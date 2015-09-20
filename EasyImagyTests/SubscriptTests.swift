@@ -179,8 +179,9 @@ struct I {
 		get {
 			return h.j
 		}
-		set {
-			newValue.map { self.h.j = $0 }
+		set (newValueOrNil) {
+			guard let newValue = newValueOrNil else { return }
+			h.j = newValue
 		}
 	}
 }

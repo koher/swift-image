@@ -18,7 +18,7 @@ for pixel in image {
 let binarized = image.map { $0.gray < 128 ? Pixel.black : Pixel.white }
 
 // From/to `UIImage`
-image = Image(UIImage: imageView.image!)
+image = Image(UIImage: imageView.image!)!
 imageView.image = image.UIImage
 ```
 
@@ -70,7 +70,7 @@ let image = Image(data: NSData(...))
 ```
 
 ```swift
-let image = Image(UIImage: imageView.image!)
+let image = Image(UIImage: imageView.image!)!
 ```
 
 ```swift
@@ -230,7 +230,7 @@ let result = image.map { x, y, pixel in
 #### From UIImage
 
 ```swift
-let image = Image(UIImage: imageView.image!)
+let image = Image(UIImage: imageView.image!)!
 ```
 
 #### To UIImage
@@ -247,7 +247,7 @@ Installation
 [_Carthage_](https://github.com/Carthage/Carthage) is available to install _EasyImagy__. Add it to your `Cartfile`:
 
 ```
-github "koher/EasyImagy" >= 0.1.0
+github "koher/EasyImagy" ~> 0.2.0
 ```
 
 ### Manually

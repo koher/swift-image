@@ -49,13 +49,13 @@ extension Image {
 		return width * height
 	}
 	
-	public func enumerate() -> SequenceOf<(x: Int, y: Int, pixel: Pixel)> {
+	public func enumerate() -> AnySequence<(x: Int, y: Int, pixel: Pixel)> {
 		let width = self.width
-		return SequenceOf<(x: Int, y: Int, pixel: Pixel)> { () -> GeneratorOf<(x: Int, y: Int, pixel: Pixel)> in
+		return AnySequence { () -> AnyGenerator<(x: Int, y: Int, pixel: Pixel)> in
 			var x = 0
 			var y = 0
-			var generator = self.generate()
-			return GeneratorOf<(x: Int, y: Int, pixel: Pixel)> {
+			let generator = self.generate()
+			return anyGenerator {
 				if x == width {
 					x = 0
 					y++
@@ -75,7 +75,7 @@ extension Image { // Subscripts (Index)
 		return y < 0 || y >= height
 	}
 	
-	public func index(# x: Int, y: Int) -> Int? {
+	public func index(x  x: Int, y: Int) -> Int? {
 		if isInvalidX(x) || isInvalidY(y) {
 			return nil
 		}
@@ -99,8 +99,9 @@ extension Image { // Subscripts (Index)
 		get {
 			return index(x: x, y: y).map { rawPixels[$0] }
 		}
-		set {
-			newValue.map { pixel in index(x: x, y: y).map { rawPixels[$0] = pixel } }
+		set (newValueOrNil) {
+			guard let newValue = newValueOrNil, index = index(x: x, y: y) else { return }
+			rawPixels[index] = newValue
 		}
 	}
 }
@@ -120,7 +121,7 @@ extension Image { // Subscripts (Range)
 }
 
 extension Image : SequenceType {
-	public func generate() -> GeneratorOf<Pixel> {
+	public func generate() -> AnyGenerator<Pixel> {
 		return indexer.generate(rawPixels)
 	}
 }
@@ -153,7 +154,7 @@ extension Image { // Higher-order methods
 
 	public func map(transform: (index: Int, pixel: Pixel) -> Pixel) -> Image {
 		var pixels = [Pixel]()
-		for (index, pixel) in Swift.enumerate(self) {
+		for (index, pixel) in enumerate() {
 			pixels.append(transform(index: index, pixel: pixel))
 		}
 		return Image(width: width, height: height, pixels: pixels)
@@ -172,11 +173,7 @@ extension Image { // Higher-order methods
 		}
 		return Image(width: width, height: height, pixels: pixels)
 	}
-	
-	public func reduce<U>(initial: U, combine: (U, Pixel) -> U) -> U {
-		return Swift.reduce(self, initial, combine)
-	}
-	
+		
 	public mutating func update(transform: Pixel -> Pixel) {
 		for y in 0..<height {
 			for x in 0..<width {
@@ -214,11 +211,11 @@ extension Image { // Operations
 		return Image(width: width, height: height, pixels: pixels)
 	}
 	
-	public func resize(# width: Int, height: Int) -> Image {
-		return resize(width: width, height: height, interpolationQuality: kCGInterpolationDefault)
+	public func resize(width  width: Int, height: Int) -> Image {
+		return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
 	}
 	
-	public func resize(# width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image {
+	public func resize(width  width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image {
 		return Image(width: width, height: height) { context in
 			CGContextSetInterpolationQuality(context, interpolationQuality)
 			CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.CGImage)
@@ -277,7 +274,6 @@ extension Image { // CoreGraphics
 	public init(CGImage: CGImageRef) {
 		let width = CGImageGetWidth(CGImage)
 		let height = CGImageGetHeight(CGImage)
-		let count = width * height
 		
 		self.init(width: width, height: height, setUp: { context in
 			let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
@@ -293,7 +289,7 @@ extension Image { // CoreGraphics
 		let defaultPixel = Pixel.transparent
 		var pixels = [Pixel](count: count, repeatedValue: defaultPixel)
 		
-		let context  = CGBitmapContextCreate(&pixels, safeWidth, safeHeight, 8, safeWidth * 4, Image.colorSpace, Image.bitmapInfo)
+		let context  = CGBitmapContextCreate(&pixels, safeWidth, safeHeight, 8, safeWidth * 4, Image.colorSpace, Image.bitmapInfo.rawValue)!
 		CGContextClearRect(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
 		setUp(context)
 
@@ -327,35 +323,28 @@ extension Image { // CoreGraphics
 		
 		let provider: CGDataProvider = EasyImageCreateDataProvider(buffer, width * height * 4).takeRetainedValue()
 		
-		return CGImageCreate(width, height, 8, 32, width * 4, Image.colorSpace, Image.bitmapInfo, provider, nil, false, kCGRenderingIntentDefault)
+		return CGImageCreate(width, height, 8, 32, width * 4, Image.colorSpace, Image.bitmapInfo, provider, nil, false, CGColorRenderingIntent.RenderingIntentDefault)!
 	}
 	
 	private static var colorSpace: CGColorSpaceRef {
-		return CGColorSpaceCreateDeviceRGB()
+		return CGColorSpaceCreateDeviceRGB()!
 	}
 	
 	private static var bitmapInfo: CGBitmapInfo {
-		return CGBitmapInfo(CGImageAlphaInfo.PremultipliedLast.rawValue | CGBitmapInfo.ByteOrder32Big.rawValue)
-	}
-	
-	private static func construct(# width: Int, height: Int, setUp: CGContextRef -> ()) -> Image? {
-		return Image(width: width, height: height, setUp: setUp)
+		return CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue | CGBitmapInfo.ByteOrder32Big.rawValue)
 	}
 }
 
 #if os(iOS)
 extension Image { // UIKit
-	public init(UIImage: UIKit.UIImage) {
-		let cgImage: CGImageRef = UIImage.CGImage
+	public init?(UIImage: UIKit.UIImage) {
+		guard let cgImage: CGImageRef = UIImage.CGImage else { return nil }
 		self.init(CGImage: cgImage)
 	}
 	
 	private init?(UIImageOrNil: UIKit.UIImage?) {
-		if let UIImage = UIImageOrNil {
-			self.init(UIImage: UIImage)
-		} else {
-			return nil
-		}
+		guard let UIImage: UIKit.UIImage = UIImageOrNil else { return nil }
+		self.init(UIImage: UIImage)
 	}
 	
 	public init?(named name: String) {
@@ -375,7 +364,7 @@ extension Image { // UIKit
 	}
 
 	public var UIImage: UIKit.UIImage {
-		return UIKit.UIImage(CGImage: CGImage)!
+		return UIKit.UIImage(CGImage: CGImage)
 	}
 }
 #endif
@@ -402,9 +391,9 @@ public struct Row : SequenceType {
 		return image.width
 	}
 	
-	public func generate() -> GeneratorOf<Pixel> {
+	public func generate() -> AnyGenerator<Pixel> {
 		var x = 0
-		return GeneratorOf { self.image[x++, self.y] }
+		return anyGenerator { self.image[x++, self.y] }
 	}
 }
 
@@ -429,9 +418,9 @@ public struct Column : SequenceType {
 	public var count: Int {
 		return image.height
 	}
-	public func generate() -> GeneratorOf<Pixel> {
+	public func generate() -> AnyGenerator<Pixel> {
 		var y = 0
-		return GeneratorOf { self.image[self.x, y++] }
+		return anyGenerator { self.image[self.x, y++] }
 	}
 }
 
@@ -452,11 +441,12 @@ public struct RowArray : SequenceType {
 		get {
 			return isInvalidY(y) ? nil : image[yRange.startIndex + y]
 		}
-		set {
+		set(newValueOrNil) {
 			if isInvalidY(y) {
 				return
 			}
-			newValue.map { self.image[self.yRange.startIndex + y] = $0 }
+			guard let newValue = newValueOrNil else { return }
+			image[yRange.startIndex + y] = newValue
 		}
 	}
 	
@@ -470,9 +460,9 @@ public struct RowArray : SequenceType {
 		return yRange.endIndex - yRange.startIndex
 	}
 	
-	public func generate() -> GeneratorOf<Row> {
+	public func generate() -> AnyGenerator<Row> {
 		var y = max(yRange.startIndex, 0)
-		return GeneratorOf { self.isInvalidY(y) ? nil : self.image[self.yRange.startIndex + y++] }
+		return anyGenerator { self.isInvalidY(y) ? nil : self.image[self.yRange.startIndex + y++] }
 	}
 }
 
@@ -485,7 +475,7 @@ private class Indexer {
 		self.height = height
 	}
 	
-	func index(# x: Int, y: Int) -> Int {
+	func index(x  x: Int, y: Int) -> Int {
 		return y * width + x
 	}
 	
@@ -493,12 +483,12 @@ private class Indexer {
 		return rawPixels
 	}
 	
-	func generate(rawPixels: [Pixel]) -> GeneratorOf<Pixel> {
+	func generate(rawPixels: [Pixel]) -> AnyGenerator<Pixel> {
 		var generator = rawPixels.generate()
-		return GeneratorOf { generator.next() }
+		return anyGenerator { generator.next() }
 	}
 	
-	func indexer(# xRange: Range<Int>, yRange: Range<Int>) -> Indexer {
+	func indexer(xRange  xRange: Range<Int>, yRange: Range<Int>) -> Indexer {
 		return OffsetIndexer(width: xRange.endIndex - xRange.startIndex, height: yRange.endIndex - yRange.startIndex, offsetX: xRange.startIndex, offsetY: yRange.startIndex, rawWidth: width, rawHeight: height)
 	}
 }
@@ -520,7 +510,7 @@ private class OffsetIndexer : Indexer {
 		super.init(width: width, height: height)
 	}
 	
-	override func index(# x: Int, y: Int) -> Int {
+	override func index(x  x: Int, y: Int) -> Int {
 		return (y + offsetY) * rawWidth + (x + offsetX)
 	}
 	
@@ -528,7 +518,7 @@ private class OffsetIndexer : Indexer {
 		var pixels = [Pixel]()
 		for y in 0..<height {
 			var index = self.index(x: 0, y: y)
-			for x in 0..<width {
+			for _ in 0..<width {
 				pixels.append(rawPixels[index++])
 			}
 		}
@@ -536,12 +526,12 @@ private class OffsetIndexer : Indexer {
 		return pixels
 	}
 	
-	override func generate(rawPixels: [Pixel]) -> GeneratorOf<Pixel> {
+	override func generate(rawPixels: [Pixel]) -> AnyGenerator<Pixel> {
 		var x: Int = 0
 		var y: Int = 0
 		var index: Int = self.index(x: 0, y: 0)
 		
-		return GeneratorOf {
+		return anyGenerator {
 			if x >= self.width {
 				x = 0
 				y++
@@ -555,7 +545,7 @@ private class OffsetIndexer : Indexer {
 		}
 	}
 	
-	private override func indexer(#xRange: Range<Int>, yRange: Range<Int>) -> Indexer {
+	private override func indexer(xRange xRange: Range<Int>, yRange: Range<Int>) -> Indexer {
 		return OffsetIndexer(width: xRange.endIndex - xRange.startIndex, height: yRange.endIndex - yRange.startIndex, offsetX: offsetX + xRange.startIndex, offsetY: offsetY + yRange.startIndex, rawWidth: rawWidth, rawHeight: rawHeight)
 	}
 }

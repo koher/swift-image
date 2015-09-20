@@ -16,12 +16,12 @@ class LoopPerformanceTests: XCTestCase {
 	}
 	
 	func testPointerRead() {
-		var numbers = [Int](count: N, repeatedValue: 1)
+		let numbers = [Int](count: N, repeatedValue: 1)
 		
 		measureBlock {
 			var sum = 0
 			var pointer = UnsafeMutablePointer<Int>(numbers)
-			for i in 0..<numbers.count {
+			for _ in 0..<numbers.count {
 				sum += pointer.memory
 				pointer++
 			}
@@ -57,10 +57,10 @@ class LoopPerformanceTests: XCTestCase {
 private struct ArrayWrapper : SequenceType {
 	let numbers: [Int]
 	
-	func generate() -> GeneratorOf<Int> {
+	func generate() -> AnyGenerator<Int> {
 		var index = 0
 		let count = numbers.count
-		return GeneratorOf {
+		return anyGenerator {
 			if index >= count {
 				return nil
 			}

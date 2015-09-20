@@ -5,7 +5,7 @@ import UIKit
 class ImageTests: XCTestCase {
 	func testSequence() {
 		if true {
-			var image = Image(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!
+			let image = Image(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!
 			
 			var i = 0
 			for pixel in image {
@@ -37,7 +37,7 @@ class ImageTests: XCTestCase {
 		}
 		
 		if true {
-			var image = Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![1...2, 1...2]!
+			let image = Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![1...2, 1...2]!
 			
 			var i = 0
 			for pixel in image {
@@ -346,7 +346,7 @@ class ImageTests: XCTestCase {
 		XCTAssertEqual(191, image[1][1]!.alpha)
 		
 	}
-    
+	
 	func testFlipY() {
 		let image = Image(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.flipY()
 		
@@ -372,7 +372,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testResize() {
-		let image = Image(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.resize(width: 4, height: 4, interpolationQuality: kCGInterpolationNone)
+		let image = Image(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.None)
 		
 		XCTAssertEqual(4, image.width)
 		XCTAssertEqual(4, image.height)
@@ -530,14 +530,14 @@ class ImageTests: XCTestCase {
 		}
 	}
 	
-    func testCopyOnWritePerformance() {
+	func testCopyOnWritePerformance() {
 		let image = Image(width: 8192, height: 8192)
 		measureBlock {
 			let copy = image
 			XCTAssertEqual(8192 * 8192, copy.count)
 		}
-    }
-    
+	}
+	
 	func testCopyPerformance() {
 		let image = Image(width: 8192, height: 8192)
 		measureBlock {

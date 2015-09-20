@@ -90,13 +90,13 @@ extension Pixel { // Gray
 	}
 }
 
-extension Pixel : Printable {
+extension Pixel : CustomStringConvertible {
 	public var description: String {
 		return String(format: "#%02X%02X%02X%02X", arguments: [red, green, blue, alpha])
 	}
 }
 
-extension Pixel : DebugPrintable {
+extension Pixel : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return description
 	}
