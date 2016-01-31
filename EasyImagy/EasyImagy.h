@@ -1,4 +1,4 @@
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for EasyImagy.
 FOUNDATION_EXPORT double EasyImagyVersionNumber;
