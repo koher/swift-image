@@ -110,7 +110,7 @@ public func ==(lhs: Pixel, rhs: Pixel) -> Bool {
 }
 
 extension Pixel { // Operations
-	public static func mean<S: SequenceType where S.Generator.Element == Pixel>(pixels: S) -> Pixel {
+	public static func mean<S: SequenceType where S.Generator.Element == Pixel>(pixels: S) -> Pixel? {
 		var count = 0
 		var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
 		for pixel in pixels {
@@ -120,11 +120,13 @@ extension Pixel { // Operations
 			sum.alpha += pixel.alphaInt
 			count++
 		}
+        
+        guard count > 0 else { return nil }
 		
 		return Pixel(red: sum.red / count, green: sum.green / count, blue: sum.blue / count, alpha: sum.alpha / count)
 	}
 
-	public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, Pixel)>(weightedPixels: S) -> Pixel {
+	public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, Pixel)>(weightedPixels: S) -> Pixel? {
 		var weightSum = 0
 		var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
 		for (weight, pixel) in weightedPixels {
@@ -134,6 +136,8 @@ extension Pixel { // Operations
 			sum.alpha += weight * pixel.alphaInt
 			weightSum += weight
 		}
+        
+        guard weightSum > 0 else { return nil }
 		
 		return Pixel(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
 	}

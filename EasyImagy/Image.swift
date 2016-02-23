@@ -4,37 +4,21 @@ import UIKit
 #endif
 
 public struct Image {
-	private var rawPixels: [Pixel]
-	private let indexer: Indexer
+	public let width: Int
+	public let height: Int
+	public private(set) var pixels: [Pixel]
 	
 	public init(width: Int, height: Int, pixels: [Pixel]) {
-		indexer = Indexer(width: max(width, 0), height: max(height, 0))
-		
-		let count = indexer.width * indexer.height
+		self.width = max(width, 0)
+		self.height = max(height, 0)
+		let count = self.width * self.height
 		if pixels.count < count {
-			rawPixels = pixels + [Pixel](count: count - pixels.count, repeatedValue: Pixel.transparent)
+			self.pixels = pixels + [Pixel](count: count - pixels.count, repeatedValue: Pixel.transparent)
 		} else if pixels.count == count {
-			rawPixels = pixels
+			self.pixels = pixels
 		} else {
-			rawPixels = [Pixel](pixels[0..<count])
+			self.pixels = [Pixel](pixels[0..<count])
 		}
-	}
-	
-	private init(indexer: Indexer, pixels: [Pixel]) {
-		self.indexer = indexer
-		self.rawPixels = pixels
-	}
-	
-	public var width: Int {
-		return indexer.width
-	}
-	
-	public var height: Int {
-		return indexer.height
-	}
-	
-	public var pixels: [Pixel] {
-		return indexer.pixels(rawPixels)
 	}
 }
 
@@ -45,84 +29,54 @@ extension Image { // Additional initializers
 }
 
 extension Image {
+	public init(_ imageSlice: ImageSlice) {
+		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)
+	}
+}
+
+extension Image {
 	public var count: Int {
 		return width * height
-	}
-	
-	public func enumerate() -> AnySequence<(x: Int, y: Int, pixel: Pixel)> {
-		let width = self.width
-		return AnySequence { () -> AnyGenerator<(x: Int, y: Int, pixel: Pixel)> in
-			var x = 0
-			var y = 0
-			let generator = self.generate()
-			return anyGenerator {
-				if x == width {
-					x = 0
-					y++
-				}
-				return generator.next().map { (x: x, y: y, pixel: $0) }
-			}
-		}
 	}
 }
 
 extension Image { // Subscripts (Index)
-	private func isInvalidX(x: Int) -> Bool {
-		return x < 0 || x >= width
+	private func isValidX(x: Int) -> Bool {
+		return 0 <= x && x < width
 	}
 	
-	private func isInvalidY(y: Int) -> Bool {
-		return y < 0 || y >= height
+	private func isValidY(y: Int) -> Bool {
+		return 0 <= y && y < height
 	}
 	
-	public func index(x  x: Int, y: Int) -> Int? {
-		if isInvalidX(x) || isInvalidY(y) {
-			return nil
-		}
-		return indexer.index(x: x, y: y)
-	}
-	
-	public subscript(y: Int) -> Row {
-		get {
-			return Row(image: self, y: y)
-		}
-		set {
-			if newValue.count == width {
-				for x in 0..<width {
-					self[x, y] = newValue[x]
-				}
-			}
-		}
+	public func pixelIndex(x  x: Int, y: Int) -> Int? {
+		guard isValidX(x) else { return nil }
+		guard isValidY(y) else { return nil }
+		return y * width + x
 	}
 	
 	public subscript(x: Int, y: Int) -> Pixel? {
 		get {
-			return index(x: x, y: y).map { rawPixels[$0] }
+			guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return nil }
+			return pixels[pixelIndex]
 		}
-		set (newValueOrNil) {
-			guard let newValue = newValueOrNil, index = index(x: x, y: y) else { return }
-			rawPixels[index] = newValue
+		set {
+			guard let newValue = newValue else { return }
+			guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return }
+			pixels[pixelIndex] = newValue
 		}
 	}
 }
 
 extension Image { // Subscripts (Range)
-	public subscript(yRange: Range<Int>) -> RowArray {
-		return RowArray(image: self, yRange: yRange)
-	}
-	
-	public subscript(xRange: Range<Int>, yRange: Range<Int>) -> Image? {
-		if isInvalidX(xRange.startIndex) || isInvalidX(xRange.endIndex - 1) || isInvalidY(yRange.startIndex) || isInvalidY(yRange.endIndex - 1) {
-			return nil
-		}
-		
-		return Image(indexer: indexer.indexer(xRange: xRange, yRange: yRange), pixels: rawPixels)
+	public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice {
+		return ImageSlice(image: self, xRange: xRange ?? 0..<width, yRange: yRange ?? 0..<height)
 	}
 }
 
 extension Image : SequenceType {
-	public func generate() -> AnyGenerator<Pixel> {
-		return indexer.generate(rawPixels)
+	public func generate() -> IndexingGenerator<[Pixel]> {
+		return pixels.generate()
 	}
 }
 
@@ -145,41 +99,24 @@ public func ==(lhs: Image, rhs: Image) -> Bool {
 
 extension Image { // Higher-order methods
 	public func map(transform: Pixel -> Pixel) -> Image {
-		var pixels = [Pixel]()
-		for pixel in self {
-			pixels.append(transform(pixel))
-		}
-		return Image(width: width, height: height, pixels: pixels)
+		return Image(width: width, height: height, pixels: pixels.map(transform))
 	}
-
-	public func map(transform: (index: Int, pixel: Pixel) -> Pixel) -> Image {
-		var pixels = [Pixel]()
-		for (index, pixel) in enumerate() {
-			pixels.append(transform(index: index, pixel: pixel))
-		}
-		return Image(width: width, height: height, pixels: pixels)
-	}
-
+	
 	public func map(transform: (x: Int, y: Int, pixel: Pixel) -> Pixel) -> Image {
-		var pixels = [Pixel]()
-		var x = 0
-		var y = 0
-		for pixel in self {
-			pixels.append(transform(x: x++, y: y, pixel: pixel))
-			if x == width {
-				x = 0
-				y++
-			}
-		}
-		return Image(width: width, height: height, pixels: pixels)
-	}
-		
-	public mutating func update(transform: Pixel -> Pixel) {
+		var pixels = Array<Pixel>()
+		pixels.reserveCapacity(count)
+		var generator = generate()
 		for y in 0..<height {
 			for x in 0..<width {
-				let index = indexer.index(x: x, y: y)
-				rawPixels[index] = transform(rawPixels[index])
+				pixels.append(transform(x: x, y: y, pixel: generator.next()!))
 			}
+		}
+		return Image(width: width, height: height, pixels: pixels)
+	}
+
+	public mutating func update(transform: Pixel -> Pixel) {
+		for i in 0..<count {
+			pixels[i] = transform(pixels[i])
 		}
 	}
 }
@@ -191,7 +128,7 @@ extension Image { // Operations
 		let maxX = width - 1
 		for y in 0..<height {
 			for x in 0..<width {
-				pixels.append(rawPixels[indexer.index(x: maxX - x, y: y)])
+				pixels.append(self.pixels[pixelIndex(x: maxX - x, y: y)!])
 			}
 		}
 		
@@ -204,7 +141,7 @@ extension Image { // Operations
 		let maxY = height - 1
 		for y in 0..<height {
 			for x in 0..<width {
-				pixels.append(rawPixels[indexer.index(x: x, y: maxY - y)])
+				pixels.append(self.pixels[pixelIndex(x: x, y: maxY - y)!])
 			}
 		}
 		
@@ -236,7 +173,7 @@ extension Image { // Operations
 			let maxX = height - 1
 			for y in 0..<width {
 				for x in 0..<height {
-					pixels.append(rawPixels[indexer.index(x: y, y: maxX - x)])
+					pixels.append(self.pixels[pixelIndex(x: y, y: maxX - x)!])
 				}
 			}
 			
@@ -248,7 +185,7 @@ extension Image { // Operations
 			let maxY = height - 1
 			for y in 0..<height {
 				for x in 0..<width {
-					pixels.append(rawPixels[indexer.index(x: maxX - x, y: maxY - y)])
+					pixels.append(self.pixels[pixelIndex(x: maxX - x, y: maxY - y)!])
 				}
 			}
 			
@@ -259,7 +196,7 @@ extension Image { // Operations
 			let maxY = width - 1
 			for y in 0..<width {
 				for x in 0..<height {
-					pixels.append(rawPixels[indexer.index(x: maxY - y, y: x)])
+					pixels.append(self.pixels[pixelIndex(x: maxY - y, y: x)!])
 				}
 			}
 			
@@ -368,184 +305,3 @@ extension Image { // UIKit
 	}
 }
 #endif
-
-public struct Row : SequenceType {
-	private var image: Image
-	private let y: Int
-	
-	private init(image: Image, y: Int) {
-		self.image = image
-		self.y = y
-	}
-	
-	public subscript(x: Int) -> Pixel? {
-		get {
-			return image[x, y]
-		}
-		set {
-			image[x, y] = newValue
-		}
-	}
-	
-	public var count: Int {
-		return image.width
-	}
-	
-	public func generate() -> AnyGenerator<Pixel> {
-		var x = 0
-		return anyGenerator { self.image[x++, self.y] }
-	}
-}
-
-public struct Column : SequenceType {
-	private var image: Image
-	private let x: Int
-	
-	private init(image: Image, x: Int) {
-		self.image = image
-		self.x = x
-	}
-	
-	public subscript(y: Int) -> Pixel? {
-		get {
-			return image[x, y]
-		}
-		set {
-			image[x, y] = newValue
-		}
-	}
-	
-	public var count: Int {
-		return image.height
-	}
-	public func generate() -> AnyGenerator<Pixel> {
-		var y = 0
-		return anyGenerator { self.image[self.x, y++] }
-	}
-}
-
-public struct RowArray : SequenceType {
-	private var image: Image
-	private let yRange: Range<Int>
-	
-	private init(image: Image, yRange: Range<Int>) {
-		self.image = image
-		self.yRange = yRange
-	}
-	
-	private func isInvalidY(y: Int) -> Bool {
-		return y < 0 || y >= count || image.isInvalidY(yRange.startIndex + y)
-	}
-	
-	public subscript(y: Int) -> Row? {
-		get {
-			return isInvalidY(y) ? nil : image[yRange.startIndex + y]
-		}
-		set(newValueOrNil) {
-			if isInvalidY(y) {
-				return
-			}
-			guard let newValue = newValueOrNil else { return }
-			image[yRange.startIndex + y] = newValue
-		}
-	}
-	
-	public subscript(xRange: Range<Int>) -> Image? {
-		get {
-			return image[xRange, yRange]
-		}
-	}
-	
-	public var count: Int {
-		return yRange.endIndex - yRange.startIndex
-	}
-	
-	public func generate() -> AnyGenerator<Row> {
-		var y = max(yRange.startIndex, 0)
-		return anyGenerator { self.isInvalidY(y) ? nil : self.image[self.yRange.startIndex + y++] }
-	}
-}
-
-private class Indexer {
-	let width: Int
-	let height: Int
-
-	init(width: Int, height: Int) {
-		self.width = width
-		self.height = height
-	}
-	
-	func index(x  x: Int, y: Int) -> Int {
-		return y * width + x
-	}
-	
-	func pixels(rawPixels: [Pixel]) -> [Pixel] {
-		return rawPixels
-	}
-	
-	func generate(rawPixels: [Pixel]) -> AnyGenerator<Pixel> {
-		var generator = rawPixels.generate()
-		return anyGenerator { generator.next() }
-	}
-	
-	func indexer(xRange  xRange: Range<Int>, yRange: Range<Int>) -> Indexer {
-		return OffsetIndexer(width: xRange.endIndex - xRange.startIndex, height: yRange.endIndex - yRange.startIndex, offsetX: xRange.startIndex, offsetY: yRange.startIndex, rawWidth: width, rawHeight: height)
-	}
-}
-
-private class OffsetIndexer : Indexer {
-	let offsetX: Int
-	let offsetY: Int
-	let rawWidth: Int
-	let rawHeight: Int
-	
-	var pixels: [Pixel]?
-	
-	init(width: Int, height: Int, offsetX: Int, offsetY: Int, rawWidth: Int, rawHeight: Int) {
-		self.offsetX = offsetX
-		self.offsetY = offsetY
-		self.rawWidth = rawWidth
-		self.rawHeight = rawHeight
-		
-		super.init(width: width, height: height)
-	}
-	
-	override func index(x  x: Int, y: Int) -> Int {
-		return (y + offsetY) * rawWidth + (x + offsetX)
-	}
-	
-	override func pixels(rawPixels: [Pixel]) -> [Pixel] {
-		var pixels = [Pixel]()
-		for y in 0..<height {
-			var index = self.index(x: 0, y: y)
-			for _ in 0..<width {
-				pixels.append(rawPixels[index++])
-			}
-		}
-		
-		return pixels
-	}
-	
-	override func generate(rawPixels: [Pixel]) -> AnyGenerator<Pixel> {
-		var x: Int = 0
-		var y: Int = 0
-		var index: Int = self.index(x: 0, y: 0)
-		
-		return anyGenerator {
-			if x >= self.width {
-				x = 0
-				y++
-				index = self.index(x: 0, y: y)
-			}
-			if y >= self.height {
-				return nil
-			}
-			x++
-			return rawPixels[index++]
-		}
-	}
-	
-	private override func indexer(xRange xRange: Range<Int>, yRange: Range<Int>) -> Indexer {
-		return OffsetIndexer(width: xRange.endIndex - xRange.startIndex, height: yRange.endIndex - yRange.startIndex, offsetX: offsetX + xRange.startIndex, offsetY: offsetY + yRange.startIndex, rawWidth: rawWidth, rawHeight: rawHeight)
-	}
-}

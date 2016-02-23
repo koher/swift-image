@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */; };
+		D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */; };
+		D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */; };
+		D607D4021C7D54BB00D2B0A4 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */; };
+		D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */; };
+		D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */; };
+		D607D4081C7D709100D2B0A4 /* Generate2dPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */; };
 		D65EA67F1B01B71500F8E95F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
 		D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA6821B01B71F00F8E95F /* ImageTests.swift */; };
 		D65EA6891B01B71F00F8E95F /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
@@ -60,6 +67,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlice.swift; sourceTree = "<group>"; };
+		D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSliceTests.swift; sourceTree = "<group>"; };
+		D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
+		D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPerformanceTest.swift; sourceTree = "<group>"; };
+		D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticalOperationPerformanceTests.swift; sourceTree = "<group>"; };
+		D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generate2dPerformanceTests.swift; sourceTree = "<group>"; };
 		D65EA67B1B01B71500F8E95F /* EasyImagy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
 		D65EA67C1B01B71500F8E95F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; usesTabs = 1; };
 		D65EA67D1B01B71500F8E95F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,7 +133,9 @@
 			children = (
 				D65EA67B1B01B71500F8E95F /* EasyImagy.h */,
 				D65EA67C1B01B71500F8E95F /* Image.swift */,
+				D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */,
 				D65EA68E1B01C7E600F8E95F /* Pixel.swift */,
+				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
 				D6D85AA01B03AE1A00B966DB /* EasyImagyC.h */,
 				D6D85A9E1B03AD7100B966DB /* EasyImagyC.m */,
 				D6D85AA11B03AE9800B966DB /* EasyImagy-Bridging-Header.h */,
@@ -132,7 +148,12 @@
 			isa = PBXGroup;
 			children = (
 				D65EA6821B01B71F00F8E95F /* ImageTests.swift */,
+				D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */,
 				D6B54D831B090EFA00E4709D /* PixelTests.swift */,
+				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
+				D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */,
+				D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */,
+				D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */,
 				D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */,
 				D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */,
 				D65EA68C1B01BDB900F8E95F /* Supporting Files */,
@@ -349,6 +370,8 @@
 			files = (
 				D65EA68F1B01C7E600F8E95F /* Pixel.swift in Sources */,
 				D6D85A9F1B03AD7100B966DB /* EasyImagyC.m in Sources */,
+				D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */,
+				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
 				D65EA67F1B01B71500F8E95F /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,7 +381,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6B54D841B090EFA00E4709D /* PixelTests.swift in Sources */,
+				D607D4021C7D54BB00D2B0A4 /* UtilTests.swift in Sources */,
 				D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */,
+				D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */,
+				D607D4081C7D709100D2B0A4 /* Generate2dPerformanceTests.swift in Sources */,
+				D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */,
+				D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */,
 				D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */,
 				D6C2EDB51B02D54800E2B876 /* SubscriptTests.swift in Sources */,
 			);
@@ -525,6 +553,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = EasyImagy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -571,6 +600,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};

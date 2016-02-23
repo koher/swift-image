@@ -45,7 +45,7 @@ class ViewController: UIViewController {
 		})
 		
 		controller.addAction(UIAlertAction(title: "Crop", style: .Default) { action in
-			imageView.image = Image(UIImage: imageView.image!)![0..<100][0..<100]!.UIImage
+			imageView.image = Image(Image(UIImage: imageView.image!)![0..<100, 0..<100]).UIImage
 			sender.enabled = true
 		})
 		
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
 		controller.addAction(UIAlertAction(title: "Mean filter", style: .Default) { action in
 			let image = Image(UIImage: imageView.image!)!
 			imageView.image = image.map { (x: Int, y: Int, pixel: Pixel) -> Pixel in
-				image[(y - 1)...(y + 1)][(x - 1)...(x + 1)].map { Pixel.mean($0) } ?? pixel
+				Pixel.mean(image[(x - 1)...(x + 1), (y - 1)...(y + 1)]) ?? pixel
 			}.UIImage
 			sender.enabled = true
 		})
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
 			]
 			let image = Image(UIImage: imageView.image!)!
 			imageView.image = image.map { (x: Int, y: Int, pixel: Pixel) -> Pixel in
-				image[(y - 2)...(y + 2)][(x - 2)...(x + 2)].map { Pixel.weightedMean(zip(weights, $0)) } ?? pixel
+				Pixel.weightedMean(zip(weights, image[(x - 2)...(x + 2), (y - 2)...(y + 2)])) ?? pixel
 			}.UIImage
 			sender.enabled = true
 		})
