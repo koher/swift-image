@@ -6,8 +6,8 @@ _EasyImagy_ makes it easy to deal with images in Swift.
 ```swift
 var image = Image(named: "ImageName")!
 
-println(image[y][x]) // `image[x, y]` is also available
-image[y][x] = Pixel(red: 255, green: 0, blue: 0, alpha: 255)
+println(image[x, y])
+image[x, y] = Pixel(red: 255, green: 0, blue: 0, alpha: 255)
 
 // Iterates over all pixels
 for pixel in image {
@@ -85,7 +85,7 @@ let image = Image(width: 640, height: 480, pixels: pixels)
 
 ```swift
 // Gets a pixel by subscripts
-if let pixel = image[y][x] { // `image[x, y]` is also available
+if let pixel = image[x, y] {
     println(pixel.red)
     println(pixel.green)
     println(pixel.blue)
@@ -100,8 +100,8 @@ if let pixel = image[y][x] { // `image[x, y]` is also available
 ```
 
 ```swift
-image[y][x] = Pixel(red: 255, green: 0, blue: 0, alpha: 255)
-image[y][x]?.alpha = 127
+image[x, y] = Pixel(red: 255, green: 0, blue: 0, alpha: 255)
+image[x, y]?.alpha = 127
 ```
 
 ### Iteration
@@ -158,7 +158,7 @@ let result = image.resize(width: 100, height: 100,
 Cropping is done with no copy cost.
 
 ```swift
-let resultOrNil = image[0..<100][0..<100] // `nil` when out of bounds
+let resultOrNil = image[0..<100, 0..<100] // `nil` when out of bounds
 ```
 
 ### Conversion
@@ -202,26 +202,7 @@ let result = image.map { $0.gray < threshold ? Pixel.black : Pixel.white }
 
 ```swift
 let result = image.map { x, y, pixel in
-    image[(y - 1)...(y + 1)][(x - 1)...(x + 1)].map {
-        Pixel.mean($0)
-    } ?? pixel
-}
-```
-
-#### Gaussian filter
-
-```swift
-let weights = [
-    1,  4,  6,  4, 1,
-    4, 16, 24, 16, 4,
-    6, 24, 36, 24, 6,
-    4, 16, 24, 16, 4,
-    1,  4,  6,  4, 1,
-]
-let result = image.map { x, y, pixel in
-    image[(y - 2)...(y + 2)][(x - 2)...(x + 2)].map {
-        Pixel.weightedMean(zip(weights, $0))
-    } ?? pixel
+    Pixel.mean(image[(x - 1)...(x + 1), (y - 1)...(y + 1)]) ?? pixel
 }
 ```
 
@@ -247,7 +228,7 @@ Installation
 [_Carthage_](https://github.com/Carthage/Carthage) is available to install _EasyImagy__. Add it to your `Cartfile`:
 
 ```
-github "koher/EasyImagy" ~> 0.2.0
+github "koher/EasyImagy" "dev-image-slice"
 ```
 
 ### Manually
