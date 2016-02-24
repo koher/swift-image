@@ -5,7 +5,7 @@ import UIKit
 class ImageSliceTests: XCTestCase {
     func testSequence() {
         do {
-            let image = Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![1...2, 1...2]
+            let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![1...2, 1...2]
             
             for (i, pixel) in image.enumerate() {
                 switch i {
@@ -36,7 +36,7 @@ class ImageSliceTests: XCTestCase {
         }
         
         do {
-            let image = Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![-2...1, -2...1]
+            let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![-2...1, -2...1]
             
             for (i, pixel) in image.enumerate() {
                 switch i {
@@ -67,7 +67,7 @@ class ImageSliceTests: XCTestCase {
         }
         
         do {
-            let image = Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![2...5, 2...5]
+            let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![2...5, 2...5]
             
             for (i, pixel) in image.enumerate() {
                 switch i {
@@ -99,7 +99,7 @@ class ImageSliceTests: XCTestCase {
     }
     
     func testSubscriptRange() {
-        let image = Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![1...2, 1...2]
+        let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)![1...2, 1...2]
         
         let topRight = image[2...2, 1...1]
         

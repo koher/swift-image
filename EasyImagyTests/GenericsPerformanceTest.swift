@@ -2,9 +2,9 @@ import XCTest
 import EasyImagy
 
 struct Foo {
-    var xs: [Pixel]
+    var xs: [RGBA]
     
-    func map(f: Pixel -> Pixel) -> Foo {
+    func map(f: RGBA -> RGBA) -> Foo {
         return Foo(xs: xs.map(f))
     }
 }
@@ -19,21 +19,21 @@ struct Bar<T> {
 
 class PerformanceTests: XCTestCase {
     func testNonGenericPerformance() {
-        let xs = [Pixel](count: 10000000, repeatedValue: Pixel(red: 255, green: 0, blue: 0, alpha: 255))
+        let xs = [RGBA](count: 10000000, repeatedValue: RGBA(red: 255, green: 0, blue: 0, alpha: 255))
         
         measureBlock {
             let foo = Foo(xs: xs)
-            let mapped = foo.map { Pixel(gray: $0.gray) }
+            let mapped = foo.map { RGBA(gray: $0.gray) }
             XCTAssertEqual(mapped.xs[0].red, 85)
         }
     }
     
     func testGenericPerformance() {
-        let xs = [Pixel](count: 10000000, repeatedValue: Pixel(red: 255, green: 0, blue: 0, alpha: 255))
+        let xs = [RGBA](count: 10000000, repeatedValue: RGBA(red: 255, green: 0, blue: 0, alpha: 255))
         
         measureBlock {
-            let bar = Bar<Pixel>(xs: xs)
-            let mapped = bar.map { Pixel(gray: $0.gray) }
+            let bar = Bar<RGBA>(xs: xs)
+            let mapped = bar.map { RGBA(gray: $0.gray) }
             XCTAssertEqual(mapped.xs[0].red, 85)
         }
     }

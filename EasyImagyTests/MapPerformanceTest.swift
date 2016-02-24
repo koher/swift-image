@@ -4,15 +4,15 @@ import EasyImagy
 private let WIDTH = 2048
 private let HEIGHT = 1024
 
-private func getImage() -> Image {
-    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { Pixel(gray: UInt8($0 % 256)) })
+private func getImage() -> Image<RGBA> {
+    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })!
 }
 
 class MapPerformanceTests: XCTestCase {
     func testNormalMap() {
         let image = getImage()
         measureBlock {
-            let mapped = image.map { $0 }
+            let mapped: Image<RGBA> = image.map { $0 }
             XCTAssertEqual(0, mapped[0, 0]!.red)
         }
     }
@@ -58,33 +58,33 @@ class MapPerformanceTests: XCTestCase {
     }
 }
 
-private func transform(x: Int, y: Int, pixel: Pixel) -> Pixel {
-    return Pixel(gray: UInt8((x + y) % 256))
+private func transform(x: Int, y: Int, pixel: RGBA) -> RGBA {
+    return RGBA(gray: UInt8((x + y) % 256))
 }
 
 extension Image {
-    private func map1(transform: (x: Int, y: Int, pixel: Pixel) -> Pixel) -> Image {
+    private func map1<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
         let w = width
-        return Image(width: width, height: height, pixels: pixels.enumerate().map { i, pixel in transform(x: i % w, y: i / w, pixel: pixel) })
+        return Image<T>(width: width, height: height, pixels: pixels.enumerate().map { i, pixel in transform(x: i % w, y: i / w, pixel: pixel) })!
     }
     
-    private func map2(transform: (x: Int, y: Int, pixel: Pixel) -> Pixel) -> Image {
-        return Image(width: width, height: height, pixels: pixels.enumerate().map { i, pixel in transform(x: i % self.width, y: i / self.width, pixel: pixel) })
+    private func map2<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
+        return Image<T>(width: width, height: height, pixels: pixels.enumerate().map { i, pixel in transform(x: i % self.width, y: i / self.width, pixel: pixel) })!
     }
     
-    private func map3(transform: (x: Int, y: Int, pixel: Pixel) -> Pixel) -> Image {
-        var pixels = Array<Pixel>()
+    private func map3<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
+        var pixels: [T] = []
         pixels.reserveCapacity(count)
         for y in 0..<height {
             for x in 0..<width {
                 pixels.append(transform(x: x, y: y, pixel: self[x, y]!))
             }
         }
-        return Image(width: width, height: height, pixels: pixels)
+        return Image<T>(width: width, height: height, pixels: pixels)!
     }
 
-    private func map4(transform: (x: Int, y: Int, pixel: Pixel) -> Pixel) -> Image {
-        var pixels = Array<Pixel>()
+    private func map4<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
+        var pixels: [T] = []
         pixels.reserveCapacity(count)
         var generator = generate()
         for y in 0..<height {
@@ -92,6 +92,6 @@ extension Image {
                 pixels.append(transform(x: x, y: y, pixel: generator.next()!))
             }
         }
-        return Image(width: width, height: height, pixels: pixels)
+        return Image<T>(width: width, height: height, pixels: pixels)!
     }
 }

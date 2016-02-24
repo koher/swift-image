@@ -1,18 +1,13 @@
-public struct Pixel {
-	public var red: UInt8
-	public var green: UInt8
-	public var blue: UInt8
-	public var alpha: UInt8
-
-	public init(red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8) {
-		self.red = red
-		self.green = green
-		self.blue = blue
-		self.alpha = alpha
-	}
+public protocol RGBAType {
+    init(red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8)
+    
+    var red: UInt8 { get set }
+    var green: UInt8 { get set }
+    var blue: UInt8 { get set }
+    var alpha: UInt8 { get set }
 }
 
-extension Pixel { // Additional initializers
+extension RGBAType { // Additional initializers
 	public init(red: UInt8, green: UInt8, blue: UInt8) {
 		self.init(red: red, green: green, blue: blue, alpha: 255)
 	}
@@ -42,7 +37,7 @@ extension Pixel { // Additional initializers
 	}
 }
 
-extension Pixel { // Int getters
+extension RGBAType { // Int getters
 	public var redInt: Int {
 		get {
 			return Int(red)
@@ -80,7 +75,7 @@ extension Pixel { // Int getters
 	}
 }
 
-extension Pixel { // Gray
+extension RGBA { // Gray
 	public var gray: UInt8 {
 		return UInt8(grayInt)
 	}
@@ -90,27 +85,27 @@ extension Pixel { // Gray
 	}
 }
 
-extension Pixel : CustomStringConvertible {
+extension RGBA : CustomStringConvertible {
 	public var description: String {
 		return String(format: "#%02X%02X%02X%02X", arguments: [red, green, blue, alpha])
 	}
 }
 
-extension Pixel : CustomDebugStringConvertible {
+extension RGBA : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return description
 	}
 }
 
-extension Pixel : Equatable {
+extension RGBA : Equatable {
 }
 
-public func ==(lhs: Pixel, rhs: Pixel) -> Bool {
+public func ==(lhs: RGBA, rhs: RGBA) -> Bool {
 	return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
 }
 
-extension Pixel { // Operations
-	public static func mean<S: SequenceType where S.Generator.Element == Pixel>(pixels: S) -> Pixel? {
+extension RGBAType { // Operations
+	public static func mean<S: SequenceType where S.Generator.Element == RGBA>(pixels: S) -> Self? {
 		var count = 0
 		var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
 		for pixel in pixels {
@@ -123,10 +118,10 @@ extension Pixel { // Operations
         
         guard count > 0 else { return nil }
 		
-		return Pixel(red: sum.red / count, green: sum.green / count, blue: sum.blue / count, alpha: sum.alpha / count)
+		return Self.init(red: sum.red / count, green: sum.green / count, blue: sum.blue / count, alpha: sum.alpha / count)
 	}
 
-	public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, Pixel)>(weightedPixels: S) -> Pixel? {
+	public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, RGBA)>(weightedPixels: S) -> Self? {
 		var weightSum = 0
 		var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
 		for (weight, pixel) in weightedPixels {
@@ -139,34 +134,48 @@ extension Pixel { // Operations
         
         guard weightSum > 0 else { return nil }
 		
-		return Pixel(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
+		return Self.init(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
 	}
 }
 
-extension Pixel { // Presets
-	public static var red: Pixel {
-		return Pixel(red: 255, green: 0, blue: 0)
+extension RGBAType { // Presets
+	public static var red: Self {
+		return Self.init(red: 255, green: 0, blue: 0)
 	}
 	
-	public static var green: Pixel {
-		return Pixel(red: 0, green: 255, blue: 0)
+	public static var green: Self {
+		return Self.init(red: 0, green: 255, blue: 0)
 	}
 	
-	public static var blue: Pixel {
-		return Pixel(red: 0, green: 0, blue: 255)
+	public static var blue: Self {
+		return Self.init(red: 0, green: 0, blue: 255)
 	}
 	
-	public static var black: Pixel {
-		return Pixel(gray: 0)
+	public static var black: Self {
+		return Self.init(gray: 0)
 	}
 	
-	public static var white: Pixel {
-		return Pixel(gray: 255)
+	public static var white: Self {
+		return Self.init(gray: 255)
 	}
 	
-	public static var transparent: Pixel {
-		return Pixel(gray: 0, alpha: 0)
+	public static var transparent: Self {
+		return Self.init(gray: 0, alpha: 0)
 	}
+}
+
+public struct RGBA: RGBAType {
+    public var red: UInt8
+    public var green: UInt8
+    public var blue: UInt8
+    public var alpha: UInt8
+    
+    public init(red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8) {
+        self.red = red
+        self.green = green
+        self.blue = blue
+        self.alpha = alpha
+    }
 }
 
 private struct IntPixel {

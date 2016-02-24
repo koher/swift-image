@@ -1,9 +1,9 @@
-public struct ImageSlice {
-    private let image: Image
+public struct ImageSlice<Pixel> {
+    private let image: Image<Pixel>
     internal let xRange: Range<Int>
     internal let yRange: Range<Int>
     
-    public init(image: Image, xRange: Range<Int>, yRange: Range<Int>) {
+    public init(image: Image<Pixel>, xRange: Range<Int>, yRange: Range<Int>) {
         self.image = image
         self.xRange = xRange
         self.yRange = yRange
@@ -45,7 +45,7 @@ extension ImageSlice { // Subscripts (Range)
 }
 
 extension ImageSlice : SequenceType {
-    public func generate() -> PixelGenerator {
+    public func generate() -> PixelGenerator<Pixel> {
         return PixelGenerator(image: image, xRange: validRange(xRange, maxValue: image.width), yRange: validRange(yRange, maxValue: image.height))
     }
 }
@@ -54,10 +54,10 @@ private func validRange(range: Range<Int>, maxValue: Int) -> Range<Int> {
     return max(0, range.startIndex)..<min(maxValue, range.endIndex)
 }
 
-public struct PixelGenerator: GeneratorType {
+public struct PixelGenerator<Pixel>: GeneratorType {
     public typealias Element = Pixel
     
-    private let image: Image
+    private let image: Image<Pixel>
     
     private let xRange: Range<Int>
     private let yRange: Range<Int>
@@ -65,7 +65,7 @@ public struct PixelGenerator: GeneratorType {
     private var x: Int
     private var y: Int
     
-    init(image: Image, xRange: Range<Int>, yRange: Range<Int>) {
+    init(image: Image<Pixel>, xRange: Range<Int>, yRange: Range<Int>) {
         self.image = image
         
         self.xRange = xRange

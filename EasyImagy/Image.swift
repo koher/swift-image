@@ -3,17 +3,18 @@ import CoreGraphics
 import UIKit
 #endif
 
-public struct Image {
+public struct Image<Pixel> {
 	public let width: Int
 	public let height: Int
 	public private(set) var pixels: [Pixel]
 	
-	public init(width: Int, height: Int, pixels: [Pixel]) {
+	public init?(width: Int, height: Int, pixels: [Pixel]) {
 		self.width = max(width, 0)
 		self.height = max(height, 0)
 		let count = self.width * self.height
+		
 		if pixels.count < count {
-			self.pixels = pixels + [Pixel](count: count - pixels.count, repeatedValue: Pixel.transparent)
+			return nil
 		} else if pixels.count == count {
 			self.pixels = pixels
 		} else {
@@ -23,14 +24,14 @@ public struct Image {
 }
 
 extension Image { // Additional initializers
-	public init(width: Int, height: Int) {
-		self.init(width: width, height: height, pixels: [Pixel](count: width * height, repeatedValue: Pixel.transparent))
+	public init(width: Int, height: Int, pixel: Pixel) {
+		self.init(width: width, height: height, pixels: [Pixel](count: width * height, repeatedValue: pixel))!
 	}
 }
 
 extension Image {
-	public init(_ imageSlice: ImageSlice) {
-		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)
+	public init(_ imageSlice: ImageSlice<Pixel>) {
+		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)!
 	}
 }
 
@@ -69,7 +70,7 @@ extension Image { // Subscripts (Index)
 }
 
 extension Image { // Subscripts (Range)
-	public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice {
+	public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice<Pixel> {
 		return ImageSlice(image: self, xRange: xRange ?? 0..<width, yRange: yRange ?? 0..<height)
 	}
 }
@@ -80,10 +81,7 @@ extension Image : SequenceType {
 	}
 }
 
-extension Image : Equatable {
-}
-
-public func ==(lhs: Image, rhs: Image) -> Bool {
+public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
 	if lhs.width != rhs.width || lhs.height != rhs.height {
 		return false
 	}
@@ -98,12 +96,12 @@ public func ==(lhs: Image, rhs: Image) -> Bool {
 }
 
 extension Image { // Higher-order methods
-	public func map(transform: Pixel -> Pixel) -> Image {
-		return Image(width: width, height: height, pixels: pixels.map(transform))
+	public func map<T>(transform: Pixel -> T) -> Image<T> {
+		return Image<T>(width: width, height: height, pixels: pixels.map(transform))!
 	}
 	
-	public func map(transform: (x: Int, y: Int, pixel: Pixel) -> Pixel) -> Image {
-		var pixels = Array<Pixel>()
+	public func map<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
+		var pixels: [T] = []
 		pixels.reserveCapacity(count)
 		var generator = generate()
 		for y in 0..<height {
@@ -111,7 +109,7 @@ extension Image { // Higher-order methods
 				pixels.append(transform(x: x, y: y, pixel: generator.next()!))
 			}
 		}
-		return Image(width: width, height: height, pixels: pixels)
+		return Image<T>(width: width, height: height, pixels: pixels)!
 	}
 
 	public mutating func update(transform: Pixel -> Pixel) {
@@ -122,7 +120,7 @@ extension Image { // Higher-order methods
 }
 
 extension Image { // Operations
-	public func flipX() -> Image {
+	public func flipX() -> Image<Pixel> {
 		var pixels = [Pixel]()
 
 		let maxX = width - 1
@@ -132,10 +130,10 @@ extension Image { // Operations
 			}
 		}
 		
-		return Image(width: width, height: height, pixels: pixels)
+		return Image(width: width, height: height, pixels: pixels)!
 	}
 	
-	public func flipY() -> Image {
+	public func flipY() -> Image<Pixel> {
 		var pixels = [Pixel]()
 		
 		let maxY = height - 1
@@ -145,25 +143,14 @@ extension Image { // Operations
 			}
 		}
 		
-		return Image(width: width, height: height, pixels: pixels)
+		return Image(width: width, height: height, pixels: pixels)!
 	}
 	
-	public func resize(width  width: Int, height: Int) -> Image {
-		return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
-	}
-	
-	public func resize(width  width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image {
-		return Image(width: width, height: height) { context in
-			CGContextSetInterpolationQuality(context, interpolationQuality)
-			CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.CGImage)
-		}
-	}
-	
-	public func rotate() -> Image {
+	public func rotate() -> Image<Pixel> {
 		return rotate(1)
 	}
 	
-	public func rotate(times: Int) -> Image {
+	public func rotate(times: Int) -> Image<Pixel> {
 		switch times % 4 {
 		case 0:
 			return self
@@ -177,7 +164,7 @@ extension Image { // Operations
 				}
 			}
 			
-			return Image(width: height, height: width, pixels: pixels)
+			return Image(width: height, height: width, pixels: pixels)!
 		case 2, -2:
 			var pixels = [Pixel]()
 			
@@ -189,7 +176,7 @@ extension Image { // Operations
 				}
 			}
 			
-			return Image(width: width, height: height, pixels: pixels)
+			return Image(width: width, height: height, pixels: pixels)!
 		case 3, -1:
 			var pixels = [Pixel]()
 			
@@ -200,14 +187,27 @@ extension Image { // Operations
 				}
 			}
 			
-			return Image(width: height, height: width, pixels: pixels)
+			return Image(width: height, height: width, pixels: pixels)!
 		default:
 			fatalError("Never reaches here.")
 		}
 	}
 }
 
-extension Image { // CoreGraphics
+extension Image where Pixel: RGBAType { // CoreGraphics
+	public func resize(width  width: Int, height: Int) -> Image<Pixel> {
+		return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
+	}
+	
+	public func resize(width  width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
+		return Image(width: width, height: height) { context in
+			CGContextSetInterpolationQuality(context, interpolationQuality)
+			CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.CGImage)
+		}
+	}
+}
+
+extension Image where Pixel: RGBAType { // CoreGraphics
 	public init(CGImage: CGImageRef) {
 		let width = CGImageGetWidth(CGImage)
 		let height = CGImageGetHeight(CGImage)
@@ -224,7 +224,7 @@ extension Image { // CoreGraphics
 		
 		let count = safeWidth * safeHeight
 		let defaultPixel = Pixel.transparent
-		var pixels = [Pixel](count: count, repeatedValue: defaultPixel)
+		var pixels = [Pixel](count: count, repeatedValue: Pixel.transparent)
 		
 		let context  = CGBitmapContextCreate(&pixels, safeWidth, safeHeight, 8, safeWidth * 4, Image.colorSpace, Image.bitmapInfo.rawValue)!
 		CGContextClearRect(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
@@ -239,7 +239,7 @@ extension Image { // CoreGraphics
 			}
 		}
 
-		self.init(width: safeWidth, height: safeHeight, pixels: pixels)
+		self.init(width: safeWidth, height: safeHeight, pixels: pixels)!
 	}
 	
 	public var CGImage: CGImageRef {
@@ -247,7 +247,7 @@ extension Image { // CoreGraphics
 		let buffer = UnsafeMutablePointer<UInt8>.alloc(length)
 		var pointer = buffer
 		for pixel in self {
-			let alphaInt = pixel.alphaInt
+			let alphaInt = Int(pixel.alpha)
 			pointer.memory = UInt8(pixel.redInt * alphaInt / 255)
 			pointer++
 			pointer.memory = UInt8(pixel.greenInt * alphaInt / 255)
@@ -273,7 +273,7 @@ extension Image { // CoreGraphics
 }
 
 #if os(iOS)
-extension Image { // UIKit
+extension Image where Pixel: RGBAType  { // UIKit
 	public init?(UIImage: UIKit.UIImage) {
 		guard let cgImage: CGImageRef = UIImage.CGImage else { return nil }
 		self.init(CGImage: cgImage)

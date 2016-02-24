@@ -4,8 +4,8 @@ import EasyImagy
 private let WIDTH = 320
 private let HEIGHT = 240
 
-private func getImage() -> Image {
-    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { Pixel(gray: UInt8($0 % 256)) })
+private func getImage() -> Image<RGBA> {
+    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })!
 }
 
 class PracticalOperationPerformanceTests: XCTestCase {
@@ -13,8 +13,8 @@ class PracticalOperationPerformanceTests: XCTestCase {
         let image = getImage()
         
         measureBlock {
-            _ = image.map { (pixel: Pixel) -> Pixel in
-                pixel.gray < 128 ? Pixel.black : Pixel.white
+            _ = image.map { (pixel: RGBA) -> RGBA in
+                pixel.gray < 128 ? RGBA.black : RGBA.white
             }
         }
     }
@@ -23,8 +23,8 @@ class PracticalOperationPerformanceTests: XCTestCase {
         let image = getImage()
 
         measureBlock {
-            _ = image.map { (x: Int, y: Int, pixel: Pixel) -> Pixel in
-                Pixel.mean(image[(x - 1)...(x + 1), (y - 1)...(y + 1)]) ?? pixel
+            _ = image.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
+                RGBA.mean(image[(x - 1)...(x + 1), (y - 1)...(y + 1)]) ?? pixel
             }
         }
     }
@@ -41,8 +41,8 @@ class PracticalOperationPerformanceTests: XCTestCase {
         let image = getImage()
         
         measureBlock {
-            _ = image.map { (x: Int, y: Int, pixel: Pixel) -> Pixel in
-                Pixel.weightedMean(zip(weights, image[(x - 2)...(x + 2), (y - 2)...(y + 2)])) ?? pixel
+            _ = image.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
+                RGBA.weightedMean(zip(weights, image[(x - 2)...(x + 2), (y - 2)...(y + 2)])) ?? pixel
             }
         }
     }
