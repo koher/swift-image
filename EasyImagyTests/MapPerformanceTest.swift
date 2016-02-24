@@ -17,6 +17,14 @@ class MapPerformanceTests: XCTestCase {
         }
     }
     
+    func testNormalMap1() {
+        let image = getImage()
+        measureBlock {
+            let mapped: Image<RGBA> = image.map1 { $0 }
+            XCTAssertEqual(0, mapped[0, 0]!.red)
+        }
+    }
+    
     func testMap() {
         let image = getImage()
         measureBlock {
@@ -63,6 +71,10 @@ private func transform(x: Int, y: Int, pixel: RGBA) -> RGBA {
 }
 
 extension Image {
+    private func map1<T>(transform: Pixel -> T) -> Image<T> {
+        return Image<T>(width: width, height: height, pixels: pixels.map(transform))!
+    }
+    
     private func map1<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
         let w = width
         return Image<T>(width: width, height: height, pixels: pixels.enumerate().map { i, pixel in transform(x: i % w, y: i / w, pixel: pixel) })!
