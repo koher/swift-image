@@ -9,9 +9,13 @@ public struct Image<Pixel> {
 	public private(set) var pixels: [Pixel]
 	
 	public init?(width: Int, height: Int, pixels: [Pixel]) {
-		self.width = max(width, 0)
-		self.height = max(height, 0)
-		let count = self.width * self.height
+		guard width >= 0 else { return nil }
+		guard height >= 0 else { return nil }
+		
+		self.width = width
+		self.height = height
+		
+		let count = width * height
 		
 		if pixels.count < count {
 			return nil
