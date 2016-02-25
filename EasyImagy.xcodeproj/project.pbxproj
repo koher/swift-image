@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */; };
 		D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */; };
 		D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */; };
 		D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */; };
@@ -14,7 +15,7 @@
 		D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */; };
 		D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */; };
 		D607D4081C7D709100D2B0A4 /* Generate2dPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */; };
-		D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */; };
+		D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC51C7ED57200E09688 /* ImageHack.swift */; };
 		D65EA67F1B01B71500F8E95F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
 		D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA6821B01B71F00F8E95F /* ImageTests.swift */; };
 		D65EA6891B01B71F00F8E95F /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
@@ -68,6 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericsPerformanceTest.swift; sourceTree = "<group>"; };
 		D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlice.swift; sourceTree = "<group>"; };
 		D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSliceTests.swift; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPerformanceTest.swift; sourceTree = "<group>"; };
 		D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticalOperationPerformanceTests.swift; sourceTree = "<group>"; };
 		D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generate2dPerformanceTests.swift; sourceTree = "<group>"; };
-		D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericsPerformanceTest.swift; sourceTree = "<group>"; };
+		D63B8BC51C7ED57200E09688 /* ImageHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHack.swift; sourceTree = "<group>"; };
 		D65EA67B1B01B71500F8E95F /* EasyImagy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
 		D65EA67C1B01B71500F8E95F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; usesTabs = 1; };
 		D65EA67D1B01B71500F8E95F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */,
 				D65EA68E1B01C7E600F8E95F /* Pixel.swift */,
 				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
+				D63B8BC51C7ED57200E09688 /* ImageHack.swift */,
 				D6D85AA01B03AE1A00B966DB /* EasyImagyC.h */,
 				D6D85A9E1B03AD7100B966DB /* EasyImagyC.m */,
 				D6D85AA11B03AE9800B966DB /* EasyImagy-Bridging-Header.h */,
@@ -375,6 +378,7 @@
 				D6D85A9F1B03AD7100B966DB /* EasyImagyC.m in Sources */,
 				D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */,
 				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
+				D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */,
 				D65EA67F1B01B71500F8E95F /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

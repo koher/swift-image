@@ -242,7 +242,7 @@ class ImageTests: XCTestCase {
     
     func testMapWithIndices() {
         do {
-            let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.map { x, y, pixel in
+            let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
                 return RGBA(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
             }
             
@@ -268,7 +268,7 @@ class ImageTests: XCTestCase {
         }
         
         do {
-            let image = Image<RGBA>(named: "Test2x1", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.map { x, y, pixel in
+            let image = Image<RGBA>(named: "Test2x1", inBundle: NSBundle(forClass: ImageTests.self), compatibleWithTraitCollection: nil)!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
                 return RGBA(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
             }
             
