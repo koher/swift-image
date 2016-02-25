@@ -98,12 +98,16 @@ public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
 extension Image { // Higher-order methods
 	public func map<T>(transform: Pixel -> T) -> Image<T> {
 		if let zelf = self as? Image<RGBA>, let f = transform as? (RGBA -> RGBA) {
-			if let result = Image<RGBA>(width: width, height: height, pixels: zelf.pixels.map(f))! as? Image<T> {
+			if let result = zelf._map(f) as? Image<T> {
 				return result
 			}
-			fatalError("Never reaches here")
+			fatalError("Never reaches here.")
 		}
 		
+		return _map(transform)
+	}
+	
+	private func _map<T>(transform: Pixel -> T) -> Image<T> {
 		return Image<T>(width: width, height: height, pixels: pixels.map(transform))!
 	}
 	
