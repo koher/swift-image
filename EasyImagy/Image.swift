@@ -97,7 +97,85 @@ public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
 
 extension Image { // Higher-order methods
 	public func map<T>(transform: Pixel -> T) -> Image<T> {
-		if let zelf = self as? Image<RGBA>, let f = transform as? (RGBA -> RGBA) {
+		if let zelf = self as? Image<RGBA>{
+			if let f = transform as? (RGBA -> RGBA) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (RGBA -> UInt8) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (RGBA -> Int) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (RGBA -> Float) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (RGBA -> Double) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			}
+		} else if let zelf = self as? Image<UInt8> {
+			if let f = transform as? (UInt8 -> UInt8) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (UInt8 -> Int) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (UInt8 -> Float) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (UInt8 -> Double) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			}
+		} else if let zelf = self as? Image<Int> {
+			if let f = transform as? (Int -> Int) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let zelf = self as? Image<Int>, let f = transform as? (Int -> Float) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let zelf = self as? Image<Int>, let f = transform as? (Int -> Double) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			}
+		} else if let zelf = self as? Image<Float> {
+			if let f = transform as? (Float -> Float) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			} else if let f = transform as? (Float -> Double) {
+				if let result = zelf._map(f) as? Image<T> {
+					return result
+				}
+				fatalError("Never reaches here.")
+			}
+		} else if let zelf = self as? Image<Double>, let f = transform as? (Double -> Double) {
 			if let result = zelf._map(f) as? Image<T> {
 				return result
 			}
@@ -107,7 +185,7 @@ extension Image { // Higher-order methods
 		return _map(transform)
 	}
 	
-	private func _map<T>(transform: Pixel -> T) -> Image<T> {
+	internal func _map<T>(transform: Pixel -> T) -> Image<T> {
 		return Image<T>(width: width, height: height, pixels: pixels.map(transform))!
 	}
 	

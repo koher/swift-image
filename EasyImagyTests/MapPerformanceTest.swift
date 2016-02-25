@@ -1,8 +1,8 @@
 import XCTest
-import EasyImagy
+@testable import EasyImagy
 
-private let WIDTH = 2048
-private let HEIGHT = 1024
+private let WIDTH = 1024
+private let HEIGHT = 512
 
 private func getImage() -> Image<RGBA> {
     return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })!
@@ -13,6 +13,14 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped: Image<RGBA> = image.map { $0 }
+            XCTAssertEqual(0, mapped[0, 0]!.red)
+        }
+    }
+    
+    func testNormalInternalMap() {
+        let image = getImage()
+        measureBlock {
+            let mapped: Image<RGBA> = image._map { $0 }
             XCTAssertEqual(0, mapped[0, 0]!.red)
         }
     }
