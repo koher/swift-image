@@ -21,9 +21,9 @@
 		D65EA6891B01B71F00F8E95F /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
 		D65EA68A1B01B71F00F8E95F /* Test2x2.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6851B01B71F00F8E95F /* Test2x2.png */; };
 		D65EA68B1B01B71F00F8E95F /* Test4x4.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6861B01B71F00F8E95F /* Test4x4.png */; };
-		D65EA68F1B01C7E600F8E95F /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA68E1B01C7E600F8E95F /* Pixel.swift */; };
+		D65EA68F1B01C7E600F8E95F /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA68E1B01C7E600F8E95F /* RGBA.swift */; };
 		D65FF07D1AFB66C7006CC985 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FF0711AFB66C7006CC985 /* EasyImagy.framework */; };
-		D6B54D841B090EFA00E4709D /* PixelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B54D831B090EFA00E4709D /* PixelTests.swift */; };
+		D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B54D831B090EFA00E4709D /* RGBATests.swift */; };
 		D6C2EDB51B02D54800E2B876 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */; };
 		D6C2EDFD1B031A0900E2B876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDFC1B031A0900E2B876 /* AppDelegate.swift */; };
 		D6C2EDFF1B031A0900E2B876 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDFE1B031A0900E2B876 /* ViewController.swift */; };
@@ -86,10 +86,10 @@
 		D65EA6841B01B71F00F8E95F /* Test2x1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test2x1.png; sourceTree = "<group>"; };
 		D65EA6851B01B71F00F8E95F /* Test2x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test2x2.png; sourceTree = "<group>"; };
 		D65EA6861B01B71F00F8E95F /* Test4x4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test4x4.png; sourceTree = "<group>"; };
-		D65EA68E1B01C7E600F8E95F /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		D65EA68E1B01C7E600F8E95F /* RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
 		D65FF0711AFB66C7006CC985 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65FF07C1AFB66C7006CC985 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6B54D831B090EFA00E4709D /* PixelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelTests.swift; sourceTree = "<group>"; };
+		D6B54D831B090EFA00E4709D /* RGBATests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBATests.swift; sourceTree = "<group>"; };
 		D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SubscriptTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D6C2EDF81B031A0900E2B876 /* EasyImagySample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyImagySample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C2EDFB1B031A0900E2B876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 				D65EA67B1B01B71500F8E95F /* EasyImagy.h */,
 				D65EA67C1B01B71500F8E95F /* Image.swift */,
 				D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */,
-				D65EA68E1B01C7E600F8E95F /* Pixel.swift */,
+				D65EA68E1B01C7E600F8E95F /* RGBA.swift */,
 				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
 				D63B8BC51C7ED57200E09688 /* ImageHack.swift */,
 				D6D85AA01B03AE1A00B966DB /* EasyImagyC.h */,
@@ -154,7 +154,7 @@
 			children = (
 				D65EA6821B01B71F00F8E95F /* ImageTests.swift */,
 				D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */,
-				D6B54D831B090EFA00E4709D /* PixelTests.swift */,
+				D6B54D831B090EFA00E4709D /* RGBATests.swift */,
 				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
 				D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */,
 				D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */,
@@ -374,7 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D65EA68F1B01C7E600F8E95F /* Pixel.swift in Sources */,
+				D65EA68F1B01C7E600F8E95F /* RGBA.swift in Sources */,
 				D6D85A9F1B03AD7100B966DB /* EasyImagyC.m in Sources */,
 				D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */,
 				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
@@ -388,7 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */,
-				D6B54D841B090EFA00E4709D /* PixelTests.swift in Sources */,
+				D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */,
 				D607D4021C7D54BB00D2B0A4 /* UtilTests.swift in Sources */,
 				D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */,
 				D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */,
