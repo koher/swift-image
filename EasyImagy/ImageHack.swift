@@ -167,3 +167,33 @@ extension Image {
         return zelf._map(transform)
     }
 }
+
+extension Image { // Convolution
+    public func convoluted(filter: Image<Int>) -> Image<RGBA> {
+        guard let zelf = self as? Image<RGBA> else { fatalError() }
+        return zelf._convoluted(filter, mean: mean)
+    }
+}
+
+private func mean(weightedPixels: [(weight: Int, value: RGBA)]) -> RGBA {
+    var weightSum = 0
+    var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
+    for (weight, pixel) in weightedPixels {
+        sum.red += weight * pixel.redInt
+        sum.green += weight * pixel.greenInt
+        sum.blue += weight * pixel.blueInt
+        sum.alpha += weight * pixel.alphaInt
+        weightSum += weight
+    }
+    
+    guard weightSum > 0 else { fatalError() }
+    
+    return RGBA(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
+}
+
+private struct IntPixel {
+    var red: Int
+    var green: Int
+    var blue: Int
+    var alpha: Int
+}

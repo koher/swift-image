@@ -9,6 +9,16 @@ private func getImage() -> Image<RGBA> {
 }
 
 class PracticalOperationPerformanceTests: XCTestCase {
+    func testGrayscale() {
+        let image = getImage()
+        
+        measureBlock {
+            image.map { (pixel: RGBA) -> RGBA in
+                RGBA(gray: pixel.gray)
+            }
+        }
+    }
+    
     func testBinarization() {
         let image = getImage()
         
@@ -21,29 +31,39 @@ class PracticalOperationPerformanceTests: XCTestCase {
     
     func testMeanFilter() {
         let image = getImage()
+        let filter = Image<Int>(width: 3, height: 3, pixels: [
+            1, 1, 1,
+            1, 1, 1,
+            1, 1, 1,
+        ])!
 
         measureBlock {
-            _ = image.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
-                RGBA.mean(image[(x - 1)...(x + 1), (y - 1)...(y + 1)]) ?? pixel
-            }
+            _ = image.convoluted(filter)
         }
     }
     
-    // Temporary implementation (`zip` does not work correctly for the edges)
+    func testIdenticalConvolution() {
+        let filter = Image<Int>(width: 1, height: 1, pixels: [1])!
+        let image = getImage()
+        
+        measureBlock {
+            _ = image.convoluted(filter)
+        }
+    }
+
+    
     func testGaussianFilter() {
-        let weights = [
+        let image = getImage()
+        let filter = Image<Int>(width: 5, height: 5, pixels: [
             1,  4,  6,  4, 1,
             4, 16, 24, 16, 4,
             6, 24, 36, 24, 6,
             4, 16, 24, 16, 4,
             1,  4,  6,  4, 1,
-        ]
-        let image = getImage()
+        ])!
         
         measureBlock {
-            _ = image.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
-                RGBA.weightedMean(zip(weights, image[(x - 2)...(x + 2), (y - 2)...(y + 2)])) ?? pixel
-            }
+            _ = image.convoluted(filter)
         }
     }
 }

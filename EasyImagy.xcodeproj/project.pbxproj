@@ -16,6 +16,8 @@
 		D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */; };
 		D607D4081C7D709100D2B0A4 /* Generate2dPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */; };
 		D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC51C7ED57200E09688 /* ImageHack.swift */; };
+		D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */; };
+		D63B8BCC1C7FF11800E09688 /* MeanPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */; };
 		D65EA67F1B01B71500F8E95F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
 		D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA6821B01B71F00F8E95F /* ImageTests.swift */; };
 		D65EA6891B01B71F00F8E95F /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
@@ -78,6 +80,8 @@
 		D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticalOperationPerformanceTests.swift; sourceTree = "<group>"; };
 		D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generate2dPerformanceTests.swift; sourceTree = "<group>"; };
 		D63B8BC51C7ED57200E09688 /* ImageHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHack.swift; sourceTree = "<group>"; };
+		D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlicePerformanceTests.swift; sourceTree = "<group>"; };
+		D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeanPerformanceTests.swift; sourceTree = "<group>"; };
 		D65EA67B1B01B71500F8E95F /* EasyImagy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
 		D65EA67C1B01B71500F8E95F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; usesTabs = 1; };
 		D65EA67D1B01B71500F8E95F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,10 +162,12 @@
 				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
 				D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */,
 				D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */,
+				D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */,
 				D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */,
 				D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */,
 				D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */,
 				D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */,
+				D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */,
 				D65EA68C1B01BDB900F8E95F /* Supporting Files */,
 			);
 			path = EasyImagyTests;
@@ -387,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */,
 				D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */,
 				D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */,
 				D607D4021C7D54BB00D2B0A4 /* UtilTests.swift in Sources */,
@@ -397,6 +404,7 @@
 				D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */,
 				D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */,
 				D6C2EDB51B02D54800E2B876 /* SubscriptTests.swift in Sources */,
+				D63B8BCC1C7FF11800E09688 /* MeanPerformanceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +576,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "EasyImagy/EasyImagy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

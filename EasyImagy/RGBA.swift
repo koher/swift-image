@@ -75,7 +75,7 @@ extension RGBAType { // Int getters
 	}
 }
 
-extension RGBA { // Gray
+extension RGBAType { // Gray
 	public var gray: UInt8 {
 		return UInt8(grayInt)
 	}
@@ -85,27 +85,8 @@ extension RGBA { // Gray
 	}
 }
 
-extension RGBA : CustomStringConvertible {
-	public var description: String {
-		return String(format: "#%02X%02X%02X%02X", arguments: [red, green, blue, alpha])
-	}
-}
-
-extension RGBA : CustomDebugStringConvertible {
-	public var debugDescription: String {
-		return description
-	}
-}
-
-extension RGBA : Equatable {
-}
-
-public func ==(lhs: RGBA, rhs: RGBA) -> Bool {
-	return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
-}
-
 extension RGBAType { // Operations
-	public static func mean<S: SequenceType where S.Generator.Element == RGBA>(pixels: S) -> Self? {
+    public static func mean<S: SequenceType where S.Generator.Element: RGBAType>(pixels: S) -> Self? {
 		var count = 0
 		var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
 		for pixel in pixels {
@@ -121,7 +102,7 @@ extension RGBAType { // Operations
 		return Self.init(red: sum.red / count, green: sum.green / count, blue: sum.blue / count, alpha: sum.alpha / count)
 	}
 
-	public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, RGBA)>(weightedPixels: S) -> Self? {
+    public static func weightedMean<S: SequenceType, RGBAValue: RGBAType where S.Generator.Element == (Int, RGBAValue)>(weightedPixels: S) -> Self? {
 		var weightSum = 0
 		var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
 		for (weight, pixel) in weightedPixels {
@@ -136,6 +117,10 @@ extension RGBAType { // Operations
 		
 		return Self.init(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
 	}
+}
+
+public func ==(lhs: RGBAType, rhs: RGBAType) -> Bool {
+    return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
 }
 
 extension RGBAType { // Presets
@@ -178,9 +163,118 @@ public struct RGBA: RGBAType {
     }
 }
 
+extension RGBA : CustomStringConvertible {
+    public var description: String {
+        return String(format: "#%02X%02X%02X%02X", arguments: [red, green, blue, alpha])
+    }
+}
+
+extension RGBA : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return description
+    }
+}
+
+extension RGBA { // Operations
+    public static func mean<S: SequenceType where S.Generator.Element == RGBA>(pixels: S) -> RGBA? {
+        return _mean(pixels)
+    }
+    
+    public static func mean(imageSlice: ImageSlice<RGBA>) -> RGBA? {
+        return _mean(imageSlice)
+    }
+    
+    private static func _mean<S: SequenceType where S.Generator.Element == RGBA>(pixels: S) -> RGBA? {
+        var count = 0
+        var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
+        for pixel in pixels {
+            sum.red += pixel.redInt
+            sum.green += pixel.greenInt
+            sum.blue += pixel.blueInt
+            sum.alpha += pixel.alphaInt
+            count++
+        }
+        
+        guard count > 0 else { return nil }
+        
+        return RGBA(red: sum.red / count, green: sum.green / count, blue: sum.blue / count, alpha: sum.alpha / count)
+    }
+
+    public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, RGBA)>(weightedPixels: S) -> RGBA? {
+        var weightSum = 0
+        var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
+        for (weight, pixel) in weightedPixels {
+            sum.red += weight * pixel.redInt
+            sum.green += weight * pixel.greenInt
+            sum.blue += weight * pixel.blueInt
+            sum.alpha += weight * pixel.alphaInt
+            weightSum += weight
+        }
+        
+        guard weightSum > 0 else { return nil }
+        
+        return RGBA(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
+    }
+}
+
+extension RGBA : Equatable {
+}
+
+public func ==(lhs: RGBA, rhs: RGBA) -> Bool {
+    return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
+}
+
 private struct IntPixel {
 	var red: Int
 	var green: Int
 	var blue: Int
 	var alpha: Int
+}
+
+extension RGBA { // Int getters
+    public var redInt: Int {
+        get {
+            return Int(red)
+        }
+        set {
+            red = UInt8(newValue)
+        }
+    }
+    
+    public var greenInt: Int {
+        get {
+            return Int(green)
+        }
+        set {
+            green = UInt8(newValue)
+        }
+    }
+    
+    public var blueInt: Int {
+        get {
+            return Int(blue)
+        }
+        set {
+            blue = UInt8(newValue)
+        }
+    }
+    
+    public var alphaInt: Int {
+        get {
+            return Int(alpha)
+        }
+        set {
+            alpha = UInt8(newValue)
+        }
+    }
+}
+
+extension RGBA { // Gray
+    public var gray: UInt8 {
+        return UInt8(grayInt)
+    }
+    
+    public var grayInt: Int {
+        return (redInt + greenInt + blueInt) / 3
+    }
 }

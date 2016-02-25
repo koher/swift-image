@@ -54,10 +54,14 @@ extension Image { // Subscripts (Index)
 		return 0 <= y && y < height
 	}
 	
+	internal func _pixelIndex(x  x: Int, y: Int) -> Int {
+		return y * width + x
+	}
+	
 	public func pixelIndex(x  x: Int, y: Int) -> Int? {
 		guard isValidX(x) else { return nil }
 		guard isValidY(y) else { return nil }
-		return y * width + x
+		return _pixelIndex(x: x, y: y)
 	}
 	
 	public subscript(x: Int, y: Int) -> Pixel? {
@@ -120,6 +124,44 @@ extension Image { // Higher-order methods
 		for i in 0..<count {
 			pixels[i] = transform(pixels[i])
 		}
+	}
+}
+
+extension Image { // Convolution
+	public func convoluted<W, T>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> T) -> Image<T> {
+		return _convoluted(filter, mean: mean)
+	}
+
+	internal func _convoluted<W, T>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> T) -> Image<T> {
+		assert(filter.width % 2 == 1, "The width of the `image` must be odd: \(filter.width)")
+		assert(filter.height % 2 == 1, "The height of the `image` must be odd: \(filter.height)")
+		
+		let hw = filter.width / 2  // halfWidth
+		let hh = filter.height / 2 // halfHeight
+		
+		var pixels: [T] = []
+		pixels.reserveCapacity(count)
+		
+		for y in 0..<height {
+			for x in 0..<width {
+				var weightedValues: [(weight: W, value: Pixel)] = []
+				for fy in 0..<filter.height {
+					for fx in 0..<filter.width {
+						let dx = fx - hw
+						let dy = fy - hh
+						guard let pixel = self[x + dx, y + dy] else { continue }
+						weightedValues.append((weight: filter.pixels[filter._pixelIndex(x: fx, y: fy)], value: pixel))
+					}
+				}
+				pixels.append(mean(weightedValues))
+			}
+		}
+		
+		return Image<T>(width: width, height: height, pixels: pixels)!
+	}
+	
+	public mutating func convolute<W>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> Pixel) {
+		self = convoluted(filter, mean: mean)
 	}
 }
 
