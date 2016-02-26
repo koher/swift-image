@@ -184,7 +184,7 @@ extension Image where Pixel: UInt8Type { // Convolution
 
 private func mean(weightedPixels: [(weight: Int, value: RGBA)]) -> RGBA {
     var weightSum = 0
-    var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
+    var sum = GenericRGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
     for (weight, pixel) in weightedPixels {
         sum.red += weight * pixel.redInt
         sum.green += weight * pixel.greenInt
@@ -211,11 +211,11 @@ private func mean(weightedPixels: [(weight: Int, value: UInt8)]) -> UInt8 {
     return UInt8(sum / weightSum)
 }
 
-private struct IntPixel {
-    var red: Int
-    var green: Int
-    var blue: Int
-    var alpha: Int
+private struct GenericRGBA<T> {
+    var red: T
+    var green: T
+    var blue: T
+    var alpha: T
 }
 
 public protocol UInt8Type {}
