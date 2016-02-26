@@ -182,31 +182,17 @@ extension Image where Pixel: UInt8Type { // Convolution
     }
 }
 
-private func mean(weightedPixels: [(weight: Int, value: RGBA)]) -> RGBA {
+private func mean<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P {
     var weightSum = 0
-    var sum = GenericRGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
+    var sum = P.summableZero
     for (weight, pixel) in weightedPixels {
-        sum = sum + GenericRGBA<Int>(red: pixel.redInt, green: pixel.greenInt, blue: pixel.blueInt, alpha: pixel.alphaInt).mul(weight)
+        sum = sum + pixel.summable.mul(weight)
         weightSum += weight
     }
     
     guard weightSum > 0 else { fatalError() }
     
-    let result = sum.div(weightSum)
-    return RGBA(red: result.red, green: result.green, blue: result.blue, alpha: result.alpha)
-}
-
-private func mean(weightedPixels: [(weight: Int, value: UInt8)]) -> UInt8 {
-    var weightSum = 0
-    var sum = 0
-    for (weight, value) in weightedPixels {
-        sum += weight * Int(value)
-        weightSum += weight
-    }
-    
-    guard weightSum > 0 else { fatalError() }
-    
-    return UInt8(sum / weightSum)
+    return P(summable: sum.div(weightSum))
 }
 
 private protocol NumericType {
@@ -253,3 +239,46 @@ extension Float: FloatType {}
 
 public protocol DoubleType {}
 extension Double: DoubleType {}
+
+private protocol PixelType {
+    typealias Summable: NumericType
+    
+    init(summable: Summable)
+    
+    var summable: Summable { get }
+    static var summableZero: Summable { get }
+}
+
+extension RGBA: PixelType {
+    private typealias Summable = GenericRGBA<Int>
+
+    private init(summable: GenericRGBA<Int>) {
+        self.init(red: summable.red, green: summable.green, blue: summable.blue, alpha: summable.alpha)
+    }
+    
+    private var summable: GenericRGBA<Int> {
+        return GenericRGBA<Int>(red: redInt, green: greenInt, blue: blueInt, alpha: alphaInt)
+    }
+
+    private static var summableZero: GenericRGBA<Int> {
+        return GenericRGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+}
+
+extension UInt8: PixelType {
+    typealias Summable = Int
+    
+    private init(summable: Int) {
+        self = UInt8(summable)
+    }
+    
+    private var summable: Int {
+        return Int(self)
+    }
+    
+    private static var summableZero: Int {
+        return 0
+    
+    }
+}
+
