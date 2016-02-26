@@ -1,8 +1,4 @@
-extension Image {
-    internal func _map<T>(transform: Pixel -> T) -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: pixels.map(transform))
-    }
-
+extension Image where Pixel: RGBAType {
     public func map(transform: RGBA -> RGBA) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._map(transform)
@@ -27,7 +23,9 @@ extension Image {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: UInt8Type {
     public func map(transform: UInt8 -> UInt8) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._map(transform)
@@ -47,7 +45,9 @@ extension Image {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: IntType {
     public func map(transform: Int -> Int) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._map(transform)
@@ -62,7 +62,9 @@ extension Image {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: FloatType {
     public func map(transform: Float -> Float) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._map(transform)
@@ -72,26 +74,16 @@ extension Image {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: DoubleType {
     public func map(transform: Double -> Double) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
         return zelf._map(transform)
     }
 }
 
-extension Image {
-    internal func _map<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
-        var pixels: [T] = []
-        pixels.reserveCapacity(count)
-        var generator = generate()
-        for y in 0..<height {
-            for x in 0..<width {
-                pixels.append(transform(x: x, y: y, pixel: generator.next()!))
-            }
-        }
-        return Image<T>(width: width, height: height, pixels: pixels)
-    }
-    
+extension Image where Pixel: RGBAType {
     public func map(transform: (x: Int, y: Int, pixel: RGBA) -> RGBA) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._map(transform)
@@ -116,7 +108,9 @@ extension Image {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: UInt8Type {
     public func map(transform: (x: Int, y: Int, pixel: UInt8) -> UInt8) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._map(transform)
@@ -136,7 +130,9 @@ extension Image {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: IntType {
     public func map(transform: (x: Int, y: Int, pixel: Int) -> Int) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._map(transform)
@@ -151,7 +147,9 @@ extension Image {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: FloatType {
     public func map(transform: (x: Int, y: Int, pixel: Float) -> Float) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._map(transform)
@@ -161,16 +159,25 @@ extension Image {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._map(transform)
     }
-    
+}
+
+extension Image where Pixel: DoubleType {
     public func map(transform: (x: Int, y: Int, pixel: Double) -> Double) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
         return zelf._map(transform)
     }
 }
 
-extension Image { // Convolution
+extension Image where Pixel: RGBAType { // Convolution
     public func convoluted(filter: Image<Int>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
+        return zelf._convoluted(filter, mean: mean)
+    }
+}
+
+extension Image where Pixel: UInt8Type { // Convolution
+    public func convoluted(filter: Image<Int>) -> Image<UInt8> {
+        guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._convoluted(filter, mean: mean)
     }
 }
@@ -191,9 +198,34 @@ private func mean(weightedPixels: [(weight: Int, value: RGBA)]) -> RGBA {
     return RGBA(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
 }
 
+private func mean(weightedPixels: [(weight: Int, value: UInt8)]) -> UInt8 {
+    var weightSum = 0
+    var sum = 0
+    for (weight, value) in weightedPixels {
+        sum += weight * Int(value)
+        weightSum += weight
+    }
+    
+    guard weightSum > 0 else { fatalError() }
+    
+    return UInt8(sum / weightSum)
+}
+
 private struct IntPixel {
     var red: Int
     var green: Int
     var blue: Int
     var alpha: Int
 }
+
+public protocol UInt8Type {}
+extension UInt8: UInt8Type {}
+
+public protocol IntType {}
+extension Int: IntType {}
+
+public protocol FloatType {}
+extension Float: FloatType {}
+
+public protocol DoubleType {}
+extension Double: DoubleType {}

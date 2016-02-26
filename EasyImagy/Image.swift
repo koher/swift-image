@@ -105,10 +105,18 @@ public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
 
 extension Image { // Higher-order methods
 	public func map<T>(transform: Pixel -> T) -> Image<T> {
-		return Image<T>(width: width, height: height, pixels: pixels.map(transform))
+		return _map(transform)
 	}
 	
+	internal func _map<T>(transform: Pixel -> T) -> Image<T> {
+		return Image<T>(width: width, height: height, pixels: pixels.map(transform))
+	}
+
 	public func map<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
+		return _map(transform)
+	}
+	
+	public func _map<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
 		var pixels: [T] = []
 		pixels.reserveCapacity(count)
 		var generator = generate()
