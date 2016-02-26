@@ -10,7 +10,7 @@ extension Float: FloatType {}
 public protocol DoubleType {}
 extension Double: DoubleType {}
 
-extension Image where Pixel: RGBAType {
+extension Image where Pixel: RGBAType { // map
     public func map(transform: RGBA -> RGBA) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._map(transform)
@@ -37,7 +37,7 @@ extension Image where Pixel: RGBAType {
     }
 }
 
-extension Image where Pixel: UInt8Type {
+extension Image where Pixel: UInt8Type { // map
     public func map(transform: UInt8 -> UInt8) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._map(transform)
@@ -59,7 +59,7 @@ extension Image where Pixel: UInt8Type {
     }
 }
 
-extension Image where Pixel: IntType {
+extension Image where Pixel: IntType { // map
     public func map(transform: Int -> Int) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._map(transform)
@@ -76,7 +76,7 @@ extension Image where Pixel: IntType {
     }
 }
 
-extension Image where Pixel: FloatType {
+extension Image where Pixel: FloatType { // map
     public func map(transform: Float -> Float) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._map(transform)
@@ -88,14 +88,14 @@ extension Image where Pixel: FloatType {
     }
 }
 
-extension Image where Pixel: DoubleType {
+extension Image where Pixel: DoubleType { // map
     public func map(transform: Double -> Double) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
         return zelf._map(transform)
     }
 }
 
-extension Image where Pixel: RGBAType {
+extension Image where Pixel: RGBAType { // map with indices
     public func map(transform: (x: Int, y: Int, pixel: RGBA) -> RGBA) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._map(transform)
@@ -122,7 +122,7 @@ extension Image where Pixel: RGBAType {
     }
 }
 
-extension Image where Pixel: UInt8Type {
+extension Image where Pixel: UInt8Type { // map with indices
     public func map(transform: (x: Int, y: Int, pixel: UInt8) -> UInt8) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._map(transform)
@@ -144,7 +144,7 @@ extension Image where Pixel: UInt8Type {
     }
 }
 
-extension Image where Pixel: IntType {
+extension Image where Pixel: IntType { // map with indices
     public func map(transform: (x: Int, y: Int, pixel: Int) -> Int) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._map(transform)
@@ -161,7 +161,7 @@ extension Image where Pixel: IntType {
     }
 }
 
-extension Image where Pixel: FloatType {
+extension Image where Pixel: FloatType { // map with indices
     public func map(transform: (x: Int, y: Int, pixel: Float) -> Float) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._map(transform)
@@ -173,7 +173,7 @@ extension Image where Pixel: FloatType {
     }
 }
 
-extension Image where Pixel: DoubleType {
+extension Image where Pixel: DoubleType { // map with indices
     public func map(transform: (x: Int, y: Int, pixel: Double) -> Double) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
         return zelf._map(transform)
