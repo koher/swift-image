@@ -186,16 +186,14 @@ private func mean(weightedPixels: [(weight: Int, value: RGBA)]) -> RGBA {
     var weightSum = 0
     var sum = GenericRGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
     for (weight, pixel) in weightedPixels {
-        sum.red += weight * pixel.redInt
-        sum.green += weight * pixel.greenInt
-        sum.blue += weight * pixel.blueInt
-        sum.alpha += weight * pixel.alphaInt
+        sum = sum + GenericRGBA<Int>(red: pixel.redInt, green: pixel.greenInt, blue: pixel.blueInt, alpha: pixel.alphaInt).mul(weight)
         weightSum += weight
     }
     
     guard weightSum > 0 else { fatalError() }
     
-    return RGBA(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
+    let result = sum.div(weightSum)
+    return RGBA(red: result.red, green: result.green, blue: result.blue, alpha: result.alpha)
 }
 
 private func mean(weightedPixels: [(weight: Int, value: UInt8)]) -> UInt8 {
@@ -211,11 +209,37 @@ private func mean(weightedPixels: [(weight: Int, value: UInt8)]) -> UInt8 {
     return UInt8(sum / weightSum)
 }
 
-private struct GenericRGBA<T> {
+private protocol NumericType {
+    func +(lhs: Self, rhs: Self) -> Self
+    
+    func mul(x: Int) -> Self
+    func div(x: Int) -> Self
+}
+extension Int: NumericType {
+    func mul(x: Int) -> Int { return self * x }
+    func div(x: Int) -> Int { return self / x }
+}
+extension Float: NumericType {
+    func mul(x: Int) -> Float { return self * Float(x) }
+    func div(x: Int) -> Float { return self / Float(x) }
+}
+extension Double: NumericType {
+    func mul(x: Int) -> Double { return self * Double(x) }
+    func div(x: Int) -> Double { return self / Double(x) }
+}
+
+private struct GenericRGBA<T: NumericType>: NumericType {
     var red: T
     var green: T
     var blue: T
     var alpha: T
+
+    func mul(x: Int) -> GenericRGBA<T> { return GenericRGBA<T>(red: red.mul(x), green: green.mul(x), blue: blue.mul(x), alpha: alpha.mul(x)) }
+    func div(x: Int) -> GenericRGBA<T> { return GenericRGBA<T>(red: red.div(x), green: green.div(x), blue: blue.div(x), alpha: alpha.div(x)) }
+}
+
+private func +<T: NumericType>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
+    return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
 }
 
 public protocol UInt8Type {}
