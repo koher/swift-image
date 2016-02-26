@@ -1,3 +1,15 @@
+public protocol UInt8Type {}
+extension UInt8: UInt8Type {}
+
+public protocol IntType {}
+extension Int: IntType {}
+
+public protocol FloatType {}
+extension Float: FloatType {}
+
+public protocol DoubleType {}
+extension Double: DoubleType {}
+
 extension Image where Pixel: RGBAType {
     public func map(transform: RGBA -> RGBA) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
@@ -227,18 +239,6 @@ private struct GenericRGBA<T: NumericType>: NumericType {
 private func +<T: NumericType>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
     return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
 }
-
-public protocol UInt8Type {}
-extension UInt8: UInt8Type {}
-
-public protocol IntType {}
-extension Int: IntType {}
-
-public protocol FloatType {}
-extension Float: FloatType {}
-
-public protocol DoubleType {}
-extension Double: DoubleType {}
 
 private protocol PixelType {
     typealias Summable: NumericType
