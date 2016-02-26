@@ -175,48 +175,6 @@ extension RGBA : CustomDebugStringConvertible {
     }
 }
 
-extension RGBA { // Operations
-    public static func mean<S: SequenceType where S.Generator.Element == RGBA>(pixels: S) -> RGBA? {
-        return _mean(pixels)
-    }
-    
-    public static func mean(imageSlice: ImageSlice<RGBA>) -> RGBA? {
-        return _mean(imageSlice)
-    }
-    
-    private static func _mean<S: SequenceType where S.Generator.Element == RGBA>(pixels: S) -> RGBA? {
-        var count = 0
-        var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
-        for pixel in pixels {
-            sum.red += pixel.redInt
-            sum.green += pixel.greenInt
-            sum.blue += pixel.blueInt
-            sum.alpha += pixel.alphaInt
-            count++
-        }
-        
-        guard count > 0 else { return nil }
-        
-        return RGBA(red: sum.red / count, green: sum.green / count, blue: sum.blue / count, alpha: sum.alpha / count)
-    }
-
-    public static func weightedMean<S: SequenceType where S.Generator.Element == (Int, RGBA)>(weightedPixels: S) -> RGBA? {
-        var weightSum = 0
-        var sum = IntPixel(red: 0, green: 0, blue: 0, alpha: 0)
-        for (weight, pixel) in weightedPixels {
-            sum.red += weight * pixel.redInt
-            sum.green += weight * pixel.greenInt
-            sum.blue += weight * pixel.blueInt
-            sum.alpha += weight * pixel.alphaInt
-            weightSum += weight
-        }
-        
-        guard weightSum > 0 else { return nil }
-        
-        return RGBA(red: sum.red / weightSum, green: sum.green / weightSum, blue: sum.blue / weightSum, alpha: sum.alpha / weightSum)
-    }
-}
-
 extension RGBA : Equatable {
 }
 

@@ -74,24 +74,25 @@ class ViewController: UIViewController {
 
 		controller.addAction(UIAlertAction(title: "Mean filter", style: .Default) { action in
 			let image = Image<RGBA>(UIImage: imageView.image!)!
-			imageView.image = image.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
-				RGBA.mean(image[(x - 1)...(x + 1), (y - 1)...(y + 1)]) ?? pixel
-			}.UIImage
+            let filter = Image<Int>(width: 3, height: 3, pixels: [
+                1, 1, 1,
+                1, 1, 1,
+                1, 1, 1,
+            ])!
+			imageView.image = image.convoluted(filter).UIImage
 			sender.enabled = true
 		})
 		
 		controller.addAction(UIAlertAction(title: "Gaussian filter", style: .Default) { action in
-			let weights = [
-				1,  4,  6,  4, 1,
-				4, 16, 24, 16, 4,
-				6, 24, 36, 24, 6,
-				4, 16, 24, 16, 4,
-				1,  4,  6,  4, 1,
-			]
 			let image = Image<RGBA>(UIImage: imageView.image!)!
-			imageView.image = image.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
-				RGBA.weightedMean(zip(weights, image[(x - 2)...(x + 2), (y - 2)...(y + 2)])) ?? pixel
-			}.UIImage
+            let filter = Image<Int>(width: 5, height: 5, pixels: [
+                1,  4,  6,  4, 1,
+                4, 16, 24, 16, 4,
+                6, 24, 36, 24, 6,
+                4, 16, 24, 16, 4,
+                1,  4,  6,  4, 1,
+            ])!
+			imageView.image = image.convoluted(filter).UIImage
 			sender.enabled = true
 		})
 		
