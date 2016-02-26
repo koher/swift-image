@@ -1,6 +1,6 @@
 extension Image {
     internal func _map<T>(transform: Pixel -> T) -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: pixels.map(transform))!
+        return Image<T>(width: width, height: height, pixels: pixels.map(transform))
     }
 
     public func map(transform: RGBA -> RGBA) -> Image<RGBA> {
@@ -89,7 +89,7 @@ extension Image {
                 pixels.append(transform(x: x, y: y, pixel: generator.next()!))
             }
         }
-        return Image<T>(width: width, height: height, pixels: pixels)!
+        return Image<T>(width: width, height: height, pixels: pixels)
     }
     
     public func map(transform: (x: Int, y: Int, pixel: RGBA) -> RGBA) -> Image<RGBA> {

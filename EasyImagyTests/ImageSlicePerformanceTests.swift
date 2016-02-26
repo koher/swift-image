@@ -5,7 +5,7 @@ private let WIDTH = 1024
 private let HEIGHT = 1024
 
 private func getImageSlice() -> ImageSlice<RGBA> {
-    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })![0..<WIDTH, 0..<HEIGHT]
+    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })[0..<WIDTH, 0..<HEIGHT]
 }
 
 private func loopGenerator<G: GeneratorType where G.Element == RGBA>(generator: G) -> Int? {

@@ -8,18 +8,18 @@ public struct Image<Pixel> {
 	public let height: Int
 	public private(set) var pixels: [Pixel]
 	
-	public init?(width: Int, height: Int, pixels: [Pixel]) {
-		guard width >= 0 else { return nil }
-		guard height >= 0 else { return nil }
+	public init(width: Int, height: Int, pixels: [Pixel]) {
+		assert(width >= 0, "`width` must be greater than or equal to 0: \(width)")
+		assert(height >= 0, "`height` must be greater than or equal to 0: \(height)")
 		
 		self.width = width
 		self.height = height
 		
 		let count = width * height
+
+		assert(pixels.count < count, "`pixels` must have more elements than `width` * `height`: \(count) < \(width) * \(height)")
 		
-		if pixels.count < count {
-			return nil
-		} else if pixels.count == count {
+		if pixels.count == count {
 			self.pixels = pixels
 		} else {
 			self.pixels = [Pixel](pixels[0..<count])
@@ -29,13 +29,13 @@ public struct Image<Pixel> {
 
 extension Image { // Additional initializers
 	public init(width: Int, height: Int, pixel: Pixel) {
-		self.init(width: width, height: height, pixels: [Pixel](count: width * height, repeatedValue: pixel))!
+		self.init(width: width, height: height, pixels: [Pixel](count: width * height, repeatedValue: pixel))
 	}
 }
 
 extension Image {
 	public init(_ imageSlice: ImageSlice<Pixel>) {
-		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)!
+		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)
 	}
 }
 
@@ -105,7 +105,7 @@ public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
 
 extension Image { // Higher-order methods
 	public func map<T>(transform: Pixel -> T) -> Image<T> {
-		return Image<T>(width: width, height: height, pixels: pixels.map(transform))!
+		return Image<T>(width: width, height: height, pixels: pixels.map(transform))
 	}
 	
 	public func map<T>(transform: (x: Int, y: Int, pixel: Pixel) -> T) -> Image<T> {
@@ -117,7 +117,7 @@ extension Image { // Higher-order methods
 				pixels.append(transform(x: x, y: y, pixel: generator.next()!))
 			}
 		}
-		return Image<T>(width: width, height: height, pixels: pixels)!
+		return Image<T>(width: width, height: height, pixels: pixels)
 	}
 
 	public mutating func update(transform: Pixel -> Pixel) {
@@ -157,7 +157,7 @@ extension Image { // Convolution
 			}
 		}
 		
-		return Image<T>(width: width, height: height, pixels: pixels)!
+		return Image<T>(width: width, height: height, pixels: pixels)
 	}
 	
 	public mutating func convolute<W>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> Pixel) {
@@ -176,7 +176,7 @@ extension Image { // Operations
 			}
 		}
 		
-		return Image(width: width, height: height, pixels: pixels)!
+		return Image(width: width, height: height, pixels: pixels)
 	}
 	
 	public func flipY() -> Image<Pixel> {
@@ -189,7 +189,7 @@ extension Image { // Operations
 			}
 		}
 		
-		return Image(width: width, height: height, pixels: pixels)!
+		return Image(width: width, height: height, pixels: pixels)
 	}
 	
 	public func rotate() -> Image<Pixel> {
@@ -210,7 +210,7 @@ extension Image { // Operations
 				}
 			}
 			
-			return Image(width: height, height: width, pixels: pixels)!
+			return Image(width: height, height: width, pixels: pixels)
 		case 2, -2:
 			var pixels = [Pixel]()
 			
@@ -222,7 +222,7 @@ extension Image { // Operations
 				}
 			}
 			
-			return Image(width: width, height: height, pixels: pixels)!
+			return Image(width: width, height: height, pixels: pixels)
 		case 3, -1:
 			var pixels = [Pixel]()
 			
@@ -233,7 +233,7 @@ extension Image { // Operations
 				}
 			}
 			
-			return Image(width: height, height: width, pixels: pixels)!
+			return Image(width: height, height: width, pixels: pixels)
 		default:
 			fatalError("Never reaches here.")
 		}
@@ -285,7 +285,7 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 			}
 		}
 
-		self.init(width: safeWidth, height: safeHeight, pixels: pixels)!
+		self.init(width: safeWidth, height: safeHeight, pixels: pixels)
 	}
 	
 	public var CGImage: CGImageRef {

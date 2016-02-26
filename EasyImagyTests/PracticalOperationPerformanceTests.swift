@@ -5,7 +5,7 @@ private let WIDTH = 320
 private let HEIGHT = 240
 
 private func getImage() -> Image<RGBA> {
-    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })!
+    return Image(width: WIDTH, height: HEIGHT, pixels: (0..<(WIDTH * HEIGHT)).map { RGBA(gray: UInt8($0 % 256)) })
 }
 
 class PracticalOperationPerformanceTests: XCTestCase {
@@ -35,7 +35,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
             1, 1, 1,
             1, 1, 1,
             1, 1, 1,
-        ])!
+        ])
 
         measureBlock {
             _ = image.convoluted(filter)
@@ -43,7 +43,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
     }
     
     func testIdenticalConvolution() {
-        let filter = Image<Int>(width: 1, height: 1, pixels: [1])!
+        let filter = Image<Int>(width: 1, height: 1, pixels: [1])
         let image = getImage()
         
         measureBlock {
@@ -60,7 +60,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
             6, 24, 36, 24, 6,
             4, 16, 24, 16, 4,
             1,  4,  6,  4, 1,
-        ])!
+        ])
         
         measureBlock {
             _ = image.convoluted(filter)
