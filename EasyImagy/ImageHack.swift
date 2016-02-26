@@ -198,43 +198,37 @@ private func mean<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P 
     var weightSum = 0
     var sum = P.summableZero
     for (weight, pixel) in weightedPixels {
-        sum = sum + pixel.summable.mul(weight)
+        sum = sum + pixel.summable * weight
         weightSum += weight
     }
     
     guard weightSum > 0 else { fatalError() }
     
-    return P(summable: sum.div(weightSum))
+    return P(summable: sum / weightSum)
 }
 
 private protocol NumericType {
     func +(lhs: Self, rhs: Self) -> Self
     
-    func mul(x: Int) -> Self
-    func div(x: Int) -> Self
+    func *(lhs: Self, rhs: Int) -> Self
+    func /(lhs: Self, rhs: Int) -> Self
 }
-extension Int: NumericType {
-    func mul(x: Int) -> Int { return self * x }
-    func div(x: Int) -> Int { return self / x }
-}
-extension Float: NumericType {
-    func mul(x: Int) -> Float { return self * Float(x) }
-    func div(x: Int) -> Float { return self / Float(x) }
-}
-extension Double: NumericType {
-    func mul(x: Int) -> Double { return self * Double(x) }
-    func div(x: Int) -> Double { return self / Double(x) }
-}
+extension Int: NumericType {}
+extension Float: NumericType {}
+private func *(lhs: Float, rhs: Int) -> Float { return lhs * Float(rhs) }
+private func /(lhs: Float, rhs: Int) -> Float { return lhs / Float(rhs) }
+extension Double: NumericType {}
+private func *(lhs: Double, rhs: Int) -> Double { return lhs * Double(rhs) }
+private func /(lhs: Double, rhs: Int) -> Double { return lhs / Double(rhs) }
 
 private struct GenericRGBA<T: NumericType>: NumericType {
     var red: T
     var green: T
     var blue: T
     var alpha: T
-
-    func mul(x: Int) -> GenericRGBA<T> { return GenericRGBA<T>(red: red.mul(x), green: green.mul(x), blue: blue.mul(x), alpha: alpha.mul(x)) }
-    func div(x: Int) -> GenericRGBA<T> { return GenericRGBA<T>(red: red.div(x), green: green.div(x), blue: blue.div(x), alpha: alpha.div(x)) }
 }
+private func *<T: NumericType>(lhs: GenericRGBA<T>, rhs: Int) -> GenericRGBA<T> { return GenericRGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs) }
+private func /<T: NumericType>(lhs: GenericRGBA<T>, rhs: Int) -> GenericRGBA<T> { return GenericRGBA<T>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs) }
 
 private func +<T: NumericType>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
     return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
