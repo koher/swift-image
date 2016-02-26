@@ -194,6 +194,27 @@ extension Image where Pixel: UInt8Type { // Convolution
     }
 }
 
+extension Image where Pixel: IntType { // Convolution
+    public func convoluted(filter: Image<Int>) -> Image<Int> {
+        guard let zelf = self as? Image<Int> else { fatalError() }
+        return zelf._convoluted(filter, mean: mean)
+    }
+}
+
+extension Image where Pixel: FloatType { // Convolution
+    public func convoluted(filter: Image<Int>) -> Image<Float> {
+        guard let zelf = self as? Image<Float> else { fatalError() }
+        return zelf._convoluted(filter, mean: mean)
+    }
+}
+
+extension Image where Pixel: DoubleType { // Convolution
+    public func convoluted(filter: Image<Int>) -> Image<Double> {
+        guard let zelf = self as? Image<Double> else { fatalError() }
+        return zelf._convoluted(filter, mean: mean)
+    }
+}
+
 private func mean<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P {
     var weightSum = 0
     var sum = P.summableZero
@@ -276,3 +297,53 @@ extension UInt8: PixelType {
     }
 }
 
+extension Int: PixelType {
+    typealias Summable = Int
+    
+    private init(summable: Int) {
+        self = summable
+    }
+    
+    private var summable: Int {
+        return self
+    }
+    
+    private static var summableZero: Int {
+        return 0
+        
+    }
+}
+
+extension Float: PixelType {
+    typealias Summable = Float
+    
+    private init(summable: Float) {
+        self = summable
+    }
+    
+    private var summable: Float {
+        return self
+    }
+    
+    private static var summableZero: Float {
+        return 0
+        
+    }
+}
+
+extension Double: PixelType {
+    typealias Summable = Double
+    
+    private init(summable: Double) {
+        self = summable
+    }
+    
+    private var summable: Double {
+        return self
+    }
+    
+    private static var summableZero: Double {
+        return 0
+        
+    }
+}
