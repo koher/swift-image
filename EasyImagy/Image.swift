@@ -259,19 +259,19 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 	public func resize(width  width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
 		return Image(width: width, height: height) { context in
 			CGContextSetInterpolationQuality(context, interpolationQuality)
-			CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.CGImage)
+			CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.cgImage)
 		}
 	}
 }
 
 extension Image where Pixel: RGBAType { // CoreGraphics
-	public init(CGImage: CGImageRef) {
-		let width = CGImageGetWidth(CGImage)
-		let height = CGImageGetHeight(CGImage)
+	public init(cgImage: CGImageRef) {
+		let width = CGImageGetWidth(cgImage)
+		let height = CGImageGetHeight(cgImage)
 		
 		self.init(width: width, height: height, setUp: { context in
 			let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
-			CGContextDrawImage(context, rect, CGImage)
+			CGContextDrawImage(context, rect, cgImage)
 		})
 	}
 	
@@ -299,7 +299,7 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 		self.init(width: safeWidth, height: safeHeight, pixels: pixels)
 	}
 	
-	public var CGImage: CGImageRef {
+	public var cgImage: CGImageRef {
 		let length = count * 4
 		let buffer = UnsafeMutablePointer<UInt8>.alloc(length)
 		var pointer = buffer
@@ -333,7 +333,7 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 extension Image where Pixel: RGBAType  { // UIKit
 	public init?(uiImage: UIImage) {
 		guard let cgImage: CGImageRef = uiImage.CGImage else { return nil }
-		self.init(CGImage: cgImage)
+		self.init(cgImage: cgImage)
 	}
 	
 	private init?(UIImageOrNil: UIImage?) {
@@ -358,7 +358,7 @@ extension Image where Pixel: RGBAType  { // UIKit
 	}
 
 	public var uiImage: UIImage {
-		return UIImage(CGImage: CGImage)
+		return UIImage(CGImage: cgImage)
 	}
 }
 #endif
@@ -367,7 +367,7 @@ extension Image where Pixel: RGBAType  { // UIKit
 	extension Image where Pixel: RGBAType  { // AppKit
 		public init?(nsImage: NSImage) {
 			guard let cgImage: CGImageRef = nsImage.CGImageForProposedRect(nil, context: nil, hints: nil) else { return nil }
-			self.init(CGImage: cgImage)
+			self.init(cgImage: cgImage)
 		}
 		
 		private init?(nsImageOrNil: NSImage?) {
@@ -388,7 +388,7 @@ extension Image where Pixel: RGBAType  { // UIKit
 		}
 		
 		public var nsImage: NSImage {
-			return NSImage(CGImage: CGImage, size: NSSize.zero)
+			return NSImage(cgImage: CGImage, size: NSSize.zero)
 		}
 	}
 #endif
