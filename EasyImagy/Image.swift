@@ -17,7 +17,7 @@ public struct Image<Pixel> {
 		
 		let count = width * height
 
-		assert(pixels.count < count, "`pixels` must have more elements than `width` * `height`: \(count) < \(width) * \(height)")
+		assert(pixels.count >= count, "`pixels` must have more elements than `width` * `height`: \(count) < \(width) * \(height)")
 		
 		if pixels.count == count {
 			self.pixels = pixels
@@ -312,7 +312,7 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 			pointer++
 		}
 		
-		let provider: CGDataProvider = EasyImageCreateDataProvider(buffer, width * height * 4).takeRetainedValue()
+		let provider: CGDataProvider = CGDataProviderCreateWithCFData(NSData(bytes: buffer, length: length))!
 		
 		return CGImageCreate(width, height, 8, 32, width * 4, Image.colorSpace, Image.bitmapInfo, provider, nil, false, CGColorRenderingIntent.RenderingIntentDefault)!
 	}
