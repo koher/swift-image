@@ -1,10 +1,4 @@
 import CoreGraphics
-#if os(iOS)
-import UIKit
-#endif
-#if os(OSX)
-import AppKit
-#endif
 
 public struct Image<Pixel> {
 	public let width: Int
@@ -328,74 +322,3 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 		return CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue | CGBitmapInfo.ByteOrder32Big.rawValue)
 	}
 }
-
-#if os(iOS)
-extension Image where Pixel: RGBAType  { // UIKit
-	public init?(uiImage: UIImage) {
-		guard let cgImage: CGImageRef = uiImage.CGImage else { return nil }
-		self.init(cgImage: cgImage)
-	}
-	
-	private init?(UIImageOrNil: UIImage?) {
-		guard let uiImage: UIImage = UIImageOrNil else { return nil }
-		self.init(uiImage: uiImage)
-	}
-	
-	public init?(named name: String) {
-		self.init(UIImageOrNil: UIImage(named: name))
-	}
-	
-	public init?(named name: String, inBundle bundle: NSBundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
-		self.init(UIImageOrNil: UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection))
-	}
-	
-	public init?(contentsOfFile path: String) {
-		self.init(UIImageOrNil: UIImage(contentsOfFile: path))
-	}
-	
-	public init?(data: NSData) {
-		self.init(UIImageOrNil: UIImage(data: data))
-	}
-
-	public var uiImage: UIImage {
-		return UIImage(CGImage: cgImage)
-	}
-}
-#endif
-
-#if os(OSX)
-	extension Image where Pixel: RGBAType  { // AppKit
-		public init?(nsImage: NSImage) {
-			guard let cgImage: CGImageRef = nsImage.CGImageForProposedRect(nil, context: nil, hints: nil) else { return nil }
-			self.init(cgImage: cgImage)
-		}
-		
-		private init?(nsImageOrNil: NSImage?) {
-			guard let nsImage: NSImage = nsImageOrNil else { return nil }
-			self.init(nsImage: nsImage)
-		}
-		
-		public init?(named name: String) {
-			self.init(nsImageOrNil: NSImage(named: name))
-		}
-		
-		public init?(named name: String, inBundle bundle: NSBundle?) {
-			// Temporary implementation
-			guard let bundle = bundle else { return nil }
-			guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).stringByAppendingPathComponent("\(name).png") }) else { return nil }
-			self.init(contentsOfFile: path)
-		}
-		
-		public init?(contentsOfFile path: String) {
-			self.init(nsImageOrNil: NSImage(contentsOfFile: path))
-		}
-		
-		public init?(data: NSData) {
-			self.init(nsImageOrNil: NSImage(data: data))
-		}
-		
-		public var nsImage: NSImage {
-			return NSImage(CGImage: cgImage, size: NSSize.zero)
-		}
-	}
-#endif

@@ -48,6 +48,10 @@
 		D69C33CF1C8D42FD007985D4 /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
 		D69C33D01C8D42FD007985D4 /* Test2x2.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6851B01B71F00F8E95F /* Test2x2.png */; };
 		D69C33D11C8D42FD007985D4 /* Test4x4.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6861B01B71F00F8E95F /* Test4x4.png */; };
+		D69C33D31C8D6265007985D4 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D21C8D6265007985D4 /* ImageUIKit.swift */; };
+		D69C33D51C8D627A007985D4 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D41C8D627A007985D4 /* ImageAppKit.swift */; };
+		D69C33D61C8D62E0007985D4 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D41C8D627A007985D4 /* ImageAppKit.swift */; };
+		D69C33D71C8D62E0007985D4 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D21C8D6265007985D4 /* ImageUIKit.swift */; };
 		D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B54D831B090EFA00E4709D /* RGBATests.swift */; };
 		D6C2EDB51B02D54800E2B876 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */; };
 		D6C2EDFD1B031A0900E2B876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDFC1B031A0900E2B876 /* AppDelegate.swift */; };
@@ -124,6 +128,8 @@
 		D65FF07C1AFB66C7006CC985 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69C33A61C8D3D2A007985D4 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69C33AF1C8D3D2A007985D4 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D69C33D21C8D6265007985D4 /* ImageUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUIKit.swift; sourceTree = "<group>"; };
+		D69C33D41C8D627A007985D4 /* ImageAppKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAppKit.swift; sourceTree = "<group>"; };
 		D6B54D831B090EFA00E4709D /* RGBATests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBATests.swift; sourceTree = "<group>"; };
 		D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SubscriptTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D6C2EDF81B031A0900E2B876 /* EasyImagySample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyImagySample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +190,8 @@
 			children = (
 				D65EA67B1B01B71500F8E95F /* EasyImagy.h */,
 				D65EA67C1B01B71500F8E95F /* Image.swift */,
+				D69C33D41C8D627A007985D4 /* ImageAppKit.swift */,
+				D69C33D21C8D6265007985D4 /* ImageUIKit.swift */,
 				D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */,
 				D65EA68E1B01C7E600F8E95F /* RGBA.swift */,
 				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
@@ -494,7 +502,9 @@
 			files = (
 				D65EA68F1B01C7E600F8E95F /* RGBA.swift in Sources */,
 				D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */,
+				D69C33D31C8D6265007985D4 /* ImageUIKit.swift in Sources */,
 				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
+				D69C33D51C8D627A007985D4 /* ImageAppKit.swift in Sources */,
 				D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */,
 				D65EA67F1B01B71500F8E95F /* Image.swift in Sources */,
 			);
@@ -523,6 +533,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69C33D71C8D62E0007985D4 /* ImageUIKit.swift in Sources */,
+				D69C33D61C8D62E0007985D4 /* ImageAppKit.swift in Sources */,
 				D69C33BE1C8D3EB1007985D4 /* ImageSlice.swift in Sources */,
 				D69C33BD1C8D3EB1007985D4 /* Image.swift in Sources */,
 				D69C33C11C8D3EB1007985D4 /* ImageHack.swift in Sources */,
