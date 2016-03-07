@@ -331,34 +331,34 @@ extension Image where Pixel: RGBAType { // CoreGraphics
 
 #if os(iOS)
 extension Image where Pixel: RGBAType  { // UIKit
-	public init?(UIImage: UIKit.UIImage) {
-		guard let cgImage: CGImageRef = UIImage.CGImage else { return nil }
+	public init?(uiImage: UIImage) {
+		guard let cgImage: CGImageRef = uiImage.CGImage else { return nil }
 		self.init(CGImage: cgImage)
 	}
 	
-	private init?(UIImageOrNil: UIKit.UIImage?) {
-		guard let UIImage: UIKit.UIImage = UIImageOrNil else { return nil }
-		self.init(UIImage: UIImage)
+	private init?(UIImageOrNil: UIImage?) {
+		guard let uiImage: UIImage = UIImageOrNil else { return nil }
+		self.init(uiImage: uiImage)
 	}
 	
 	public init?(named name: String) {
-		self.init(UIImageOrNil: UIKit.UIImage(named: name))
+		self.init(UIImageOrNil: UIImage(named: name))
 	}
 	
 	public init?(named name: String, inBundle bundle: NSBundle?, compatibleWithTraitCollection traitCollection: UITraitCollection?) {
-		self.init(UIImageOrNil: UIKit.UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection))
+		self.init(UIImageOrNil: UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection))
 	}
 	
 	public init?(contentsOfFile path: String) {
-		self.init(UIImageOrNil: UIKit.UIImage(contentsOfFile: path))
+		self.init(UIImageOrNil: UIImage(contentsOfFile: path))
 	}
 	
 	public init?(data: NSData) {
-		self.init(UIImageOrNil: UIKit.UIImage(data: data))
+		self.init(UIImageOrNil: UIImage(data: data))
 	}
 
-	public var UIImage: UIKit.UIImage {
-		return UIKit.UIImage(CGImage: CGImage)
+	public var uiImage: UIImage {
+		return UIImage(CGImage: CGImage)
 	}
 }
 #endif
