@@ -345,7 +345,7 @@ extension Image where Pixel: RGBAType  { // UIKit
 		self.init(UIImageOrNil: UIImage(named: name))
 	}
 	
-	public init?(named name: String, inBundle bundle: NSBundle?, compatibleWithTraitCollection traitCollection: UITraitCollection?) {
+	public init?(named name: String, inBundle bundle: NSBundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
 		self.init(UIImageOrNil: UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection))
 	}
 	
@@ -379,6 +379,13 @@ extension Image where Pixel: RGBAType  { // UIKit
 			self.init(nsImageOrNil: NSImage(named: name))
 		}
 		
+		public init?(named name: String, inBundle bundle: NSBundle?) {
+			// Temporary implementation
+			guard let bundle = bundle else { return nil }
+			guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).stringByAppendingPathComponent("\(name).png") }) else { return nil }
+			self.init(contentsOfFile: path)
+		}
+		
 		public init?(contentsOfFile path: String) {
 			self.init(nsImageOrNil: NSImage(contentsOfFile: path))
 		}
@@ -388,7 +395,7 @@ extension Image where Pixel: RGBAType  { // UIKit
 		}
 		
 		public var nsImage: NSImage {
-			return NSImage(cgImage: CGImage, size: NSSize.zero)
+			return NSImage(CGImage: cgImage, size: NSSize.zero)
 		}
 	}
 #endif

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D69C33A51C8D3D2A007985D4"
+               BlueprintIdentifier = "D65FF0701AFB66C7006CC985"
                BuildableName = "EasyImagy.framework"
-               BlueprintName = "EasyImagy-OSX"
+               BlueprintName = "EasyImagy-iOS"
                ReferencedContainer = "container:EasyImagy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D69C33AE1C8D3D2A007985D4"
+               BlueprintIdentifier = "D65FF07B1AFB66C7006CC985"
                BuildableName = "EasyImagyTests.xctest"
-               BlueprintName = "EasyImagy-OSX Tests"
+               BlueprintName = "EasyImagy-iOS Tests"
                ReferencedContainer = "container:EasyImagy.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D69C33A51C8D3D2A007985D4"
+            BlueprintIdentifier = "D65FF0701AFB66C7006CC985"
             BuildableName = "EasyImagy.framework"
-            BlueprintName = "EasyImagy-OSX"
+            BlueprintName = "EasyImagy-iOS"
             ReferencedContainer = "container:EasyImagy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D69C33A51C8D3D2A007985D4"
+            BlueprintIdentifier = "D65FF0701AFB66C7006CC985"
             BuildableName = "EasyImagy.framework"
-            BlueprintName = "EasyImagy-OSX"
+            BlueprintName = "EasyImagy-iOS"
             ReferencedContainer = "container:EasyImagy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D69C33A51C8D3D2A007985D4"
+            BlueprintIdentifier = "D65FF0701AFB66C7006CC985"
             BuildableName = "EasyImagy.framework"
-            BlueprintName = "EasyImagy-OSX"
+            BlueprintName = "EasyImagy-iOS"
             ReferencedContainer = "container:EasyImagy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
