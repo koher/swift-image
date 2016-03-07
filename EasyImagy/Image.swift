@@ -30,7 +30,7 @@ extension Image { // Additional initializers
 	}
 }
 
-extension Image {
+extension Image { // Initializers for ImageSlice
 	public init(_ imageSlice: ImageSlice<Pixel>) {
 		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)
 	}
@@ -132,7 +132,7 @@ extension Image { // Higher-order methods
 	}
 }
 
-extension Image { // Convolution
+extension Image { // Convolutions
 	public func convoluted<W, T>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> T) -> Image<T> {
 		return _convoluted(filter, mean: mean)
 	}
