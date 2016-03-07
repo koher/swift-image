@@ -2,6 +2,9 @@ import CoreGraphics
 #if os(iOS)
 import UIKit
 #endif
+#if os(OSX)
+import AppKit
+#endif
 
 public struct Image<Pixel> {
 	public let width: Int
@@ -358,4 +361,34 @@ extension Image where Pixel: RGBAType  { // UIKit
 		return UIKit.UIImage(CGImage: CGImage)
 	}
 }
+#endif
+
+#if os(OSX)
+	extension Image where Pixel: RGBAType  { // AppKit
+		public init?(nsImage: NSImage) {
+			guard let cgImage: CGImageRef = nsImage.CGImageForProposedRect(nil, context: nil, hints: nil) else { return nil }
+			self.init(CGImage: cgImage)
+		}
+		
+		private init?(nsImageOrNil: NSImage?) {
+			guard let nsImage: NSImage = nsImageOrNil else { return nil }
+			self.init(nsImage: nsImage)
+		}
+		
+		public init?(named name: String) {
+			self.init(nsImageOrNil: NSImage(named: name))
+		}
+		
+		public init?(contentsOfFile path: String) {
+			self.init(nsImageOrNil: NSImage(contentsOfFile: path))
+		}
+		
+		public init?(data: NSData) {
+			self.init(nsImageOrNil: NSImage(data: data))
+		}
+		
+		public var nsImage: NSImage {
+			return NSImage(CGImage: CGImage, size: NSSize.zero)
+		}
+	}
 #endif
