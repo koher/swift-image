@@ -41,7 +41,7 @@ class LoopPerformanceTests: XCTestCase {
 		}
 	}
 	
-	func testGeneratorOfRead() {
+	func testAnyGeneratorRead() {
 		let numbers = ArrayWrapper(numbers: [Int](count: N, repeatedValue: 1))
 		
 		measureBlock {
@@ -52,6 +52,18 @@ class LoopPerformanceTests: XCTestCase {
 			XCTAssertEqual(N, sum)
 		}
 	}
+    
+    func testIndexingGeneratorRead() {
+        let numbers = ArrayWrapper2(numbers: [Int](count: N, repeatedValue: 1))
+        
+        measureBlock {
+            var sum = 0
+            for number in numbers {
+                sum += number
+            }
+            XCTAssertEqual(N, sum)
+        }
+    }
 }
 
 private struct ArrayWrapper : SequenceType {
@@ -67,4 +79,12 @@ private struct ArrayWrapper : SequenceType {
 			return self.numbers[index++]
 		}
 	}
+}
+
+private struct ArrayWrapper2: SequenceType {
+    let numbers: [Int]
+    
+    func generate() -> IndexingGenerator<[Int]> {
+        return numbers.generate()
+    }
 }
