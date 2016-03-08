@@ -66,19 +66,13 @@ class ViewController: UIViewController {
 		controller.addAction(UIAlertAction(title: "Binarize (Auto threshold)", style: .Default) { action in
 			let image = Image<RGBA>(uiImage: imageView.image!)!
 			let threshold = UInt8(image.reduce(0) { $0 + $1.grayInt } / image.count) // mean of gray values of all pixels
-			imageView.image = image.map { (pixel: RGBA) -> RGBA in
-				pixel.gray < threshold ? RGBA.black : RGBA.white
-			}.uiImage
+			imageView.image = image.map { $0.gray < threshold ? .black : .white }.uiImage
 			sender.enabled = true
 		})
 
 		controller.addAction(UIAlertAction(title: "Mean filter", style: .Default) { action in
 			let image = Image<RGBA>(uiImage: imageView.image!)!
-            let filter = Image<Int>(width: 3, height: 3, pixels: [
-                1, 1, 1,
-                1, 1, 1,
-                1, 1, 1,
-            ])
+            let filter = Image<Int>(width: 3, height: 3, pixel: 1)
 			imageView.image = image.convoluted(filter).uiImage
 			sender.enabled = true
 		})
