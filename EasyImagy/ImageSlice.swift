@@ -1,5 +1,5 @@
 public struct ImageSlice<Pixel> {
-    private let image: Image<Pixel>
+    internal let image: Image<Pixel>
     internal let xRange: Range<Int>
     internal let yRange: Range<Int>
     
@@ -44,7 +44,7 @@ extension ImageSlice { // Subscripts (Range)
     }
 }
 
-extension ImageSlice : SequenceType {
+extension ImageSlice: SequenceType {
     public func generate() -> PixelGenerator<Pixel> {
         return PixelGenerator(image: image, xRange: validRange(xRange, maxValue: image.width), yRange: validRange(yRange, maxValue: image.height))
     }
@@ -84,6 +84,6 @@ public struct PixelGenerator<Pixel>: GeneratorType {
         guard y < yRange.endIndex else { return nil }
         defer { x += 1 }
         
-        return image.pixels[y * image.width + x]
+        return image.pixels[image._pixelIndex(x: x, y: y)]
     }
 }

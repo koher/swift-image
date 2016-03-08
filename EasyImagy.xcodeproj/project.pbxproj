@@ -7,22 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */; };
 		D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */; };
 		D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */; };
 		D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */; };
 		D607D4021C7D54BB00D2B0A4 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */; };
 		D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */; };
 		D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */; };
-		D607D4081C7D709100D2B0A4 /* Generate2dPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */; };
-		D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */; };
+		D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC51C7ED57200E09688 /* ImageHack.swift */; };
+		D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */; };
+		D63B8BCC1C7FF11800E09688 /* MeanPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */; };
 		D65EA67F1B01B71500F8E95F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
 		D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA6821B01B71F00F8E95F /* ImageTests.swift */; };
 		D65EA6891B01B71F00F8E95F /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
 		D65EA68A1B01B71F00F8E95F /* Test2x2.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6851B01B71F00F8E95F /* Test2x2.png */; };
 		D65EA68B1B01B71F00F8E95F /* Test4x4.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6861B01B71F00F8E95F /* Test4x4.png */; };
-		D65EA68F1B01C7E600F8E95F /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA68E1B01C7E600F8E95F /* Pixel.swift */; };
+		D65EA68F1B01C7E600F8E95F /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA68E1B01C7E600F8E95F /* RGBA.swift */; };
 		D65FF07D1AFB66C7006CC985 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FF0711AFB66C7006CC985 /* EasyImagy.framework */; };
-		D6B54D841B090EFA00E4709D /* PixelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B54D831B090EFA00E4709D /* PixelTests.swift */; };
+		D69C339F1C8D19C8007985D4 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D65EA67B1B01B71500F8E95F /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D69C33B01C8D3D2A007985D4 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69C33A61C8D3D2A007985D4 /* EasyImagy.framework */; };
+		D69C33BD1C8D3EB1007985D4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
+		D69C33BE1C8D3EB1007985D4 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */; };
+		D69C33BF1C8D3EB1007985D4 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA68E1B01C7E600F8E95F /* RGBA.swift */; };
+		D69C33C01C8D3EB1007985D4 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */; };
+		D69C33C11C8D3EB1007985D4 /* ImageHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC51C7ED57200E09688 /* ImageHack.swift */; };
+		D69C33C21C8D3EB7007985D4 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA6821B01B71F00F8E95F /* ImageTests.swift */; };
+		D69C33C31C8D3EB7007985D4 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */; };
+		D69C33C41C8D3EB7007985D4 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B54D831B090EFA00E4709D /* RGBATests.swift */; };
+		D69C33C51C8D3EB7007985D4 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */; };
+		D69C33C61C8D3EB7007985D4 /* MapPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */; };
+		D69C33C81C8D3EB7007985D4 /* ImageSlicePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */; };
+		D69C33C91C8D3EB7007985D4 /* PracticalOperationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */; };
+		D69C33CA1C8D3EB7007985D4 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */; };
+		D69C33CB1C8D3EB7007985D4 /* LoopPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */; };
+		D69C33CC1C8D3EB7007985D4 /* GenericsPerformanceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */; };
+		D69C33CD1C8D3EB7007985D4 /* MeanPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */; };
+		D69C33CE1C8D3EC3007985D4 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D65EA67B1B01B71500F8E95F /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D69C33CF1C8D42FD007985D4 /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
+		D69C33D01C8D42FD007985D4 /* Test2x2.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6851B01B71F00F8E95F /* Test2x2.png */; };
+		D69C33D11C8D42FD007985D4 /* Test4x4.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6861B01B71F00F8E95F /* Test4x4.png */; };
+		D69C33D31C8D6265007985D4 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D21C8D6265007985D4 /* ImageUIKit.swift */; };
+		D69C33D51C8D627A007985D4 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D41C8D627A007985D4 /* ImageAppKit.swift */; };
+		D69C33D61C8D62E0007985D4 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D41C8D627A007985D4 /* ImageAppKit.swift */; };
+		D69C33D71C8D62E0007985D4 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D21C8D6265007985D4 /* ImageUIKit.swift */; };
+		D69C33D91C8D66DD007985D4 /* ImageCoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D81C8D66DD007985D4 /* ImageCoreGraphics.swift */; };
+		D69C33DA1C8D66E4007985D4 /* ImageCoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C33D81C8D66DD007985D4 /* ImageCoreGraphics.swift */; };
+		D69C340F1C8EB942007985D4 /* EasyImagySample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69C340D1C8EB81D007985D4 /* EasyImagySample.swift */; };
+		D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B54D831B090EFA00E4709D /* RGBATests.swift */; };
 		D6C2EDB51B02D54800E2B876 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */; };
 		D6C2EDFD1B031A0900E2B876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDFC1B031A0900E2B876 /* AppDelegate.swift */; };
 		D6C2EDFF1B031A0900E2B876 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C2EDFE1B031A0900E2B876 /* ViewController.swift */; };
@@ -32,7 +63,6 @@
 		D6C2EE1A1B031A5B00E2B876 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D65FF0711AFB66C7006CC985 /* EasyImagy.framework */; };
 		D6C2EE1B1B031A5B00E2B876 /* EasyImagy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D65FF0711AFB66C7006CC985 /* EasyImagy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6C2EE201B03211C00E2B876 /* Image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D6C2EE1F1B03211C00E2B876 /* Image.jpg */; };
-		D6D85A9F1B03AD7100B966DB /* EasyImagyC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D85A9E1B03AD7100B966DB /* EasyImagyC.m */; };
 		D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +73,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D65FF0701AFB66C7006CC985;
 			remoteInfo = EasyImagy;
+		};
+		D69C33B11C8D3D2A007985D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D65FF0681AFB66C7006CC985 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D69C33A51C8D3D2A007985D4;
+			remoteInfo = "EasyImagy-OSX";
 		};
 		D6C2EE1C1B031A5B00E2B876 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -68,14 +105,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericsPerformanceTest.swift; sourceTree = "<group>"; };
 		D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlice.swift; sourceTree = "<group>"; };
 		D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSliceTests.swift; sourceTree = "<group>"; };
 		D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
 		D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPerformanceTest.swift; sourceTree = "<group>"; };
 		D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticalOperationPerformanceTests.swift; sourceTree = "<group>"; };
-		D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generate2dPerformanceTests.swift; sourceTree = "<group>"; };
-		D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericsPerformanceTest.swift; sourceTree = "<group>"; };
+		D63B8BC51C7ED57200E09688 /* ImageHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHack.swift; sourceTree = "<group>"; };
+		D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlicePerformanceTests.swift; sourceTree = "<group>"; };
+		D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeanPerformanceTests.swift; sourceTree = "<group>"; };
 		D65EA67B1B01B71500F8E95F /* EasyImagy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
 		D65EA67C1B01B71500F8E95F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; usesTabs = 1; };
 		D65EA67D1B01B71500F8E95F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,10 +123,16 @@
 		D65EA6841B01B71F00F8E95F /* Test2x1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test2x1.png; sourceTree = "<group>"; };
 		D65EA6851B01B71F00F8E95F /* Test2x2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test2x2.png; sourceTree = "<group>"; };
 		D65EA6861B01B71F00F8E95F /* Test4x4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Test4x4.png; sourceTree = "<group>"; };
-		D65EA68E1B01C7E600F8E95F /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		D65EA68E1B01C7E600F8E95F /* RGBA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
 		D65FF0711AFB66C7006CC985 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65FF07C1AFB66C7006CC985 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6B54D831B090EFA00E4709D /* PixelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelTests.swift; sourceTree = "<group>"; };
+		D69C33A61C8D3D2A007985D4 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D69C33AF1C8D3D2A007985D4 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D69C33D21C8D6265007985D4 /* ImageUIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageUIKit.swift; sourceTree = "<group>"; };
+		D69C33D41C8D627A007985D4 /* ImageAppKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAppKit.swift; sourceTree = "<group>"; };
+		D69C33D81C8D66DD007985D4 /* ImageCoreGraphics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCoreGraphics.swift; sourceTree = "<group>"; };
+		D69C340D1C8EB81D007985D4 /* EasyImagySample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyImagySample.swift; sourceTree = "<group>"; };
+		D6B54D831B090EFA00E4709D /* RGBATests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBATests.swift; sourceTree = "<group>"; };
 		D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SubscriptTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D6C2EDF81B031A0900E2B876 /* EasyImagySample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyImagySample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C2EDFB1B031A0900E2B876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,9 +142,6 @@
 		D6C2EE031B031A0900E2B876 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D6C2EE061B031A0900E2B876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D6C2EE1F1B03211C00E2B876 /* Image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image.jpg; sourceTree = "<group>"; };
-		D6D85A9E1B03AD7100B966DB /* EasyImagyC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyImagyC.m; sourceTree = "<group>"; };
-		D6D85AA01B03AE1A00B966DB /* EasyImagyC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyImagyC.h; sourceTree = "<group>"; };
-		D6D85AA11B03AE9800B966DB /* EasyImagy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyImagy-Bridging-Header.h"; sourceTree = "<group>"; };
 		D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopPerformanceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +161,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D69C33A21C8D3D2A007985D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D69C33AC1C8D3D2A007985D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D69C33B01C8D3D2A007985D4 /* EasyImagy.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6C2EDF51B031A0900E2B876 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -135,12 +192,13 @@
 			children = (
 				D65EA67B1B01B71500F8E95F /* EasyImagy.h */,
 				D65EA67C1B01B71500F8E95F /* Image.swift */,
+				D69C33D81C8D66DD007985D4 /* ImageCoreGraphics.swift */,
+				D69C33D41C8D627A007985D4 /* ImageAppKit.swift */,
+				D69C33D21C8D6265007985D4 /* ImageUIKit.swift */,
 				D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */,
-				D65EA68E1B01C7E600F8E95F /* Pixel.swift */,
+				D65EA68E1B01C7E600F8E95F /* RGBA.swift */,
 				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
-				D6D85AA01B03AE1A00B966DB /* EasyImagyC.h */,
-				D6D85A9E1B03AD7100B966DB /* EasyImagyC.m */,
-				D6D85AA11B03AE9800B966DB /* EasyImagy-Bridging-Header.h */,
+				D63B8BC51C7ED57200E09688 /* ImageHack.swift */,
 				D65EA68D1B01BE0D00F8E95F /* Supporting Files */,
 			);
 			path = EasyImagy;
@@ -149,16 +207,18 @@
 		D65EA6811B01B71F00F8E95F /* EasyImagyTests */ = {
 			isa = PBXGroup;
 			children = (
+				D69C340D1C8EB81D007985D4 /* EasyImagySample.swift */,
 				D65EA6821B01B71F00F8E95F /* ImageTests.swift */,
 				D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */,
-				D6B54D831B090EFA00E4709D /* PixelTests.swift */,
+				D6B54D831B090EFA00E4709D /* RGBATests.swift */,
 				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
 				D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */,
-				D607D4071C7D709100D2B0A4 /* Generate2dPerformanceTests.swift */,
+				D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */,
 				D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */,
 				D6C2EDB41B02D54800E2B876 /* SubscriptTests.swift */,
 				D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */,
 				D607D3ED1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift */,
+				D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */,
 				D65EA68C1B01BDB900F8E95F /* Supporting Files */,
 			);
 			path = EasyImagyTests;
@@ -199,6 +259,8 @@
 				D65FF0711AFB66C7006CC985 /* EasyImagy.framework */,
 				D65FF07C1AFB66C7006CC985 /* EasyImagyTests.xctest */,
 				D6C2EDF81B031A0900E2B876 /* EasyImagySample.app */,
+				D69C33A61C8D3D2A007985D4 /* EasyImagy.framework */,
+				D69C33AF1C8D3D2A007985D4 /* EasyImagyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,15 +294,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69C339F1C8D19C8007985D4 /* EasyImagy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D69C33A31C8D3D2A007985D4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D69C33CE1C8D3EC3007985D4 /* EasyImagy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D65FF0701AFB66C7006CC985 /* EasyImagy */ = {
+		D65FF0701AFB66C7006CC985 /* EasyImagy-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D65FF0871AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagy" */;
+			buildConfigurationList = D65FF0871AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagy-iOS" */;
 			buildPhases = (
 				D65FF06C1AFB66C7006CC985 /* Sources */,
 				D65FF06D1AFB66C7006CC985 /* Frameworks */,
@@ -251,14 +322,14 @@
 			);
 			dependencies = (
 			);
-			name = EasyImagy;
+			name = "EasyImagy-iOS";
 			productName = EasyImagy;
 			productReference = D65FF0711AFB66C7006CC985 /* EasyImagy.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D65FF07B1AFB66C7006CC985 /* EasyImagyTests */ = {
+		D65FF07B1AFB66C7006CC985 /* EasyImagy-iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D65FF08A1AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagyTests" */;
+			buildConfigurationList = D65FF08A1AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagy-iOS Tests" */;
 			buildPhases = (
 				D65FF0781AFB66C7006CC985 /* Sources */,
 				D65FF0791AFB66C7006CC985 /* Frameworks */,
@@ -269,9 +340,45 @@
 			dependencies = (
 				D65FF07F1AFB66C7006CC985 /* PBXTargetDependency */,
 			);
-			name = EasyImagyTests;
+			name = "EasyImagy-iOS Tests";
 			productName = EasyImagyTests;
 			productReference = D65FF07C1AFB66C7006CC985 /* EasyImagyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D69C33A51C8D3D2A007985D4 /* EasyImagy-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D69C33B71C8D3D2A007985D4 /* Build configuration list for PBXNativeTarget "EasyImagy-OSX" */;
+			buildPhases = (
+				D69C33A11C8D3D2A007985D4 /* Sources */,
+				D69C33A21C8D3D2A007985D4 /* Frameworks */,
+				D69C33A31C8D3D2A007985D4 /* Headers */,
+				D69C33A41C8D3D2A007985D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EasyImagy-OSX";
+			productName = "EasyImagy-OSX";
+			productReference = D69C33A61C8D3D2A007985D4 /* EasyImagy.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D69C33AE1C8D3D2A007985D4 /* EasyImagy-OSX Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D69C33BA1C8D3D2A007985D4 /* Build configuration list for PBXNativeTarget "EasyImagy-OSX Tests" */;
+			buildPhases = (
+				D69C33AB1C8D3D2A007985D4 /* Sources */,
+				D69C33AC1C8D3D2A007985D4 /* Frameworks */,
+				D69C33AD1C8D3D2A007985D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D69C33B21C8D3D2A007985D4 /* PBXTargetDependency */,
+			);
+			name = "EasyImagy-OSX Tests";
+			productName = "EasyImagy-OSXTests";
+			productReference = D69C33AF1C8D3D2A007985D4 /* EasyImagyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		D6C2EDF71B031A0900E2B876 /* EasyImagySample */ = {
@@ -300,7 +407,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = koherent.org;
 				TargetAttributes = {
@@ -309,6 +416,12 @@
 					};
 					D65FF07B1AFB66C7006CC985 = {
 						CreatedOnToolsVersion = 6.3.1;
+					};
+					D69C33A51C8D3D2A007985D4 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					D69C33AE1C8D3D2A007985D4 = {
+						CreatedOnToolsVersion = 7.2.1;
 					};
 					D6C2EDF71B031A0900E2B876 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -328,8 +441,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D65FF0701AFB66C7006CC985 /* EasyImagy */,
-				D65FF07B1AFB66C7006CC985 /* EasyImagyTests */,
+				D65FF0701AFB66C7006CC985 /* EasyImagy-iOS */,
+				D69C33A51C8D3D2A007985D4 /* EasyImagy-OSX */,
+				D65FF07B1AFB66C7006CC985 /* EasyImagy-iOS Tests */,
+				D69C33AE1C8D3D2A007985D4 /* EasyImagy-OSX Tests */,
 				D6C2EDF71B031A0900E2B876 /* EasyImagySample */,
 			);
 		};
@@ -353,6 +468,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D69C33A41C8D3D2A007985D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D69C33AD1C8D3D2A007985D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D69C33D11C8D42FD007985D4 /* Test4x4.png in Resources */,
+				D69C33D01C8D42FD007985D4 /* Test2x2.png in Resources */,
+				D69C33CF1C8D42FD007985D4 /* Test2x1.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D6C2EDF61B031A0900E2B876 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,11 +503,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D65EA68F1B01C7E600F8E95F /* Pixel.swift in Sources */,
-				D6D85A9F1B03AD7100B966DB /* EasyImagyC.m in Sources */,
+				D65EA68F1B01C7E600F8E95F /* RGBA.swift in Sources */,
 				D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */,
+				D69C33D31C8D6265007985D4 /* ImageUIKit.swift in Sources */,
 				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
+				D69C33D51C8D627A007985D4 /* ImageAppKit.swift in Sources */,
+				D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */,
 				D65EA67F1B01B71500F8E95F /* Image.swift in Sources */,
+				D69C33D91C8D66DD007985D4 /* ImageCoreGraphics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,16 +518,51 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */,
 				D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */,
-				D6B54D841B090EFA00E4709D /* PixelTests.swift in Sources */,
+				D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */,
 				D607D4021C7D54BB00D2B0A4 /* UtilTests.swift in Sources */,
 				D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */,
 				D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */,
-				D607D4081C7D709100D2B0A4 /* Generate2dPerformanceTests.swift in Sources */,
 				D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */,
+				D69C340F1C8EB942007985D4 /* EasyImagySample.swift in Sources */,
 				D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */,
 				D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */,
 				D6C2EDB51B02D54800E2B876 /* SubscriptTests.swift in Sources */,
+				D63B8BCC1C7FF11800E09688 /* MeanPerformanceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D69C33A11C8D3D2A007985D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D69C33D71C8D62E0007985D4 /* ImageUIKit.swift in Sources */,
+				D69C33D61C8D62E0007985D4 /* ImageAppKit.swift in Sources */,
+				D69C33BE1C8D3EB1007985D4 /* ImageSlice.swift in Sources */,
+				D69C33BD1C8D3EB1007985D4 /* Image.swift in Sources */,
+				D69C33C11C8D3EB1007985D4 /* ImageHack.swift in Sources */,
+				D69C33BF1C8D3EB1007985D4 /* RGBA.swift in Sources */,
+				D69C33C01C8D3EB1007985D4 /* Util.swift in Sources */,
+				D69C33DA1C8D66E4007985D4 /* ImageCoreGraphics.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D69C33AB1C8D3D2A007985D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D69C33C91C8D3EB7007985D4 /* PracticalOperationPerformanceTests.swift in Sources */,
+				D69C33CC1C8D3EB7007985D4 /* GenericsPerformanceTest.swift in Sources */,
+				D69C33CB1C8D3EB7007985D4 /* LoopPerformanceTests.swift in Sources */,
+				D69C33C61C8D3EB7007985D4 /* MapPerformanceTest.swift in Sources */,
+				D69C33C41C8D3EB7007985D4 /* RGBATests.swift in Sources */,
+				D69C33C31C8D3EB7007985D4 /* ImageSliceTests.swift in Sources */,
+				D69C33CD1C8D3EB7007985D4 /* MeanPerformanceTests.swift in Sources */,
+				D69C33C51C8D3EB7007985D4 /* UtilTests.swift in Sources */,
+				D69C33C81C8D3EB7007985D4 /* ImageSlicePerformanceTests.swift in Sources */,
+				D69C33C21C8D3EB7007985D4 /* ImageTests.swift in Sources */,
+				D69C33CA1C8D3EB7007985D4 /* SubscriptTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,12 +580,17 @@
 /* Begin PBXTargetDependency section */
 		D65FF07F1AFB66C7006CC985 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D65FF0701AFB66C7006CC985 /* EasyImagy */;
+			target = D65FF0701AFB66C7006CC985 /* EasyImagy-iOS */;
 			targetProxy = D65FF07E1AFB66C7006CC985 /* PBXContainerItemProxy */;
+		};
+		D69C33B21C8D3D2A007985D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D69C33A51C8D3D2A007985D4 /* EasyImagy-OSX */;
+			targetProxy = D69C33B11C8D3D2A007985D4 /* PBXContainerItemProxy */;
 		};
 		D6C2EE1D1B031A5B00E2B876 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D65FF0701AFB66C7006CC985 /* EasyImagy */;
+			target = D65FF0701AFB66C7006CC985 /* EasyImagy-iOS */;
 			targetProxy = D6C2EE1C1B031A5B00E2B876 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -538,13 +713,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = EasyImagy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "EasyImagy/EasyImagy-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -557,13 +732,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_TESTABILITY = YES;
+				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = EasyImagy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "EasyImagy/EasyImagy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -577,7 +753,7 @@
 				INFOPLIST_FILE = EasyImagyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EasyImagyTests;
 			};
 			name = Debug;
 		};
@@ -587,7 +763,76 @@
 				INFOPLIST_FILE = EasyImagyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = EasyImagyTests;
+			};
+			name = Release;
+		};
+		D69C33B81C8D3D2A007985D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = EasyImagy/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D69C33B91C8D3D2A007985D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = EasyImagy/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D69C33BB1C8D3D2A007985D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = EasyImagyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
+				PRODUCT_NAME = EasyImagyTests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D69C33BC1C8D3D2A007985D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EasyImagyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
+				PRODUCT_NAME = EasyImagyTests;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -630,7 +875,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D65FF0871AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagy" */ = {
+		D65FF0871AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagy-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D65FF0881AFB66C7006CC985 /* Debug */,
@@ -639,7 +884,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D65FF08A1AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagyTests" */ = {
+		D65FF08A1AFB66C7006CC985 /* Build configuration list for PBXNativeTarget "EasyImagy-iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D65FF08B1AFB66C7006CC985 /* Debug */,
@@ -647,6 +892,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D69C33B71C8D3D2A007985D4 /* Build configuration list for PBXNativeTarget "EasyImagy-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D69C33B81C8D3D2A007985D4 /* Debug */,
+				D69C33B91C8D3D2A007985D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D69C33BA1C8D3D2A007985D4 /* Build configuration list for PBXNativeTarget "EasyImagy-OSX Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D69C33BB1C8D3D2A007985D4 /* Debug */,
+				D69C33BC1C8D3D2A007985D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		D6C2EE181B031A0900E2B876 /* Build configuration list for PBXNativeTarget "EasyImagySample" */ = {
 			isa = XCConfigurationList;
