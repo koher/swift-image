@@ -7,25 +7,25 @@
             self.init(cgImage: cgImage)
         }
         
-        private init?(UIImageOrNil: UIImage?) {
-            guard let uiImage: UIImage = UIImageOrNil else { return nil }
+        private init?(uiImageOrNil: UIImage?) {
+            guard let uiImage: UIImage = uiImageOrNil else { return nil }
             self.init(uiImage: uiImage)
         }
         
         public init?(named name: String) {
-            self.init(UIImageOrNil: UIImage(named: name))
+            self.init(uiImageOrNil: UIImage(named: name))
         }
         
         public init?(named name: String, inBundle bundle: NSBundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
-            self.init(UIImageOrNil: UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection))
+            self.init(uiImageOrNil: UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection))
         }
         
         public init?(contentsOfFile path: String) {
-            self.init(UIImageOrNil: UIImage(contentsOfFile: path))
+            self.init(uiImageOrNil: UIImage(contentsOfFile: path))
         }
         
         public init?(data: NSData) {
-            self.init(UIImageOrNil: UIImage(data: data))
+            self.init(uiImageOrNil: UIImage(data: data))
         }
         
         public var uiImage: UIImage {
