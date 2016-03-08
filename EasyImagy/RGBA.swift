@@ -37,6 +37,12 @@ extension RGBAType { // Additional initializers
 	}
 }
 
+extension RGBAType {
+    public init(_ rgbaInt: UInt32) {
+        self.init(red: UInt8((rgbaInt >> 24) & 0xFF), green: UInt8((rgbaInt >> 16) & 0xFF), blue: UInt8((rgbaInt >> 8) & 0xFF), alpha: UInt8(rgbaInt & 0xFF))
+    }
+}
+
 extension RGBAType { // Int getters
 	public var redInt: Int {
 		get {
