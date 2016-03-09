@@ -165,7 +165,7 @@ let cropped = Image<RGBA>(slice) // copy is done here
 
 ```swift
 let result: Image<UInt8> = image.map { (pixel: Pixel) -> Pixel in
-    Pixel(gray: pixel.gray)
+    pixel.gray
 }
 ```
 
