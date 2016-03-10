@@ -16,7 +16,7 @@ for pixel in image {
 }
 
 // Converts the image (e.g. binarizations)
-let binarized = image.map { $0.gray < 128 ? .black : .white }
+let binarized: Image<RGBA> = image.map { $0.gray < 128 ? .black : .white }
 
 // From/to `UIImage`
 image = Image<RGBA>(uiImage: imageView.image!)!
