@@ -265,6 +265,91 @@ extension Image where Pixel: DoubleType { // Convolution
     }
 }
 
+extension Image where Pixel: RGBAType { // Interpolation
+    public subscript(x: Float, y: Float) -> RGBA {
+        guard let zelf = self as? Image<RGBA> else { fatalError() }
+        return interpolate(zelf, x: x, y: y)
+    }
+}
+
+extension Image where Pixel: UInt8Type { // Interpolation
+    public subscript(x: Float, y: Float) -> UInt8 {
+        guard let zelf = self as? Image<UInt8> else { fatalError() }
+        return interpolate(zelf, x: x, y: y)
+    }
+}
+extension Image where Pixel: IntType { // Interpolation
+    public subscript(x: Float, y: Float) -> Int {
+        guard let zelf = self as? Image<Int> else { fatalError() }
+        return interpolate(zelf, x: x, y: y)
+    }
+}
+extension Image where Pixel: FloatType { // Interpolation
+    public subscript(x: Float, y: Float) -> Float {
+        guard let zelf = self as? Image<Float> else { fatalError() }
+        return interpolate(zelf, x: x, y: y)
+    }
+}
+extension Image where Pixel: DoubleType { // Interpolation
+    public subscript(x: Float, y: Float) -> Double {
+        guard let zelf = self as? Image<Double> else { fatalError() }
+        return interpolate(zelf, x: x, y: y)
+    }
+}
+
+private func interpolate<P: PixelType>(image: Image<P>, x: Float, y: Float) -> P {
+    let width = image.width
+    let height = image.height
+    
+    var x0 = Int(floor(x))
+    var y0 = Int(floor(y))
+    var x1 = x0 + 1
+    var y1 = y0 + 1
+    
+    if x1 <= 0 {
+        x0 = 0
+        
+        if x1 < 0 {
+            x1 = 0
+        }
+    } else if x0 >= width - 1 {
+        if x0 >= width {
+            x0 = width - 1
+        }
+        
+        x1 = width - 1
+    }
+    
+    if y1 <= 0 {
+        y0 = 0
+        
+        if y1 < 0 {
+            y1 = 0
+        }
+    } else if y0 >= height - 1 {
+        if y0 >= height {
+            y0 = height - 1
+        }
+        
+        y1 = height - 1
+    }
+    
+    let v00 = image.pixels[image._pixelIndex(x: x0, y: y0)]
+    let v01 = image.pixels[image._pixelIndex(x: x1, y: y0)]
+    let v10 = image.pixels[image._pixelIndex(x: x0, y: y1)]
+    let v11 = image.pixels[image._pixelIndex(x: x1, y: y1)]
+    
+    let wx = x - Float(x0)
+    let wy = y - Float(y0)
+    let w00 = (1.0 - wx) * (1.0 - wy)
+    let w01 = wx * (1.0 - wy)
+    let w10 = (1.0 - wx) * wy
+    let w11 = wx * wy
+    
+    return P(summableF: P.mulF(v00.summableF, w00) + P.mulF(v01.summableF, w01) + P.mulF(v10.summableF, w10) + P.mulF(v11.summableF, w11))
+
+}
+
 private func mean<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P {
     var weightSum = 0
     var sum = P.summableIZero
