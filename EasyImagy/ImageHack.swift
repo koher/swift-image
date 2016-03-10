@@ -265,41 +265,67 @@ extension Image where Pixel: DoubleType { // Convolution
     }
 }
 
-extension Image where Pixel: RGBAType { // Interpolation
+extension Image where Pixel: RGBAType { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> RGBA {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
         return zelf._interpolate(x: x, y: y)
     }
     
-    
+    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA> {
+        guard let zelf = self as? Image<RGBA> else { fatalError() }
+        return zelf._transformed(width: width, height: height, transform: transform)
+    }
 }
 
-extension Image where Pixel: UInt8Type { // Interpolation
+extension Image where Pixel: UInt8Type { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> UInt8 {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
         return zelf._interpolate(x: x, y: y)
     }
+    
+    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
+        guard let zelf = self as? Image<UInt8> else { fatalError() }
+        return zelf._transformed(width: width, height: height, transform: transform)
+    }
 }
-extension Image where Pixel: IntType { // Interpolation
+
+extension Image where Pixel: IntType { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Int {
         guard let zelf = self as? Image<Int> else { fatalError() }
         return zelf._interpolate(x: x, y: y)
     }
+    
+    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
+        guard let zelf = self as? Image<Int> else { fatalError() }
+        return zelf._transformed(width: width, height: height, transform: transform)
+    }
 }
-extension Image where Pixel: FloatType { // Interpolation
+
+extension Image where Pixel: FloatType { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Float {
         guard let zelf = self as? Image<Float> else { fatalError() }
         return zelf._interpolate(x: x, y: y)
     }
+    
+    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
+        guard let zelf = self as? Image<Float> else { fatalError() }
+        return zelf._transformed(width: width, height: height, transform: transform)
+    }
 }
-extension Image where Pixel: DoubleType { // Interpolation
+
+extension Image where Pixel: DoubleType { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Double {
         guard let zelf = self as? Image<Double> else { fatalError() }
         return zelf._interpolate(x: x, y: y)
     }
+    
+    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
+        guard let zelf = self as? Image<Double> else { fatalError() }
+        return zelf._transformed(width: width, height: height, transform: transform)
+    }
 }
 
-extension Image where Pixel: PixelType {
+extension Image where Pixel: PixelType { // Interpolation, Transformation
     private func _interpolate(x x: Float, y: Float) -> Pixel {
         let width = self.width
         let height = self.height
@@ -350,6 +376,22 @@ extension Image where Pixel: PixelType {
         let w11 = wx * wy
         
         return Pixel(summableF: Pixel.mulF(v00.summableF, w00) + Pixel.mulF(v01.summableF, w01) + Pixel.mulF(v10.summableF, w10) + Pixel.mulF(v11.summableF, w11))
+    }
+    
+    private func _transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Pixel> {
+        guard width >= 0 else { fatalError("`width` must be greater than or equal to 0: \(width)") }
+        guard height >= 0 else { fatalError("`width` must be greater than or equal to 0: \(height)") }
+
+        var pixels: [Pixel] = []
+        pixels.reserveCapacity(width * height)
+        for y in 0..<height {
+            for x in 0..<width {
+                let transformed = transform(Float(x), Float(y))
+                pixels.append(_interpolate(x: transformed.0, y: transformed.1))
+            }
+        }
+        
+        return Image<Pixel>(width: width, height: height, pixels: pixels)
     }
 }
 
