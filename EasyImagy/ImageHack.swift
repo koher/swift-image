@@ -1,15 +1,3 @@
-public protocol UInt8Type {}
-extension UInt8: UInt8Type {}
-
-public protocol IntType {}
-extension Int: IntType {}
-
-public protocol FloatType {}
-extension Float: FloatType {}
-
-public protocol DoubleType {}
-extension Double: DoubleType {}
-
 extension Image where Pixel: RGBAType { // map
     public func map(transform: RGBA -> RGBA) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
