@@ -16,9 +16,11 @@
 		D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */; };
 		D6118EF51C92D5000029F45F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6118EF41C92D4FF0029F45F /* Protocols.swift */; };
 		D6118EF61C92D5160029F45F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6118EF41C92D4FF0029F45F /* Protocols.swift */; };
+		D6118EF81C92D7A40029F45F /* ImageCoreGraphicsHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6118EF71C92D7A40029F45F /* ImageCoreGraphicsHack.swift */; };
 		D63B8BC61C7ED57200E09688 /* ImageHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC51C7ED57200E09688 /* ImageHack.swift */; };
 		D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */; };
 		D63B8BCC1C7FF11800E09688 /* MeanPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */; };
+		D63F2FF11C92D82300B88E12 /* ImageCoreGraphicsHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6118EF71C92D7A40029F45F /* ImageCoreGraphicsHack.swift */; };
 		D65EA67F1B01B71500F8E95F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
 		D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA6821B01B71F00F8E95F /* ImageTests.swift */; };
 		D65EA6891B01B71F00F8E95F /* Test2x1.png in Resources */ = {isa = PBXBuildFile; fileRef = D65EA6841B01B71F00F8E95F /* Test2x1.png */; };
@@ -115,6 +117,7 @@
 		D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPerformanceTest.swift; sourceTree = "<group>"; };
 		D607D4051C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticalOperationPerformanceTests.swift; sourceTree = "<group>"; };
 		D6118EF41C92D4FF0029F45F /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		D6118EF71C92D7A40029F45F /* ImageCoreGraphicsHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCoreGraphicsHack.swift; sourceTree = "<group>"; };
 		D63B8BC51C7ED57200E09688 /* ImageHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHack.swift; sourceTree = "<group>"; };
 		D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlicePerformanceTests.swift; sourceTree = "<group>"; };
 		D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeanPerformanceTests.swift; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
 				D6118EF41C92D4FF0029F45F /* Protocols.swift */,
 				D63B8BC51C7ED57200E09688 /* ImageHack.swift */,
+				D6118EF71C92D7A40029F45F /* ImageCoreGraphicsHack.swift */,
 				D65EA68D1B01BE0D00F8E95F /* Supporting Files */,
 			);
 			path = EasyImagy;
@@ -509,6 +513,7 @@
 			files = (
 				D65EA68F1B01C7E600F8E95F /* RGBA.swift in Sources */,
 				D607D3F01C7C471C00D2B0A4 /* ImageSlice.swift in Sources */,
+				D6118EF81C92D7A40029F45F /* ImageCoreGraphicsHack.swift in Sources */,
 				D69C33D31C8D6265007985D4 /* ImageUIKit.swift in Sources */,
 				D6118EF51C92D5000029F45F /* Protocols.swift in Sources */,
 				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
@@ -544,6 +549,7 @@
 			files = (
 				D69C33D71C8D62E0007985D4 /* ImageUIKit.swift in Sources */,
 				D69C33D61C8D62E0007985D4 /* ImageAppKit.swift in Sources */,
+				D63F2FF11C92D82300B88E12 /* ImageCoreGraphicsHack.swift in Sources */,
 				D69C33BE1C8D3EB1007985D4 /* ImageSlice.swift in Sources */,
 				D6118EF61C92D5160029F45F /* Protocols.swift in Sources */,
 				D69C33BD1C8D3EB1007985D4 /* Image.swift in Sources */,
