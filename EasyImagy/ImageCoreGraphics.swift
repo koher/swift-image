@@ -1,6 +1,6 @@
 import CoreGraphics
 
-extension Image where Pixel: RGBAType { // CoreGraphics
+extension Image where Pixel: RGBAType { // Initializers
     public init(cgImage: CGImageRef) {
         let width = CGImageGetWidth(cgImage)
         let height = CGImageGetHeight(cgImage)
@@ -34,7 +34,9 @@ extension Image where Pixel: RGBAType { // CoreGraphics
         
         self.init(width: safeWidth, height: safeHeight, pixels: pixels)
     }
-    
+}
+
+extension Image where Pixel: RGBAType { // Conversion
     public var cgImage: CGImageRef {
         let length = count * 4
         let buffer = UnsafeMutablePointer<UInt8>.alloc(length)
@@ -65,7 +67,7 @@ extension Image where Pixel: RGBAType { // CoreGraphics
     }
 }
 
-extension Image where Pixel: RGBAType {
+extension Image where Pixel: RGBAType { // Resizing
     public func resize(width  width: Int, height: Int) -> Image<Pixel> {
         return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
     }
