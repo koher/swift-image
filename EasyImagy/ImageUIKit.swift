@@ -38,5 +38,11 @@
             return UIImage(CGImage: cgImage)
         }
     }
+    
+    extension Image where Pixel: FloatType {
+        public var uiImage: UIImage {
+            return UIImage(CGImage: cgImage)
+        }
+    }
 #endif
 
