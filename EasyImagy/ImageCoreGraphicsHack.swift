@@ -18,3 +18,19 @@ extension Image where Pixel: UInt8Type { // Conversion
     }
 }
 
+extension Image where Pixel: FloatType { // Conversion
+    public var cgImage: CGImageRef {
+        guard let zelf = self as? Image<Float> else { fatalError() }
+
+        return (zelf.map { UInt8(min(max($0, 0.0), 1.0) * 255.0) }).cgImage
+    }
+    
+    private static var colorSpace: CGColorSpaceRef {
+        return CGColorSpaceCreateDeviceGray()!
+    }
+    
+    private static var bitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo.ByteOrderDefault
+    }
+}
+
