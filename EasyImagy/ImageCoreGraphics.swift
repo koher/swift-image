@@ -16,8 +16,8 @@ extension Image where Pixel: RGBAType { // Initializers
         let safeHeight = max(height, 0)
         
         let count = safeWidth * safeHeight
-        let defaultPixel = Pixel.transparent
-        var pixels = [Pixel](count: count, repeatedValue: Pixel.transparent)
+        let defaultPixel = RGBA.transparent
+        var pixels = [RGBA](count: count, repeatedValue: defaultPixel)
         
         let context  = CGBitmapContextCreate(&pixels, safeWidth, safeHeight, 8, safeWidth * 4, Image.colorSpace, Image.bitmapInfo.rawValue)!
         CGContextClearRect(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
@@ -28,20 +28,52 @@ extension Image where Pixel: RGBAType { // Initializers
             if pixel.alpha == 0 {
                 pixels[i] = defaultPixel
             } else {
-                pixels[i] = Pixel(red: UInt8(255 * Int(pixel.red) / Int(pixel.alpha)), green: UInt8(255 * Int(pixel.green) / Int(pixel.alpha)), blue: UInt8(255 * Int(pixel.blue) / Int(pixel.alpha)), alpha: pixel.alpha)
+                pixels[i] = RGBA(red: UInt8(255 * Int(pixel.red) / Int(pixel.alpha)), green: UInt8(255 * Int(pixel.green) / Int(pixel.alpha)), blue: UInt8(255 * Int(pixel.blue) / Int(pixel.alpha)), alpha: pixel.alpha)
             }
         }
         
-        self.init(width: safeWidth, height: safeHeight, pixels: pixels)
+        let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<Pixel>(pixels), count: pixels.count))
+        
+        self.init(width: safeWidth, height: safeHeight, pixels: ps)
+    }
+}
+
+extension Image where Pixel: UInt8Type { // Initializers
+    public init(cgImage: CGImageRef) {
+        let width = CGImageGetWidth(cgImage)
+        let height = CGImageGetHeight(cgImage)
+        
+        self.init(width: width, height: height, setUp: { context in
+            let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
+            CGContextDrawImage(context, rect, cgImage)
+        })
+    }
+    
+    private init(width: Int, height: Int, setUp: CGContextRef -> ()) {
+        let safeWidth = max(width, 0)
+        let safeHeight = max(height, 0)
+        
+        let count = safeWidth * safeHeight
+        var pixels = [UInt8](count: count, repeatedValue: 0)
+        
+        let context  = CGBitmapContextCreate(&pixels, safeWidth, safeHeight, 8, safeWidth, Image.colorSpace, Image.bitmapInfo.rawValue)!
+        CGContextClearRect(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
+        setUp(context)
+        
+        let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<Pixel>(pixels), count: pixels.count))
+        
+        self.init(width: safeWidth, height: safeHeight, pixels: ps)
     }
 }
 
 extension Image where Pixel: RGBAType { // Conversion
     public var cgImage: CGImageRef {
+        guard let zelf = self as? Image<RGBA> else { fatalError() }
+        
         let length = count * 4
         let buffer = UnsafeMutablePointer<UInt8>.alloc(length)
         var pointer = buffer
-        for pixel in self {
+        for pixel in zelf.pixels {
             let alphaInt = Int(pixel.alpha)
             pointer.memory = UInt8(pixel.redInt * alphaInt / 255)
             pointer++
@@ -67,6 +99,41 @@ extension Image where Pixel: RGBAType { // Conversion
     }
 }
 
+
+extension Image where Pixel: UInt8Type { // Conversion
+    public var cgImage: CGImageRef {
+        guard let zelf = self as? Image<UInt8> else { fatalError() }
+        
+        let provider: CGDataProvider = CGDataProviderCreateWithCFData(NSData(bytes: UnsafeMutablePointer<Void>(zelf.pixels), length: count))!
+        
+        return CGImageCreate(width, height, 8, 8, width, Image.colorSpace, Image.bitmapInfo, provider, nil, false, CGColorRenderingIntent.RenderingIntentDefault)!
+    }
+    
+    private static var colorSpace: CGColorSpaceRef {
+        return CGColorSpaceCreateDeviceGray()!
+    }
+    
+    private static var bitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo.ByteOrderDefault
+    }
+}
+
+extension Image where Pixel: FloatType { // Conversion
+    public var cgImage: CGImageRef {
+        guard let zelf = self as? Image<Float> else { fatalError() }
+        
+        return (zelf.map { UInt8(min(max($0, 0.0), 1.0) * 255.0) }).cgImage
+    }
+    
+    private static var colorSpace: CGColorSpaceRef {
+        return CGColorSpaceCreateDeviceGray()!
+    }
+    
+    private static var bitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo.ByteOrderDefault
+    }
+}
+
 extension Image where Pixel: RGBAType { // Resizing
     public func resize(width  width: Int, height: Int) -> Image<Pixel> {
         return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
@@ -79,3 +146,4 @@ extension Image where Pixel: RGBAType { // Resizing
         }
     }
 }
+

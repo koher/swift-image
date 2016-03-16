@@ -1,3 +1,6 @@
+public protocol RGBAType {}
+extension RGBA: RGBAType {}
+
 public protocol UInt8Type {}
 extension UInt8: UInt8Type {}
 

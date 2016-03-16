@@ -8,6 +8,32 @@ import AppKit
 #endif
 
 class ImageTests: XCTestCase {
+    func testInitNamed() {
+        do {
+            let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!
+            
+            XCTAssertEqual(255, image[0, 0]!.red)
+            XCTAssertEqual(  0, image[0, 0]!.green)
+            XCTAssertEqual(  0, image[0, 0]!.blue)
+            XCTAssertEqual( 64, image[0, 0]!.alpha)
+            
+            XCTAssertEqual(  0, image[1, 0]!.red)
+            XCTAssertEqual(255, image[1, 0]!.green)
+            XCTAssertEqual(  0, image[1, 0]!.blue)
+            XCTAssertEqual(127, image[1, 0]!.alpha)
+            
+            XCTAssertEqual(  0, image[0, 1]!.red)
+            XCTAssertEqual(  0, image[0, 1]!.green)
+            XCTAssertEqual(255, image[0, 1]!.blue)
+            XCTAssertEqual(191, image[0, 1]!.alpha)
+            
+            XCTAssertEqual(255, image[1, 1]!.red)
+            XCTAssertEqual(255, image[1, 1]!.green)
+            XCTAssertEqual(  0, image[1, 1]!.blue)
+            XCTAssertEqual(255, image[1, 1]!.alpha)
+        }
+    }
+    
     func testInitWithImageSlice() {
         let image = Image<RGBA>(Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![1...2, 1...2])
         
