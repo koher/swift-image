@@ -66,6 +66,34 @@ extension Image where Pixel: UInt8Type { // Initializers
     }
 }
 
+extension Image where Pixel: FloatType { // Initializers
+    public init(cgImage: CGImageRef) {
+        let width = CGImageGetWidth(cgImage)
+        let height = CGImageGetHeight(cgImage)
+        
+        self.init(width: width, height: height, setUp: { context in
+            let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
+            CGContextDrawImage(context, rect, cgImage)
+        })
+    }
+    
+    private init(width: Int, height: Int, setUp: CGContextRef -> ()) {
+        let safeWidth = max(width, 0)
+        let safeHeight = max(height, 0)
+        
+        let count = safeWidth * safeHeight
+        var pixels = [UInt8](count: count, repeatedValue: 0)
+        
+        let context  = CGBitmapContextCreate(&pixels, safeWidth, safeHeight, 8, safeWidth, Image.colorSpace, Image.bitmapInfo.rawValue)!
+        CGContextClearRect(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
+        setUp(context)
+
+        let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<Pixel>(pixels.map { Float($0) / 255.0 }), count: pixels.count))
+
+        self.init(width: safeWidth, height: safeHeight, pixels: ps)
+    }
+}
+
 extension Image where Pixel: RGBAType { // Conversion
     public var cgImage: CGImageRef {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
@@ -135,6 +163,32 @@ extension Image where Pixel: FloatType { // Conversion
 }
 
 extension Image where Pixel: RGBAType { // Resizing
+    public func resize(width  width: Int, height: Int) -> Image<Pixel> {
+        return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
+    }
+    
+    public func resize(width  width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
+        return Image(width: width, height: height) { context in
+            CGContextSetInterpolationQuality(context, interpolationQuality)
+            CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.cgImage)
+        }
+    }
+}
+
+extension Image where Pixel: UInt8Type { // Resizing
+    public func resize(width  width: Int, height: Int) -> Image<Pixel> {
+        return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
+    }
+    
+    public func resize(width  width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
+        return Image(width: width, height: height) { context in
+            CGContextSetInterpolationQuality(context, interpolationQuality)
+            CGContextDrawImage(context, CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)), self.cgImage)
+        }
+    }
+}
+
+extension Image where Pixel: FloatType { // Resizing
     public func resize(width  width: Int, height: Int) -> Image<Pixel> {
         return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.Default)
     }
