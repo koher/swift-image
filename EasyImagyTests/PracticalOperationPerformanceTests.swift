@@ -31,11 +31,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
     
     func testMeanFilter() {
         let image = getImage()
-        let filter = Image<Int>(width: 3, height: 3, pixels: [
-            1, 1, 1,
-            1, 1, 1,
-            1, 1, 1,
-        ])
+        let filter = Image<Float>(width: 3, height: 3, pixel: 1.0 / 9.0)
 
         measureBlock {
             _ = image.convoluted(filter)
@@ -43,27 +39,27 @@ class PracticalOperationPerformanceTests: XCTestCase {
     }
     
     func testIdenticalConvolution() {
-        let filter = Image<Int>(width: 1, height: 1, pixels: [1])
+        let kernel = Image<Int>(width: 1, height: 1, pixels: [1])
         let image = getImage()
         
         measureBlock {
-            _ = image.convoluted(filter)
+            _ = image.convoluted(kernel)
         }
     }
 
     
     func testGaussianFilter() {
         let image = getImage()
-        let filter = Image<Int>(width: 5, height: 5, pixels: [
+        let kernel = Image<Int>(width: 5, height: 5, pixels: [
             1,  4,  6,  4, 1,
             4, 16, 24, 16, 4,
             6, 24, 36, 24, 6,
             4, 16, 24, 16, 4,
             1,  4,  6,  4, 1,
-        ])
+        ]).map { Float($0) / 256.0 }
         
         measureBlock {
-            _ = image.convoluted(filter)
+            _ = image.convoluted(kernel)
         }
     }
 }

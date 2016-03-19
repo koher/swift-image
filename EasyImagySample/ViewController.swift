@@ -72,21 +72,21 @@ class ViewController: UIViewController {
 
 		controller.addAction(UIAlertAction(title: "Mean filter", style: .Default) { action in
 			let image = Image<RGBA>(uiImage: imageView.image!)!
-            let filter = Image<Int>(width: 3, height: 3, pixel: 1)
-			imageView.image = image.convoluted(filter).uiImage
+            let kernel = Image<Float>(width: 3, height: 3, pixel: 1.0 / 9.0)
+			imageView.image = image.convoluted(kernel).uiImage
 			sender.enabled = true
 		})
 		
 		controller.addAction(UIAlertAction(title: "Gaussian filter", style: .Default) { action in
 			let image = Image<RGBA>(uiImage: imageView.image!)!
-            let filter = Image<Int>(width: 5, height: 5, pixels: [
+            let kernel = Image<Int>(width: 5, height: 5, pixels: [
                 1,  4,  6,  4, 1,
                 4, 16, 24, 16, 4,
                 6, 24, 36, 24, 6,
                 4, 16, 24, 16, 4,
                 1,  4,  6,  4, 1,
-            ])
-			imageView.image = image.convoluted(filter).uiImage
+            ]).map { Float($0) / 256.0 }
+			imageView.image = image.convoluted(kernel).uiImage
 			sender.enabled = true
 		})
 		
