@@ -131,11 +131,7 @@ extension Image { // Higher-order methods
 }
 
 extension Image { // Convolutions
-	public func convoluted<W, T>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> T) -> Image<T> {
-		return _convoluted(filter, mean: mean)
-	}
-
-	internal func _convoluted<W, T>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> T) -> Image<T> {
+	internal func _convoluted<W, T>(filter: Image<W>, weightedSum: [(weight: W, value: Pixel)] -> T) -> Image<T> {
 		assert(filter.width % 2 == 1, "The width of the `image` must be odd: \(filter.width)")
 		assert(filter.height % 2 == 1, "The height of the `image` must be odd: \(filter.height)")
 		
@@ -156,15 +152,11 @@ extension Image { // Convolutions
 						weightedValues.append((weight: filter.pixels[filter._pixelIndex(x: fx, y: fy)], value: pixel))
 					}
 				}
-				pixels.append(mean(weightedValues))
+				pixels.append(weightedSum(weightedValues))
 			}
 		}
 		
 		return Image<T>(width: width, height: height, pixels: pixels)
-	}
-	
-	public mutating func convolute<W>(filter: Image<W>, mean: [(weight: W, value: Pixel)] -> Pixel) {
-		self = convoluted(filter, mean: mean)
 	}
 }
 

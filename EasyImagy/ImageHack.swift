@@ -171,85 +171,85 @@ extension Image where Pixel: DoubleType { // map with indices
 extension Image where Pixel: RGBAType { // Convolution
     public func convoluted(filter: Image<Int>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
     
     public func convoluted(filter: Image<Float>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
     
     public func convoluted(filter: Image<Double>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: UInt8Type { // Convolution
     public func convoluted(filter: Image<Int>) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
     
     public func convoluted(filter: Image<Float>) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 
     public func convoluted(filter: Image<Double>) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: IntType { // Convolution
     public func convoluted(filter: Image<Int>) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
     
     public func convoluted(filter: Image<Float>) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
     
     public func convoluted(filter: Image<Double>) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: FloatType { // Convolution
     public func convoluted(filter: Image<Int>) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 
     public func convoluted(filter: Image<Float>) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 
     public func convoluted(filter: Image<Double>) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: DoubleType { // Convolution
     public func convoluted(filter: Image<Int>) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 
     public func convoluted(filter: Image<Float>) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 
     public func convoluted(filter: Image<Double>) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
-        return zelf._convoluted(filter, mean: mean)
+        return zelf._convoluted(filter, weightedSum: weightedSum)
     }
 }
 
@@ -383,43 +383,31 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
     }
 }
 
-private func mean<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P {
-    var weightSum = 0
+private func weightedSum<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P {
     var sum = P.summableIZero
     for (weight, pixel) in weightedPixels {
         sum = sum + P.mulI(pixel.summableI, weight)
-        weightSum += weight
     }
     
-    guard weightSum > 0 else { fatalError() }
-    
-    return P(summableI: P.divI(sum, weightSum))
+    return P(summableI: sum)
 }
 
-private func mean<P: PixelType>(weightedPixels: [(weight: Float, value: P)]) -> P {
-    var weightSum: Float = 0
+private func weightedSum<P: PixelType>(weightedPixels: [(weight: Float, value: P)]) -> P {
     var sum = P.summableFZero
     for (weight, pixel) in weightedPixels {
         sum = sum + P.mulF(pixel.summableF, weight)
-        weightSum += weight
     }
     
-    guard weightSum > 0 else { fatalError() }
-    
-    return P(summableF: P.divF(sum, weightSum))
+    return P(summableF: sum)
 }
 
-private func mean<P: PixelType>(weightedPixels: [(weight: Double, value: P)]) -> P {
-    var weightSum: Double = 0
+private func weightedSum<P: PixelType>(weightedPixels: [(weight: Double, value: P)]) -> P {
     var sum = P.summableDZero
     for (weight, pixel) in weightedPixels {
         sum = sum + P.mulD(pixel.summableD, weight)
-        weightSum += weight
     }
     
-    guard weightSum > 0 else { fatalError() }
-    
-    return P(summableD: P.divD(sum, weightSum))
+    return P(summableD: sum)
 }
 
 private protocol NumericType {
@@ -472,15 +460,15 @@ extension RGBA: PixelType {
     private typealias SummableD = GenericRGBA<Double>
 
     private init(summableI: GenericRGBA<Int>) {
-        self.init(red: summableI.red, green: summableI.green, blue: summableI.blue, alpha: summableI.alpha)
+        self.init(red: clamp(summableI.red, lower: Int(UInt8.min), upper: Int(UInt8.max)), green: clamp(summableI.green, lower: Int(UInt8.min), upper: Int(UInt8.max)), blue: clamp(summableI.blue, lower: Int(UInt8.min), upper: Int(UInt8.max)), alpha: clamp(summableI.alpha, lower: Int(UInt8.min), upper: Int(UInt8.max)))
     }
     
     private init(summableF: GenericRGBA<Float>) {
-        self.init(red: UInt8(summableF.red), green: UInt8(summableF.green), blue: UInt8(summableF.blue), alpha: UInt8(summableF.alpha))
+        self.init(red: UInt8(clamp(summableF.red, lower: Float(UInt8.min), upper: Float(UInt8.max))), green: UInt8(clamp(summableF.green, lower: Float(UInt8.min), upper: Float(UInt8.max))), blue: UInt8(clamp(summableF.blue, lower: Float(UInt8.min), upper: Float(UInt8.max))), alpha: UInt8(clamp(summableF.alpha, lower: Float(UInt8.min), upper: Float(UInt8.max))))
     }
     
     private init(summableD: GenericRGBA<Double>) {
-        self.init(red: UInt8(summableD.red), green: UInt8(summableD.green), blue: UInt8(summableD.blue), alpha: UInt8(summableD.alpha))
+        self.init(red: UInt8(clamp(summableD.red, lower: Double(UInt8.min), upper: Double(UInt8.max))), green: UInt8(clamp(summableD.green, lower: Double(UInt8.min), upper: Double(UInt8.max))), blue: UInt8(clamp(summableD.blue, lower: Double(UInt8.min), upper: Double(UInt8.max))), alpha: UInt8(clamp(summableD.alpha, lower: Double(UInt8.min), upper: Double(UInt8.max))))
     }
     
     private var summableI: GenericRGBA<Int> {
@@ -538,15 +526,15 @@ extension UInt8: PixelType {
     typealias SummableD = Double
     
     private init(summableI: Int) {
-        self = UInt8(summableI)
+        self = UInt8(clamp(summableI, lower: Int(UInt8.min), upper: Int(UInt8.max)))
     }
     
     private init(summableF: Float) {
-        self = UInt8(summableF)
+        self = UInt8(clamp(summableF, lower: Float(UInt8.min), upper: Float(UInt8.max)))
     }
     
     private init(summableD: Double) {
-        self = UInt8(summableD)
+        self = UInt8(clamp(summableD, lower: Double(UInt8.min), upper: Double(UInt8.max)))
     }
     
     private var summableI: Int {
