@@ -169,87 +169,87 @@ extension Image where Pixel: DoubleType { // map with indices
 }
 
 extension Image where Pixel: RGBAType { // Convolution
-    public func convoluted(filter: Image<Int>) -> Image<RGBA> {
+    public func convoluted(kernel: Image<Int>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(filter: Image<Float>) -> Image<RGBA> {
+    public func convoluted(kernel: Image<Float>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(filter: Image<Double>) -> Image<RGBA> {
+    public func convoluted(kernel: Image<Double>) -> Image<RGBA> {
         guard let zelf = self as? Image<RGBA> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: UInt8Type { // Convolution
-    public func convoluted(filter: Image<Int>) -> Image<UInt8> {
+    public func convoluted(kernel: Image<Int>) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(filter: Image<Float>) -> Image<UInt8> {
+    public func convoluted(kernel: Image<Float>) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(filter: Image<Double>) -> Image<UInt8> {
+    public func convoluted(kernel: Image<Double>) -> Image<UInt8> {
         guard let zelf = self as? Image<UInt8> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: IntType { // Convolution
-    public func convoluted(filter: Image<Int>) -> Image<Int> {
+    public func convoluted(kernel: Image<Int>) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(filter: Image<Float>) -> Image<Int> {
+    public func convoluted(kernel: Image<Float>) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(filter: Image<Double>) -> Image<Int> {
+    public func convoluted(kernel: Image<Double>) -> Image<Int> {
         guard let zelf = self as? Image<Int> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: FloatType { // Convolution
-    public func convoluted(filter: Image<Int>) -> Image<Float> {
+    public func convoluted(kernel: Image<Int>) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(filter: Image<Float>) -> Image<Float> {
+    public func convoluted(kernel: Image<Float>) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(filter: Image<Double>) -> Image<Float> {
+    public func convoluted(kernel: Image<Double>) -> Image<Float> {
         guard let zelf = self as? Image<Float> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: DoubleType { // Convolution
-    public func convoluted(filter: Image<Int>) -> Image<Double> {
+    public func convoluted(kernel: Image<Int>) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(filter: Image<Float>) -> Image<Double> {
+    public func convoluted(kernel: Image<Float>) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(filter: Image<Double>) -> Image<Double> {
+    public func convoluted(kernel: Image<Double>) -> Image<Double> {
         guard let zelf = self as? Image<Double> else { fatalError() }
-        return zelf._convoluted(filter, weightedSum: weightedSum)
+        return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 

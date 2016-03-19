@@ -131,12 +131,12 @@ extension Image { // Higher-order methods
 }
 
 extension Image { // Convolutions
-	internal func _convoluted<W, T>(filter: Image<W>, weightedSum: [(weight: W, value: Pixel)] -> T) -> Image<T> {
-		assert(filter.width % 2 == 1, "The width of the `image` must be odd: \(filter.width)")
-		assert(filter.height % 2 == 1, "The height of the `image` must be odd: \(filter.height)")
+	internal func _convoluted<W, T>(kernel: Image<W>, weightedSum: [(weight: W, value: Pixel)] -> T) -> Image<T> {
+		assert(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
+		assert(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
 		
-		let hw = filter.width / 2  // halfWidth
-		let hh = filter.height / 2 // halfHeight
+		let hw = kernel.width / 2  // halfWidth
+		let hh = kernel.height / 2 // halfHeight
 		
 		var pixels: [T] = []
 		pixels.reserveCapacity(count)
@@ -144,12 +144,12 @@ extension Image { // Convolutions
 		for y in 0..<height {
 			for x in 0..<width {
 				var weightedValues: [(weight: W, value: Pixel)] = []
-				for fy in 0..<filter.height {
-					for fx in 0..<filter.width {
+				for fy in 0..<kernel.height {
+					for fx in 0..<kernel.width {
 						let dx = fx - hw
 						let dy = fy - hh
 						guard let pixel = self[x + dx, y + dy] else { continue }
-						weightedValues.append((weight: filter.pixels[filter._pixelIndex(x: fx, y: fy)], value: pixel))
+						weightedValues.append((weight: kernel.pixels[kernel._pixelIndex(x: fx, y: fy)], value: pixel))
 					}
 				}
 				pixels.append(weightedSum(weightedValues))
