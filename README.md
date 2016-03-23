@@ -197,21 +197,21 @@ let result = image.map { $0.gray < threshold ? .black : .white }
 #### Mean filter
 
 ```swift
-let filter = Image<Int>(width: 3, height: 3, pixel: 1)
-let result = image.convoluted(filter)
+let kernel = Image<Float>(width: 3, height: 3, pixel: 1.0 / 9.0)
+let result = image.convoluted(kernel)
 ```
 
 #### Gaussian filter
 
 ```swift
-let filter = Image<Int>(width: 5, height: 5, pixels: [
+let kernel = Image<Int>(width: 5, height: 5, pixels: [
     1,  4,  6,  4, 1,
     4, 16, 24, 16, 4,
     6, 24, 36, 24, 6,
     4, 16, 24, 16, 4,
     1,  4,  6,  4, 1,
-])
-let result = image.convoluted(filter)
+]).map { Float($0) / 256.0 }
+let result = image.convoluted(kernel)
 ```
 
 ### With UIImage
@@ -233,7 +233,7 @@ Installation
 
 ### Carthage
 
-[_Carthage_](https://github.com/Carthage/Carthage) is available to install _EasyImagy__. Add it to your `Cartfile`:
+[_Carthage_](https://github.com/Carthage/Carthage) is available to install _EasyImagy_. Add it to your `Cartfile`:
 
 ```
 github "koher/EasyImagy" "master"
