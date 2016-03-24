@@ -86,10 +86,7 @@ let image = Image<RGBA>(width: 640, height: 480, pixels: pixels)
 
 ```swift
 // Gets a pixel by subscripts
-do {
-    let pixel = image[x, y]
-    /**/ _ = pixel
-}
+let pixel = image[x, y]
 ```
 
 ```swift
