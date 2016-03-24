@@ -13,7 +13,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped: Image<RGBA> = image.map { $0 }
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -21,7 +21,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped: Image<RGBA> = image._map { $0 }
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -29,7 +29,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped: Image<RGBA> = image.map1 { $0 }
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -37,7 +37,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped = image.map(transform)
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -45,7 +45,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped = image.map1(transform)
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -53,7 +53,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped = image.map2(transform)
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -61,7 +61,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped = image.map3(transform)
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
     
@@ -69,7 +69,7 @@ class MapPerformanceTests: XCTestCase {
         let image = getImage()
         measureBlock {
             let mapped = image.map4(transform)
-            XCTAssertEqual(0, mapped[0, 0]!.red)
+            XCTAssertEqual(0, mapped[0, 0].red)
         }
     }
 }
@@ -97,7 +97,7 @@ extension Image {
         pixels.reserveCapacity(count)
         for y in 0..<height {
             for x in 0..<width {
-                pixels.append(transform(x: x, y: y, pixel: self[x, y]!))
+                pixels.append(transform(x: x, y: y, pixel: self[x, y]))
             }
         }
         return Image<T>(width: width, height: height, pixels: pixels)

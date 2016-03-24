@@ -351,10 +351,10 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
             y1 = height - 1
         }
         
-        let v00 = pixels[_pixelIndex(x: x0, y: y0)]
-        let v01 = pixels[_pixelIndex(x: x1, y: y0)]
-        let v10 = pixels[_pixelIndex(x: x0, y: y1)]
-        let v11 = pixels[_pixelIndex(x: x1, y: y1)]
+        let v00 = self[x0, y0]
+        let v01 = self[x1, y0]
+        let v10 = self[x0, y1]
+        let v11 = self[x1, y1]
         
         let wx = x - Float(x0)
         let wy = y - Float(y0)

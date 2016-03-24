@@ -33,7 +33,7 @@ extension ImageSlice {
 }
 
 extension ImageSlice { // Subscripts (Index)
-    public subscript(x: Int, y: Int) -> Pixel? {
+    public subscript(x: Int, y: Int) -> Pixel {
         return image[x, y]
     }
 }
@@ -41,6 +41,12 @@ extension ImageSlice { // Subscripts (Index)
 extension ImageSlice { // Subscripts (Range)
     public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice {
         return image[xRange ?? self.xRange, yRange ?? self.yRange]
+    }
+}
+
+extension ImageSlice { // safe get
+    public func pixel(x: Int, _ y: Int) -> Pixel? {
+        return image.pixel(x, y)
     }
 }
 
@@ -84,6 +90,6 @@ public struct PixelGenerator<Pixel>: GeneratorType {
         guard y < yRange.endIndex else { return nil }
         defer { x += 1 }
         
-        return image.pixels[image._pixelIndex(x: x, y: y)]
+        return image[x, y]
     }
 }

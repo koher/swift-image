@@ -85,7 +85,21 @@ import EasyImagy
             /**/ var image = Image<RGBA>(width: 1, height: 1, pixel: .red)
             
             // Gets a pixel by subscripts
-            if let pixel = image[x, y] {
+            do {
+                let pixel = image[x, y]
+                /**/ _ = pixel
+            }
+            
+            /////////////////////////////////
+
+            // Sets a pixel by subscripts
+            image[x, y] = RGBA(0xFF0000FF)
+            image[x, y].alpha = 127
+            
+            /////////////////////////////////
+            
+            // Safe get for a pixel
+            if let pixel = image.pixel(x, y) {
                 print(pixel.red)
                 print(pixel.green)
                 print(pixel.blue)
@@ -94,14 +108,9 @@ import EasyImagy
                 print(pixel.gray) // (red + green + blue) / 3
                 print(pixel) // formatted like "#FF0000FF"
             } else {
-                // Subscript get is safe: out of bounds never causes unexpected results
+                // `pixel` is safe: `nil` is returned when out of bounds
                 print("Out of bounds")
             }
-            
-            /////////////////////////////////
-
-            image[x, y] = RGBA(0xFF0000FF)
-            image[x, y]?.alpha = 127
         }
         
         func testCropping() {
