@@ -1,7 +1,7 @@
 EasyImagy
 ===========================
 
-_EasyImagy_ makes it easy to deal with images in Swift.
+_EasyImagy_ makes it easy to handle images in Swift.
 
 ```swift
 var image = Image<RGBA>(named: "ImageName")!
@@ -26,7 +26,7 @@ imageView.image = image.uiImage
 Introduction
 ---------------------------
 
-Dealing with images using _CoreGraphics_ is too complicated for casual use: various formats, old C APIs and painful memory management. _EasyImagy_ provides the easier way to deal with images in exchange for some performance.
+Handling images by _CoreGraphics_ is too complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides the easier way to handle images in exchange for some performance.
 
 Typically `Image`s in _EasyImagy_ are used with `RGBA`. `RGBA` is a simple structure declared as follows.
 
@@ -41,7 +41,7 @@ struct RGBA {
 
 You can access to a pixel easily using subscripts like `image[x, y]` and its channels by properties `red`, `green`, `blue` and `alpha`.
 
-`Image` and `RGBA` also provide some convenient methods and properties to make processing images easy. For example, it is possible to convert an image to grayscale combining `Image#map` with `RGBA#gray` in one line as shown below.
+`Image` and `RGBA` also provide some convenient methods and properties to make it easy to process images. For example, it is possible to convert an image to grayscale combining `Image#map` with `RGBA#gray` in one line as shown below.
 
 ```swift
 let result = image.map { $0.gray }
