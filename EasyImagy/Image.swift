@@ -63,15 +63,12 @@ extension Image { // Subscripts (Index)
 		return _pixelIndex(x: x, y: y)
 	}
 	
-	public subscript(x: Int, y: Int) -> Pixel? {
+	public subscript(x: Int, y: Int) -> Pixel {
 		get {
-			guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return nil }
-			return pixels[pixelIndex]
+			return pixels[_pixelIndex(x: x, y: y)]
 		}
 		set {
-			guard let newValue = newValue else { return }
-			guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return }
-			pixels[pixelIndex] = newValue
+			pixels[_pixelIndex(x: x, y: y)] = newValue
 		}
 	}
 }
@@ -79,6 +76,13 @@ extension Image { // Subscripts (Index)
 extension Image { // Subscripts (Range)
 	public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice<Pixel> {
 		return ImageSlice(image: self, xRange: xRange ?? 0..<width, yRange: yRange ?? 0..<height)
+	}
+}
+
+extension Image { // safe get
+	public func pixel(x: Int, _ y: Int) -> Pixel? {
+		guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return nil }
+		return pixels[pixelIndex]
 	}
 }
 

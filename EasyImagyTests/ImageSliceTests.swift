@@ -111,19 +111,19 @@ class ImageSliceTests: XCTestCase {
         XCTAssertEqual(1, topRight.width)
         XCTAssertEqual(1, topRight.height)
         
-        XCTAssertEqual(255, topRight[2, 1]!.red)
-        XCTAssertEqual(255, topRight[2, 1]!.green)
-        XCTAssertEqual(255, topRight[2, 1]!.blue)
-        XCTAssertEqual(255, topRight[2, 1]!.alpha)
+        XCTAssertEqual(255, topRight[2, 1].red)
+        XCTAssertEqual(255, topRight[2, 1].green)
+        XCTAssertEqual(255, topRight[2, 1].blue)
+        XCTAssertEqual(255, topRight[2, 1].alpha)
         
         let bottomLeft = image[1...1, 2...2]
         
         XCTAssertEqual(1, bottomLeft.width)
         XCTAssertEqual(1, bottomLeft.height)
         
-        XCTAssertEqual(255, bottomLeft[1, 2]!.red)
-        XCTAssertEqual(255, bottomLeft[1, 2]!.green)
-        XCTAssertEqual(255, bottomLeft[1, 2]!.blue)
-        XCTAssertEqual( 64, bottomLeft[1, 2]!.alpha)
+        XCTAssertEqual(255, bottomLeft[1, 2].red)
+        XCTAssertEqual(255, bottomLeft[1, 2].green)
+        XCTAssertEqual(255, bottomLeft[1, 2].blue)
+        XCTAssertEqual( 64, bottomLeft[1, 2].alpha)
     }
 }

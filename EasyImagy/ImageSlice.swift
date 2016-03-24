@@ -33,7 +33,7 @@ extension ImageSlice {
 }
 
 extension ImageSlice { // Subscripts (Index)
-    public subscript(x: Int, y: Int) -> Pixel? {
+    public subscript(x: Int, y: Int) -> Pixel {
         return image[x, y]
     }
 }
@@ -41,6 +41,12 @@ extension ImageSlice { // Subscripts (Index)
 extension ImageSlice { // Subscripts (Range)
     public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice {
         return image[xRange ?? self.xRange, yRange ?? self.yRange]
+    }
+}
+
+extension ImageSlice { // safe get
+    public func pixel(x: Int, _ y: Int) -> Pixel? {
+        return image.pixel(x, y)
     }
 }
 
