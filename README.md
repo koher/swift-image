@@ -86,23 +86,32 @@ let image = Image<RGBA>(width: 640, height: 480, pixels: pixels)
 
 ```swift
 // Gets a pixel by subscripts
-if let pixel = image[x, y] {
-    print(pixel.red)
-    print(pixel.green)
-    print(pixel.blue)
-    print(pixel.alpha)
-
-    print(pixel.gray) // (red + green + blue) / 3
-    print(pixel) // formatted like "#FF0000FF"
-} else {
-    // Subscript get is safe: out of bounds never causes unexpected results
-    print("Out of bounds")
+do {
+    let pixel = image[x, y]
+    /**/ _ = pixel
 }
 ```
 
 ```swift
+// Sets a pixel by subscripts
 image[x, y] = RGBA(0xFF0000FF)
-image[x, y]?.alpha = 127
+image[x, y].alpha = 127
+```
+
+```swift
+// Safe get for a pixel
+if let pixel = image.pixel(x, y) {
+    print(pixel.red)
+    print(pixel.green)
+    print(pixel.blue)
+    print(pixel.alpha)
+    
+    print(pixel.gray) // (red + green + blue) / 3
+    print(pixel) // formatted like "#FF0000FF"
+} else {
+    // `pixel` is safe: `nil` is returned when out of bounds
+    print("Out of bounds")
+}
 ```
 
 ### Iteration
