@@ -90,6 +90,6 @@ public struct PixelGenerator<Pixel>: GeneratorType {
         guard y < yRange.endIndex else { return nil }
         defer { x += 1 }
         
-        return image.pixels[image._pixelIndex(x: x, y: y)]
+        return image[x, y]
     }
 }

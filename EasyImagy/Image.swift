@@ -49,7 +49,7 @@ extension Image { // Subscripts (Index)
 		return 0 <= y && y < height
 	}
 	
-	internal func _pixelIndex(x  x: Int, y: Int) -> Int {
+	private func _pixelIndex(x  x: Int, y: Int) -> Int {
 		return y * width + x
 	}
 	
@@ -156,7 +156,7 @@ extension Image { // Convolutions
 					for fx in 0..<kernel.width {
 						let dx = fx - hw
 						let dy = fy - hh
-						weightedValues.append((weight: kernel.pixels[kernel._pixelIndex(x: fx, y: fy)], value: self.pixels[_safePixelIndex(x: x + dx, y: y + dy)]))
+						weightedValues.append((weight: kernel[fx, fy], value: self.pixels[_safePixelIndex(x: x + dx, y: y + dy)]))
 					}
 				}
 				pixels.append(weightedSum(weightedValues))
