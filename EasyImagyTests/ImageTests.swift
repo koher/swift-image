@@ -315,7 +315,23 @@ class ImageTests: XCTestCase {
 
         XCTAssertEqual(RGBA(red: 15, green: 30, blue: 45, alpha: 60), image[1.5, 3.0])
         XCTAssertEqual(RGBA(red: 13, green: 26, blue: 39, alpha: 52), image[3.0, 1.5])
-}
+    }
+    
+    func testPixel() {
+        let image = Image<UInt8>(width: 3, height: 2, pixels: [0, 1, 2, 3, 4, 5])
+
+        XCTAssertEqual(0, image.pixel(0, 0)!)
+        XCTAssertEqual(1, image.pixel(1, 0)!)
+        XCTAssertEqual(2, image.pixel(2, 0)!)
+        XCTAssertEqual(3, image.pixel(0, 1)!)
+        XCTAssertEqual(4, image.pixel(1, 1)!)
+        XCTAssertEqual(5, image.pixel(2, 1)!)
+
+        XCTAssertNil(image.pixel(-1, 0))
+        XCTAssertNil(image.pixel(3, 0))
+        XCTAssertNil(image.pixel(0, -1))
+        XCTAssertNil(image.pixel(0, 2))
+    }
 	
 	func testMap() {
 		let image = Image<RGBA>(named: "Test2x1", inBundle: NSBundle(forClass: ImageTests.self))!.map { pixel in
