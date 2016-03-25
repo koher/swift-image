@@ -23,7 +23,7 @@ class LoopPerformanceTests: XCTestCase {
 			var pointer = UnsafeMutablePointer<Int>(numbers)
 			for _ in 0..<numbers.count {
 				sum += pointer.memory
-				pointer++
+				pointer += 1
 			}
 			XCTAssertEqual(N, sum)
 		}
@@ -72,11 +72,14 @@ private struct ArrayWrapper : SequenceType {
 	func generate() -> AnyGenerator<Int> {
 		var index = 0
 		let count = numbers.count
-		return anyGenerator {
+		return AnyGenerator {
 			if index >= count {
 				return nil
 			}
-			return self.numbers[index++]
+            defer {
+                index += 1
+            }
+			return self.numbers[index]
 		}
 	}
 }

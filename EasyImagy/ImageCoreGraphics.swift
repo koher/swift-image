@@ -104,13 +104,13 @@ extension Image where Pixel: RGBAType { // Conversion
         for pixel in zelf.pixels {
             let alphaInt = Int(pixel.alpha)
             pointer.memory = UInt8(pixel.redInt * alphaInt / 255)
-            pointer++
+            pointer += 1
             pointer.memory = UInt8(pixel.greenInt * alphaInt / 255)
-            pointer++
+            pointer += 1
             pointer.memory = UInt8(pixel.blueInt * alphaInt / 255)
-            pointer++
+            pointer += 1
             pointer.memory = pixel.alpha
-            pointer++
+            pointer += 1
         }
         
         let provider: CGDataProvider = CGDataProviderCreateWithCFData(NSData(bytes: buffer, length: length))!

@@ -429,9 +429,9 @@ private func +<T: NumericType>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> Gene
 }
 
 private protocol PixelType {
-    typealias SummableI: NumericType
-    typealias SummableF: NumericType
-    typealias SummableD: NumericType
+    associatedtype SummableI: NumericType
+    associatedtype SummableF: NumericType
+    associatedtype SummableD: NumericType
     
     init(summableI: SummableI)
     init(summableF: SummableF)
