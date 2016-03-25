@@ -96,7 +96,7 @@ extension Image where Pixel: FloatType { // Initializers
 
 extension Image where Pixel: RGBAType { // Conversion
     public var cgImage: CGImageRef {
-        guard let zelf = self as? Image<RGBA> else { fatalError() }
+        let zelf = self as! Image<RGBA>
         
         let length = count * 4
         let buffer = UnsafeMutablePointer<UInt8>.alloc(length)
@@ -130,7 +130,7 @@ extension Image where Pixel: RGBAType { // Conversion
 
 extension Image where Pixel: UInt8Type { // Conversion
     public var cgImage: CGImageRef {
-        guard let zelf = self as? Image<UInt8> else { fatalError() }
+        let zelf = self as! Image<UInt8>
         
         let provider: CGDataProvider = CGDataProviderCreateWithCFData(NSData(bytes: UnsafeMutablePointer<Void>(zelf.pixels), length: count))!
         
@@ -148,7 +148,7 @@ extension Image where Pixel: UInt8Type { // Conversion
 
 extension Image where Pixel: FloatType { // Conversion
     public var cgImage: CGImageRef {
-        guard let zelf = self as? Image<Float> else { fatalError() }
+        let zelf = self as! Image<Float>
         
         return (zelf.map { UInt8(min(max($0, 0.0), 1.0) * 255.0) }).cgImage
     }
