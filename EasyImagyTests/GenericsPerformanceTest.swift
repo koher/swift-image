@@ -17,7 +17,7 @@ struct Bar<T> {
     }
 }
 
-class PerformanceTests: XCTestCase {
+class GenericsPerformanceTests: XCTestCase {
     func testNonGenericPerformance() {
         let xs = [RGBA](count: 1000000, repeatedValue: RGBA(red: 255, green: 0, blue: 0, alpha: 255))
         
