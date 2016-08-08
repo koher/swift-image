@@ -115,6 +115,8 @@ extension Image where Pixel: RGBAType { // Conversion
         
         let provider: CGDataProvider = CGDataProviderCreateWithCFData(NSData(bytes: buffer, length: length))!
         
+        buffer.dealloc(length)
+        
         return CGImageCreate(width, height, 8, 32, width * 4, Image.colorSpace, Image.bitmapInfo, provider, nil, false, CGColorRenderingIntent.RenderingIntentDefault)!
     }
     
