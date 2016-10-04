@@ -4,9 +4,9 @@ private let N = 1000000
 
 class LoopPerformanceTests: XCTestCase {
 	func testIndexRead() {
-		let numbers = [Int](count: N, repeatedValue: 1)
+		let numbers = [Int](repeating: 1, count: N)
 		
-		measureBlock {
+		measure {
 			var sum = 0
 			for i in 0..<numbers.count {
 				sum += numbers[i]
@@ -16,13 +16,13 @@ class LoopPerformanceTests: XCTestCase {
 	}
 	
 	func testPointerRead() {
-		let numbers = [Int](count: N, repeatedValue: 1)
+		let numbers = [Int](repeating: 1, count: N)
 		
-		measureBlock {
+		measure {
 			var sum = 0
-			var pointer = UnsafeMutablePointer<Int>(numbers)
+			var pointer = UnsafeMutablePointer<Int>(mutating: numbers)
 			for _ in 0..<numbers.count {
-				sum += pointer.memory
+				sum += pointer.pointee
 				pointer += 1
 			}
 			XCTAssertEqual(N, sum)
@@ -30,9 +30,9 @@ class LoopPerformanceTests: XCTestCase {
 	}
 	
 	func testGeneratorRead() {
-		let numbers = [Int](count: N, repeatedValue: 1)
+		let numbers = [Int](repeating: 1, count: N)
 		
-		measureBlock {
+		measure {
 			var sum = 0
 			for number in numbers {
 				sum += number
@@ -42,9 +42,9 @@ class LoopPerformanceTests: XCTestCase {
 	}
 	
 	func testAnyGeneratorRead() {
-		let numbers = ArrayWrapper(numbers: [Int](count: N, repeatedValue: 1))
+		let numbers = ArrayWrapper(numbers: [Int](repeating: 1, count: N))
 		
-		measureBlock {
+		measure {
 			var sum = 0
 			for number in numbers {
 				sum += number
@@ -54,9 +54,9 @@ class LoopPerformanceTests: XCTestCase {
 	}
     
     func testIndexingGeneratorRead() {
-        let numbers = ArrayWrapper2(numbers: [Int](count: N, repeatedValue: 1))
+        let numbers = ArrayWrapper2(numbers: [Int](repeating: 1, count: N))
         
-        measureBlock {
+        measure {
             var sum = 0
             for number in numbers {
                 sum += number
@@ -66,13 +66,13 @@ class LoopPerformanceTests: XCTestCase {
     }
 }
 
-private struct ArrayWrapper : SequenceType {
+private struct ArrayWrapper : Sequence {
 	let numbers: [Int]
 	
-	func generate() -> AnyGenerator<Int> {
+	func makeIterator() -> AnyIterator<Int> {
 		var index = 0
 		let count = numbers.count
-		return AnyGenerator {
+		return AnyIterator {
 			if index >= count {
 				return nil
 			}
@@ -84,10 +84,10 @@ private struct ArrayWrapper : SequenceType {
 	}
 }
 
-private struct ArrayWrapper2: SequenceType {
+private struct ArrayWrapper2: Sequence {
     let numbers: [Int]
     
-    func generate() -> IndexingGenerator<[Int]> {
-        return numbers.generate()
+    func makeIterator() -> IndexingIterator<[Int]> {
+        return numbers.makeIterator()
     }
 }

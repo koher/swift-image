@@ -3,11 +3,11 @@
     
     extension Image where Pixel: RGBAType  { // AppKit
         public init?(nsImage: NSImage) {
-            guard let cgImage: CGImageRef = nsImage.CGImageForProposedRect(nil, context: nil, hints: nil) else { return nil }
+            guard let cgImage: CGImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
             self.init(cgImage: cgImage)
         }
         
-        private init?(nsImageOrNil: NSImage?) {
+        fileprivate init?(nsImageOrNil: NSImage?) {
             guard let nsImage: NSImage = nsImageOrNil else { return nil }
             self.init(nsImage: nsImage)
         }
@@ -16,10 +16,10 @@
             self.init(nsImageOrNil: NSImage(named: name))
         }
         
-        public init?(named name: String, inBundle bundle: NSBundle?) {
+        public init?(named name: String, inBundle bundle: Bundle?) {
             // Temporary implementation
             guard let bundle = bundle else { return nil }
-            guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).stringByAppendingPathComponent("\(name).png") }) else { return nil }
+            guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).appendingPathComponent("\(name).png") }) else { return nil }
             self.init(contentsOfFile: path)
         }
         
@@ -27,22 +27,22 @@
             self.init(nsImageOrNil: NSImage(contentsOfFile: path))
         }
         
-        public init?(data: NSData) {
+        public init?(data: Data) {
             self.init(nsImageOrNil: NSImage(data: data))
         }
         
         public var nsImage: NSImage {
-            return NSImage(CGImage: cgImage, size: NSSize.zero)
+            return NSImage(cgImage: cgImage, size: NSSize.zero)
         }
     }
 
     extension Image where Pixel: UInt8Type  { // AppKit
         public init?(nsImage: NSImage) {
-            guard let cgImage: CGImageRef = nsImage.CGImageForProposedRect(nil, context: nil, hints: nil) else { return nil }
+            guard let cgImage: CGImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
             self.init(cgImage: cgImage)
         }
         
-        private init?(nsImageOrNil: NSImage?) {
+        fileprivate init?(nsImageOrNil: NSImage?) {
             guard let nsImage: NSImage = nsImageOrNil else { return nil }
             self.init(nsImage: nsImage)
         }
@@ -51,10 +51,10 @@
             self.init(nsImageOrNil: NSImage(named: name))
         }
         
-        public init?(named name: String, inBundle bundle: NSBundle?) {
+        public init?(named name: String, inBundle bundle: Bundle?) {
             // Temporary implementation
             guard let bundle = bundle else { return nil }
-            guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).stringByAppendingPathComponent("\(name).png") }) else { return nil }
+            guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).appendingPathComponent("\(name).png") }) else { return nil }
             self.init(contentsOfFile: path)
         }
         
@@ -62,12 +62,12 @@
             self.init(nsImageOrNil: NSImage(contentsOfFile: path))
         }
         
-        public init?(data: NSData) {
+        public init?(data: Data) {
             self.init(nsImageOrNil: NSImage(data: data))
         }
         
         public var nsImage: NSImage {
-            return NSImage(CGImage: cgImage, size: NSSize.zero)
+            return NSImage(cgImage: cgImage, size: NSSize.zero)
         }
     }
 #endif

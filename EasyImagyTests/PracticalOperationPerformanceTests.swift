@@ -12,7 +12,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
     func testGrayscale() {
         let image = getImage()
         
-        measureBlock {
+        measure {
             image.map { (pixel: RGBA) -> RGBA in
                 RGBA(gray: pixel.gray)
             }
@@ -22,7 +22,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
     func testBinarization() {
         let image = getImage()
         
-        measureBlock {
+        measure {
             _ = image.map { (pixel: RGBA) -> RGBA in
                 pixel.gray < 128 ? RGBA.black : RGBA.white
             }
@@ -33,7 +33,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
         let image = getImage()
         let filter = Image<Float>(width: 3, height: 3, pixel: 1.0 / 9.0)
 
-        measureBlock {
+        measure {
             _ = image.convoluted(filter)
         }
     }
@@ -42,7 +42,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
         let kernel = Image<Int>(width: 1, height: 1, pixels: [1])
         let image = getImage()
         
-        measureBlock {
+        measure {
             _ = image.convoluted(kernel)
         }
     }
@@ -58,7 +58,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
             1,  4,  6,  4, 1,
         ]).map { Float($0) / 256.0 }
         
-        measureBlock {
+        measure {
             _ = image.convoluted(kernel)
         }
     }

@@ -173,7 +173,7 @@ struct H {
 }
 
 struct I {
-	private var h: H
+	fileprivate var h: H
 	
 	subscript(i: Int) -> J? {
 		get {

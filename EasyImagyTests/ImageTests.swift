@@ -10,7 +10,7 @@ import AppKit
 class ImageTests: XCTestCase {
     func testInitNamed() {
         do {
-            let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!
+            let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!
             
             XCTAssertEqual(255, image[0, 0].red)
             XCTAssertEqual(  0, image[0, 0].green)
@@ -35,7 +35,7 @@ class ImageTests: XCTestCase {
     }
     
     func testInitWithImageSlice() {
-        let image = Image<RGBA>(Image(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![1...2, 1...2])
+        let image = Image<RGBA>(Image(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![1...2, 1...2])
         
         XCTAssertEqual(2, image.width)
         XCTAssertEqual(2, image.height)
@@ -64,9 +64,9 @@ class ImageTests: XCTestCase {
     
     
 	func testSequence() {
-        let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!
+        let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!
         
-        for (i, pixel) in image.enumerate() {
+        for (i, pixel) in image.enumerated() {
             switch i {
             case 0:
                 XCTAssertEqual(255, pixel.red)
@@ -95,7 +95,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testSubscriptGet() {
-		let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))!
+		let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))!
 		
 		XCTAssertEqual(255, image[0, 0].red)
 		XCTAssertEqual(  0, image[0, 0].green)
@@ -179,7 +179,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testSubscriptSet() {
-        var image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!
+        var image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!
         var original = image
         
         image[0, 0] = RGBA(red:  2, green:  3, blue:  5, alpha:  7)
@@ -229,7 +229,7 @@ class ImageTests: XCTestCase {
 	}
     
 	func testSubscriptRange() {
-		let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![1...2, 1...2]
+		let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![1...2, 1...2]
 		
 		XCTAssertEqual(2, image.width)
 		XCTAssertEqual(2, image.height)
@@ -334,7 +334,7 @@ class ImageTests: XCTestCase {
     }
 	
 	func testMap() {
-		let image = Image<RGBA>(named: "Test2x1", inBundle: NSBundle(forClass: ImageTests.self))!.map { pixel in
+		let image = Image<RGBA>(named: "Test2x1", inBundle: Bundle(for: ImageTests.self))!.map { pixel in
 			return RGBA(red: pixel.red / 2, green: pixel.green / 2, blue: pixel.blue / 2, alpha: pixel.alpha / 2)
 		}
         
@@ -351,7 +351,7 @@ class ImageTests: XCTestCase {
     
     func testMapWithIndices() {
         do {
-            let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
+            let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
                 return RGBA(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
             }
             
@@ -377,7 +377,7 @@ class ImageTests: XCTestCase {
         }
         
         do {
-            let image = Image<RGBA>(named: "Test2x1", inBundle: NSBundle(forClass: ImageTests.self))!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
+            let image = Image<RGBA>(named: "Test2x1", inBundle: Bundle(for: ImageTests.self))!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
                 return RGBA(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
             }
             
@@ -394,7 +394,7 @@ class ImageTests: XCTestCase {
     }
 	
 	func testFlipX() {
-		let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!.flipX()
+		let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.flipX()
 
 		XCTAssertEqual(  0, image[0, 0].red)
 		XCTAssertEqual(255, image[0, 0].green)
@@ -418,7 +418,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testFlipY() {
-		let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!.flipY()
+		let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.flipY()
 		
 		XCTAssertEqual(  0, image[0, 0].red)
 		XCTAssertEqual(  0, image[0, 0].green)
@@ -443,7 +443,7 @@ class ImageTests: XCTestCase {
 	
 	func testResize() {
         do {
-            let image = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.None)
+            let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
             
             XCTAssertEqual(4, image.width)
             XCTAssertEqual(4, image.height)
@@ -530,7 +530,7 @@ class ImageTests: XCTestCase {
         }
         
         do {
-            let image: Image<UInt8> = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.None).map { $0.alpha }
+            let image: Image<UInt8> = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { $0.alpha }
             
             XCTAssertEqual( 64, image[0, 0])
             XCTAssertEqual( 64, image[1, 0])
@@ -554,7 +554,7 @@ class ImageTests: XCTestCase {
         }
         
         do {
-            let image: Image<Float> = Image<RGBA>(named: "Test2x2", inBundle: NSBundle(forClass: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.None).map { Float($0.alpha) / 255.0 }
+            let image: Image<Float> = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
             
             XCTAssertEqualWithAccuracy(0.25, image[0, 0], accuracy: 0.002)
             XCTAssertEqualWithAccuracy(0.25, image[1, 0], accuracy: 0.002)
@@ -579,7 +579,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testRotate() {
-		let image = Image<RGBA>(named: "Test2x1", inBundle: NSBundle(forClass: ImageTests.self))!
+		let image = Image<RGBA>(named: "Test2x1", inBundle: Bundle(for: ImageTests.self))!
 
 		for times in [-8, -4, 0, 4, 8] {
 			let rotated = image.rotate(times)
@@ -671,7 +671,7 @@ class ImageTests: XCTestCase {
     
 	func testCopyOnWritePerformanceOfCopy() { // Fast
         let image = Image<RGBA>(width: 8192, height: 8192, pixel: RGBA.transparent)
-		measureBlock {
+		measure {
 			let copy = image
 			XCTAssertEqual(8192 * 8192, copy.count)
 		}
@@ -679,7 +679,7 @@ class ImageTests: XCTestCase {
 	
     func testCopyOnWritePerformanceOfUpdate() { // Fast
         var image = Image<RGBA>(width: 8192, height: 8192, pixel: RGBA.transparent)
-        measureBlock {
+        measure {
             image[0, 0] = RGBA.white
             XCTAssertEqual(8192 * 8192, image.count)
         }
@@ -687,7 +687,7 @@ class ImageTests: XCTestCase {
     
 	func testCopyPerformance() { // Slow
 		let image = Image<RGBA>(width: 8192, height: 8192, pixel: RGBA.transparent)
-		measureBlock {
+		measure {
 			var copy = image
 			copy[0, 0] = RGBA.white
 			XCTAssertEqual(8192 * 8192, copy.count)

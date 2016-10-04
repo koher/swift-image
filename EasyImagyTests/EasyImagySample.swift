@@ -8,7 +8,7 @@ import EasyImagy
         func testSample() {
             /**/ let x = 0
             /**/ let y = 0
-            /**/ let imageView: UIImageView = UIImageView(frame: CGRectMake(0, 0, 100, 100))
+            /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
             /**/ imageView.image = Image<RGBA>(width: 1, height: 1, pixel: RGBA.black).uiImage
             
             /**/ if false {
@@ -58,12 +58,12 @@ import EasyImagy
             }
             do {
                 /**/ if false {
-                let image = Image<RGBA>(data: NSData(/* ... */))!
+                let image = Image<RGBA>(data: Data(/* ... */))!
                 /**/ _ = image.count
                 /**/ }
             }
             do {
-                /**/ let imageView: UIImageView = UIImageView(frame: CGRectMake(0, 0, 100, 100))
+                /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
                 /**/ imageView.image = Image<RGBA>(width: 1, height: 1, pixel: RGBA.black).uiImage
                 let image = Image<RGBA>(uiImage: imageView.image!)!
                 /**/ _ = image.count
@@ -73,7 +73,7 @@ import EasyImagy
                 /**/ _ = image.count
             }
             do {
-                /**/ let pixels = [RGBA](count: 640 * 480, repeatedValue: .black)
+                /**/ let pixels = [RGBA](repeating: .black, count: 640 * 480)
                 let image = Image<RGBA>(width: 640, height: 480, pixels: pixels)
                 /**/ _ = image.count
             }

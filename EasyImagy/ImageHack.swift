@@ -1,253 +1,253 @@
 extension Image where Pixel: RGBAType { // map
-    public func map(transform: RGBA -> RGBA) -> Image<RGBA> {
+    public func map(_ transform: (RGBA) -> RGBA) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
 
-    public func map(transform: RGBA -> UInt8) -> Image<UInt8> {
+    public func map(_ transform: (RGBA) -> UInt8) -> Image<UInt8> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
 
-    public func map(transform: RGBA -> Int) -> Image<Int> {
+    public func map(_ transform: (RGBA) -> Int) -> Image<Int> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
 
-    public func map(transform: RGBA -> Float) -> Image<Float> {
+    public func map(_ transform: (RGBA) -> Float) -> Image<Float> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
 
-    public func map(transform: RGBA -> Double) -> Image<Double> {
+    public func map(_ transform: (RGBA) -> Double) -> Image<Double> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: UInt8Type { // map
-    public func map(transform: UInt8 -> UInt8) -> Image<UInt8> {
+    public func map(_ transform: (UInt8) -> UInt8) -> Image<UInt8> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
     
-    public func map(transform: UInt8 -> Int) -> Image<Int> {
+    public func map(_ transform: (UInt8) -> Int) -> Image<Int> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
     
-    public func map(transform: UInt8 -> Float) -> Image<Float> {
+    public func map(_ transform: (UInt8) -> Float) -> Image<Float> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
     
-    public func map(transform: UInt8 -> Double) -> Image<Double> {
+    public func map(_ transform: (UInt8) -> Double) -> Image<Double> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: IntType { // map
-    public func map(transform: Int -> Int) -> Image<Int> {
+    public func map(_ transform: (Int) -> Int) -> Image<Int> {
         let zelf = self as! Image<Int>
         return zelf._map(transform)
     }
     
-    public func map(transform: Int -> Float) -> Image<Float> {
+    public func map(_ transform: (Int) -> Float) -> Image<Float> {
         let zelf = self as! Image<Int>
         return zelf._map(transform)
     }
     
-    public func map(transform: Int -> Double) -> Image<Double> {
+    public func map(_ transform: (Int) -> Double) -> Image<Double> {
         let zelf = self as! Image<Int>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: FloatType { // map
-    public func map(transform: Float -> Float) -> Image<Float> {
+    public func map(_ transform: (Float) -> Float) -> Image<Float> {
         let zelf = self as! Image<Float>
         return zelf._map(transform)
     }
     
-    public func map(transform: Float -> Double) -> Image<Double> {
+    public func map(_ transform: (Float) -> Double) -> Image<Double> {
         let zelf = self as! Image<Float>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: DoubleType { // map
-    public func map(transform: Double -> Double) -> Image<Double> {
+    public func map(_ transform: (Double) -> Double) -> Image<Double> {
         let zelf = self as! Image<Double>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: RGBAType { // map with indices
-    public func map(transform: (x: Int, y: Int, pixel: RGBA) -> RGBA) -> Image<RGBA> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> RGBA) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: RGBA) -> UInt8) -> Image<UInt8> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> UInt8) -> Image<UInt8> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: RGBA) -> Int) -> Image<Int> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> Int) -> Image<Int> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: RGBA) -> Float) -> Image<Float> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> Float) -> Image<Float> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: RGBA) -> Double) -> Image<Double> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> Double) -> Image<Double> {
         let zelf = self as! Image<RGBA>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: UInt8Type { // map with indices
-    public func map(transform: (x: Int, y: Int, pixel: UInt8) -> UInt8) -> Image<UInt8> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> UInt8) -> Image<UInt8> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: UInt8) -> Int) -> Image<Int> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> Int) -> Image<Int> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: UInt8) -> Float) -> Image<Float> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> Float) -> Image<Float> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: UInt8) -> Double) -> Image<Double> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> Double) -> Image<Double> {
         let zelf = self as! Image<UInt8>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: IntType { // map with indices
-    public func map(transform: (x: Int, y: Int, pixel: Int) -> Int) -> Image<Int> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Int) -> Int) -> Image<Int> {
         let zelf = self as! Image<Int>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: Int) -> Float) -> Image<Float> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Int) -> Float) -> Image<Float> {
         let zelf = self as! Image<Int>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: Int) -> Double) -> Image<Double> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Int) -> Double) -> Image<Double> {
         let zelf = self as! Image<Int>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: FloatType { // map with indices
-    public func map(transform: (x: Int, y: Int, pixel: Float) -> Float) -> Image<Float> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Float) -> Float) -> Image<Float> {
         let zelf = self as! Image<Float>
         return zelf._map(transform)
     }
     
-    public func map(transform: (x: Int, y: Int, pixel: Float) -> Double) -> Image<Double> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Float) -> Double) -> Image<Double> {
         let zelf = self as! Image<Float>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: DoubleType { // map with indices
-    public func map(transform: (x: Int, y: Int, pixel: Double) -> Double) -> Image<Double> {
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Double) -> Double) -> Image<Double> {
         let zelf = self as! Image<Double>
         return zelf._map(transform)
     }
 }
 
 extension Image where Pixel: RGBAType { // Convolution
-    public func convoluted(kernel: Image<Int>) -> Image<RGBA> {
+    public func convoluted(_ kernel: Image<Int>) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(kernel: Image<Float>) -> Image<RGBA> {
+    public func convoluted(_ kernel: Image<Float>) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(kernel: Image<Double>) -> Image<RGBA> {
+    public func convoluted(_ kernel: Image<Double>) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: UInt8Type { // Convolution
-    public func convoluted(kernel: Image<Int>) -> Image<UInt8> {
+    public func convoluted(_ kernel: Image<Int>) -> Image<UInt8> {
         let zelf = self as! Image<UInt8>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(kernel: Image<Float>) -> Image<UInt8> {
+    public func convoluted(_ kernel: Image<Float>) -> Image<UInt8> {
         let zelf = self as! Image<UInt8>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(kernel: Image<Double>) -> Image<UInt8> {
+    public func convoluted(_ kernel: Image<Double>) -> Image<UInt8> {
         let zelf = self as! Image<UInt8>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: IntType { // Convolution
-    public func convoluted(kernel: Image<Int>) -> Image<Int> {
+    public func convoluted(_ kernel: Image<Int>) -> Image<Int> {
         let zelf = self as! Image<Int>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(kernel: Image<Float>) -> Image<Int> {
+    public func convoluted(_ kernel: Image<Float>) -> Image<Int> {
         let zelf = self as! Image<Int>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(kernel: Image<Double>) -> Image<Int> {
+    public func convoluted(_ kernel: Image<Double>) -> Image<Int> {
         let zelf = self as! Image<Int>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: FloatType { // Convolution
-    public func convoluted(kernel: Image<Int>) -> Image<Float> {
+    public func convoluted(_ kernel: Image<Int>) -> Image<Float> {
         let zelf = self as! Image<Float>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(kernel: Image<Float>) -> Image<Float> {
+    public func convoluted(_ kernel: Image<Float>) -> Image<Float> {
         let zelf = self as! Image<Float>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(kernel: Image<Double>) -> Image<Float> {
+    public func convoluted(_ kernel: Image<Double>) -> Image<Float> {
         let zelf = self as! Image<Float>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel: DoubleType { // Convolution
-    public func convoluted(kernel: Image<Int>) -> Image<Double> {
+    public func convoluted(_ kernel: Image<Int>) -> Image<Double> {
         let zelf = self as! Image<Double>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(kernel: Image<Float>) -> Image<Double> {
+    public func convoluted(_ kernel: Image<Float>) -> Image<Double> {
         let zelf = self as! Image<Double>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(kernel: Image<Double>) -> Image<Double> {
+    public func convoluted(_ kernel: Image<Double>) -> Image<Double> {
         let zelf = self as! Image<Double>
         return zelf._convoluted(kernel, weightedSum: weightedSum)
     }
@@ -259,7 +259,7 @@ extension Image where Pixel: RGBAType { // Interpolation, Transformation
         return zelf._interpolate(x: x, y: y)
     }
     
-    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA> {
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>
         return zelf._transformed(width: width, height: height, transform: transform)
     }
@@ -271,7 +271,7 @@ extension Image where Pixel: UInt8Type { // Interpolation, Transformation
         return zelf._interpolate(x: x, y: y)
     }
     
-    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
         let zelf = self as! Image<UInt8>
         return zelf._transformed(width: width, height: height, transform: transform)
     }
@@ -283,7 +283,7 @@ extension Image where Pixel: IntType { // Interpolation, Transformation
         return zelf._interpolate(x: x, y: y)
     }
     
-    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
         let zelf = self as! Image<Int>
         return zelf._transformed(width: width, height: height, transform: transform)
     }
@@ -295,7 +295,7 @@ extension Image where Pixel: FloatType { // Interpolation, Transformation
         return zelf._interpolate(x: x, y: y)
     }
     
-    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
         let zelf = self as! Image<Float>
         return zelf._transformed(width: width, height: height, transform: transform)
     }
@@ -307,14 +307,14 @@ extension Image where Pixel: DoubleType { // Interpolation, Transformation
         return zelf._interpolate(x: x, y: y)
     }
     
-    public func transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
         let zelf = self as! Image<Double>
         return zelf._transformed(width: width, height: height, transform: transform)
     }
 }
 
 extension Image where Pixel: PixelType { // Interpolation, Transformation
-    private func _interpolate(x x: Float, y: Float) -> Pixel {
+    fileprivate func _interpolate(x: Float, y: Float) -> Pixel {
         let width = self.width
         let height = self.height
         
@@ -366,7 +366,7 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
         return Pixel(summableF: Pixel.mulF(v00.summableF, w00) + Pixel.mulF(v01.summableF, w01) + Pixel.mulF(v10.summableF, w10) + Pixel.mulF(v11.summableF, w11))
     }
     
-    private func _transformed(width width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Pixel> {
+    fileprivate func _transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Pixel> {
         guard width >= 0 else { fatalError("`width` must be greater than or equal to 0: \(width)") }
         guard height >= 0 else { fatalError("`width` must be greater than or equal to 0: \(height)") }
 
@@ -383,7 +383,7 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
     }
 }
 
-private func weightedSum<P: PixelType>(weightedPixels: [(weight: Int, value: P)]) -> P {
+private func weightedSum<P: PixelType>(_ weightedPixels: [(weight: Int, value: P)]) -> P {
     var sum = P.summableIZero
     for (weight, pixel) in weightedPixels {
         sum = sum + P.mulI(pixel.summableI, weight)
@@ -392,7 +392,7 @@ private func weightedSum<P: PixelType>(weightedPixels: [(weight: Int, value: P)]
     return P(summableI: sum)
 }
 
-private func weightedSum<P: PixelType>(weightedPixels: [(weight: Float, value: P)]) -> P {
+private func weightedSum<P: PixelType>(_ weightedPixels: [(weight: Float, value: P)]) -> P {
     var sum = P.summableFZero
     for (weight, pixel) in weightedPixels {
         sum = sum + P.mulF(pixel.summableF, weight)
@@ -401,7 +401,7 @@ private func weightedSum<P: PixelType>(weightedPixels: [(weight: Float, value: P
     return P(summableF: sum)
 }
 
-private func weightedSum<P: PixelType>(weightedPixels: [(weight: Double, value: P)]) -> P {
+private func weightedSum<P: PixelType>(_ weightedPixels: [(weight: Double, value: P)]) -> P {
     var sum = P.summableDZero
     for (weight, pixel) in weightedPixels {
         sum = sum + P.mulD(pixel.summableD, weight)
@@ -411,7 +411,7 @@ private func weightedSum<P: PixelType>(weightedPixels: [(weight: Double, value: 
 }
 
 private protocol NumericType {
-    func +(lhs: Self, rhs: Self) -> Self
+    static func +(lhs: Self, rhs: Self) -> Self
 }
 extension Int: NumericType {}
 extension Float: NumericType {}
@@ -445,77 +445,77 @@ private protocol PixelType {
     static var summableFZero: SummableF { get }
     static var summableDZero: SummableD { get }
     
-    static func mulI(lhs: SummableI, _ rhs: Int) -> SummableI
-    static func mulF(lhs: SummableF, _ rhs: Float) -> SummableF
-    static func mulD(lhs: SummableD, _ rhs: Double) -> SummableD
+    static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI
+    static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF
+    static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD
     
-    static func divI(lhs: SummableI, _ rhs: Int) -> SummableI
-    static func divF(lhs: SummableF, _ rhs: Float) -> SummableF
-    static func divD(lhs: SummableD, _ rhs: Double) -> SummableD
+    static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI
+    static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF
+    static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD
 }
 
 extension RGBA: PixelType {
-    private typealias SummableI = GenericRGBA<Int>
-    private typealias SummableF = GenericRGBA<Float>
-    private typealias SummableD = GenericRGBA<Double>
+    fileprivate typealias SummableI = GenericRGBA<Int>
+    fileprivate typealias SummableF = GenericRGBA<Float>
+    fileprivate typealias SummableD = GenericRGBA<Double>
 
-    private init(summableI: GenericRGBA<Int>) {
+    fileprivate init(summableI: GenericRGBA<Int>) {
         self.init(red: clamp(summableI.red, lower: Int(UInt8.min), upper: Int(UInt8.max)), green: clamp(summableI.green, lower: Int(UInt8.min), upper: Int(UInt8.max)), blue: clamp(summableI.blue, lower: Int(UInt8.min), upper: Int(UInt8.max)), alpha: clamp(summableI.alpha, lower: Int(UInt8.min), upper: Int(UInt8.max)))
     }
     
-    private init(summableF: GenericRGBA<Float>) {
+    fileprivate init(summableF: GenericRGBA<Float>) {
         self.init(red: UInt8(clamp(summableF.red, lower: Float(UInt8.min), upper: Float(UInt8.max))), green: UInt8(clamp(summableF.green, lower: Float(UInt8.min), upper: Float(UInt8.max))), blue: UInt8(clamp(summableF.blue, lower: Float(UInt8.min), upper: Float(UInt8.max))), alpha: UInt8(clamp(summableF.alpha, lower: Float(UInt8.min), upper: Float(UInt8.max))))
     }
     
-    private init(summableD: GenericRGBA<Double>) {
+    fileprivate init(summableD: GenericRGBA<Double>) {
         self.init(red: UInt8(clamp(summableD.red, lower: Double(UInt8.min), upper: Double(UInt8.max))), green: UInt8(clamp(summableD.green, lower: Double(UInt8.min), upper: Double(UInt8.max))), blue: UInt8(clamp(summableD.blue, lower: Double(UInt8.min), upper: Double(UInt8.max))), alpha: UInt8(clamp(summableD.alpha, lower: Double(UInt8.min), upper: Double(UInt8.max))))
     }
     
-    private var summableI: GenericRGBA<Int> {
+    fileprivate var summableI: GenericRGBA<Int> {
         return GenericRGBA<Int>(red: redInt, green: greenInt, blue: blueInt, alpha: alphaInt)
     }
     
-    private var summableF: GenericRGBA<Float> {
+    fileprivate var summableF: GenericRGBA<Float> {
         return GenericRGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
     }
     
-    private var summableD: GenericRGBA<Double> {
+    fileprivate var summableD: GenericRGBA<Double> {
         return GenericRGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
     
-    private static var summableIZero: GenericRGBA<Int> {
+    fileprivate static var summableIZero: GenericRGBA<Int> {
         return GenericRGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
-    private static var summableFZero: GenericRGBA<Float> {
+    fileprivate static var summableFZero: GenericRGBA<Float> {
         return GenericRGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
-    private static var summableDZero: GenericRGBA<Double> {
+    fileprivate static var summableDZero: GenericRGBA<Double> {
         return GenericRGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
-    private static func mulI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return GenericRGBA<Int>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
     }
     
-    private static func mulF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return GenericRGBA<Float>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
     }
 
-    private static func mulD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return GenericRGBA<Double>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
     }
     
-    private static func divI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return GenericRGBA<Int>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
     }
     
-    private static func divF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return GenericRGBA<Float>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
     }
     
-    private static func divD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return GenericRGBA<Double>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
     }
 }
@@ -525,66 +525,66 @@ extension UInt8: PixelType {
     typealias SummableF = Float
     typealias SummableD = Double
     
-    private init(summableI: Int) {
+    fileprivate init(summableI: Int) {
         self = UInt8(clamp(summableI, lower: Int(UInt8.min), upper: Int(UInt8.max)))
     }
     
-    private init(summableF: Float) {
+    fileprivate init(summableF: Float) {
         self = UInt8(clamp(summableF, lower: Float(UInt8.min), upper: Float(UInt8.max)))
     }
     
-    private init(summableD: Double) {
+    fileprivate init(summableD: Double) {
         self = UInt8(clamp(summableD, lower: Double(UInt8.min), upper: Double(UInt8.max)))
     }
     
-    private var summableI: Int {
+    fileprivate var summableI: Int {
         return Int(self)
     }
     
-    private var summableF: Float {
+    fileprivate var summableF: Float {
         return Float(self)
     }
     
-    private var summableD: Double {
+    fileprivate var summableD: Double {
         return Double(self)
     }
     
-    private static var summableIZero: Int {
+    fileprivate static var summableIZero: Int {
         return 0
         
     }
     
-    private static var summableFZero: Float {
+    fileprivate static var summableFZero: Float {
         return 0
         
     }
     
-    private static var summableDZero: Double {
+    fileprivate static var summableDZero: Double {
         return 0
         
     }
     
-    private static func mulI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    private static func mulF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    private static func mulD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
     
-    private static func divI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    private static func divF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    private static func divD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -594,66 +594,66 @@ extension Int: PixelType {
     typealias SummableF = Float
     typealias SummableD = Double
     
-    private init(summableI: Int) {
+    fileprivate init(summableI: Int) {
         self = summableI
     }
     
-    private init(summableF: Float) {
+    fileprivate init(summableF: Float) {
         self = Int(summableF)
     }
     
-    private init(summableD: Double) {
+    fileprivate init(summableD: Double) {
         self = Int(summableD)
     }
     
-    private var summableI: Int {
+    fileprivate var summableI: Int {
         return self
     }
     
-    private var summableF: Float {
+    fileprivate var summableF: Float {
         return Float(self)
     }
     
-    private var summableD: Double {
+    fileprivate var summableD: Double {
         return Double(self)
     }
     
-    private static var summableIZero: Int {
+    fileprivate static var summableIZero: Int {
         return 0
         
     }
     
-    private static var summableFZero: Float {
+    fileprivate static var summableFZero: Float {
         return 0
         
     }
     
-    private static var summableDZero: Double {
+    fileprivate static var summableDZero: Double {
         return 0
         
     }
     
-    private static func mulI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    private static func mulF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    private static func mulD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
     
-    private static func divI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    private static func divF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    private static func divD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -663,66 +663,66 @@ extension Float: PixelType {
     typealias SummableF = Float
     typealias SummableD = Double
     
-    private init(summableI: Float) {
+    fileprivate init(summableI: Float) {
         self = summableI
     }
     
-    private init(summableF: Float) {
+    fileprivate init(summableF: Float) {
         self = summableF
     }
     
-    private init(summableD: Double) {
+    fileprivate init(summableD: Double) {
         self = Float(summableD)
     }
     
-    private var summableI: Float {
+    fileprivate var summableI: Float {
         return self
     }
     
-    private var summableF: Float {
+    fileprivate var summableF: Float {
         return self
     }
     
-    private var summableD: Double {
+    fileprivate var summableD: Double {
         return Double(self)
     }
     
-    private static var summableIZero: Float {
+    fileprivate static var summableIZero: Float {
         return 0
         
     }
     
-    private static var summableFZero: Float {
+    fileprivate static var summableFZero: Float {
         return 0
         
     }
     
-    private static var summableDZero: Double {
+    fileprivate static var summableDZero: Double {
         return 0
         
     }
     
-    private static func mulI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * Float(rhs)
     }
     
-    private static func mulF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    private static func mulD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
     
-    private static func divI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * Float(rhs)
     }
     
-    private static func divF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    private static func divD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -732,66 +732,66 @@ extension Double: PixelType {
     typealias SummableF = Double
     typealias SummableD = Double
     
-    private init(summableI: Double) {
+    fileprivate init(summableI: Double) {
         self = summableI
     }
     
-    private init(summableF: Double) {
+    fileprivate init(summableF: Double) {
         self = summableF
     }
     
-    private init(summableD: Double) {
+    fileprivate init(summableD: Double) {
         self = summableD
     }
     
-    private var summableI: Double {
+    fileprivate var summableI: Double {
         return self
     }
     
-    private var summableF: Double {
+    fileprivate var summableF: Double {
         return self
     }
     
-    private var summableD: Double {
+    fileprivate var summableD: Double {
         return self
     }
     
-    private static var summableIZero: Double {
+    fileprivate static var summableIZero: Double {
         return 0
         
     }
     
-    private static var summableFZero: Double {
+    fileprivate static var summableFZero: Double {
         return 0
         
     }
     
-    private static var summableDZero: Double {
+    fileprivate static var summableDZero: Double {
         return 0
         
     }
     
-    private static func mulI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * Double(rhs)
     }
     
-    private static func mulF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * Double(rhs)
     }
     
-    private static func mulD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
     
-    private static func divI(lhs: SummableI, _ rhs: Int) -> SummableI {
+    fileprivate static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * Double(rhs)
     }
     
-    private static func divF(lhs: SummableF, _ rhs: Float) -> SummableF {
+    fileprivate static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * Double(rhs)
     }
     
-    private static func divD(lhs: SummableD, _ rhs: Double) -> SummableD {
+    fileprivate static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }

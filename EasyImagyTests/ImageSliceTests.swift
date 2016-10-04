@@ -10,9 +10,9 @@ import EasyImagy
 class ImageSliceTests: XCTestCase {
     func testSequence() {
         do {
-            let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![1...2, 1...2]
+            let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![1...2, 1...2]
             
-            for (i, pixel) in image.enumerate() {
+            for (i, pixel) in image.enumerated() {
                 switch i {
                 case 0:
                     XCTAssertEqual(  0, pixel.red)
@@ -41,9 +41,9 @@ class ImageSliceTests: XCTestCase {
         }
         
         do {
-            let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![-2...1, -2...1]
+            let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![-2...1, -2...1]
             
-            for (i, pixel) in image.enumerate() {
+            for (i, pixel) in image.enumerated() {
                 switch i {
                 case 0:
                     XCTAssertEqual(255, pixel.red)
@@ -72,9 +72,9 @@ class ImageSliceTests: XCTestCase {
         }
         
         do {
-            let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![2...5, 2...5]
+            let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![2...5, 2...5]
             
-            for (i, pixel) in image.enumerate() {
+            for (i, pixel) in image.enumerated() {
                 switch i {
                 case 0:
                     XCTAssertEqual(255, pixel.red)
@@ -104,7 +104,7 @@ class ImageSliceTests: XCTestCase {
     }
     
     func testSubscriptRange() {
-        let image = Image<RGBA>(named: "Test4x4", inBundle: NSBundle(forClass: ImageTests.self))![1...2, 1...2]
+        let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![1...2, 1...2]
         
         let topRight = image[2...2, 1...1]
         

@@ -19,7 +19,7 @@ private func getImage() -> Image<RGBA> {
 
 class ConvolutionPerformanceTests: XCTestCase {
     func testConvoluted() {
-        measureBlock {
+        measure {
             _ = image.convoluted(kernel)
         }        
     }

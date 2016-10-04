@@ -421,15 +421,19 @@
 				TargetAttributes = {
 					D65FF0701AFB66C7006CC985 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0800;
 					};
 					D65FF07B1AFB66C7006CC985 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0800;
 					};
 					D69C33A51C8D3D2A007985D4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					D69C33AE1C8D3D2A007985D4 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					D6C2EDF71B031A0900E2B876 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -732,6 +736,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
 				PRODUCT_NAME = EasyImagy;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -752,6 +757,7 @@
 				PRODUCT_NAME = EasyImagy;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -766,6 +772,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = EasyImagyTests;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -776,6 +783,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.koherent.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = EasyImagyTests;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -797,6 +805,7 @@
 				PRODUCT_NAME = EasyImagy;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -818,6 +827,7 @@
 				PRODUCT_NAME = EasyImagy;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -832,6 +842,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
 				PRODUCT_NAME = EasyImagyTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -845,6 +856,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
 				PRODUCT_NAME = EasyImagyTests;
 				SDKROOT = macosx;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

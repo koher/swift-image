@@ -1,9 +1,9 @@
 public struct ImageSlice<Pixel> {
     internal let image: Image<Pixel>
-    internal let xRange: Range<Int>
-    internal let yRange: Range<Int>
+    internal let xRange: CountableRange<Int>
+    internal let yRange: CountableRange<Int>
     
-    public init(image: Image<Pixel>, xRange: Range<Int>, yRange: Range<Int>) {
+    public init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
         self.image = image
         self.xRange = xRange
         self.yRange = yRange
@@ -38,56 +38,85 @@ extension ImageSlice { // Subscripts (Index)
     }
 }
 
+// Does not support combinations of range types like `xRange: Range<Int>, yRange: ClosedRange<Int>` currently
 extension ImageSlice { // Subscripts (Range)
-    public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice {
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+        return image[xRange, yRange]
+    }
+    
+    public subscript(xRange: CountableClosedRange<Int>, yRange: CountableClosedRange<Int>) -> ImageSlice<Pixel> {
+        return image[xRange, yRange]
+    }
+    
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> ImageSlice<Pixel> {
+        return image[xRange, yRange]
+    }
+    
+    public subscript(xRange: ClosedRange<Int>, yRange: ClosedRange<Int>) -> ImageSlice<Pixel> {
+        return image[xRange, yRange]
+    }
+    
+    public subscript(xRange: CountableRange<Int>?, yRange: CountableRange<Int>?) -> ImageSlice<Pixel> {
         return image[xRange ?? self.xRange, yRange ?? self.yRange]
+    }
+    
+    public subscript(xRange: CountableClosedRange<Int>?, yRange: CountableClosedRange<Int>?) -> ImageSlice<Pixel> {
+        return image[xRange.map { CountableRange($0) } ?? self.xRange, yRange.map { CountableRange($0) } ?? self.yRange]
+    }
+    
+    public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice<Pixel> {
+        return image[xRange.map { CountableRange($0) } ?? self.xRange, yRange.map { CountableRange($0) } ?? self.yRange]
+    }
+    
+    public subscript(xRange: ClosedRange<Int>?, yRange: ClosedRange<Int>?) -> ImageSlice<Pixel> {
+        return image[xRange.map { CountableRange($0) } ?? self.xRange, yRange.map { CountableRange($0) } ?? self.yRange]
     }
 }
 
 extension ImageSlice { // safe get
-    public func pixel(x: Int, _ y: Int) -> Pixel? {
+    public func pixel(_ x: Int, _ y: Int) -> Pixel? {
         return image.pixel(x, y)
     }
 }
 
-extension ImageSlice: SequenceType {
-    public func generate() -> PixelGenerator<Pixel> {
+extension ImageSlice: Sequence {
+    public func makeIterator() -> PixelGenerator<Pixel> {
         return PixelGenerator(image: image, xRange: validRange(xRange, maxValue: image.width), yRange: validRange(yRange, maxValue: image.height))
     }
 }
 
-private func validRange(range: Range<Int>, maxValue: Int) -> Range<Int> {
-    return max(0, range.startIndex)..<min(maxValue, range.endIndex)
+private func validRange(_ range: CountableRange<Int>, maxValue: Int) -> CountableRange<Int> {
+    return max(0, range.lowerBound)..<min(maxValue, range.upperBound)
 }
 
-public struct PixelGenerator<Pixel>: GeneratorType {
+public struct PixelGenerator<Pixel>: IteratorProtocol {
     public typealias Element = Pixel
     
-    private let image: Image<Pixel>
+    fileprivate let image: Image<Pixel>
     
-    private let xRange: Range<Int>
-    private let yRange: Range<Int>
+    fileprivate let xRange: CountableRange<Int>
+    fileprivate let yRange: CountableRange<Int>
     
-    private var x: Int
-    private var y: Int
+    fileprivate var x: Int
+    fileprivate var y: Int
     
-    init(image: Image<Pixel>, xRange: Range<Int>, yRange: Range<Int>) {
+    init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
         self.image = image
         
         self.xRange = xRange
         self.yRange = yRange
         
-        self.x = xRange.startIndex
-        self.y = yRange.startIndex
+        self.x = xRange.lowerBound
+        self.y = yRange.lowerBound
     }
     
     public mutating func next() -> Pixel? {
-        if x == xRange.endIndex {
-            x = xRange.startIndex
+        if x == xRange.upperBound {
+            x = xRange.lowerBound
             y += 1
         }
         
-        guard y < yRange.endIndex else { return nil }
+        guard y < yRange.upperBound else { return nil }
         defer { x += 1 }
         
         return image[x, y]
