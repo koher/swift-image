@@ -2,9 +2,9 @@ import UIKit
 import EasyImagy
 
 class ViewController: UIViewController {
-	@IBOutlet fileprivate var imageView: UIImageView!
+	@IBOutlet private var imageView: UIImageView!
 
-	@IBAction fileprivate func onPressActionButton(_ sender: UIButton) {
+	@IBAction private func onPressActionButton(_ sender: UIButton) {
         let imageView: UIImageView! = self.imageView
 		
 		let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
