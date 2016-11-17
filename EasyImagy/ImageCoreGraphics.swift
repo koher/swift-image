@@ -132,7 +132,7 @@ extension Image where Pixel: UInt8Type { // Conversion
     public var cgImage: CGImage {
         let zelf = self as! Image<UInt8>
         
-        let provider: CGDataProvider = CGDataProvider(data: NSData(bytesNoCopy: UnsafeMutableRawPointer(mutating: zelf.pixels), length: count))!
+        let provider: CGDataProvider = CGDataProvider(data: Data(bytes: UnsafeMutableRawPointer(mutating: zelf.pixels), count: count) as CFData)!
         
         return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 8, bytesPerRow: width, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: CGColorRenderingIntent.defaultIntent)!
     }
