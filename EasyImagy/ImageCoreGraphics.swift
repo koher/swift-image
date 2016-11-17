@@ -100,6 +100,8 @@ extension Image where Pixel: RGBAType { // Conversion
         
         let length = count * 4
         let buffer = UnsafeMutablePointer<UInt8>.alloc(length)
+        defer { buffer.dealloc(length) }
+        
         var pointer = buffer
         for pixel in zelf.pixels {
             let alphaInt = Int(pixel.alpha)
