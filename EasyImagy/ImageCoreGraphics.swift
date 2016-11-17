@@ -97,10 +97,11 @@ extension Image where Pixel: FloatType { // Initializers
 extension Image where Pixel: RGBAType { // Conversion
     public var cgImage: CGImage {
         let zelf = self as! Image<RGBA>
-        
         let length = count * 4
-        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: length)
-        var pointer = buffer
+        
+        let data = NSMutableData(capacity: length)!
+
+        var pointer = UnsafeMutablePointer<UInt8>(OpaquePointer(data.mutableBytes))
         for pixel in zelf.pixels {
             let alphaInt = Int(pixel.alpha)
             pointer.pointee = UInt8(pixel.redInt * alphaInt / 255)
@@ -113,7 +114,7 @@ extension Image where Pixel: RGBAType { // Conversion
             pointer += 1
         }
         
-        let provider: CGDataProvider = CGDataProvider(data: Data(bytes: UnsafePointer<UInt8>(buffer), count: length) as CFData)!
+        let provider: CGDataProvider = CGDataProvider(data: data)!
         
         return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: CGColorRenderingIntent.defaultIntent)!
     }
