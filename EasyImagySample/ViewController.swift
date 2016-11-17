@@ -50,8 +50,8 @@ class ViewController: UIViewController {
 		})
 		
 		controller.addAction(UIAlertAction(title: "Grayscale", style: .default) { action in
-			imageView.image = Image<RGBA>(uiImage: imageView.image!)!.map { (pixel: RGBA) -> RGBA in
-				RGBA(gray: pixel.gray)
+			imageView.image = Image<RGBA>(uiImage: imageView.image!)!.map { (pixel: RGBA) -> UInt8 in
+				pixel.gray
 			}.uiImage
 			sender.isEnabled = true
 		})
