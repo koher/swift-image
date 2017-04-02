@@ -237,22 +237,13 @@ imageView.image = image.uiImage
 Installation
 ---------------------------
 
-### Carthage
+### Swift Package Manager
 
-[_Carthage_](https://github.com/Carthage/Carthage) is available to install _EasyImagy_. Add it to your `Cartfile`:
-
+```swift
+dependencies: [
+    .Package(url: "https://github.com/koher/EasyImagy.git", majorVersion: 0),
+]
 ```
-github "koher/EasyImagy" "master"
-```
-
-### Manually
-
-For iOS 8 or later,
-
-1. Put [EasyImagy.xcodeproj](EasyImagy.xcodeproj) into your project/workspace in Xcode.
-2. Click your project icon and select the application target and the "General" tab.
-3. Add `EasyImagy.framework` to "Embedded Binaries".
-4. `import EasyImagy` in your swift files.
 
 License
 ---------------------------

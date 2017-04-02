@@ -1,4 +1,5 @@
 import CoreGraphics
+import Foundation
 
 extension Image where Pixel: RGBAType { // Initializers
     public init(cgImage: CGImage) {
