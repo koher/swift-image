@@ -1,3 +1,5 @@
+import Foundation
+
 extension Image where Pixel: RGBAType { // map
     public func map(_ transform: (RGBA) -> RGBA) -> Image<RGBA> {
         let zelf = self as! Image<RGBA>

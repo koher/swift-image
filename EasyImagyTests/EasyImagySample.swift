@@ -1,5 +1,7 @@
 import XCTest
+#if os(iOS)
 import UIKit
+#endif
 import EasyImagy
     
 #if os(iOS)
