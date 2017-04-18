@@ -1,7 +1,7 @@
 import CoreGraphics
 import Foundation
 
-extension Image where Pixel: RGBAType { // Initializers
+extension Image where Pixel == RGBA { // Initializers
     public init(cgImage: CGImage) {
         let width = cgImage.width
         let height = cgImage.height
@@ -39,7 +39,7 @@ extension Image where Pixel: RGBAType { // Initializers
     }
 }
 
-extension Image where Pixel: UInt8Type { // Initializers
+extension Image where Pixel == UInt8 { // Initializers
     public init(cgImage: CGImage) {
         let width = cgImage.width
         let height = cgImage.height
@@ -67,7 +67,7 @@ extension Image where Pixel: UInt8Type { // Initializers
     }
 }
 
-extension Image where Pixel: FloatType { // Initializers
+extension Image where Pixel == Float { // Initializers
     public init(cgImage: CGImage) {
         let width = cgImage.width
         let height = cgImage.height
@@ -95,15 +95,14 @@ extension Image where Pixel: FloatType { // Initializers
     }
 }
 
-extension Image where Pixel: RGBAType { // Conversion
+extension Image where Pixel == RGBA { // Conversion
     public var cgImage: CGImage {
-        let zelf = self as! Image<RGBA>
         let length = count * 4
         
         let data = NSMutableData(capacity: length)!
 
         var pointer = UnsafeMutablePointer<UInt8>(OpaquePointer(data.mutableBytes))
-        for pixel in zelf.pixels {
+        for pixel in pixels {
             let alphaInt = Int(pixel.alpha)
             pointer.pointee = UInt8(pixel.redInt * alphaInt / 255)
             pointer += 1
@@ -130,11 +129,9 @@ extension Image where Pixel: RGBAType { // Conversion
 }
 
 
-extension Image where Pixel: UInt8Type { // Conversion
+extension Image where Pixel == UInt8 { // Conversion
     public var cgImage: CGImage {
-        let zelf = self as! Image<UInt8>
-        
-        let provider: CGDataProvider = CGDataProvider(data: Data(bytes: UnsafeMutableRawPointer(mutating: zelf.pixels), count: count) as CFData)!
+        let provider: CGDataProvider = CGDataProvider(data: Data(bytes: UnsafeMutableRawPointer(mutating: pixels), count: count) as CFData)!
         
         return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 8, bytesPerRow: width, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: CGColorRenderingIntent.defaultIntent)!
     }
@@ -148,11 +145,9 @@ extension Image where Pixel: UInt8Type { // Conversion
     }
 }
 
-extension Image where Pixel: FloatType { // Conversion
+extension Image where Pixel == Float { // Conversion
     public var cgImage: CGImage {
-        let zelf = self as! Image<Float>
-        
-        return (zelf.map { UInt8(Swift.min(Swift.max($0, 0.0), 1.0) * 255.0) }).cgImage
+        return (map { UInt8(Swift.min(Swift.max($0, 0.0), 1.0) * 255.0) }).cgImage
     }
     
     fileprivate static var colorSpace: CGColorSpace {
@@ -164,7 +159,7 @@ extension Image where Pixel: FloatType { // Conversion
     }
 }
 
-extension Image where Pixel: RGBAType { // Resizing
+extension Image where Pixel == RGBA { // Resizing
     public func resize(width: Int, height: Int) -> Image<Pixel> {
         return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
     }
@@ -177,7 +172,7 @@ extension Image where Pixel: RGBAType { // Resizing
     }
 }
 
-extension Image where Pixel: UInt8Type { // Resizing
+extension Image where Pixel == UInt8 { // Resizing
     public func resize(width: Int, height: Int) -> Image<Pixel> {
         return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
     }
@@ -190,7 +185,7 @@ extension Image where Pixel: UInt8Type { // Resizing
     }
 }
 
-extension Image where Pixel: FloatType { // Resizing
+extension Image where Pixel == Float { // Resizing
     public func resize(width: Int, height: Int) -> Image<Pixel> {
         return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
     }
