@@ -1,7 +1,7 @@
 #if os(OSX)
     import AppKit
     
-    extension Image where Pixel: RGBAType  { // AppKit
+    extension Image where Pixel == RGBA  { // AppKit
         public init?(nsImage: NSImage) {
             guard let cgImage: CGImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
             self.init(cgImage: cgImage)
@@ -36,7 +36,7 @@
         }
     }
 
-    extension Image where Pixel: UInt8Type  { // AppKit
+    extension Image where Pixel == UInt8  { // AppKit
         public init?(nsImage: NSImage) {
             guard let cgImage: CGImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) else { return nil }
             self.init(cgImage: cgImage)

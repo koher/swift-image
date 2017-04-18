@@ -13,7 +13,7 @@ class PracticalOperationPerformanceTests: XCTestCase {
         let image = getImage()
         
         measure {
-            image.map { (pixel: RGBA) -> RGBA in
+            _ = image.map { (pixel: RGBA) -> RGBA in
                 RGBA(gray: pixel.gray)
             }
         }

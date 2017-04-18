@@ -1,7 +1,7 @@
 #if os(iOS)
     import UIKit
     
-    extension Image where Pixel: RGBAType { // UIKit
+    extension Image where Pixel == RGBA { // UIKit
         public init?(uiImage: UIImage) {
             guard let cgImage: CGImage = uiImage.cgImage else { return nil }
             self.init(cgImage: cgImage)
@@ -33,7 +33,7 @@
         }
     }
     
-    extension Image where Pixel: UInt8Type {
+    extension Image where Pixel == UInt8 {
         public init?(uiImage: UIImage) {
             guard let cgImage: CGImage = uiImage.cgImage else { return nil }
             self.init(cgImage: cgImage)
@@ -65,7 +65,7 @@
         }
     }
     
-    extension Image where Pixel: FloatType {
+    extension Image where Pixel == Float {
         public var uiImage: UIImage {
             return UIImage(cgImage: cgImage)
         }

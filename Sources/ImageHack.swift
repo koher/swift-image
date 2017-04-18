@@ -1,317 +1,262 @@
 import Foundation
 
-extension Image where Pixel: RGBAType { // map
+extension Image where Pixel == RGBA { // map
     public func map(_ transform: (RGBA) -> RGBA) -> Image<RGBA> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 
     public func map(_ transform: (RGBA) -> UInt8) -> Image<UInt8> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 
     public func map(_ transform: (RGBA) -> Int) -> Image<Int> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 
     public func map(_ transform: (RGBA) -> Float) -> Image<Float> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 
     public func map(_ transform: (RGBA) -> Double) -> Image<Double> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: UInt8Type { // map
+extension Image where Pixel == UInt8 { // map
     public func map(_ transform: (UInt8) -> UInt8) -> Image<UInt8> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (UInt8) -> Int) -> Image<Int> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (UInt8) -> Float) -> Image<Float> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (UInt8) -> Double) -> Image<Double> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: IntType { // map
+extension Image where Pixel == Int { // map
     public func map(_ transform: (Int) -> Int) -> Image<Int> {
-        let zelf = self as! Image<Int>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (Int) -> Float) -> Image<Float> {
-        let zelf = self as! Image<Int>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (Int) -> Double) -> Image<Double> {
-        let zelf = self as! Image<Int>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: FloatType { // map
+extension Image where Pixel == Float { // map
     public func map(_ transform: (Float) -> Float) -> Image<Float> {
-        let zelf = self as! Image<Float>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (Float) -> Double) -> Image<Double> {
-        let zelf = self as! Image<Float>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: DoubleType { // map
+extension Image where Pixel == Double { // map
     public func map(_ transform: (Double) -> Double) -> Image<Double> {
-        let zelf = self as! Image<Double>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: RGBAType { // map with indices
+extension Image where Pixel == RGBA { // map with indices
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> RGBA) -> Image<RGBA> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> UInt8) -> Image<UInt8> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> Int) -> Image<Int> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> Float) -> Image<Float> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: RGBA) -> Double) -> Image<Double> {
-        let zelf = self as! Image<RGBA>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: UInt8Type { // map with indices
+extension Image where Pixel == UInt8 { // map with indices
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> UInt8) -> Image<UInt8> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> Int) -> Image<Int> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> Float) -> Image<Float> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: UInt8) -> Double) -> Image<Double> {
-        let zelf = self as! Image<UInt8>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: IntType { // map with indices
+extension Image where Pixel == Int { // map with indices
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Int) -> Int) -> Image<Int> {
-        let zelf = self as! Image<Int>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Int) -> Float) -> Image<Float> {
-        let zelf = self as! Image<Int>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Int) -> Double) -> Image<Double> {
-        let zelf = self as! Image<Int>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: FloatType { // map with indices
+extension Image where Pixel == Float { // map with indices
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Float) -> Float) -> Image<Float> {
-        let zelf = self as! Image<Float>
-        return zelf._map(transform)
+        return self._map(transform)
     }
     
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Float) -> Double) -> Image<Double> {
-        let zelf = self as! Image<Float>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: DoubleType { // map with indices
+extension Image where Pixel == Double { // map with indices
     public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: Double) -> Double) -> Image<Double> {
-        let zelf = self as! Image<Double>
-        return zelf._map(transform)
+        return self._map(transform)
     }
 }
 
-extension Image where Pixel: RGBAType { // Convolution
+extension Image where Pixel == RGBA { // Convolution
     public func convoluted(_ kernel: Image<Int>) -> Image<RGBA> {
-        let zelf = self as! Image<RGBA>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
     
     public func convoluted(_ kernel: Image<Float>) -> Image<RGBA> {
-        let zelf = self as! Image<RGBA>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
     
     public func convoluted(_ kernel: Image<Double>) -> Image<RGBA> {
-        let zelf = self as! Image<RGBA>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
-extension Image where Pixel: UInt8Type { // Convolution
+extension Image where Pixel == UInt8 { // Convolution
     public func convoluted(_ kernel: Image<Int>) -> Image<UInt8> {
-        let zelf = self as! Image<UInt8>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
     
     public func convoluted(_ kernel: Image<Float>) -> Image<UInt8> {
-        let zelf = self as! Image<UInt8>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 
     public func convoluted(_ kernel: Image<Double>) -> Image<UInt8> {
-        let zelf = self as! Image<UInt8>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
-extension Image where Pixel: IntType { // Convolution
+extension Image where Pixel == Int { // Convolution
     public func convoluted(_ kernel: Image<Int>) -> Image<Int> {
-        let zelf = self as! Image<Int>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
     
     public func convoluted(_ kernel: Image<Float>) -> Image<Int> {
-        let zelf = self as! Image<Int>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
     
     public func convoluted(_ kernel: Image<Double>) -> Image<Int> {
-        let zelf = self as! Image<Int>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
-extension Image where Pixel: FloatType { // Convolution
+extension Image where Pixel == Float { // Convolution
     public func convoluted(_ kernel: Image<Int>) -> Image<Float> {
-        let zelf = self as! Image<Float>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 
     public func convoluted(_ kernel: Image<Float>) -> Image<Float> {
-        let zelf = self as! Image<Float>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 
     public func convoluted(_ kernel: Image<Double>) -> Image<Float> {
-        let zelf = self as! Image<Float>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
-extension Image where Pixel: DoubleType { // Convolution
+extension Image where Pixel == Double { // Convolution
     public func convoluted(_ kernel: Image<Int>) -> Image<Double> {
-        let zelf = self as! Image<Double>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 
     public func convoluted(_ kernel: Image<Float>) -> Image<Double> {
-        let zelf = self as! Image<Double>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 
     public func convoluted(_ kernel: Image<Double>) -> Image<Double> {
-        let zelf = self as! Image<Double>
-        return zelf._convoluted(kernel, weightedSum: weightedSum)
+        return self._convoluted(kernel, weightedSum: weightedSum)
     }
 }
 
-extension Image where Pixel: RGBAType { // Interpolation, Transformation
+extension Image where Pixel == RGBA { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> RGBA {
-        let zelf = self as! Image<RGBA>
-        return zelf._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y)
     }
     
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA> {
-        let zelf = self as! Image<RGBA>
-        return zelf._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, transform: transform)
     }
 }
 
-extension Image where Pixel: UInt8Type { // Interpolation, Transformation
+extension Image where Pixel == UInt8 { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> UInt8 {
-        let zelf = self as! Image<UInt8>
-        return zelf._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y)
     }
     
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
-        let zelf = self as! Image<UInt8>
-        return zelf._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, transform: transform)
     }
 }
 
-extension Image where Pixel: IntType { // Interpolation, Transformation
+extension Image where Pixel == Int { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Int {
-        let zelf = self as! Image<Int>
-        return zelf._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y)
     }
     
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
-        let zelf = self as! Image<Int>
-        return zelf._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, transform: transform)
     }
 }
 
-extension Image where Pixel: FloatType { // Interpolation, Transformation
+extension Image where Pixel == Float { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Float {
-        let zelf = self as! Image<Float>
-        return zelf._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y)
     }
     
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
-        let zelf = self as! Image<Float>
-        return zelf._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, transform: transform)
     }
 }
 
-extension Image where Pixel: DoubleType { // Interpolation, Transformation
+extension Image where Pixel == Double { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Double {
-        let zelf = self as! Image<Double>
-        return zelf._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y)
     }
     
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
-        let zelf = self as! Image<Double>
-        return zelf._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, transform: transform)
     }
 }
 
