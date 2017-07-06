@@ -1,4 +1,4 @@
-#if os(iOS)
+#if os(iOS) || os(watchOS) || os(tvOS)
     import UIKit
     
     extension Image where Pixel == RGBA { // UIKit
@@ -16,9 +16,11 @@
             self.init(uiImageOrNil: UIImage(named: name))
         }
         
-        public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
-            self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
-        }
+        #if os(iOS) || os(tvOS)
+            public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+                self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
+            }
+        #endif
         
         public init?(contentsOfFile path: String) {
             self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -48,9 +50,11 @@
             self.init(uiImageOrNil: UIImage(named: name))
         }
         
-        public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
-            self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
-        }
+        #if os(iOS) || os(tvOS)
+            public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+                self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
+            }
+        #endif
         
         public init?(contentsOfFile path: String) {
             self.init(uiImageOrNil: UIImage(contentsOfFile: path))

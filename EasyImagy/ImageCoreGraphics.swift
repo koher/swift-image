@@ -1,4 +1,4 @@
-#if os(iOS) || os(OSX)
+#if os(iOS) || os(OSX) || os(watchOS) || os(tvOS)
     import CoreGraphics
     import Foundation
     
