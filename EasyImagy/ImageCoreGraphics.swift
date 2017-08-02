@@ -100,22 +100,22 @@
         public var cgImage: CGImage {
             let length = count * 4
             
-            let data = NSMutableData(capacity: length)!
-            
-            var pointer = UnsafeMutablePointer<UInt8>(OpaquePointer(data.mutableBytes))
-            for pixel in pixels {
-                let alphaInt = Int(pixel.alpha)
-                pointer.pointee = UInt8(pixel.redInt * alphaInt / 255)
-                pointer += 1
-                pointer.pointee = UInt8(pixel.greenInt * alphaInt / 255)
-                pointer += 1
-                pointer.pointee = UInt8(pixel.blueInt * alphaInt / 255)
-                pointer += 1
-                pointer.pointee = pixel.alpha
-                pointer += 1
+            var data = Data(capacity: length)
+            data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<UInt8>) -> Void in
+                var pointer = bytes
+                for pixel in pixels {
+                    let alphaInt = Int(pixel.alpha)
+                    pointer.pointee = UInt8(pixel.redInt * alphaInt / 255)
+                    pointer += 1
+                    pointer.pointee = UInt8(pixel.greenInt * alphaInt / 255)
+                    pointer += 1
+                    pointer.pointee = UInt8(pixel.blueInt * alphaInt / 255)
+                    pointer += 1
+                    pointer.pointee = pixel.alpha
+                    pointer += 1
+                }
             }
-            
-            let provider: CGDataProvider = CGDataProvider(data: data)!
+            let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
             
             return CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32, bytesPerRow: width * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo, provider: provider, decode: nil, shouldInterpolate: false, intent: CGColorRenderingIntent.defaultIntent)!
         }
