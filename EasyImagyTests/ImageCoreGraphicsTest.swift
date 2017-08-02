@@ -5,9 +5,31 @@ import EasyImagy
     import CoreGraphics
 
     class ImageCoreGraphicsTests: XCTestCase {
+        func testCgImage() {
+            do {
+                let image = Image<RGBA>(width: 2, height: 2, pixels: [
+                    RGBA(red: 0, green: 1, blue: 2, alpha: 255),
+                    RGBA(red: 253, green: 254, blue: 255, alpha: 255),
+                    RGBA(red: 10, green: 20, blue: 30, alpha: 102),
+                    RGBA(red: 10, green: 20, blue: 30, alpha: 51),
+                    ])
+                let cgImage = image.cgImage
+                XCTAssertEqual(cgImage.width, image.width)
+                XCTAssertEqual(cgImage.height, image.height)
+                
+                let restored = Image<RGBA>(cgImage: cgImage)
+                XCTAssertEqual(restored.width, image.width)
+                XCTAssertEqual(restored.height, image.height)
+                XCTAssertEqual(restored[0, 0], image[0, 0])
+                XCTAssertEqual(restored[1, 0], image[1, 0])
+                XCTAssertEqual(restored[0, 1], image[0, 1])
+                XCTAssertEqual(restored[1, 1], image[1, 1])
+            }
+        }
+        
         func testResize() {
             do {
-                let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
+                let image = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageCoreGraphicsTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
                 
                 XCTAssertEqual(4, image.width)
                 XCTAssertEqual(4, image.height)
