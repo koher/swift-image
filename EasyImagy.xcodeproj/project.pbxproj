@@ -90,6 +90,7 @@
 		D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */; };
 		D6F6A57E1F31C0CF00668D27 /* ImageCoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */; };
 		D6F6A57F1F31C0D000668D27 /* ImageCoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */; };
+		D6F6A5821F31C82800668D27 /* ImageAppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +175,7 @@
 		D6C2EE1F1B03211C00E2B876 /* Image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image.jpg; sourceTree = "<group>"; };
 		D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopPerformanceTests.swift; sourceTree = "<group>"; };
 		D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCoreGraphicsTest.swift; sourceTree = "<group>"; };
+		D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAppKitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +258,7 @@
 				D69C340D1C8EB81D007985D4 /* EasyImagySample.swift */,
 				D65EA6821B01B71F00F8E95F /* ImageTests.swift */,
 				D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */,
+				D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */,
 				D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */,
 				D6B54D831B090EFA00E4709D /* RGBATests.swift */,
 				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
@@ -693,6 +696,7 @@
 				D69C33CB1C8D3EB7007985D4 /* LoopPerformanceTests.swift in Sources */,
 				D65C4CF11CABE878008BC376 /* ConvolutionPerformanceTests.swift in Sources */,
 				D69C33C61C8D3EB7007985D4 /* MapPerformanceTest.swift in Sources */,
+				D6F6A5821F31C82800668D27 /* ImageAppKitTests.swift in Sources */,
 				D69C33C41C8D3EB7007985D4 /* RGBATests.swift in Sources */,
 				D69C33C31C8D3EB7007985D4 /* ImageSliceTests.swift in Sources */,
 				D69C33CD1C8D3EB7007985D4 /* MeanPerformanceTests.swift in Sources */,
