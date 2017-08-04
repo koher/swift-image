@@ -9,22 +9,27 @@ public typealias UnboundedRange = (Int, Int) -> CountableClosedRange<Int>
 
 extension ${range_type_1} where Bound: Strideable, Bound.Stride: SignedInteger {
     %     first = True
-    %     for range_type_2 in [r for r in range_types if 'Countable' in r]:
+    %     for range_type_2 in [r for r in range_types if 'Countable' in r or (range_type_1 == 'ClosedRange' and r == 'Range')]:
     %         closed_2 = 'Closed' in range_type_2
     %         if first:
     %             first = False
     %         else:
 
     %         end
-    %         if closed_1:
-    %             le = True
-    %         elif closed_2:
-    %             le = False
-    %         else:
-    %             le = True
-    %         end
     internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if le else '<'} upperBound
+        %     if closed_1:
+        %         if closed_2:
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+        %         else:
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound.advanced(by: 1)
+        %         end
+        %     else:
+        %         if closed_2:
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+        %         else:
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+        %         end
+        %     end
     }
     %     end
 }
@@ -39,15 +44,20 @@ extension ${range_type_1} {
     %     else:
 
     %     end
-    %     if closed_1:
-    %         le = True
-    %     elif closed_2:
-    %         le = False
-    %     else:
-    %         le = True
-    %     end
     internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if le else '<'} upperBound
+        % if closed_1:
+        %     if closed_2 or not countable_1:
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+        %     else:
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound.advanced(by: 1)
+        %     end
+        % else:
+        %     if closed_2:
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+        %     else:
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+        %     end
+        % end
     }
     % end
 }
