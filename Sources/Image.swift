@@ -4,15 +4,15 @@ public struct Image<Pixel> {
 	public fileprivate(set) var pixels: [Pixel]
 	
 	public init(width: Int, height: Int, pixels: [Pixel]) {
-		assert(width >= 0, "`width` must be greater than or equal to 0: \(width)")
-		assert(height >= 0, "`height` must be greater than or equal to 0: \(height)")
+		precondition(width >= 0, "`width` must be greater than or equal to 0: \(width)")
+		precondition(height >= 0, "`height` must be greater than or equal to 0: \(height)")
 		
 		self.width = width
 		self.height = height
 		
 		let count = width * height
 
-		assert(pixels.count >= count, "`pixels` must have more elements than `width` * `height`: \(count) < \(width) * \(height)")
+		precondition(pixels.count >= count, "`pixels` must have more elements than `width` * `height`: \(count) < \(width) * \(height)")
 		
 		if pixels.count == count {
 			self.pixels = pixels
@@ -50,6 +50,8 @@ extension Image { // Subscripts (Index)
 	}
 	
 	fileprivate func _pixelIndex(x: Int, y: Int) -> Int {
+		precondition(isValidX(x), "`x` is out of bounds: \(x)")
+		precondition(isValidY(y), "`y` is out of bounds: \(y)")
 		return y * width + x
 	}
 	
@@ -169,8 +171,8 @@ extension Image { // Higher-order methods
 
 extension Image { // Convolutions
 	internal func _convoluted<W, T>(_ kernel: Image<W>, weightedSum: ([(weight: W, value: Pixel)]) -> T) -> Image<T> {
-		assert(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
-		assert(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
+		precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
+		precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
 		
 		let hw = kernel.width / 2  // halfWidth
 		let hh = kernel.height / 2 // halfHeight

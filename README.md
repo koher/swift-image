@@ -170,7 +170,7 @@ let cropped = Image<RGBA>(slice) // copy is done here
 #### Grayscale
 
 ```swift
-let result: Image<UInt8> = image.map { (pixel: Pixel) -> Pixel in
+let result: Image<UInt8> = image.map { (pixel: RGBA) -> UInt8 in
     pixel.gray
 }
 ```
@@ -183,8 +183,8 @@ let result = image.map { $0.gray }
 #### Binarization
 
 ```swift
-let result = image.map { (pixel: Pixel) -> Pixel in
-    pixel.gray < 128 ? Pixel.black : Pixel.white
+let result = image.map { (pixel: RGBA) -> RGBA in
+    pixel.gray < 128 ? RGBA.black : RGBA.white
 }
 ```
 
