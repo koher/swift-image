@@ -2,6 +2,42 @@
 % range_types = ['CountableRange', 'CountableClosedRange', 'Range', 'ClosedRange']
 // Workaround until Swift 4
 public typealias UnboundedRange = (Int, Int) -> CountableClosedRange<Int>
+% for range_type_1 in range_types:
+%     closed_1 = 'Closed' in range_type_1
+%     countable_1 = 'Countable' in range_type_1
+%     if not countable_1:
+
+extension ${range_type_1} where Bound: Strideable, Bound.Stride: SignedInteger {
+    %     first = True
+    %     for range_type_2 in [r for r in range_types if 'Countable' in r]:
+    %         closed_2 = 'Closed' in range_type_2
+    %         if first:
+    %             first = False
+    %         else:
+
+    %         end
+    internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if closed_1 == closed_2 else '<'} upperBound
+    }
+    %     end
+}
+%     end
+
+extension ${range_type_1} {
+    % first = True
+    % for range_type_2 in range_types if countable_1 else [r for r in range_types if 'Countable' not in r]:
+    %     closed_2 = 'Closed' in range_type_2
+    %     if first:
+    %         first = False
+    %     else:
+
+    %     end
+    internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if closed_1 == closed_2 else '<'} upperBound
+    }
+    % end
+}
+% end
 % for image_type in image_types:
 
 extension ${image_type} {

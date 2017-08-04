@@ -1,6 +1,82 @@
 // Workaround until Swift 4
 public typealias UnboundedRange = (Int, Int) -> CountableClosedRange<Int>
 
+extension CountableRange {
+    internal func contains(_ range: CountableRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+
+    internal func contains(_ range: CountableClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+
+    internal func contains(_ range: Range<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+
+    internal func contains(_ range: ClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+}
+
+extension CountableClosedRange {
+    internal func contains(_ range: CountableRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+
+    internal func contains(_ range: CountableClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+
+    internal func contains(_ range: Range<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+
+    internal func contains(_ range: ClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+}
+
+extension Range where Bound: Strideable, Bound.Stride: SignedInteger {
+    internal func contains(_ range: CountableRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+
+    internal func contains(_ range: CountableClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+}
+
+extension Range {
+    internal func contains(_ range: Range<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+
+    internal func contains(_ range: ClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+}
+
+extension ClosedRange where Bound: Strideable, Bound.Stride: SignedInteger {
+    internal func contains(_ range: CountableRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+
+    internal func contains(_ range: CountableClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+}
+
+extension ClosedRange {
+    internal func contains(_ range: Range<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+    }
+
+    internal func contains(_ range: ClosedRange<Bound>) -> Bool {
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
+    }
+}
+
 extension Image {
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
         return ImageSlice(image: self, xRange: xRange, yRange: yRange)
