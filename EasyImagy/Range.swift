@@ -21,7 +21,7 @@ extension CountableRange {
 
 extension CountableClosedRange {
     internal func contains(_ range: CountableRange<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
     }
 
     internal func contains(_ range: CountableClosedRange<Bound>) -> Bool {
@@ -29,7 +29,7 @@ extension CountableClosedRange {
     }
 
     internal func contains(_ range: Range<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
     }
 
     internal func contains(_ range: ClosedRange<Bound>) -> Bool {
@@ -59,7 +59,7 @@ extension Range {
 
 extension ClosedRange where Bound: Strideable, Bound.Stride: SignedInteger {
     internal func contains(_ range: CountableRange<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
     }
 
     internal func contains(_ range: CountableClosedRange<Bound>) -> Bool {
@@ -69,7 +69,7 @@ extension ClosedRange where Bound: Strideable, Bound.Stride: SignedInteger {
 
 extension ClosedRange {
     internal func contains(_ range: Range<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound < upperBound
+        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
     }
 
     internal func contains(_ range: ClosedRange<Bound>) -> Bool {

@@ -16,8 +16,15 @@ extension ${range_type_1} where Bound: Strideable, Bound.Stride: SignedInteger {
     %         else:
 
     %         end
+    %         if closed_1:
+    %             le = True
+    %         elif closed_2:
+    %             le = False
+    %         else:
+    %             le = True
+    %         end
     internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if closed_1 == closed_2 else '<'} upperBound
+        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if le else '<'} upperBound
     }
     %     end
 }
@@ -32,8 +39,15 @@ extension ${range_type_1} {
     %     else:
 
     %     end
+    %     if closed_1:
+    %         le = True
+    %     elif closed_2:
+    %         le = False
+    %     else:
+    %         le = True
+    %     end
     internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
-        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if closed_1 == closed_2 else '<'} upperBound
+        return lowerBound <= range.lowerBound && range.upperBound ${'<=' if le else '<'} upperBound
     }
     % end
 }
