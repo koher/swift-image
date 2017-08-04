@@ -100,7 +100,7 @@
         public var cgImage: CGImage {
             let length = count * 4
             
-            var data = Data(capacity: length)
+            var data = Data(count: length)
             data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<UInt8>) -> Void in
                 var pointer = bytes
                 for pixel in pixels {
