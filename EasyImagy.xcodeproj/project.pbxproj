@@ -88,6 +88,9 @@
 		D6C2EE1B1B031A5B00E2B876 /* EasyImagy.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D65FF0711AFB66C7006CC985 /* EasyImagy.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D6C2EE201B03211C00E2B876 /* Image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D6C2EE1F1B03211C00E2B876 /* Image.jpg */; };
 		D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */; };
+		D6F6A57E1F31C0CF00668D27 /* ImageCoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */; };
+		D6F6A57F1F31C0D000668D27 /* ImageCoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */; };
+		D6F6A5821F31C82800668D27 /* ImageAppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +174,8 @@
 		D6C2EE061B031A0900E2B876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D6C2EE1F1B03211C00E2B876 /* Image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image.jpg; sourceTree = "<group>"; };
 		D6D85AA21B045BD300B966DB /* LoopPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoopPerformanceTests.swift; sourceTree = "<group>"; };
+		D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCoreGraphicsTest.swift; sourceTree = "<group>"; };
+		D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAppKitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +257,8 @@
 			children = (
 				D69C340D1C8EB81D007985D4 /* EasyImagySample.swift */,
 				D65EA6821B01B71F00F8E95F /* ImageTests.swift */,
+				D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */,
+				D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */,
 				D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */,
 				D6B54D831B090EFA00E4709D /* RGBATests.swift */,
 				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
@@ -647,6 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D65C4CF01CABE878008BC376 /* ConvolutionPerformanceTests.swift in Sources */,
+				D6F6A57E1F31C0CF00668D27 /* ImageCoreGraphicsTest.swift in Sources */,
 				D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */,
 				D607D3EE1C7C3F7100D2B0A4 /* GenericsPerformanceTest.swift in Sources */,
 				D6B54D841B090EFA00E4709D /* RGBATests.swift in Sources */,
@@ -682,11 +690,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6F6A57F1F31C0D000668D27 /* ImageCoreGraphicsTest.swift in Sources */,
 				D69C33C91C8D3EB7007985D4 /* PracticalOperationPerformanceTests.swift in Sources */,
 				D69C33CC1C8D3EB7007985D4 /* GenericsPerformanceTest.swift in Sources */,
 				D69C33CB1C8D3EB7007985D4 /* LoopPerformanceTests.swift in Sources */,
 				D65C4CF11CABE878008BC376 /* ConvolutionPerformanceTests.swift in Sources */,
 				D69C33C61C8D3EB7007985D4 /* MapPerformanceTest.swift in Sources */,
+				D6F6A5821F31C82800668D27 /* ImageAppKitTests.swift in Sources */,
 				D69C33C41C8D3EB7007985D4 /* RGBATests.swift in Sources */,
 				D69C33C31C8D3EB7007985D4 /* ImageSliceTests.swift in Sources */,
 				D69C33CD1C8D3EB7007985D4 /* MeanPerformanceTests.swift in Sources */,
