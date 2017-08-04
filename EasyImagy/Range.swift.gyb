@@ -1,0 +1,54 @@
+// Workaround until Swift 4
+public typealias UnboundedRange = (Int, Int) -> CountableClosedRange<Int>
+
+% types = ['CountableRange', 'CountableClosedRange', 'Range', 'ClosedRange']
+extension Image {
+    % first = True
+    % for type1 in types:
+    %     for type2 in types:
+    %         if first:
+    %             first = False
+    %         else:
+
+    %         end
+    public subscript(xRange: ${type1}<Int>, yRange: ${type2}<Int>) -> ImageSlice<Pixel> {
+        % if type1 == 'CountableRange' and type2 == 'CountableRange':
+        return ImageSlice(image: self, xRange: xRange, yRange: yRange)
+        % else:
+        return self[CountableRange(xRange), CountableRange(yRange)]
+        % end
+    }
+    %     end
+    % end
+}
+
+extension Image {
+    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> {
+        return self[0..<width, 0..<height]
+    }
+
+    % first = True
+    % for type in types:
+    %     if first:
+    %         first = False
+    %     else:
+
+    %     end
+    public subscript(xRange: UnboundedRange, yRange: ${type}<Int>) -> ImageSlice<Pixel> {
+        return self[0..<width, yRange]
+    }
+    % end
+
+    % first = True
+    % for type in types:
+    %     if first:
+    %         first = False
+    %     else:
+
+    %     end
+    public subscript(xRange: ${type}<Int>, yRange: UnboundedRange) -> ImageSlice<Pixel> {
+        return self[xRange, 0..<height]
+    }
+    % end
+}
+
