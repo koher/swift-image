@@ -28,7 +28,6 @@ class RangeTests: XCTestCase {
 
             %     for range_type_2 in range_types if bound_type == 'Int' else [r for r in range_types if 'Countable' not in r]:
             %         closed_2 = 'Closed' in range_type_2
-
             do {
                 let b: ${range_type_2}<${bound_type}> = ${lower}${'...' if closed_2 else '..<'}${upper}
                 %     if lower < 2:
