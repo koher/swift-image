@@ -1,0 +1,48 @@
+% range_types = ['CountableRange', 'CountableClosedRange', 'Range', 'ClosedRange']
+import XCTest
+@testable import EasyImagy
+
+class RangeTests: XCTestCase {
+    % first = True
+    % for range_type_1 in range_types:
+    %     closed_1 = 'Closed' in range_type_1
+    %     if first:
+    %         first = False
+    %     else:
+
+    %     end
+    func test${range_type_1}Contains() {
+        let a: ${range_type_1}<Int> = 2${'...' if closed_1 else '..<'}7
+        % for lower, upper in [(3, 5), (2, 5), (3, 7), (2, 7), (1, 5), (3, 8), (3, 9)]:
+        %     for range_type_2 in range_types:
+        %         closed_2 = 'Closed' in range_type_2
+
+        do { // ${range_type_2}
+            let b: ${range_type_2}<Int> = ${lower}${'...' if closed_2 else '..<'}${upper}
+            %     if lower < 2:
+            XCTAssertFalse(a.contains(b))
+            %     elif upper < 7:
+            XCTAssertTrue(a.contains(b))
+            %     elif upper == 7:
+            %         if closed_1:
+            XCTAssertTrue(a.contains(b))
+            %         elif closed_2:
+            XCTAssertFalse(a.contains(b))
+            %         else:
+            XCTAssertTrue(a.contains(b))
+            %         end
+            %     elif upper == 8:
+            %         if closed_1 and not closed_2:
+            XCTAssertTrue(a.contains(b))
+            %         else:
+            XCTAssertFalse(a.contains(b))
+            %         end
+            %     elif upper >= 9:
+            XCTAssertFalse(a.contains(b))
+            %     end
+        }
+        %     end
+        % end
+    }
+    % end
+}
