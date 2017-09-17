@@ -1,144 +1,52 @@
-% image_types = ['Image', 'ImageSlice']
 % range_types = ['CountableRange', 'CountableClosedRange', 'Range', 'ClosedRange']
-// Workaround until Swift 4
-public typealias UnboundedRange = (Int, Int) -> CountableClosedRange<Int>
+% conditions = [' where Bound: _Strideable, Bound.Stride: SignedInteger', '']
+%
+% first_1 = True
 % for range_type_1 in range_types:
-%     closed_1 = 'Closed' in range_type_1
-%     countable_1 = 'Countable' in range_type_1
-%     if not countable_1:
+%   countable_1 = 'Countable' in range_type_1
+%   closed_1 = 'Closed' in range_type_1
+%   for condition in conditions:
+%     if condition == '' or not countable_1:
+%       if first_1:
+%         first_1 = False
+%       else:
 
-extension ${range_type_1} where Bound: Strideable, Bound.Stride: SignedInteger {
-    %     first = True
-    %     for range_type_2 in [r for r in range_types if 'Countable' in r or (range_type_1 == 'ClosedRange' and r == 'Range')]:
-    %         closed_2 = 'Closed' in range_type_2
-    %         if first:
-    %             first = False
-    %         else:
+%       end
+extension ${range_type_1}${condition} {
+%       first_2 = True
+%       for range_type_2 in range_types:
+%         countable_2 = 'Countable' in range_type_2
+%         closed_2 = 'Closed' in range_type_2
+%         if condition == '':
+%           outputs = countable_1 or not countable_2
+%         else:
+%           outputs = countable_2 or (closed_1 and not closed_2)
+%         end
+%         if outputs:
+%           if first_2:
+%             first_2 = False
+%           else:
 
-    %         end
-    internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
-        %     if closed_1:
-        %         if closed_2:
-        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
-        %         else:
-        return lowerBound <= range.lowerBound && range.upperBound <= upperBound.advanced(by: 1)
-        %         end
-        %     else:
-        %         if closed_2:
-        return lowerBound <= range.lowerBound && range.upperBound < upperBound
-        %         else:
-        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
-        %         end
-        %     end
+%           end
+    internal func isSuperset(of other: ${range_type_2}<Bound>) -> Bool {
+%           if closed_1 and (countable_1 or not closed_1 or closed_2 or condition != ''):
+%             if closed_2:
+        return lowerBound <= other.lowerBound && other.upperBound <= upperBound
+%             else:
+        return lowerBound <= other.lowerBound && other.upperBound <= upperBound.advanced(by: 1) || other.isEmpty
+%             end
+%           else:
+%             if closed_2:
+        return lowerBound <= other.lowerBound && other.upperBound < upperBound
+%             else:
+        return lowerBound <= other.lowerBound && other.upperBound <= upperBound || other.isEmpty
+%             end
+%           end
     }
-    %     end
+%         end
+%       end
 }
 %     end
-
-extension ${range_type_1} {
-    % first = True
-    % for range_type_2 in range_types if countable_1 else [r for r in range_types if 'Countable' not in r]:
-    %     closed_2 = 'Closed' in range_type_2
-    %     if first:
-    %         first = False
-    %     else:
-
-    %     end
-    internal func contains(_ range: ${range_type_2}<Bound>) -> Bool {
-        % if closed_1:
-        %     if closed_2 or not countable_1:
-        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
-        %     else:
-        return lowerBound <= range.lowerBound && range.upperBound <= upperBound.advanced(by: 1)
-        %     end
-        % else:
-        %     if closed_2:
-        return lowerBound <= range.lowerBound && range.upperBound < upperBound
-        %     else:
-        return lowerBound <= range.lowerBound && range.upperBound <= upperBound
-        %     end
-        % end
-    }
-    % end
-}
+%   end
 % end
-% for image_type in image_types:
 
-extension ${image_type} {
-    % first = True
-    % for range_type_1 in range_types:
-    %     for range_type_2 in range_types:
-    %         if first:
-    %             first = False
-    %         else:
-
-    %         end
-    public subscript(xRange: ${range_type_1}<Int>, yRange: ${range_type_2}<Int>) -> ImageSlice<Pixel> {
-        % if image_type == 'Image':
-        %     if range_type_1 == 'CountableRange' and range_type_2 == 'CountableRange':
-        return ImageSlice(image: self, xRange: xRange, yRange: yRange)
-        %     else:
-        return self[CountableRange(xRange), CountableRange(yRange)]
-        %     end
-        % elif image_type == 'ImageSlice':
-        precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)")
-        return image[xRange, yRange]
-        % else:
-        %     raise(Exception('Never reaches here.'))
-        % end
-    }
-    %     end
-    % end
-}
-
-extension ${image_type} {
-    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> {
-        % if image_type == 'Image':
-        return self[0..<width, 0..<height]
-        % elif image_type == 'ImageSlice':
-        return image[self.xRange, self.yRange]
-        % else:
-        %     raise(Exception('Never reaches here.'))
-        % end
-    }
-
-    % first = True
-    % for range_type in range_types:
-    %     if first:
-    %         first = False
-    %     else:
-
-    %     end
-    public subscript(xRange: UnboundedRange, yRange: ${range_type}<Int>) -> ImageSlice<Pixel> {
-        % if image_type == 'Image':
-        return self[0..<width, yRange]
-        % elif image_type == 'ImageSlice':
-        precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)")
-        return image[self.xRange, yRange]
-        % else:
-        %     raise(Exception('Never reaches here.'))
-        % end
-    }
-    % end
-
-    % first = True
-    % for range_type in range_types:
-    %     if first:
-    %         first = False
-    %     else:
-
-    %     end
-    public subscript(xRange: ${range_type}<Int>, yRange: UnboundedRange) -> ImageSlice<Pixel> {
-        % if image_type == 'Image':
-        return self[xRange, 0..<height]
-        % elif image_type == 'ImageSlice':
-        precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        return image[xRange, self.yRange]
-        % else:
-        %     raise(Exception('Never reaches here.'))
-        % end
-    }
-    % end
-}
-% end

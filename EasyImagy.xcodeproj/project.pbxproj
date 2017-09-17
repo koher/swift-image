@@ -19,6 +19,10 @@
 		D63B8BC61C7ED57200E09688 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC51C7ED57200E09688 /* ImageTyped.swift */; };
 		D63B8BC81C7F044000E09688 /* ImageSlicePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */; };
 		D63B8BCC1C7FF11800E09688 /* MeanPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */; };
+		D64E98C01F6E3B74008EF959 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64E98BF1F6E3B74008EF959 /* RangedSubscript.swift */; };
+		D64E98C21F6E41FA008EF959 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64E98C11F6E41AD008EF959 /* RangedSubscript.swift */; };
+		D64E98C31F6E41FB008EF959 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64E98C11F6E41AD008EF959 /* RangedSubscript.swift */; };
+		D64E98C41F6E41FC008EF959 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64E98C11F6E41AD008EF959 /* RangedSubscript.swift */; };
 		D65C4CF01CABE878008BC376 /* ConvolutionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C4CEE1CABE7B0008BC376 /* ConvolutionPerformanceTests.swift */; };
 		D65C4CF11CABE878008BC376 /* ConvolutionPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65C4CEE1CABE7B0008BC376 /* ConvolutionPerformanceTests.swift */; };
 		D65EA67F1B01B71500F8E95F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65EA67C1B01B71500F8E95F /* Image.swift */; };
@@ -95,8 +99,6 @@
 		D6F6A5AB1F3417B300668D27 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5A91F340E8700668D27 /* Range.swift */; };
 		D6F6A5AC1F3417B400668D27 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5A91F340E8700668D27 /* Range.swift */; };
 		D6F6A5AD1F3417B500668D27 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5A91F340E8700668D27 /* Range.swift */; };
-		D6F6A5B01F3445C400668D27 /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5AE1F343EF000668D27 /* RangeTests.swift */; };
-		D6F6A5B11F3445C500668D27 /* RangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F6A5AE1F343EF000668D27 /* RangeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,8 @@
 		D63B8BC51C7ED57200E09688 /* ImageTyped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTyped.swift; sourceTree = "<group>"; };
 		D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlicePerformanceTests.swift; sourceTree = "<group>"; };
 		D63B8BCB1C7FF11800E09688 /* MeanPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeanPerformanceTests.swift; sourceTree = "<group>"; };
+		D64E98BF1F6E3B74008EF959 /* RangedSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedSubscript.swift; sourceTree = "<group>"; };
+		D64E98C11F6E41AD008EF959 /* RangedSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedSubscript.swift; sourceTree = "<group>"; };
 		D65C4CEE1CABE7B0008BC376 /* ConvolutionPerformanceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvolutionPerformanceTests.swift; sourceTree = "<group>"; };
 		D65EA67B1B01B71500F8E95F /* EasyImagy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
 		D65EA67C1B01B71500F8E95F /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; usesTabs = 1; };
@@ -183,7 +187,6 @@
 		D6F6A57C1F31C04300668D27 /* ImageCoreGraphicsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCoreGraphicsTest.swift; sourceTree = "<group>"; };
 		D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAppKitTests.swift; sourceTree = "<group>"; };
 		D6F6A5A91F340E8700668D27 /* Range.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
-		D6F6A5AE1F343EF000668D27 /* RangeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,10 +256,12 @@
 				D607D3EF1C7C471C00D2B0A4 /* ImageSlice.swift */,
 				D65EA68E1B01C7E600F8E95F /* RGBA.swift */,
 				D6F6A5A91F340E8700668D27 /* Range.swift */,
+				D64E98C11F6E41AD008EF959 /* RangedSubscript.swift */,
 				D607D3FB1C7C5EBF00D2B0A4 /* Util.swift */,
 				D6118EF41C92D4FF0029F45F /* Protocols.swift */,
 				D63B8BC51C7ED57200E09688 /* ImageTyped.swift */,
 				D65EA68D1B01BE0D00F8E95F /* Supporting Files */,
+				D64E98BF1F6E3B74008EF959 /* RangedSubscript.swift */,
 			);
 			path = EasyImagy;
 			sourceTree = "<group>";
@@ -270,7 +275,6 @@
 				D6F6A5801F31C82100668D27 /* ImageAppKitTests.swift */,
 				D607D3FF1C7D48A800D2B0A4 /* ImageSliceTests.swift */,
 				D6B54D831B090EFA00E4709D /* RGBATests.swift */,
-				D6F6A5AE1F343EF000668D27 /* RangeTests.swift */,
 				D607D4011C7D54BB00D2B0A4 /* UtilTests.swift */,
 				D607D4031C7D640B00D2B0A4 /* MapPerformanceTest.swift */,
 				D63B8BC71C7F044000E09688 /* ImageSlicePerformanceTests.swift */,
@@ -653,6 +657,7 @@
 				D6118EF51C92D5000029F45F /* Protocols.swift in Sources */,
 				D607D3FC1C7C5EBF00D2B0A4 /* Util.swift in Sources */,
 				D69C33D51C8D627A007985D4 /* ImageAppKit.swift in Sources */,
+				D64E98C01F6E3B74008EF959 /* RangedSubscript.swift in Sources */,
 				D63B8BC61C7ED57200E09688 /* ImageTyped.swift in Sources */,
 				D65EA67F1B01B71500F8E95F /* Image.swift in Sources */,
 				D69C33D91C8D66DD007985D4 /* ImageCoreGraphics.swift in Sources */,
@@ -673,7 +678,6 @@
 				D6D85AA31B045BD300B966DB /* LoopPerformanceTests.swift in Sources */,
 				D607D4001C7D48A900D2B0A4 /* ImageSliceTests.swift in Sources */,
 				D607D4061C7D6BA000D2B0A4 /* PracticalOperationPerformanceTests.swift in Sources */,
-				D6F6A5B01F3445C400668D27 /* RangeTests.swift in Sources */,
 				D69C340F1C8EB942007985D4 /* EasyImagySample.swift in Sources */,
 				D607D4041C7D640B00D2B0A4 /* MapPerformanceTest.swift in Sources */,
 				D65EA6871B01B71F00F8E95F /* ImageTests.swift in Sources */,
@@ -692,6 +696,7 @@
 				D6118EF61C92D5160029F45F /* Protocols.swift in Sources */,
 				D69C33BD1C8D3EB1007985D4 /* Image.swift in Sources */,
 				D69C33C11C8D3EB1007985D4 /* ImageTyped.swift in Sources */,
+				D64E98C41F6E41FC008EF959 /* RangedSubscript.swift in Sources */,
 				D69C33BF1C8D3EB1007985D4 /* RGBA.swift in Sources */,
 				D69C33C01C8D3EB1007985D4 /* Util.swift in Sources */,
 				D69C33DA1C8D66E4007985D4 /* ImageCoreGraphics.swift in Sources */,
@@ -712,7 +717,6 @@
 				D6F6A5821F31C82800668D27 /* ImageAppKitTests.swift in Sources */,
 				D69C33C41C8D3EB7007985D4 /* RGBATests.swift in Sources */,
 				D69C33C31C8D3EB7007985D4 /* ImageSliceTests.swift in Sources */,
-				D6F6A5B11F3445C500668D27 /* RangeTests.swift in Sources */,
 				D69C33CD1C8D3EB7007985D4 /* MeanPerformanceTests.swift in Sources */,
 				D69C33C51C8D3EB7007985D4 /* UtilTests.swift in Sources */,
 				D69C33C81C8D3EB7007985D4 /* ImageSlicePerformanceTests.swift in Sources */,
@@ -731,6 +735,7 @@
 				D6A7A8361F0DCDED00E4615A /* ImageAppKit.swift in Sources */,
 				D6A7A8341F0DCDED00E4615A /* Image.swift in Sources */,
 				D6A7A83A1F0DCDED00E4615A /* Util.swift in Sources */,
+				D64E98C31F6E41FB008EF959 /* RangedSubscript.swift in Sources */,
 				D6A7A8351F0DCDED00E4615A /* ImageCoreGraphics.swift in Sources */,
 				D6A7A8391F0DCDED00E4615A /* RGBA.swift in Sources */,
 				D6A7A83B1F0DCDED00E4615A /* Protocols.swift in Sources */,
@@ -748,6 +753,7 @@
 				D6A7A84D1F0DD3DD00E4615A /* ImageAppKit.swift in Sources */,
 				D6A7A84B1F0DD3DD00E4615A /* Image.swift in Sources */,
 				D6A7A8511F0DD3DD00E4615A /* Util.swift in Sources */,
+				D64E98C21F6E41FA008EF959 /* RangedSubscript.swift in Sources */,
 				D6A7A84C1F0DD3DD00E4615A /* ImageCoreGraphics.swift in Sources */,
 				D6A7A8501F0DD3DD00E4615A /* RGBA.swift in Sources */,
 				D6A7A8521F0DD3DD00E4615A /* Protocols.swift in Sources */,

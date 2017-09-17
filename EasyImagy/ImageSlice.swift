@@ -4,8 +4,8 @@ public struct ImageSlice<Pixel> {
     internal let yRange: CountableRange<Int>
     
     public init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
-        precondition((0..<image.width).contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition((0..<image.height).contains(yRange), "`yRange` is out of bounds: \(yRange)")
+        precondition((0..<image.width).isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
+        precondition((0..<image.height).isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         self.image = image
         self.xRange = xRange
         self.yRange = yRange
