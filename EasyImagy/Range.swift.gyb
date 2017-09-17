@@ -1,0 +1,52 @@
+% range_types = ['CountableRange', 'CountableClosedRange', 'Range', 'ClosedRange']
+% conditions = [' where Bound: _Strideable, Bound.Stride: SignedInteger', '']
+%
+% first_1 = True
+% for range_type_1 in range_types:
+%   countable_1 = 'Countable' in range_type_1
+%   closed_1 = 'Closed' in range_type_1
+%   for condition in conditions:
+%     if condition == '' or not countable_1:
+%       if first_1:
+%         first_1 = False
+%       else:
+
+%       end
+extension ${range_type_1}${condition} {
+%       first_2 = True
+%       for range_type_2 in range_types:
+%         countable_2 = 'Countable' in range_type_2
+%         closed_2 = 'Closed' in range_type_2
+%         if condition == '':
+%           outputs = countable_1 or not countable_2
+%         else:
+%           outputs = countable_2 or (closed_1 and not closed_2)
+%         end
+%         if outputs:
+%           if first_2:
+%             first_2 = False
+%           else:
+
+%           end
+    internal func isSuperset(of other: ${range_type_2}<Bound>) -> Bool {
+%           if closed_1 and (countable_1 or not closed_1 or closed_2 or condition != ''):
+%             if closed_2:
+        return lowerBound <= other.lowerBound && other.upperBound <= upperBound
+%             else:
+        return lowerBound <= other.lowerBound && other.upperBound <= upperBound.advanced(by: 1) || other.isEmpty
+%             end
+%           else:
+%             if closed_2:
+        return lowerBound <= other.lowerBound && other.upperBound < upperBound
+%             else:
+        return lowerBound <= other.lowerBound && other.upperBound <= upperBound || other.isEmpty
+%             end
+%           end
+    }
+%         end
+%       end
+}
+%     end
+%   end
+% end
+
