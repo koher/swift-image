@@ -4,8 +4,8 @@ public struct ImageSlice<Pixel> {
     internal let yRange: CountableRange<Int>
     
     public init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
-        precondition((0..<image.width).contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition((0..<image.height).contains(yRange), "`yRange` is out of bounds: \(yRange)")
+        precondition((0..<image.width).isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
+        precondition((0..<image.height).isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         self.image = image
         self.xRange = xRange
         self.yRange = yRange
@@ -39,57 +39,6 @@ extension ImageSlice { // Subscripts (Index)
         precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
         precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
         return image[x, y]
-    }
-}
-
-// Does not support combinations of range types like `xRange: Range<Int>, yRange: ClosedRange<Int>` currently
-extension ImageSlice { // Subscripts (Range)
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
-        precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)")
-        return image[xRange, yRange]
-    }
-    
-    public subscript(xRange: CountableClosedRange<Int>, yRange: CountableClosedRange<Int>) -> ImageSlice<Pixel> {
-        precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)")
-        return image[xRange, yRange]
-    }
-    
-    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> ImageSlice<Pixel> {
-        precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)")
-        return image[xRange, yRange]
-    }
-    
-    public subscript(xRange: ClosedRange<Int>, yRange: ClosedRange<Int>) -> ImageSlice<Pixel> {
-        precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)")
-        return image[xRange, yRange]
-    }
-    
-    public subscript(xRange: CountableRange<Int>?, yRange: CountableRange<Int>?) -> ImageSlice<Pixel> {
-        if let xRange = xRange { precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)") }
-        if let yRange = yRange { precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)") }
-        return image[xRange ?? self.xRange, yRange ?? self.yRange]
-    }
-    
-    public subscript(xRange: CountableClosedRange<Int>?, yRange: CountableClosedRange<Int>?) -> ImageSlice<Pixel> {
-        if let xRange = xRange { precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)") }
-        if let yRange = yRange { precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)") }
-        return image[xRange.map { CountableRange($0) } ?? self.xRange, yRange.map { CountableRange($0) } ?? self.yRange]
-    }
-    
-    public subscript(xRange: Range<Int>?, yRange: Range<Int>?) -> ImageSlice<Pixel> {
-        if let xRange = xRange { precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)") }
-        if let yRange = yRange { precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)") }
-        return image[xRange.map { CountableRange($0) } ?? self.xRange, yRange.map { CountableRange($0) } ?? self.yRange]
-    }
-    
-    public subscript(xRange: ClosedRange<Int>?, yRange: ClosedRange<Int>?) -> ImageSlice<Pixel> {
-        if let xRange = xRange { precondition(self.xRange.contains(xRange), "`xRange` is out of bounds: \(xRange)") }
-        if let yRange = yRange { precondition(self.xRange.contains(yRange), "`yRange` is out of bounds: \(yRange)") }
-        return image[xRange.map { CountableRange($0) } ?? self.xRange, yRange.map { CountableRange($0) } ?? self.yRange]
     }
 }
 

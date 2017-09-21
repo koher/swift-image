@@ -155,27 +155,27 @@ import EasyImagy
             }
             
             do {
-                let image: Image<Float> = Image<RGBA>(named: "Test2x2", inBundle: Bundle(for: ImageTests.self))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
+                let image: Image<Float> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
                 
-                XCTAssertEqualWithAccuracy(0.25, image[0, 0], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.25, image[1, 0], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.25, image[0, 1], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.25, image[1, 1], accuracy: 0.002)
+                XCTAssertEqual(0.25, image[0, 0], accuracy: 0.002)
+                XCTAssertEqual(0.25, image[1, 0], accuracy: 0.002)
+                XCTAssertEqual(0.25, image[0, 1], accuracy: 0.002)
+                XCTAssertEqual(0.25, image[1, 1], accuracy: 0.002)
                 
-                XCTAssertEqualWithAccuracy(0.5,  image[2, 0], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.5,  image[3, 0], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.5,  image[2, 1], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.5,  image[3, 1], accuracy: 0.002)
+                XCTAssertEqual(0.5,  image[2, 0], accuracy: 0.002)
+                XCTAssertEqual(0.5,  image[3, 0], accuracy: 0.002)
+                XCTAssertEqual(0.5,  image[2, 1], accuracy: 0.002)
+                XCTAssertEqual(0.5,  image[3, 1], accuracy: 0.002)
                 
-                XCTAssertEqualWithAccuracy(0.75, image[0, 2], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.75, image[1, 2], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.75, image[0, 3], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(0.75, image[1, 3], accuracy: 0.002)
+                XCTAssertEqual(0.75, image[0, 2], accuracy: 0.002)
+                XCTAssertEqual(0.75, image[1, 2], accuracy: 0.002)
+                XCTAssertEqual(0.75, image[0, 3], accuracy: 0.002)
+                XCTAssertEqual(0.75, image[1, 3], accuracy: 0.002)
                 
-                XCTAssertEqualWithAccuracy(1.0,  image[2, 2], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(1.0,  image[3, 2], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(1.0,  image[2, 3], accuracy: 0.002)
-                XCTAssertEqualWithAccuracy(1.0,  image[3, 3], accuracy: 0.002)
+                XCTAssertEqual(1.0,  image[2, 2], accuracy: 0.002)
+                XCTAssertEqual(1.0,  image[3, 2], accuracy: 0.002)
+                XCTAssertEqual(1.0,  image[2, 3], accuracy: 0.002)
+                XCTAssertEqual(1.0,  image[3, 3], accuracy: 0.002)
             }
         }
     }
