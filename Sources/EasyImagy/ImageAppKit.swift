@@ -12,15 +12,8 @@
             self.init(nsImage: nsImage)
         }
         
-        public init?(named name: String) {
+        public init?(named name: NSImage.Name) {
             self.init(nsImageOrNil: NSImage(named: name))
-        }
-        
-        public init?(named name: String, inBundle bundle: Bundle?) {
-            // Temporary implementation
-            guard let bundle = bundle else { return nil }
-            guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).appendingPathComponent("\(name).png") }) else { return nil }
-            self.init(contentsOfFile: path)
         }
         
         public init?(contentsOfFile path: String) {
@@ -47,15 +40,8 @@
             self.init(nsImage: nsImage)
         }
         
-        public init?(named name: String) {
+        public init?(named name: NSImage.Name) {
             self.init(nsImageOrNil: NSImage(named: name))
-        }
-        
-        public init?(named name: String, inBundle bundle: Bundle?) {
-            // Temporary implementation
-            guard let bundle = bundle else { return nil }
-            guard let path = (bundle.resourcePath.flatMap { ($0 as NSString).appendingPathComponent("\(name).png") }) else { return nil }
-            self.init(contentsOfFile: path)
         }
         
         public init?(contentsOfFile path: String) {
