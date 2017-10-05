@@ -3,3 +3,4 @@
 /Packages
 /*.xcodeproj/project.xcworkspace/xcuserdata
 /*.xcodeproj/xcuserdata
+/Carthage
