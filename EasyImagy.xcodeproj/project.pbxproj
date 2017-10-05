@@ -27,6 +27,27 @@
 		D6134A581F852A85005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
 		D6134A591F852A85005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
 		D6134A5A1F852A85005592A2 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A381F852A49005592A2 /* Util.swift */; };
+		D6134A691F852C80005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A601F852C80005592A2 /* EasyImagy.framework */; };
+		D6134A7B1F85CF5E005592A2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2B1F852A49005592A2 /* Image.swift */; };
+		D6134A7C1F85CF5E005592A2 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2C1F852A49005592A2 /* ImageAppKit.swift */; };
+		D6134A7D1F85CF5E005592A2 /* ImageCoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2D1F852A49005592A2 /* ImageCoreGraphics.swift */; };
+		D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2E1F852A49005592A2 /* ImageSlice.swift */; };
+		D6134A7F1F85CF5E005592A2 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2F1F852A49005592A2 /* ImageTyped.swift */; };
+		D6134A801F85CF5E005592A2 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* ImageUIKit.swift */; };
+		D6134A811F85CF5E005592A2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A321F852A49005592A2 /* Protocols.swift */; };
+		D6134A821F85CF5E005592A2 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A331F852A49005592A2 /* Range.swift */; };
+		D6134A831F85CF5E005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
+		D6134A841F85CF5E005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
+		D6134A851F85CF5E005592A2 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A381F852A49005592A2 /* Util.swift */; };
+		D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
+		D6134A871F85CF6F005592A2 /* ImageAppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* ImageAppKitTests.swift */; };
+		D6134A881F85CF6F005592A2 /* ImageCoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* ImageCoreGraphicsTest.swift */; };
+		D6134A891F85CF6F005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
+		D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
+		D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
+		D6134A8C1F85CF6F005592A2 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A421F852A57005592A2 /* SubscriptTests.swift */; };
+		D6134A8D1F85CF6F005592A2 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A461F852A57005592A2 /* UtilTests.swift */; };
+		D6134A8F1F85CFA4005592A2 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D6134A2A1F852A49005592A2 /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +57,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D6134A0D1F85226C005592A2;
 			remoteInfo = EasyImagy;
+		};
+		D6134A6A1F852C80005592A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6134A051F85226C005592A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D6134A5F1F852C80005592A2;
+			remoteInfo = "EasyImagy-macOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -65,6 +93,8 @@
 		D6134A421F852A57005592A2 /* SubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptTests.swift; sourceTree = "<group>"; };
 		D6134A461F852A57005592A2 /* UtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
 		D6134A471F852A57005592A2 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
+		D6134A601F852C80005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134A681F852C80005592A2 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +110,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134A5C1F852C80005592A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134A651F852C80005592A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6134A691F852C80005592A2 /* EasyImagy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +145,8 @@
 			children = (
 				D6134A0E1F85226C005592A2 /* EasyImagy.framework */,
 				D6134A171F85226D005592A2 /* EasyImagyTests.xctest */,
+				D6134A601F852C80005592A2 /* EasyImagy.framework */,
+				D6134A681F852C80005592A2 /* EasyImagyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +214,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6134A5D1F852C80005592A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6134A8F1F85CFA4005592A2 /* EasyImagy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -206,6 +261,42 @@
 			productReference = D6134A171F85226D005592A2 /* EasyImagyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D6134A5F1F852C80005592A2 /* EasyImagy-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6134A711F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-macOS" */;
+			buildPhases = (
+				D6134A5B1F852C80005592A2 /* Sources */,
+				D6134A5C1F852C80005592A2 /* Frameworks */,
+				D6134A5D1F852C80005592A2 /* Headers */,
+				D6134A5E1F852C80005592A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EasyImagy-macOS";
+			productName = "EasyImagy-macOS";
+			productReference = D6134A601F852C80005592A2 /* EasyImagy.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D6134A671F852C80005592A2 /* EasyImagy-macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6134A741F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-macOSTests" */;
+			buildPhases = (
+				D6134A641F852C80005592A2 /* Sources */,
+				D6134A651F852C80005592A2 /* Frameworks */,
+				D6134A661F852C80005592A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D6134A6B1F852C80005592A2 /* PBXTargetDependency */,
+			);
+			name = "EasyImagy-macOSTests";
+			productName = "EasyImagy-macOSTests";
+			productReference = D6134A681F852C80005592A2 /* EasyImagyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,6 +312,14 @@
 						ProvisioningStyle = Automatic;
 					};
 					D6134A161F85226D005592A2 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					D6134A5F1F852C80005592A2 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					D6134A671F852C80005592A2 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -240,6 +339,8 @@
 			targets = (
 				D6134A0D1F85226C005592A2 /* EasyImagy */,
 				D6134A161F85226D005592A2 /* EasyImagyTests */,
+				D6134A5F1F852C80005592A2 /* EasyImagy-macOS */,
+				D6134A671F852C80005592A2 /* EasyImagy-macOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -253,6 +354,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D6134A151F85226D005592A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134A5E1F852C80005592A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134A661F852C80005592A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -295,6 +410,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6134A5B1F852C80005592A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6134A851F85CF5E005592A2 /* Util.swift in Sources */,
+				D6134A7C1F85CF5E005592A2 /* ImageAppKit.swift in Sources */,
+				D6134A841F85CF5E005592A2 /* RGBA.swift in Sources */,
+				D6134A7B1F85CF5E005592A2 /* Image.swift in Sources */,
+				D6134A811F85CF5E005592A2 /* Protocols.swift in Sources */,
+				D6134A821F85CF5E005592A2 /* Range.swift in Sources */,
+				D6134A801F85CF5E005592A2 /* ImageUIKit.swift in Sources */,
+				D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */,
+				D6134A7D1F85CF5E005592A2 /* ImageCoreGraphics.swift in Sources */,
+				D6134A7F1F85CF5E005592A2 /* ImageTyped.swift in Sources */,
+				D6134A831F85CF5E005592A2 /* RangedSubscript.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134A641F852C80005592A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */,
+				D6134A871F85CF6F005592A2 /* ImageAppKitTests.swift in Sources */,
+				D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */,
+				D6134A8D1F85CF6F005592A2 /* UtilTests.swift in Sources */,
+				D6134A891F85CF6F005592A2 /* ImageSliceTests.swift in Sources */,
+				D6134A881F85CF6F005592A2 /* ImageCoreGraphicsTest.swift in Sources */,
+				D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */,
+				D6134A8C1F85CF6F005592A2 /* SubscriptTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -302,6 +450,11 @@
 			isa = PBXTargetDependency;
 			target = D6134A0D1F85226C005592A2 /* EasyImagy */;
 			targetProxy = D6134A191F85226D005592A2 /* PBXContainerItemProxy */;
+		};
+		D6134A6B1F852C80005592A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D6134A5F1F852C80005592A2 /* EasyImagy-macOS */;
+			targetProxy = D6134A6A1F852C80005592A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -335,7 +488,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -395,7 +547,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -487,6 +638,86 @@
 			};
 			name = Release;
 		};
+		D6134A721F852C80005592A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Sources/EasyImagy/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		D6134A731F852C80005592A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Sources/EasyImagy/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		D6134A751F852C80005592A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/EasyImagyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
+				PRODUCT_NAME = EasyImagyTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		D6134A761F852C80005592A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Tests/EasyImagyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
+				PRODUCT_NAME = EasyImagyTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,6 +744,24 @@
 			buildConfigurations = (
 				D6134A261F85226D005592A2 /* Debug */,
 				D6134A271F85226D005592A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6134A711F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6134A721F852C80005592A2 /* Debug */,
+				D6134A731F852C80005592A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6134A741F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6134A751F852C80005592A2 /* Debug */,
+				D6134A761F852C80005592A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
