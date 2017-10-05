@@ -69,6 +69,18 @@
 		D6134ACA1F85D2BF005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
 		D6134ACB1F85D2BF005592A2 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A421F852A57005592A2 /* SubscriptTests.swift */; };
 		D6134ACC1F85D2BF005592A2 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A461F852A57005592A2 /* UtilTests.swift */; };
+		D6134ADA1F85DA5C005592A2 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D6134A2A1F852A49005592A2 /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D6134ADB1F85DA5C005592A2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2B1F852A49005592A2 /* Image.swift */; };
+		D6134ADC1F85DA5C005592A2 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2C1F852A49005592A2 /* ImageAppKit.swift */; };
+		D6134ADD1F85DA5C005592A2 /* ImageCoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2D1F852A49005592A2 /* ImageCoreGraphics.swift */; };
+		D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2E1F852A49005592A2 /* ImageSlice.swift */; };
+		D6134ADF1F85DA5C005592A2 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2F1F852A49005592A2 /* ImageTyped.swift */; };
+		D6134AE01F85DA5C005592A2 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* ImageUIKit.swift */; };
+		D6134AE11F85DA5C005592A2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A321F852A49005592A2 /* Protocols.swift */; };
+		D6134AE21F85DA5C005592A2 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A331F852A49005592A2 /* Range.swift */; };
+		D6134AE31F85DA5C005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
+		D6134AE41F85DA5C005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
+		D6134AE51F85DA5C005592A2 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A381F852A49005592A2 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +137,7 @@
 		D6134A681F852C80005592A2 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134AA21F85D1F9005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134AAA1F85D1FA005592A2 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134AD21F85D800005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +186,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D6134ACE1F85D800005592A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -194,6 +214,7 @@
 				D6134A681F852C80005592A2 /* EasyImagyTests.xctest */,
 				D6134AA21F85D1F9005592A2 /* EasyImagy.framework */,
 				D6134AAA1F85D1FA005592A2 /* EasyImagyTests.xctest */,
+				D6134AD21F85D800005592A2 /* EasyImagy.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,6 +295,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6134AB91F85D2AF005592A2 /* EasyImagy.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134ACF1F85D800005592A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6134ADA1F85DA5C005592A2 /* EasyImagy.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +417,24 @@
 			productReference = D6134AAA1F85D1FA005592A2 /* EasyImagyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D6134AD11F85D800005592A2 /* EasyImagy-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D6134AD71F85D800005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-watchOS" */;
+			buildPhases = (
+				D6134ACD1F85D800005592A2 /* Sources */,
+				D6134ACE1F85D800005592A2 /* Frameworks */,
+				D6134ACF1F85D800005592A2 /* Headers */,
+				D6134AD01F85D800005592A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "EasyImagy-watchOS";
+			productName = "EasyImagy-watchOS";
+			productReference = D6134AD21F85D800005592A2 /* EasyImagy.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -422,6 +469,10 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
+					D6134AD11F85D800005592A2 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = D6134A081F85226C005592A2 /* Build configuration list for PBXProject "EasyImagy" */;
@@ -442,6 +493,7 @@
 				D6134A671F852C80005592A2 /* EasyImagy-macOSTests */,
 				D6134AA11F85D1F9005592A2 /* EasyImagy-tvOS */,
 				D6134AA91F85D1FA005592A2 /* EasyImagy-tvOSTests */,
+				D6134AD11F85D800005592A2 /* EasyImagy-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -483,6 +535,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D6134AA81F85D1FA005592A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134AD01F85D800005592A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -588,6 +647,24 @@
 				D6134AC71F85D2BF005592A2 /* ImageCoreGraphicsTest.swift in Sources */,
 				D6134ACA1F85D2BF005592A2 /* RGBATests.swift in Sources */,
 				D6134ACB1F85D2BF005592A2 /* SubscriptTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D6134ACD1F85D800005592A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6134AE51F85DA5C005592A2 /* Util.swift in Sources */,
+				D6134ADC1F85DA5C005592A2 /* ImageAppKit.swift in Sources */,
+				D6134AE41F85DA5C005592A2 /* RGBA.swift in Sources */,
+				D6134ADB1F85DA5C005592A2 /* Image.swift in Sources */,
+				D6134AE11F85DA5C005592A2 /* Protocols.swift in Sources */,
+				D6134AE21F85DA5C005592A2 /* Range.swift in Sources */,
+				D6134AE01F85DA5C005592A2 /* ImageUIKit.swift in Sources */,
+				D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */,
+				D6134ADD1F85DA5C005592A2 /* ImageCoreGraphics.swift in Sources */,
+				D6134ADF1F85DA5C005592A2 /* ImageTyped.swift in Sources */,
+				D6134AE31F85DA5C005592A2 /* RangedSubscript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,6 +1024,52 @@
 			};
 			name = Release;
 		};
+		D6134AD81F85D800005592A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Sources/EasyImagy/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		D6134AD91F85D800005592A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Sources/EasyImagy/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
+				PRODUCT_NAME = EasyImagy;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1009,6 +1132,15 @@
 			buildConfigurations = (
 				D6134AB51F85D1FA005592A2 /* Debug */,
 				D6134AB61F85D1FA005592A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D6134AD71F85D800005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D6134AD81F85D800005592A2 /* Debug */,
+				D6134AD91F85D800005592A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
