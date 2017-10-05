@@ -1,7 +1,7 @@
 import XCTest
 import EasyImagy
 
-#if os(iOS) || os(macOS)
+#if os(iOS) || os(macOS) || os(tvOS)
     import CoreGraphics
 
     class ImageCoreGraphicsTests: XCTestCase {
