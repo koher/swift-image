@@ -10,7 +10,7 @@ import EasyImagy
 class ImageSliceTests: XCTestCase {
     func testSequence() {
         do {
-            let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![1...2, 1...2]
+            let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2]
             
             for (i, pixel) in image.enumerated() {
                 switch i {
@@ -42,7 +42,7 @@ class ImageSliceTests: XCTestCase {
     }
     
     func testSubscriptRange() {
-        let image = Image<RGBA>(named: "Test4x4", inBundle: Bundle(for: ImageTests.self))![1...2, 1...2]
+        let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2]
         
         let topRight = image[2...2, 1...1]
         

@@ -1,3 +1,11 @@
+//
+//  EasyImagy.h
+//  EasyImagy
+//
+//  Created by Yuta Koshizawa on 2017/10/04.
+//  Copyright © 2017 koherent.org. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 
 //! Project version number for EasyImagy.

@@ -102,7 +102,7 @@ if let pixel = image.pixel(x, y) {
     print(pixel.green)
     print(pixel.blue)
     print(pixel.alpha)
-    
+
     print(pixel.gray) // (red + green + blue) / 3
     print(pixel) // formatted like "#FF0000FF"
 } else {
@@ -234,25 +234,53 @@ let image = Image<RGBA>(uiImage: imageView.image!)!
 imageView.image = image.uiImage
 ```
 
+Requirements
+---------------------------
+
+- Swift 4 or later
+- Xcode 9 or later
+
 Installation
 ---------------------------
 
-### Carthage
+### Swift Package Manager
 
-[_Carthage_](https://github.com/Carthage/Carthage) is available to install _EasyImagy_. Add it to your `Cartfile`:
+**Package.swift**
+
+```swift
+// swift-tools-version:4.0
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+import PackageDescription
+
+let package = Package(
+  ...
+  dependencies: [
+    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.3.0-alpha.6"),
+  ],
+  targets: [
+    .target(
+      ...
+      dependencies: [
+        "EasyImagy",
+      ]),
+    ]
+)
+```
+
+### [Carthage](https://github.com/Carthage/Carthage)
+
+**Cartfile**
 
 ```
-github "koher/EasyImagy" "master"
+github "koher/EasyImagy" "0.3.0-alpha.6"
 ```
 
 ### Manually
 
-For iOS 8 or later,
-
 1. Put [EasyImagy.xcodeproj](EasyImagy.xcodeproj) into your project/workspace in Xcode.
 2. Click your project icon and select the application target and the "General" tab.
 3. Add `EasyImagy.framework` to "Embedded Binaries".
-4. `import EasyImagy` in your swift files.
 
 License
 ---------------------------
