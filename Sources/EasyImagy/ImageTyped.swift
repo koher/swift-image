@@ -141,72 +141,72 @@ extension Image where Pixel == Double { // map with indices
 }
 
 extension Image where Pixel == RGBA { // Convolution
-    public func convoluted(_ kernel: Image<Int>) -> Image<RGBA> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Int>) -> Image<RGBA> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(_ kernel: Image<Float>) -> Image<RGBA> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Float>) -> Image<RGBA> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(_ kernel: Image<Double>) -> Image<RGBA> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Double>) -> Image<RGBA> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel == UInt8 { // Convolution
-    public func convoluted(_ kernel: Image<Int>) -> Image<UInt8> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Int>) -> Image<UInt8> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(_ kernel: Image<Float>) -> Image<UInt8> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Float>) -> Image<UInt8> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(_ kernel: Image<Double>) -> Image<UInt8> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Double>) -> Image<UInt8> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel == Int { // Convolution
-    public func convoluted(_ kernel: Image<Int>) -> Image<Int> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Int>) -> Image<Int> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(_ kernel: Image<Float>) -> Image<Int> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Float>) -> Image<Int> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
     
-    public func convoluted(_ kernel: Image<Double>) -> Image<Int> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Double>) -> Image<Int> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel == Float { // Convolution
-    public func convoluted(_ kernel: Image<Int>) -> Image<Float> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Int>) -> Image<Float> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(_ kernel: Image<Float>) -> Image<Float> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Float>) -> Image<Float> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(_ kernel: Image<Double>) -> Image<Float> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Double>) -> Image<Float> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 }
 
 extension Image where Pixel == Double { // Convolution
-    public func convoluted(_ kernel: Image<Int>) -> Image<Double> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Int>) -> Image<Double> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(_ kernel: Image<Float>) -> Image<Double> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Float>) -> Image<Double> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 
-    public func convoluted(_ kernel: Image<Double>) -> Image<Double> {
-        return self._convoluted(kernel, weightedSum: weightedSum)
+    public func convoluted(by kernel: Image<Double>) -> Image<Double> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
     }
 }
 

@@ -68,23 +68,23 @@ class ImageSliceTests: XCTestCase {
     func testPixel() {
         let image = Image<UInt8>(width: 4, height: 3, pixels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])[1...2, 1...1]
         
-        XCTAssertNil(image.pixel(0, 0))
-        XCTAssertNil(image.pixel(1, 0))
-        XCTAssertNil(image.pixel(2, 0))
-        XCTAssertNil(image.pixel(3, 0))
-        XCTAssertNil(image.pixel(0, 1))
-        XCTAssertEqual(5, image.pixel(1, 1)!)
-        XCTAssertEqual(6, image.pixel(2, 1)!)
-        XCTAssertNil(image.pixel(3, 1))
-        XCTAssertNil(image.pixel(0, 2))
-        XCTAssertNil(image.pixel(1, 2))
-        XCTAssertNil(image.pixel(2, 2))
-        XCTAssertNil(image.pixel(3, 2))
+        XCTAssertNil(image.pixelAt(x: 0, y: 0))
+        XCTAssertNil(image.pixelAt(x: 1, y: 0))
+        XCTAssertNil(image.pixelAt(x: 2, y: 0))
+        XCTAssertNil(image.pixelAt(x: 3, y: 0))
+        XCTAssertNil(image.pixelAt(x: 0, y: 1))
+        XCTAssertEqual(5, image.pixelAt(x: 1, y: 1)!)
+        XCTAssertEqual(6, image.pixelAt(x: 2, y: 1)!)
+        XCTAssertNil(image.pixelAt(x: 3, y: 1))
+        XCTAssertNil(image.pixelAt(x: 0, y: 2))
+        XCTAssertNil(image.pixelAt(x: 1, y: 2))
+        XCTAssertNil(image.pixelAt(x: 2, y: 2))
+        XCTAssertNil(image.pixelAt(x: 3, y: 2))
         
-        XCTAssertNil(image.pixel(-1, 0))
-        XCTAssertNil(image.pixel(4, 0))
-        XCTAssertNil(image.pixel(0, -1))
-        XCTAssertNil(image.pixel(0, 3))
+        XCTAssertNil(image.pixelAt(x: -1, y: 0))
+        XCTAssertNil(image.pixelAt(x: 4, y: 0))
+        XCTAssertNil(image.pixelAt(x: 0, y: -1))
+        XCTAssertNil(image.pixelAt(x: 0, y: 3))
     }
 
 }

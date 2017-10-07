@@ -101,7 +101,7 @@ import EasyImagy
             /////////////////////////////////
             
             // Safe get for a pixel
-            if let pixel = image.pixel(x, y) {
+            if let pixel = image.pixelAt(x: x, y: y) {
                 print(pixel.red)
                 print(pixel.green)
                 print(pixel.blue)

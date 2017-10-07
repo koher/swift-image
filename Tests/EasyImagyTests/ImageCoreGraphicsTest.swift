@@ -42,9 +42,9 @@ import EasyImagy
             }
         }
         
-        func testResize() {
+        func testResizedTo() {
             do {
-                let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
+                let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
                 
                 XCTAssertEqual(4, image.width)
                 XCTAssertEqual(4, image.height)
@@ -131,7 +131,7 @@ import EasyImagy
             }
             
             do {
-                let image: Image<UInt8> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { $0.alpha }
+                let image: Image<UInt8> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { $0.alpha }
                 
                 XCTAssertEqual( 64, image[0, 0])
                 XCTAssertEqual( 64, image[1, 0])
@@ -155,7 +155,7 @@ import EasyImagy
             }
             
             do {
-                let image: Image<Float> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resize(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
+                let image: Image<Float> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
                 
                 XCTAssertEqual(0.25, image[0, 0], accuracy: 0.002)
                 XCTAssertEqual(0.25, image[1, 0], accuracy: 0.002)

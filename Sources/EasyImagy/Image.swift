@@ -76,7 +76,7 @@ extension Image { // Subscripts (Index)
 }
 
 extension Image { // safe get
-	public func pixel(_ x: Int, _ y: Int) -> Pixel? {
+	public func pixelAt(x: Int, y: Int) -> Pixel? {
 		guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return nil }
 		return pixels[pixelIndex]
 	}
@@ -135,7 +135,7 @@ extension Image { // Higher-order methods
 }
 
 extension Image { // Convolutions
-	internal func _convoluted<W, T>(_ kernel: Image<W>, weightedSum: ([(weight: W, value: Pixel)]) -> T) -> Image<T> {
+	internal func _convoluted<W, T>(by kernel: Image<W>, weightedSum: ([(weight: W, value: Pixel)]) -> T) -> Image<T> {
 		precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
 		precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
 		
@@ -164,7 +164,7 @@ extension Image { // Convolutions
 }
 
 extension Image { // Operations
-	public func flipX() -> Image<Pixel> {
+	public func xReversed() -> Image<Pixel> {
 		var pixels = [Pixel]()
 
 		let maxX = width - 1
@@ -177,7 +177,7 @@ extension Image { // Operations
 		return Image(width: width, height: height, pixels: pixels)
 	}
 	
-	public func flipY() -> Image<Pixel> {
+	public func yReversed() -> Image<Pixel> {
 		var pixels = [Pixel]()
 		
 		let maxY = height - 1
@@ -190,11 +190,11 @@ extension Image { // Operations
 		return Image(width: width, height: height, pixels: pixels)
 	}
 	
-	public func rotate() -> Image<Pixel> {
-		return rotate(1)
+	public func rotated() -> Image<Pixel> {
+		return rotated(1)
 	}
 	
-	public func rotate(_ times: Int) -> Image<Pixel> {
+	public func rotated(_ times: Int) -> Image<Pixel> {
 		switch times % 4 {
 		case 0:
 			return self

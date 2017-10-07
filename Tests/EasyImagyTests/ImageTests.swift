@@ -320,17 +320,17 @@ class ImageTests: XCTestCase {
     func testPixel() {
         let image = Image<UInt8>(width: 3, height: 2, pixels: [0, 1, 2, 3, 4, 5])
 
-        XCTAssertEqual(0, image.pixel(0, 0)!)
-        XCTAssertEqual(1, image.pixel(1, 0)!)
-        XCTAssertEqual(2, image.pixel(2, 0)!)
-        XCTAssertEqual(3, image.pixel(0, 1)!)
-        XCTAssertEqual(4, image.pixel(1, 1)!)
-        XCTAssertEqual(5, image.pixel(2, 1)!)
+        XCTAssertEqual(0, image.pixelAt(x: 0, y: 0)!)
+        XCTAssertEqual(1, image.pixelAt(x: 1, y: 0)!)
+        XCTAssertEqual(2, image.pixelAt(x: 2, y: 0)!)
+        XCTAssertEqual(3, image.pixelAt(x: 0, y: 1)!)
+        XCTAssertEqual(4, image.pixelAt(x: 1, y: 1)!)
+        XCTAssertEqual(5, image.pixelAt(x: 2, y: 1)!)
 
-        XCTAssertNil(image.pixel(-1, 0))
-        XCTAssertNil(image.pixel(3, 0))
-        XCTAssertNil(image.pixel(0, -1))
-        XCTAssertNil(image.pixel(0, 2))
+        XCTAssertNil(image.pixelAt(x: -1, y: 0))
+        XCTAssertNil(image.pixelAt(x: 3, y: 0))
+        XCTAssertNil(image.pixelAt(x: 0, y: -1))
+        XCTAssertNil(image.pixelAt(x: 0, y: 2))
     }
 	
 	func testMap() {
@@ -393,8 +393,8 @@ class ImageTests: XCTestCase {
         }
     }
 	
-	func testFlipX() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.flipX()
+	func testXReversed() {
+		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.xReversed()
 
 		XCTAssertEqual(  0, image[0, 0].red)
 		XCTAssertEqual(255, image[0, 0].green)
@@ -417,8 +417,8 @@ class ImageTests: XCTestCase {
 		XCTAssertEqual(191, image[1, 1].alpha)
 	}
 	
-	func testFlipY() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.flipY()
+	func testYReversed() {
+		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.yReversed()
 		
 		XCTAssertEqual(  0, image[0, 0].red)
 		XCTAssertEqual(  0, image[0, 0].green)
@@ -441,11 +441,11 @@ class ImageTests: XCTestCase {
 		XCTAssertEqual(127, image[1, 1].alpha)
 	}
 	
-	func testRotate() {
+	func testRotated() {
 		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!
 
 		for times in [-8, -4, 0, 4, 8] {
-			let rotated = image.rotate(times)
+			let rotated = image.rotated(times)
 			
 			XCTAssertEqual(2, rotated.width)
 			XCTAssertEqual(1, rotated.height)
@@ -462,7 +462,7 @@ class ImageTests: XCTestCase {
 		}
 		
 		for times in [-7, -3, 1, 5] {
-			let rotated = image.rotate(times)
+			let rotated = image.rotated(times)
 
 			XCTAssertEqual(1, rotated.width)
 			XCTAssertEqual(2, rotated.height)
@@ -479,7 +479,7 @@ class ImageTests: XCTestCase {
 		}
 		
 		for times in [-6, -2, 2, 6] {
-			let rotated = image.rotate(times)
+			let rotated = image.rotated(times)
 			
 			XCTAssertEqual(2, rotated.width)
 			XCTAssertEqual(1, rotated.height)
@@ -496,7 +496,7 @@ class ImageTests: XCTestCase {
 		}
 		
 		for times in [-5, -1, 3, 7] {
-			let rotated = image.rotate(times)
+			let rotated = image.rotated(times)
 			
 			XCTAssertEqual(1, rotated.width)
 			XCTAssertEqual(2, rotated.height)
@@ -524,7 +524,7 @@ class ImageTests: XCTestCase {
             1, 1, 1, 1, 1,
         ])
         
-        let convoluted = image.convoluted(kernel)
+        let convoluted = image.convoluted(by: kernel)
         
         XCTAssertEqual(55, convoluted[0, 0])
         XCTAssertEqual(60, convoluted[1, 0])

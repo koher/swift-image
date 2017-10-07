@@ -161,11 +161,11 @@
     }
     
     extension Image where Pixel == RGBA { // Resizing
-        public func resize(width: Int, height: Int) -> Image<Pixel> {
-            return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
+        public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+            return resizedTo(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
         }
         
-        public func resize(width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
+        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
             return Image(width: width, height: height) { context in
                 context.interpolationQuality = interpolationQuality
                 context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
@@ -174,11 +174,11 @@
     }
     
     extension Image where Pixel == UInt8 { // Resizing
-        public func resize(width: Int, height: Int) -> Image<Pixel> {
-            return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
+        public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+            return resizedTo(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
         }
         
-        public func resize(width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
+        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
             return Image(width: width, height: height) { context in
                 context.interpolationQuality = interpolationQuality
                 context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
@@ -187,11 +187,11 @@
     }
     
     extension Image where Pixel == Float { // Resizing
-        public func resize(width: Int, height: Int) -> Image<Pixel> {
-            return resize(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
+        public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+            return resizedTo(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
         }
         
-        public func resize(width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
+        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality) -> Image<Pixel> {
             return Image(width: width, height: height) { context in
                 context.interpolationQuality = interpolationQuality
                 context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
