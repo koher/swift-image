@@ -1,5 +1,3 @@
-import Foundation
-
 extension Image where Pixel == RGBA { // map
     public func map(_ transform: (RGBA) -> RGBA) -> Image<RGBA> {
         return self._map(transform)
