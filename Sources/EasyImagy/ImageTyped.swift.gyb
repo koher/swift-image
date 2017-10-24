@@ -1,0 +1,68 @@
+% types = ['RGBA', 'UInt8', 'Int', 'Float', 'Double']
+% conversions = {
+%   'RGBA'  : ['RGBA', 'UInt8', 'Int', 'Float', 'Double'],
+%   'UInt8' : ['UInt8', 'Int', 'Float', 'Double'],
+%   'Int'   : ['Int', 'Float', 'Double'],
+%   'Float' : ['Float', 'Double'],
+%   'Double': ['Double'],
+% }
+%
+% for i, type in enumerate(types):
+%   if i > 0:
+
+%   end
+extension Image where Pixel == ${type} { // map
+%   for j, target_type in enumerate(conversions[type]):
+%     if j > 0:
+
+%     end
+    public func map(_ transform: (${type}) -> ${target_type}) -> Image<${target_type}> {
+        return self._map(transform)
+    }
+%   end
+}
+% end
+%
+% for i, type in enumerate(types):
+
+extension Image where Pixel == ${type} { // map with indices
+%   for j, target_type in enumerate(conversions[type]):
+%     if j > 0:
+
+%     end
+    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: ${type}) -> ${target_type}) -> Image<${target_type}> {
+        return self._map(transform)
+    }
+%   end
+}
+% end
+%
+% for i, type in enumerate(types):
+
+extension Image where Pixel == ${type} { // Convolution
+    public func convoluted(by kernel: Image<Int>) -> Image<${type}> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
+    }
+
+    public func convoluted(by kernel: Image<Float>) -> Image<${type}> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
+    }
+
+    public func convoluted(by kernel: Image<Double>) -> Image<${type}> {
+        return self._convoluted(by: kernel, weightedSum: weightedSum)
+    }
+}
+% end
+%
+% for i, type in enumerate(types):
+
+extension Image where Pixel == ${type} { // Interpolation, Transformation
+    public subscript(x: Float, y: Float) -> ${type} {
+        return self._interpolate(x: x, y: y)
+    }
+
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<${type}> {
+        return self._transformed(width: width, height: height, transform: transform)
+    }
+}
+% end
