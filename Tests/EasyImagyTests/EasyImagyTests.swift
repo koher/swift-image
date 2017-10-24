@@ -13,7 +13,7 @@ import EasyImagy
             /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
             /**/ imageView.image = Image<RGBA>(width: 1, height: 1, pixel: RGBA.black).uiImage
             
-            /**/ if false {
+            /**/ if never() {
             var image = Image<RGBA>(named: "ImageName")!
             /**/ _ = image[0, 0]
             /**/ }
@@ -47,19 +47,19 @@ import EasyImagy
         
         func testInitialization() {
             do {
-                /**/ if false {
+                /**/ if never() {
                 let image = Image<RGBA>(named: "ImageName")!
                 /**/ _ = image.count
                 /**/ }
             }
             do {
-                /**/ if false {
+                /**/ if never() {
                 let image = Image<RGBA>(contentsOfFile: "path/to/file")!
                 /**/ _ = image.count
                 /**/ }
             }
             do {
-                /**/ if false {
+                /**/ if never() {
                 let image = Image<RGBA>(data: Data(/* ... */))!
                 /**/ _ = image.count
                 /**/ }
@@ -123,5 +123,9 @@ import EasyImagy
             
             /**/ _ = cropped.count
         }
+    }
+    
+    func never() -> Bool {
+        return false
     }
 #endif
