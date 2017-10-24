@@ -22,7 +22,6 @@
 		D6134A531F852A85005592A2 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2E1F852A49005592A2 /* ImageSlice.swift */; };
 		D6134A541F852A85005592A2 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2F1F852A49005592A2 /* ImageTyped.swift */; };
 		D6134A551F852A85005592A2 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* ImageUIKit.swift */; };
-		D6134A561F852A85005592A2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A321F852A49005592A2 /* Protocols.swift */; };
 		D6134A571F852A85005592A2 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A331F852A49005592A2 /* Range.swift */; };
 		D6134A581F852A85005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
 		D6134A591F852A85005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
@@ -34,7 +33,6 @@
 		D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2E1F852A49005592A2 /* ImageSlice.swift */; };
 		D6134A7F1F85CF5E005592A2 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2F1F852A49005592A2 /* ImageTyped.swift */; };
 		D6134A801F85CF5E005592A2 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* ImageUIKit.swift */; };
-		D6134A811F85CF5E005592A2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A321F852A49005592A2 /* Protocols.swift */; };
 		D6134A821F85CF5E005592A2 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A331F852A49005592A2 /* Range.swift */; };
 		D6134A831F85CF5E005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
 		D6134A841F85CF5E005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
@@ -56,7 +54,6 @@
 		D6134ABD1F85D2AF005592A2 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2E1F852A49005592A2 /* ImageSlice.swift */; };
 		D6134ABE1F85D2AF005592A2 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2F1F852A49005592A2 /* ImageTyped.swift */; };
 		D6134ABF1F85D2AF005592A2 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* ImageUIKit.swift */; };
-		D6134AC01F85D2AF005592A2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A321F852A49005592A2 /* Protocols.swift */; };
 		D6134AC11F85D2AF005592A2 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A331F852A49005592A2 /* Range.swift */; };
 		D6134AC21F85D2AF005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
 		D6134AC31F85D2AF005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
@@ -76,7 +73,6 @@
 		D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2E1F852A49005592A2 /* ImageSlice.swift */; };
 		D6134ADF1F85DA5C005592A2 /* ImageTyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2F1F852A49005592A2 /* ImageTyped.swift */; };
 		D6134AE01F85DA5C005592A2 /* ImageUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* ImageUIKit.swift */; };
-		D6134AE11F85DA5C005592A2 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A321F852A49005592A2 /* Protocols.swift */; };
 		D6134AE21F85DA5C005592A2 /* Range.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A331F852A49005592A2 /* Range.swift */; };
 		D6134AE31F85DA5C005592A2 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A351F852A49005592A2 /* RangedSubscript.swift */; };
 		D6134AE41F85DA5C005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
@@ -123,7 +119,6 @@
 		D6134A2F1F852A49005592A2 /* ImageTyped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTyped.swift; sourceTree = "<group>"; };
 		D6134A301F852A49005592A2 /* ImageUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUIKit.swift; sourceTree = "<group>"; };
 		D6134A311F852A49005592A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D6134A321F852A49005592A2 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D6134A331F852A49005592A2 /* Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
 		D6134A351F852A49005592A2 /* RangedSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedSubscript.swift; sourceTree = "<group>"; };
 		D6134A371F852A49005592A2 /* RGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
@@ -245,7 +240,6 @@
 				D6134A301F852A49005592A2 /* ImageUIKit.swift */,
 				D6134A311F852A49005592A2 /* Info.plist */,
 				D66840581F9F426200D1DE7F /* PixelProtocol.swift */,
-				D6134A321F852A49005592A2 /* Protocols.swift */,
 				D6134A331F852A49005592A2 /* Range.swift */,
 				D6134A351F852A49005592A2 /* RangedSubscript.swift */,
 				D6134A371F852A49005592A2 /* RGBA.swift */,
@@ -568,7 +562,6 @@
 				D66840591F9F426200D1DE7F /* PixelProtocol.swift in Sources */,
 				D6134A591F852A85005592A2 /* RGBA.swift in Sources */,
 				D6134A501F852A85005592A2 /* Image.swift in Sources */,
-				D6134A561F852A85005592A2 /* Protocols.swift in Sources */,
 				D6134A571F852A85005592A2 /* Range.swift in Sources */,
 				D6134A551F852A85005592A2 /* ImageUIKit.swift in Sources */,
 				D6134A531F852A85005592A2 /* ImageSlice.swift in Sources */,
@@ -601,7 +594,6 @@
 				D6134A7C1F85CF5E005592A2 /* ImageAppKit.swift in Sources */,
 				D6134A841F85CF5E005592A2 /* RGBA.swift in Sources */,
 				D6134A7B1F85CF5E005592A2 /* Image.swift in Sources */,
-				D6134A811F85CF5E005592A2 /* Protocols.swift in Sources */,
 				D6134A821F85CF5E005592A2 /* Range.swift in Sources */,
 				D6134A801F85CF5E005592A2 /* ImageUIKit.swift in Sources */,
 				D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */,
@@ -635,7 +627,6 @@
 				D6134ABB1F85D2AF005592A2 /* ImageAppKit.swift in Sources */,
 				D6134AC31F85D2AF005592A2 /* RGBA.swift in Sources */,
 				D6134ABA1F85D2AF005592A2 /* Image.swift in Sources */,
-				D6134AC01F85D2AF005592A2 /* Protocols.swift in Sources */,
 				D6134AC11F85D2AF005592A2 /* Range.swift in Sources */,
 				D6134ABF1F85D2AF005592A2 /* ImageUIKit.swift in Sources */,
 				D6134ABD1F85D2AF005592A2 /* ImageSlice.swift in Sources */,
@@ -669,7 +660,6 @@
 				D6134ADC1F85DA5C005592A2 /* ImageAppKit.swift in Sources */,
 				D6134AE41F85DA5C005592A2 /* RGBA.swift in Sources */,
 				D6134ADB1F85DA5C005592A2 /* Image.swift in Sources */,
-				D6134AE11F85DA5C005592A2 /* Protocols.swift in Sources */,
 				D6134AE21F85DA5C005592A2 /* Range.swift in Sources */,
 				D6134AE01F85DA5C005592A2 /* ImageUIKit.swift in Sources */,
 				D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */,
