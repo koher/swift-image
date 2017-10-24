@@ -148,7 +148,7 @@
     
     extension Image where Pixel == Float { // Conversion
         public var cgImage: CGImage {
-            return (map { UInt8(Swift.min(Swift.max($0, 0.0), 1.0) * 255.0) }).cgImage
+            return (map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255.0) }).cgImage
         }
         
         fileprivate static var colorSpace: CGColorSpace {
