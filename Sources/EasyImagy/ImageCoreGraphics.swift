@@ -14,15 +14,15 @@
         }
         
         fileprivate init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-            let safeWidth = Swift.max(width, 0)
-            let safeHeight = Swift.max(height, 0)
+            assert(width >= 0)
+            assert(height >= 0)
             
-            let count = safeWidth * safeHeight
+            let count = width * height
             let defaultPixel = RGBA.transparent
             var pixels = [RGBA](repeating: defaultPixel, count: count)
             
-            let context  = CGContext(data: &pixels, width: safeWidth, height: safeHeight, bitsPerComponent: 8, bytesPerRow: safeWidth * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!
-            context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
+            let context  = CGContext(data: &pixels, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!
+            context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
             setUp(context)
             
             for i in 0..<count {
@@ -36,7 +36,7 @@
             
             let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<RGBA>(mutating: pixels)!.withMemoryRebound(to: Pixel.self, capacity: pixels.count) { $0 }, count: pixels.count))
             
-            self.init(width: safeWidth, height: safeHeight, pixels: ps)
+            self.init(width: width, height: height, pixels: ps)
         }
     }
     
@@ -52,19 +52,19 @@
         }
         
         fileprivate init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-            let safeWidth = Swift.max(width, 0)
-            let safeHeight = Swift.max(height, 0)
-            
-            let count = safeWidth * safeHeight
+            assert(width >= 0)
+            assert(height >= 0)
+
+            let count = width * height
             var pixels = [UInt8](repeating: 0, count: count)
             
-            let context  = CGContext(data: &pixels, width: safeWidth, height: safeHeight, bitsPerComponent: 8, bytesPerRow: safeWidth, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!
-            context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
+            let context  = CGContext(data: &pixels, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!
+            context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
             setUp(context)
             
             let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<UInt8>(mutating: pixels)!.withMemoryRebound(to: Pixel.self, capacity: pixels.count) { $0 }, count: pixels.count))
             
-            self.init(width: safeWidth, height: safeHeight, pixels: ps)
+            self.init(width: width, height: height, pixels: ps)
         }
     }
     
@@ -80,19 +80,19 @@
         }
         
         fileprivate init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-            let safeWidth = Swift.max(width, 0)
-            let safeHeight = Swift.max(height, 0)
-            
-            let count = safeWidth * safeHeight
+            assert(width >= 0)
+            assert(height >= 0)
+
+            let count = width * height
             var pixels = [UInt8](repeating: 0, count: count)
             
-            let context  = CGContext(data: &pixels, width: safeWidth, height: safeHeight, bitsPerComponent: 8, bytesPerRow: safeWidth, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!
-            context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(safeWidth), height: CGFloat(safeHeight)))
+            let context  = CGContext(data: &pixels, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!
+            context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
             setUp(context)
             
             let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<Float>(mutating: pixels.map { Float($0) / 255.0 })!.withMemoryRebound(to: Pixel.self, capacity: pixels.count) { $0 }, count: pixels.count))
             
-            self.init(width: safeWidth, height: safeHeight, pixels: ps)
+            self.init(width: width, height: height, pixels: ps)
         }
     }
     
