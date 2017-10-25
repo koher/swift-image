@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D60D48A51FA0E3360047F2D3 /* ImageInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */; };
 		D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A0E1F85226C005592A2 /* EasyImagy.framework */; };
 		D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134A491F852A64005592A2 /* ImageAppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* ImageAppKitTests.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInternal.swift; sourceTree = "<group>"; };
 		D6134A0E1F85226C005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EasyImagyTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A2A1F852A49005592A2 /* EasyImagy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				D6134A2B1F852A49005592A2 /* Image.swift */,
 				D6134A2C1F852A49005592A2 /* ImageAppKit.swift */,
 				D6134A2D1F852A49005592A2 /* ImageCoreGraphics.swift */,
+				D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */,
 				D6134A2E1F852A49005592A2 /* ImageSlice.swift */,
 				D6134A2F1F852A49005592A2 /* ImageTyped.swift */,
 				D6134A301F852A49005592A2 /* ImageUIKit.swift */,
@@ -567,6 +570,7 @@
 				D6134A531F852A85005592A2 /* ImageSlice.swift in Sources */,
 				D6134A521F852A85005592A2 /* ImageCoreGraphics.swift in Sources */,
 				D6134A541F852A85005592A2 /* ImageTyped.swift in Sources */,
+				D60D48A51FA0E3360047F2D3 /* ImageInternal.swift in Sources */,
 				D6134A581F852A85005592A2 /* RangedSubscript.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -134,37 +134,6 @@ extension Image { // Higher-order methods
 	}
 }
 
-extension Image { // Convolutions
-    internal func _convoluted<W, Summable>(by kernel: Image<W>, toSummable: (Pixel) -> Summable, product: (Summable, W) -> Summable, zero: Summable, sum: (Summable, Summable) -> Summable, toOriginal: (Summable) -> Pixel) -> Image<Pixel> {
-		precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
-		precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
-		
-		let hw = kernel.width / 2  // halfWidth
-		let hh = kernel.height / 2 // halfHeight
-		
-		var pixels: [Pixel] = []
-		pixels.reserveCapacity(count)
-		
-		for y in 0..<height {
-			for x in 0..<width {
-				var weightedValues: [Summable] = []
-				for fy in 0..<kernel.height {
-					for fx in 0..<kernel.width {
-						let dx = fx - hw
-						let dy = fy - hh
-                        let summablePixel = toSummable(self.pixels[_safePixelIndex(x: x + dx, y: y + dy)])
-                        let weight = kernel[fx, fy]
-						weightedValues.append(product(summablePixel, weight))
-					}
-				}
-                pixels.append(toOriginal(weightedValues.reduce(zero) { sum($0, $1) }))
-			}
-		}
-		
-		return Image<Pixel>(width: width, height: height, pixels: pixels)
-	}
-}
-
 extension Image { // Operations
 	public func xReversed() -> Image<Pixel> {
 		var pixels = [Pixel]()
