@@ -7,14 +7,14 @@ extension Int: NumericType {}
 extension Float: NumericType {}
 extension Double: NumericType {}
 
-internal struct GenericRGBA<T: NumericType>: NumericType {
+internal struct GenericRGBA<T> {
     var red: T
     var green: T
     var blue: T
     var alpha: T
 }
 
-internal func +<T>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
+internal func +<T: NumericType>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
     return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
 }
 
