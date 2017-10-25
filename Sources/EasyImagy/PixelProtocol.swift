@@ -7,6 +7,13 @@ extension Int: _Summable {}
 extension Float: _Summable {}
 extension Double: _Summable {}
 
+internal protocol _Multipliable {
+    static func *(lhs: Self, rhs: Self) -> Self
+}
+extension Int: _Multipliable {}
+extension Float: _Multipliable {}
+extension Double: _Multipliable {}
+
 internal struct GenericRGBA<T> {
     var red: T
     var green: T
@@ -16,6 +23,10 @@ internal struct GenericRGBA<T> {
 
 internal func +<T: _Summable>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
     return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
+}
+
+internal func *<T: _Multipliable>(lhs: GenericRGBA<T>, rhs: T) -> GenericRGBA<T> {
+    return GenericRGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
 }
 
 extension RGBA {
@@ -60,15 +71,15 @@ extension RGBA {
     }
     
     internal static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
-        return GenericRGBA<Int>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+        return lhs * rhs
     }
     
     internal static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
-        return GenericRGBA<Float>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+        return lhs * rhs
     }
     
     internal static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
-        return GenericRGBA<Double>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+        return lhs * rhs
     }
 }
 
