@@ -106,33 +106,7 @@ internal func +<T>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
     return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
 }
 
-internal protocol PixelType {
-    associatedtype SummableI: NumericType
-    associatedtype SummableF: NumericType
-    associatedtype SummableD: NumericType
-    
-    init(summableI: SummableI)
-    init(summableF: SummableF)
-    init(summableD: SummableD)
-    
-    var summableI: SummableI { get }
-    var summableF: SummableF { get }
-    var summableD: SummableD { get }
-    
-    static var summableIZero: SummableI { get }
-    static var summableFZero: SummableF { get }
-    static var summableDZero: SummableD { get }
-    
-    static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI
-    static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF
-    static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD
-    
-    static func divI(_ lhs: SummableI, _ rhs: Int) -> SummableI
-    static func divF(_ lhs: SummableF, _ rhs: Float) -> SummableF
-    static func divD(_ lhs: SummableD, _ rhs: Double) -> SummableD
-}
-
-extension RGBA: PixelType {
+extension RGBA {
     internal typealias SummableI = GenericRGBA<Int>
     internal typealias SummableF = GenericRGBA<Float>
     internal typealias SummableD = GenericRGBA<Double>
@@ -198,7 +172,7 @@ extension RGBA: PixelType {
     }
 }
 
-extension UInt8: PixelType {
+extension UInt8 {
     typealias SummableI = Int
     typealias SummableF = Float
     typealias SummableD = Double
@@ -267,7 +241,7 @@ extension UInt8: PixelType {
     }
 }
 
-extension Int: PixelType {
+extension Int {
     typealias SummableI = Int
     typealias SummableF = Float
     typealias SummableD = Double
@@ -336,7 +310,7 @@ extension Int: PixelType {
     }
 }
 
-extension Float: PixelType {
+extension Float {
     typealias SummableI = Float
     typealias SummableF = Float
     typealias SummableD = Double
@@ -405,7 +379,7 @@ extension Float: PixelType {
     }
 }
 
-extension Double: PixelType {
+extension Double {
     typealias SummableI = Double
     typealias SummableF = Double
     typealias SummableD = Double
