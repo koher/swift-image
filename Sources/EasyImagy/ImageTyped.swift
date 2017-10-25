@@ -140,120 +140,120 @@ extension Image where Pixel == Double { // map with indices
 
 extension Image where Pixel == RGBA { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<RGBA> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<RGBA> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<RGBA> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == UInt8 { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Int { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<Int> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<Int> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<Int> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Float { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<Float> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<Float> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<Float> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Double { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<Double> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<Double> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<Double> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == RGBA { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> RGBA {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA> {
-        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == UInt8 { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> UInt8 {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
-        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == Int { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Int {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
-        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == Float { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Float {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
-        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == Double { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Double {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
-        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }

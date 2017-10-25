@@ -70,15 +70,15 @@ extension RGBA {
         return GenericRGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
-    internal static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
+    internal static func productI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    internal static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
+    internal static func productF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    internal static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
+    internal static func productD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -127,15 +127,15 @@ extension UInt8 {
         
     }
     
-    internal static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
+    internal static func productI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    internal static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
+    internal static func productF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    internal static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
+    internal static func productD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -184,15 +184,15 @@ extension Int {
         
     }
     
-    internal static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
+    internal static func productI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * rhs
     }
     
-    internal static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
+    internal static func productF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    internal static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
+    internal static func productD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -241,15 +241,15 @@ extension Float {
         
     }
     
-    internal static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
+    internal static func productI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * Float(rhs)
     }
     
-    internal static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
+    internal static func productF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * rhs
     }
     
-    internal static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
+    internal static func productD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
@@ -298,15 +298,15 @@ extension Double {
         
     }
     
-    internal static func mulI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
+    internal static func productI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
         return lhs * Double(rhs)
     }
     
-    internal static func mulF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
+    internal static func productF(_ lhs: SummableF, _ rhs: Float) -> SummableF {
         return lhs * Double(rhs)
     }
     
-    internal static func mulD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
+    internal static func productD(_ lhs: SummableD, _ rhs: Double) -> SummableD {
         return lhs * rhs
     }
 }
