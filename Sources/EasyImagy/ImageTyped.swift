@@ -210,50 +210,50 @@ extension Image where Pixel == Double { // Convolution
 
 extension Image where Pixel == RGBA { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> RGBA {
-        return self._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA> {
-        return self._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == UInt8 { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> UInt8 {
-        return self._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
-        return self._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == Int { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Int {
-        return self._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
-        return self._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == Float { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Float {
-        return self._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
-        return self._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 
 extension Image where Pixel == Double { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> Double {
-        return self._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
-        return self._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }

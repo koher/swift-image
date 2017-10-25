@@ -1,7 +1,14 @@
 import Foundation
 
-extension Image where Pixel: PixelType { // Interpolation, Transformation
-    internal func _interpolate(x: Float, y: Float) -> Pixel {
+extension Image { // Interpolation, Transformation
+    internal func _interpolate<Summable>(
+        x: Float,
+        y: Float,
+        toSummable: (Pixel) -> Summable,
+        product: (Summable, Float) -> Summable,
+        sum: (Summable, Summable) -> Summable,
+        toOriginal: (Summable) -> Pixel
+    ) -> Pixel {
         let width = self.width
         let height = self.height
         
@@ -50,10 +57,21 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
         let w10 = (1.0 - wx) * wy
         let w11 = wx * wy
         
-        return Pixel(summableF: Pixel.mulF(v00.summableF, w00) + Pixel.mulF(v01.summableF, w01) + Pixel.mulF(v10.summableF, w10) + Pixel.mulF(v11.summableF, w11))
+        return toOriginal(sum(
+            sum(product(toSummable(v00), w00), product(toSummable(v01), w01)),
+            sum(product(toSummable(v10), w10), product(toSummable(v11), w11))
+        ))
     }
     
-    internal func _transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Pixel> {
+    internal func _transformed<Summable>(
+        width: Int,
+        height: Int,
+        toSummable: (Pixel) -> Summable,
+        product: (Summable, Float) -> Summable,
+        sum: (Summable, Summable) -> Summable,
+        toOriginal: (Summable) -> Pixel,
+        transform: (Float, Float) -> (Float, Float)
+    ) -> Image<Pixel> {
         guard width >= 0 else { fatalError("`width` must be greater than or equal to 0: \(width)") }
         guard height >= 0 else { fatalError("`width` must be greater than or equal to 0: \(height)") }
         
@@ -62,7 +80,7 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
         for y in 0..<height {
             for x in 0..<width {
                 let transformed = transform(Float(x), Float(y))
-                pixels.append(_interpolate(x: transformed.0, y: transformed.1))
+                pixels.append(_interpolate(x: transformed.0, y: transformed.1, toSummable: toSummable, product: product, sum: sum, toOriginal: toOriginal))
             }
         }
         

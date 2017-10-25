@@ -58,11 +58,11 @@ extension Image where Pixel == ${type} { // Convolution
 
 extension Image where Pixel == ${type} { // Interpolation, Transformation
     public subscript(x: Float, y: Float) -> ${type} {
-        return self._interpolate(x: x, y: y)
+        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<${type}> {
-        return self._transformed(width: width, height: height, transform: transform)
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.mulF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 % end
