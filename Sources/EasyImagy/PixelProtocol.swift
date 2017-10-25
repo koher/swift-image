@@ -84,9 +84,9 @@ extension RGBA {
 }
 
 extension UInt8 {
-    typealias SummableI = Int
-    typealias SummableF = Float
-    typealias SummableD = Double
+    internal typealias SummableI = Int
+    internal typealias SummableF = Float
+    internal typealias SummableD = Double
     
     internal init(summableI: Int) {
         self = UInt8(clamp(summableI, lower: Int(UInt8.min), upper: Int(UInt8.max)))
@@ -141,9 +141,9 @@ extension UInt8 {
 }
 
 extension Int {
-    typealias SummableI = Int
-    typealias SummableF = Float
-    typealias SummableD = Double
+    internal typealias SummableI = Int
+    internal typealias SummableF = Float
+    internal typealias SummableD = Double
     
     internal init(summableI: Int) {
         self = summableI
@@ -198,9 +198,9 @@ extension Int {
 }
 
 extension Float {
-    typealias SummableI = Float
-    typealias SummableF = Float
-    typealias SummableD = Double
+    internal typealias SummableI = Float
+    internal typealias SummableF = Float
+    internal typealias SummableD = Double
     
     internal init(summableI: Float) {
         self = summableI
@@ -255,9 +255,9 @@ extension Float {
 }
 
 extension Double {
-    typealias SummableI = Double
-    typealias SummableF = Double
-    typealias SummableD = Double
+    internal typealias SummableI = Double
+    internal typealias SummableF = Double
+    internal typealias SummableD = Double
     
     internal init(summableI: Double) {
         self = summableI
