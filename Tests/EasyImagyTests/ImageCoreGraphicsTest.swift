@@ -8,10 +8,10 @@ import EasyImagy
         func testCgImage() {
             do {
                 let image = Image<RGBA>(width: 2, height: 2, pixels: [
-                    RGBA(red: 0, green: 1, blue: 2, alpha: 255),
-                    RGBA(red: 253, green: 254, blue: 255, alpha: 255),
-                    RGBA(red: 10, green: 20, blue: 30, alpha: 102),
-                    RGBA(red: 10, green: 20, blue: 30, alpha: 51),
+                    RGBA<UInt8>(red: 0, green: 1, blue: 2, alpha: 255),
+                    RGBA<UInt8>(red: 253, green: 254, blue: 255, alpha: 255),
+                    RGBA<UInt8>(red: 10, green: 20, blue: 30, alpha: 102),
+                    RGBA<UInt8>(red: 10, green: 20, blue: 30, alpha: 51),
                 ])
                 let cgImage = image.cgImage
                 XCTAssertEqual(cgImage.width, image.width)

@@ -29,7 +29,7 @@ internal func *<T: _Multipliable>(lhs: GenericRGBA<T>, rhs: T) -> GenericRGBA<T>
     return GenericRGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
 }
 
-extension RGBA {
+extension RGBA where Channel == UInt8 {
     internal typealias SummableI = GenericRGBA<Int>
     internal typealias SummableF = GenericRGBA<Float>
     internal typealias SummableD = GenericRGBA<Double>

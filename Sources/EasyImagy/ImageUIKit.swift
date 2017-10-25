@@ -1,7 +1,7 @@
 #if os(iOS) || os(watchOS) || os(tvOS)
     import UIKit
     
-    extension Image where Pixel == RGBA { // UIKit
+    extension Image where Pixel == RGBA<UInt8> { // UIKit
         public init?(uiImage: UIImage) {
             guard let cgImage: CGImage = uiImage.cgImage else { return nil }
             self.init(cgImage: cgImage)

@@ -257,15 +257,15 @@ class ImageTests: XCTestCase {
     
     func testSubscriptInterpolation() {
         let image = Image<RGBA>(width: 3, height: 3, pixels: [
-            RGBA(red:  0, green:  0, blue:  0, alpha:  0),
-            RGBA(red:  2, green:  4, blue:  6, alpha:  8),
-            RGBA(red:  4, green:  8, blue: 12, alpha: 16),
-            RGBA(red:  6, green: 12, blue: 18, alpha: 24),
-            RGBA(red:  8, green: 16, blue: 24, alpha: 32),
-            RGBA(red: 10, green: 20, blue: 30, alpha: 40),
-            RGBA(red: 12, green: 24, blue: 36, alpha: 48),
-            RGBA(red: 14, green: 28, blue: 42, alpha: 56),
-            RGBA(red: 16, green: 32, blue: 48, alpha: 64),
+            RGBA<UInt8>(red:  0, green:  0, blue:  0, alpha:  0),
+            RGBA<UInt8>(red:  2, green:  4, blue:  6, alpha:  8),
+            RGBA<UInt8>(red:  4, green:  8, blue: 12, alpha: 16),
+            RGBA<UInt8>(red:  6, green: 12, blue: 18, alpha: 24),
+            RGBA<UInt8>(red:  8, green: 16, blue: 24, alpha: 32),
+            RGBA<UInt8>(red: 10, green: 20, blue: 30, alpha: 40),
+            RGBA<UInt8>(red: 12, green: 24, blue: 36, alpha: 48),
+            RGBA<UInt8>(red: 14, green: 28, blue: 42, alpha: 56),
+            RGBA<UInt8>(red: 16, green: 32, blue: 48, alpha: 64),
         ])
         
         XCTAssertEqual(image[0, 0], image[0.0, 0.0])
@@ -334,8 +334,8 @@ class ImageTests: XCTestCase {
     }
 	
 	func testMap() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!.map { pixel in
-			return RGBA(red: pixel.red / 2, green: pixel.green / 2, blue: pixel.blue / 2, alpha: pixel.alpha / 2)
+		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!.map { pixel in
+			RGBA<UInt8>(red: pixel.red / 2, green: pixel.green / 2, blue: pixel.blue / 2, alpha: pixel.alpha / 2)
 		}
         
 		XCTAssertEqual(127, image[0, 0].red)
@@ -351,8 +351,9 @@ class ImageTests: XCTestCase {
     
     func testMapWithIndices() {
         do {
-            let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
-                return RGBA(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
+            let original = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
+            let image = original.map { (x: Int, y: Int, pixel: RGBA<UInt8>) -> RGBA<UInt8> in
+                return RGBA<UInt8>(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
             }
             
             XCTAssertEqual( 42, image[0, 0].red)
@@ -377,8 +378,9 @@ class ImageTests: XCTestCase {
         }
         
         do {
-            let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!.map { (x: Int, y: Int, pixel: RGBA) -> RGBA in
-                return RGBA(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
+            let original = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!
+            let image = original.map { (x: Int, y: Int, pixel: RGBA<UInt8>) -> RGBA<UInt8> in
+                RGBA<UInt8>(red: x + 42, green: y + 42, blue: (pixel.redInt + pixel.blueInt) / 2, alpha: (pixel.greenInt + pixel.alphaInt) / 2)
             }
             
             XCTAssertEqual( 42, image[0, 0].red)

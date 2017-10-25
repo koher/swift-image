@@ -1,10 +1,10 @@
-public struct RGBA {
-    public var red: UInt8
-    public var green: UInt8
-    public var blue: UInt8
-    public var alpha: UInt8
+public struct RGBA<Channel> {
+    public var red: Channel
+    public var green: Channel
+    public var blue: Channel
+    public var alpha: Channel
     
-    public init(red: UInt8, green: UInt8, blue: UInt8, alpha: UInt8) {
+    public init(red: Channel, green: Channel, blue: Channel, alpha: Channel) {
         self.red = red
         self.green = green
         self.blue = blue
@@ -13,15 +13,17 @@ public struct RGBA {
 }
 
 extension RGBA { // Additional initializers
-    public init(red: UInt8, green: UInt8, blue: UInt8) {
+    public init(gray: Channel, alpha: Channel) {
+        self.init(red: gray, green: gray, blue: gray, alpha: alpha)
+    }
+}
+
+extension RGBA where Channel == UInt8 { // Additional initializers
+    public init(red: Channel, green: Channel, blue: Channel) {
         self.init(red: red, green: green, blue: blue, alpha: 255)
     }
     
-    public init(gray: UInt8, alpha: UInt8) {
-        self.init(red: gray, green: gray, blue: gray, alpha: alpha)
-    }
-    
-    public init(gray: UInt8) {
+    public init(gray: Channel) {
         self.init(gray: gray, alpha: 255)
     }
     
@@ -42,7 +44,7 @@ extension RGBA { // Additional initializers
     }
 }
 
-extension RGBA {
+extension RGBA where Channel == UInt8 {
     public init(_ rgbaInt: UInt32) {
         self.init(red: UInt8((rgbaInt >> 24) & 0xFF), green: UInt8((rgbaInt >> 16) & 0xFF), blue: UInt8((rgbaInt >> 8) & 0xFF), alpha: UInt8(rgbaInt & 0xFF))
     }
@@ -50,7 +52,11 @@ extension RGBA {
 
 extension RGBA : CustomStringConvertible {
     public var description: String {
-        return String(format: "#%02X%02X%02X%02X", arguments: [red, green, blue, alpha])
+        if let zelf = self as? RGBA<UInt8> {
+            return String(format: "#%02X%02X%02X%02X", arguments: [zelf.red, zelf.green, zelf.blue, zelf.alpha])
+        } else {
+            return "RGBA(red: \(red), green: \(green), blue: \(blue), alpha: \(alpha))"
+        }
     }
 }
 
@@ -60,14 +66,14 @@ extension RGBA : CustomDebugStringConvertible {
     }
 }
 
-extension RGBA : Equatable {
+// FIXME: with conditional conformance
+extension RGBA where Channel: Equatable {
+    public static func ==(lhs: RGBA, rhs: RGBA) -> Bool {
+        return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
+    }
 }
 
-public func ==(lhs: RGBA, rhs: RGBA) -> Bool {
-    return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
-}
-
-extension RGBA { // Presets
+extension RGBA where Channel == UInt8 { // Presets
     public static var red: RGBA {
         return RGBA(red: 255, green: 0, blue: 0)
     }
@@ -93,7 +99,7 @@ extension RGBA { // Presets
     }
 }
 
-extension RGBA { // Int getters
+extension RGBA where Channel == UInt8 { // Int getters
     public var redInt: Int {
         get {
             return Int(red)
@@ -131,7 +137,7 @@ extension RGBA { // Int getters
     }
 }
 
-extension RGBA { // Gray
+extension RGBA where Channel == UInt8{ // Gray
     public var gray: UInt8 {
         return UInt8(grayInt)
     }

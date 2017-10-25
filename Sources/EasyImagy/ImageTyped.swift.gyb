@@ -1,6 +1,6 @@
-% types = ['RGBA', 'UInt8', 'Int', 'Float', 'Double']
+% types = ['RGBA<UInt8>', 'UInt8', 'Int', 'Float', 'Double']
 % conversions = {
-%   'RGBA'  : ['RGBA', 'UInt8', 'Int', 'Float', 'Double'],
+%   'RGBA<UInt8>'  : ['RGBA<UInt8>', 'UInt8', 'Int', 'Float', 'Double'],
 %   'UInt8' : ['UInt8', 'Int', 'Float', 'Double'],
 %   'Int'   : ['Int', 'Float', 'Double'],
 %   'Float' : ['Float', 'Double'],

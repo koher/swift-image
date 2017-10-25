@@ -2,7 +2,7 @@
     import CoreGraphics
     import Foundation
     
-    extension Image where Pixel == RGBA { // Initializers
+    extension Image where Pixel == RGBA<UInt8> { // Initializers
         public init(cgImage: CGImage) {
             let width = cgImage.width
             let height = cgImage.height
@@ -96,7 +96,7 @@
         }
     }
     
-    extension Image where Pixel == RGBA { // Conversion
+    extension Image where Pixel == RGBA<UInt8> { // Conversion
         public var cgImage: CGImage {
             let length = count * 4
             
@@ -160,7 +160,7 @@
         }
     }
     
-    extension Image where Pixel == RGBA { // Resizing
+    extension Image where Pixel == RGBA<UInt8> { // Resizing
         public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
             return resizedTo(width: width, height: height, interpolationQuality: CGInterpolationQuality.default)
         }
