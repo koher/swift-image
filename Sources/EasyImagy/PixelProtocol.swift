@@ -1,11 +1,11 @@
 import Foundation
 
-internal protocol NumericType {
+internal protocol _Summable {
     static func +(lhs: Self, rhs: Self) -> Self
 }
-extension Int: NumericType {}
-extension Float: NumericType {}
-extension Double: NumericType {}
+extension Int: _Summable {}
+extension Float: _Summable {}
+extension Double: _Summable {}
 
 internal struct GenericRGBA<T> {
     var red: T
@@ -14,7 +14,7 @@ internal struct GenericRGBA<T> {
     var alpha: T
 }
 
-internal func +<T: NumericType>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
+internal func +<T: _Summable>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
     return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
 }
 
