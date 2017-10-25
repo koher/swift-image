@@ -70,33 +70,6 @@ extension Image where Pixel: PixelType { // Interpolation, Transformation
     }
 }
 
-internal func weightedSum<P: PixelType>(_ weightedPixels: [(weight: Int, value: P)]) -> P {
-    var sum = P.summableIZero
-    for (weight, pixel) in weightedPixels {
-        sum = sum + P.mulI(pixel.summableI, weight)
-    }
-    
-    return P(summableI: sum)
-}
-
-internal func weightedSum<P: PixelType>(_ weightedPixels: [(weight: Float, value: P)]) -> P {
-    var sum = P.summableFZero
-    for (weight, pixel) in weightedPixels {
-        sum = sum + P.mulF(pixel.summableF, weight)
-    }
-    
-    return P(summableF: sum)
-}
-
-internal func weightedSum<P: PixelType>(_ weightedPixels: [(weight: Double, value: P)]) -> P {
-    var sum = P.summableDZero
-    for (weight, pixel) in weightedPixels {
-        sum = sum + P.mulD(pixel.summableD, weight)
-    }
-    
-    return P(summableD: sum)
-}
-
 internal protocol NumericType {
     static func +(lhs: Self, rhs: Self) -> Self
 }

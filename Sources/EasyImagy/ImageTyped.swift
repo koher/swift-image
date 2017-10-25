@@ -140,71 +140,71 @@ extension Image where Pixel == Double { // map with indices
 
 extension Image where Pixel == RGBA { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<RGBA> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<RGBA> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<RGBA> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == UInt8 { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Int { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<Int> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<Int> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<Int> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Float { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<Float> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<Float> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<Float> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Double { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<Double> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.mulI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
     public func convoluted(by kernel: Image<Float>) -> Image<Double> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.mulF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
     public func convoluted(by kernel: Image<Double>) -> Image<Double> {
-        return self._convoluted(by: kernel, weightedSum: weightedSum)
+        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.mulD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
