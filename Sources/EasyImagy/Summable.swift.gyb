@@ -33,14 +33,6 @@ internal func *<T: _Multipliable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
 %   'Float' : ['Float', 'Float', 'Double'],
 %   'Double': ['Double', 'Double', 'Double'],
 % }
-% type_to_max_value = {
-%   'UInt8' : 'UInt8.max',
-%   'UInt16': 'UInt16.max',
-%   'UInt32': 'UInt32.max',
-%   'Int'   : '255',
-%   'Float' : '1',
-%   'Double': '1',
-% }
 % summable_sybmols = ['I', 'F', 'D']
 % summable_weights = ['Int', 'Float', 'Double']
 %
@@ -55,10 +47,10 @@ extension RGBA where Channel == ${type} {
 %     end
     internal init(summable${summable_symbol}: RGBA<${summable}>) {
         self.init(
-            red: ${type}(clamp(summable${summable_symbol}.red, lower: 0, upper: ${summable}(${type_to_max_value[type]}))),
-            green: ${type}(clamp(summable${summable_symbol}.green, lower: 0, upper: ${summable}(${type_to_max_value[type]}))),
-            blue: ${type}(clamp(summable${summable_symbol}.blue, lower: 0, upper: ${summable}(${type_to_max_value[type]}))),
-            alpha: ${type}(clamp(summable${summable_symbol}.alpha, lower: 0, upper: ${summable}(${type_to_max_value[type]})))
+            red: ${type}(summable${summable_symbol}.red),
+            green: ${type}(summable${summable_symbol}.green),
+            blue: ${type}(summable${summable_symbol}.blue),
+            alpha: ${type}(summable${summable_symbol}.alpha)
         )
     }
 %   end
@@ -104,7 +96,7 @@ extension ${type} {
 
 %     end
     internal init(summable${summable_symbol}: ${summable}) {
-        self = ${type}(clamp(summable${summable_symbol}, lower: 0, upper: ${summable}(${type_to_max_value[type]})))
+        self = ${type}(summable${summable_symbol})
     }
 %   end
 %
