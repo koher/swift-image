@@ -14,60 +14,53 @@ extension Int: _Multipliable {}
 extension Float: _Multipliable {}
 extension Double: _Multipliable {}
 
-internal struct GenericRGBA<T> {
-    var red: T
-    var green: T
-    var blue: T
-    var alpha: T
+internal func +<T: _Summable>(lhs: RGBA<T>, rhs: RGBA<T>) -> RGBA<T> {
+    return RGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
 }
 
-internal func +<T: _Summable>(lhs: GenericRGBA<T>, rhs: GenericRGBA<T>) -> GenericRGBA<T> {
-    return GenericRGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
-}
-
-internal func *<T: _Multipliable>(lhs: GenericRGBA<T>, rhs: T) -> GenericRGBA<T> {
-    return GenericRGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+internal func *<T: _Multipliable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
+    return RGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
 }
 
 extension RGBA where Channel == UInt8 {
-    internal typealias SummableI = GenericRGBA<Int>
-    internal typealias SummableF = GenericRGBA<Float>
-    internal typealias SummableD = GenericRGBA<Double>
+    internal typealias SummableI = RGBA<Int>
+    internal typealias SummableF = RGBA<Float>
+    internal typealias SummableD = RGBA<Double>
     
-    internal init(summableI: GenericRGBA<Int>) {
+    internal init(summableI: RGBA<Int>) {
         self.init(red: clamp(summableI.red, lower: Int(UInt8.min), upper: Int(UInt8.max)), green: clamp(summableI.green, lower: Int(UInt8.min), upper: Int(UInt8.max)), blue: clamp(summableI.blue, lower: Int(UInt8.min), upper: Int(UInt8.max)), alpha: clamp(summableI.alpha, lower: Int(UInt8.min), upper: Int(UInt8.max)))
     }
     
-    internal init(summableF: GenericRGBA<Float>) {
+    internal init(summableF: RGBA<Float>) {
         self.init(red: UInt8(clamp(summableF.red, lower: Float(UInt8.min), upper: Float(UInt8.max))), green: UInt8(clamp(summableF.green, lower: Float(UInt8.min), upper: Float(UInt8.max))), blue: UInt8(clamp(summableF.blue, lower: Float(UInt8.min), upper: Float(UInt8.max))), alpha: UInt8(clamp(summableF.alpha, lower: Float(UInt8.min), upper: Float(UInt8.max))))
     }
     
-    internal init(summableD: GenericRGBA<Double>) {
+    internal init(summableD: RGBA<Double>) {
         self.init(red: UInt8(clamp(summableD.red, lower: Double(UInt8.min), upper: Double(UInt8.max))), green: UInt8(clamp(summableD.green, lower: Double(UInt8.min), upper: Double(UInt8.max))), blue: UInt8(clamp(summableD.blue, lower: Double(UInt8.min), upper: Double(UInt8.max))), alpha: UInt8(clamp(summableD.alpha, lower: Double(UInt8.min), upper: Double(UInt8.max))))
     }
     
-    internal var summableI: GenericRGBA<Int> {
-        return GenericRGBA<Int>(red: redInt, green: greenInt, blue: blueInt, alpha: alphaInt)
+    internal var summableI: RGBA<Int> {
+        return RGBA<Int>(red: redInt, green: greenInt, blue: blueInt, alpha: alphaInt)
     }
     
-    internal var summableF: GenericRGBA<Float> {
-        return GenericRGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
+    internal var summableF: RGBA<Float> {
+        return RGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
     }
     
-    internal var summableD: GenericRGBA<Double> {
-        return GenericRGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
+    internal var summableD: RGBA<Double> {
+        return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
     
-    internal static var summableIZero: GenericRGBA<Int> {
-        return GenericRGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
+    internal static var summableIZero: RGBA<Int> {
+        return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
-    internal static var summableFZero: GenericRGBA<Float> {
-        return GenericRGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
+    internal static var summableFZero: RGBA<Float> {
+        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
-    internal static var summableDZero: GenericRGBA<Double> {
-        return GenericRGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
+    internal static var summableDZero: RGBA<Double> {
+        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
     }
     
     internal static func productI(_ lhs: SummableI, _ rhs: Int) -> SummableI {
