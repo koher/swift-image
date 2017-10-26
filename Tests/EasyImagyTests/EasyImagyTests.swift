@@ -11,13 +11,13 @@ import EasyImagy
             /**/ let x = 0
             /**/ let y = 0
             /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-            /**/ imageView.image = Image<RGBA>(width: 1, height: 1, pixel: RGBA.black).uiImage
+            /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black).uiImage
             
             /**/ if never() {
-            var image = Image<RGBA>(named: "ImageName")!
+            var image = Image<RGBA<UInt8>>(named: "ImageName")!
             /**/ _ = image[0, 0]
             /**/ }
-            /**/ var image = Image<RGBA>(width: 1, height: 1, pixel: .black)
+            /**/ var image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black)
             
             print(image[x, y])
             image[x, y] = RGBA(red: 255, green: 0, blue: 0, alpha: 127)
@@ -40,7 +40,7 @@ import EasyImagy
         }
         
         func testIntroduction() {
-            /**/ let image = Image<RGBA>(width: 10, height: 10, pixel: .black)
+            /**/ let image = Image<RGBA<UInt8>>(width: 10, height: 10, pixel: .black)
             let result = image.map { $0.gray }
             /**/ _ = result[0, 0]
         }
@@ -71,12 +71,12 @@ import EasyImagy
                 /**/ _ = image.count
             }
             do {
-                let image = Image<RGBA>(width: 640, height: 480, pixel: .black) // a black image
+                let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black image
                 /**/ _ = image.count
             }
             do {
-                /**/ let pixels = [RGBA](repeating: .black, count: 640 * 480)
-                let image = Image<RGBA>(width: 640, height: 480, pixels: pixels)
+                /**/ let pixels = [RGBA<UInt8>](repeating: .black, count: 640 * 480)
+                let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels)
                 /**/ _ = image.count
             }
         }
@@ -84,7 +84,7 @@ import EasyImagy
         func testAccessToAPixel() {
             /**/ let x = 0
             /**/ let y = 0
-            /**/ var image = Image<RGBA>(width: 1, height: 1, pixel: .red)
+            /**/ var image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .red)
             
             // Gets a pixel by subscripts
             do {
@@ -116,10 +116,10 @@ import EasyImagy
         }
         
         func testCropping() {
-            /**/ let image = Image<RGBA>(width: 128, height: 128, pixel: .red)
+            /**/ let image = Image<RGBA<UInt8>>(width: 128, height: 128, pixel: .red)
             
-            let slice: ImageSlice<RGBA> = image[32..<64, 32..<64] // no copy cost
-            let cropped = Image<RGBA>(slice) // copy is done here
+            let slice: ImageSlice<RGBA<UInt8>> = image[32..<64, 32..<64] // no copy cost
+            let cropped = Image<RGBA<UInt8>>(slice) // copy is done here
             
             /**/ _ = cropped.count
         }

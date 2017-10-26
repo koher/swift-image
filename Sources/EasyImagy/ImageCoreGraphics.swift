@@ -18,7 +18,7 @@
             assert(height >= 0)
             
             let count = width * height
-            let defaultPixel = RGBA.transparent
+            let defaultPixel = RGBA<UInt8>.transparent
             var pixels = [RGBA](repeating: defaultPixel, count: count)
             
             let context  = CGContext(data: &pixels, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4, space: Image.colorSpace, bitmapInfo: Image.bitmapInfo.rawValue)!

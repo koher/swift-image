@@ -1,0 +1,118 @@
+% types = ['Int', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
+% max_values = {
+%   'Int'   : '255',
+%   'UInt8' : 'UInt8.max',
+%   'UInt16': 'UInt16.max',
+%   'UInt32': 'UInt32.max',
+%   'UInt64': 'UInt64.max',
+%   'Float' : '1',
+%   'Double': '1',
+% }
+% summables = {
+%   'UInt8' : 'UInt',
+%   'UInt16': 'UInt',
+%   'UInt32': 'UInt64',
+% }
+% int_convertibles = {'UInt8', 'UInt16'}
+%
+% for i, type in enumerate(types):
+%   if i > 0:
+
+%   end
+extension RGBA where Channel == ${type} {
+    public init(red: ${type}, green: ${type}, blue: ${type}) {
+        self.init(red: red, green: green, blue: blue, alpha: ${max_values[type]})
+    }
+    
+    public init(gray: ${type}) {
+        self.init(gray: gray, alpha: ${max_values[type]})
+    }
+
+    public static var red: RGBA<${type}> {
+        return RGBA<${type}>(red: ${max_values[type]}, green: 0, blue: 0)
+    }
+    
+    public static var green: RGBA<${type}> {
+        return RGBA<${type}>(red: 0, green: ${max_values[type]}, blue: 0)
+    }
+    
+    public static var blue: RGBA<${type}> {
+        return RGBA<${type}>(red: 0, green: 0, blue: ${max_values[type]})
+    }
+    
+    public static var black: RGBA<${type}> {
+        return RGBA<${type}>(gray: 0)
+    }
+    
+    public static var white: RGBA<${type}> {
+        return RGBA<${type}>(gray: ${max_values[type]})
+    }
+    
+    public static var transparent: RGBA<${type}> {
+        return RGBA<${type}>(gray: 0, alpha: 0)
+    }
+
+    public var gray: ${type} {
+%   summable = summables[type] if type in summables else type
+        return ${type}((${summable}(red) + ${summable}(green) + ${summable}(blue)) / 3)
+    }
+%   if type in int_convertibles:
+    
+    public init(red: Int, green: Int, blue: Int, alpha: Int) {
+        self.init(red: ${type}(red), green: ${type}(green), blue: ${type}(blue), alpha: ${type}(alpha))
+    }
+    
+    public init(red: Int, green: Int, blue: Int) {
+        self.init(red: ${type}(red), green: ${type}(green), blue: ${type}(blue))
+    }
+    
+    public init(gray: Int) {
+        self.init(gray: ${type}(gray))
+    }
+    
+    public init(gray: Int, alpha: Int) {
+        self.init(gray: ${type}(gray), alpha: ${type}(alpha))
+    }
+
+    public var redInt: Int {
+        get {
+            return Int(red)
+        }
+        set {
+            red = ${type}(newValue)
+        }
+    }
+    
+    public var greenInt: Int {
+        get {
+            return Int(green)
+        }
+        set {
+            green = ${type}(newValue)
+        }
+    }
+    
+    public var blueInt: Int {
+        get {
+            return Int(blue)
+        }
+        set {
+            blue = ${type}(newValue)
+        }
+    }
+    
+    public var alphaInt: Int {
+        get {
+            return Int(alpha)
+        }
+        set {
+            alpha = ${type}(newValue)
+        }
+    }
+
+    public var grayInt: Int {
+        return (redInt + greenInt + blueInt) / 3
+    }
+%   end
+}
+% end

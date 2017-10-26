@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D60D48A51FA0E3360047F2D3 /* ImageInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */; };
+		D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
 		D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A0E1F85226C005592A2 /* EasyImagy.framework */; };
 		D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134A491F852A64005592A2 /* ImageAppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* ImageAppKitTests.swift */; };
@@ -111,6 +112,7 @@
 
 /* Begin PBXFileReference section */
 		D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInternal.swift; sourceTree = "<group>"; };
+		D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBATyped.swift; sourceTree = "<group>"; };
 		D6134A0E1F85226C005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EasyImagyTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A2A1F852A49005592A2 /* EasyImagy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				D6134A331F852A49005592A2 /* Range.swift */,
 				D6134A351F852A49005592A2 /* RangedSubscript.swift */,
 				D6134A371F852A49005592A2 /* RGBA.swift */,
+				D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */,
 				D6134A381F852A49005592A2 /* Util.swift */,
 			);
 			path = EasyImagy;
@@ -563,6 +566,7 @@
 				D6134A5A1F852A85005592A2 /* Util.swift in Sources */,
 				D6134A511F852A85005592A2 /* ImageAppKit.swift in Sources */,
 				D66840591F9F426200D1DE7F /* PixelProtocol.swift in Sources */,
+				D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */,
 				D6134A591F852A85005592A2 /* RGBA.swift in Sources */,
 				D6134A501F852A85005592A2 /* Image.swift in Sources */,
 				D6134A571F852A85005592A2 /* Range.swift in Sources */,
