@@ -32,7 +32,7 @@ extension RGBA where Channel == Int {
     }
 
     public var gray: Int {
-        return Int((Int(red) + Int(green) + Int(blue)) / 3)
+        return (red + green + blue) / 3
     }
 }
 
@@ -334,7 +334,7 @@ extension RGBA where Channel == Float {
     }
 
     public var gray: Float {
-        return Float((Float(red) + Float(green) + Float(blue)) / 3)
+        return (red + green + blue) / 3
     }
 }
 
@@ -372,6 +372,6 @@ extension RGBA where Channel == Double {
     }
 
     public var gray: Double {
-        return Double((Double(red) + Double(green) + Double(blue)) / 3)
+        return (red + green + blue) / 3
     }
 }
