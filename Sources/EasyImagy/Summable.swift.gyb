@@ -1,0 +1,141 @@
+import Foundation
+
+internal protocol _Summable {
+    static func +(lhs: Self, rhs: Self) -> Self
+}
+extension Int: _Summable {}
+extension Int64: _Summable {}
+extension Float: _Summable {}
+extension Double: _Summable {}
+
+internal protocol _Multipliable {
+    static func *(lhs: Self, rhs: Self) -> Self
+}
+extension Int: _Multipliable {}
+extension Int64: _Multipliable {}
+extension Float: _Multipliable {}
+extension Double: _Multipliable {}
+
+internal func +<T: _Summable>(lhs: RGBA<T>, rhs: RGBA<T>) -> RGBA<T> {
+    return RGBA<T>(red: lhs.red + rhs.red, green: lhs.green + rhs.green, blue: lhs.blue + rhs.blue, alpha: lhs.alpha + rhs.alpha)
+}
+
+internal func *<T: _Multipliable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
+    return RGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+}
+%
+% types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
+% type_to_summables = {
+%   'UInt8' : ['Int', 'Float', 'Double'],
+%   'UInt16': ['Int', 'Float', 'Double'],
+%   'UInt32': ['Int64', 'Float', 'Double'],
+%   'Int'   : ['Int', 'Float', 'Double'],
+%   'Float' : ['Float', 'Float', 'Double'],
+%   'Double': ['Double', 'Double', 'Double'],
+% }
+% type_to_max_value = {
+%   'UInt8' : 'UInt8.max',
+%   'UInt16': 'UInt16.max',
+%   'UInt32': 'UInt32.max',
+%   'Int'   : '255',
+%   'Float' : '1',
+%   'Double': '1',
+% }
+% summable_sybmols = ['I', 'F', 'D']
+% summable_weights = ['Int', 'Float', 'Double']
+%
+% for type in types:
+
+extension RGBA where Channel == ${type} {
+%   summables = type_to_summables[type]
+%
+%   for i, (summable_symbol, summable) in enumerate(zip(summable_sybmols, summables)):
+%     if i > 0:
+
+%     end
+    internal init(summable${summable_symbol}: RGBA<${summable}>) {
+        self.init(
+            red: ${type}(clamp(summable${summable_symbol}.red, lower: 0, upper: ${summable}(${type_to_max_value[type]}))),
+            green: ${type}(clamp(summable${summable_symbol}.green, lower: 0, upper: ${summable}(${type_to_max_value[type]}))),
+            blue: ${type}(clamp(summable${summable_symbol}.blue, lower: 0, upper: ${summable}(${type_to_max_value[type]}))),
+            alpha: ${type}(clamp(summable${summable_symbol}.alpha, lower: 0, upper: ${summable}(${type_to_max_value[type]})))
+        )
+    }
+%   end
+%
+%   for summable_symbol, summable in zip(summable_sybmols, summables):
+    
+    internal var summable${summable_symbol}: RGBA<${summable}> {
+%     if summable == type:
+        return self
+%     else:
+        return RGBA<${summable}>(red: ${summable}(red), green: ${summable}(green), blue: ${summable}(blue), alpha: ${summable}(alpha))
+%     end
+    }
+%   end
+%
+%   for summable_symbol, summable in zip(summable_sybmols, summables):
+    
+    internal static var summable${summable_symbol}Zero: RGBA<${summable}> {
+        return RGBA<${summable}>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+%   end
+%
+%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+    
+    internal static func product${summable_symbol}(_ lhs: RGBA<${summable}>, _ rhs: ${summable_weight}) -> RGBA<${summable}> {
+%     if summable_weight == summable:
+        return lhs * rhs
+%     else:
+        return lhs * ${summable}(rhs)
+%     end
+    }
+%   end
+}
+% end
+%
+% for type in types:
+
+extension ${type} {
+%   summables = type_to_summables[type]
+%
+%   for i, (summable_symbol, summable) in enumerate(zip(summable_sybmols, summables)):
+%     if i > 0:
+
+%     end
+    internal init(summable${summable_symbol}: ${summable}) {
+        self = ${type}(clamp(summable${summable_symbol}, lower: 0, upper: ${summable}(${type_to_max_value[type]})))
+    }
+%   end
+%
+%   for summable_symbol, summable in zip(summable_sybmols, summables):
+    
+    internal var summable${summable_symbol}: ${summable} {
+%     if summable == type:
+        return self
+%     else:
+        return ${summable}(self)
+%     end
+    }
+%   end
+%
+%   for summable_symbol, summable in zip(summable_sybmols, summables):
+    
+    internal static var summable${summable_symbol}Zero: ${summable} {
+        return 0
+        
+    }
+%   end
+%
+%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+    
+    internal static func product${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
+%     if summable_weight == summable:
+        return lhs * rhs
+%     else:
+        return lhs * ${summable}(rhs)
+%     end
+    }
+%   end
+}
+% end
