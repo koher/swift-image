@@ -1,18 +1,19 @@
-% types = ['RGBA<UInt8>', 'UInt8', 'Int', 'Float', 'Double']
-% conversions = {
-%   'RGBA<UInt8>'  : ['RGBA<UInt8>', 'UInt8', 'Int', 'Float', 'Double'],
-%   'UInt8' : ['UInt8', 'Int', 'Float', 'Double'],
-%   'Int'   : ['Int', 'Float', 'Double'],
-%   'Float' : ['Float', 'Double'],
-%   'Double': ['Double'],
-% }
+% channel_types = [
+%   'UInt8',
+%   'UInt16',
+%   'UInt32',
+%   'Int',
+%   'Float',
+%   'Double',
+% ]
+% types = [f'RGBA<{t}>' for t in channel_types] + channel_types
 %
 % for i, type in enumerate(types):
 %   if i > 0:
 
 %   end
 extension Image where Pixel == ${type} { // map
-%   for j, target_type in enumerate(conversions[type]):
+%   for j, target_type in enumerate(types):
 %     if j > 0:
 
 %     end
@@ -26,7 +27,7 @@ extension Image where Pixel == ${type} { // map
 % for i, type in enumerate(types):
 
 extension Image where Pixel == ${type} { // map with indices
-%   for j, target_type in enumerate(conversions[type]):
+%   for j, target_type in enumerate(types):
 %     if j > 0:
 
 %     end

@@ -30,7 +30,7 @@ import EasyImagy
             }
             
             // Converts the image (e.g. binarizations)
-            let binarized: Image<RGBA> = image.map { $0.gray < 128 ? .black : .white }
+            let binarized: Image<RGBA<UInt8>> = image.map { $0.gray < 128 ? .black : .white }
             
             // From/to `UIImage`
             image = Image<RGBA>(uiImage: imageView.image!)!
