@@ -46,12 +46,11 @@ extension RGBA where Channel == ${type} {
 
 %     end
     internal init(summable${summable_symbol}: RGBA<${summable}>) {
-        self.init(
-            red: ${type}(summable${summable_symbol}.red),
-            green: ${type}(summable${summable_symbol}.green),
-            blue: ${type}(summable${summable_symbol}.blue),
-            alpha: ${type}(summable${summable_symbol}.alpha)
-        )
+%     if summable == type:
+        self = summable${summable_symbol}
+%     else:
+        self = RGBA<${type}>(summable${summable_symbol})
+%     end
     }
 %   end
 %
@@ -96,7 +95,11 @@ extension ${type} {
 
 %     end
     internal init(summable${summable_symbol}: ${summable}) {
+%     if summable == type:
+        self = summable${summable_symbol}
+%     else:
         self = ${type}(summable${summable_symbol})
+%     end
     }
 %   end
 %
