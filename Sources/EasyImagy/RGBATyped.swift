@@ -296,7 +296,7 @@ extension RGBA where Channel == UInt64 {
     }
 
     public var gray: UInt64 {
-        return UInt64((UInt64(red) + UInt64(green) + UInt64(blue)) / 3)
+        return (red / 3 + green / 3 + blue / 3) + (red % 3 + green % 3 + blue % 3) / 3
     }
 }
 

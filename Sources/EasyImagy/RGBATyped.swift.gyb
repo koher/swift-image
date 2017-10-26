@@ -54,7 +54,11 @@ extension RGBA where Channel == ${type} {
 
     public var gray: ${type} {
 %   summable = summables[type] if type in summables else type
+%   if type == 'UInt64':
+        return (red / 3 + green / 3 + blue / 3) + (red % 3 + green % 3 + blue % 3) / 3
+%   else:
         return ${type}((${summable}(red) + ${summable}(green) + ${summable}(blue)) / 3)
+%   end
     }
 %   if type in int_convertibles:
     
