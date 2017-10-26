@@ -1,41 +1,3 @@
-extension RGBA where Channel == Int {
-    public init(red: Int, green: Int, blue: Int) {
-        self.init(red: red, green: green, blue: blue, alpha: 255)
-    }
-    
-    public init(gray: Int) {
-        self.init(gray: gray, alpha: 255)
-    }
-
-    public static var red: RGBA<Int> {
-        return RGBA<Int>(red: 255, green: 0, blue: 0)
-    }
-    
-    public static var green: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 255, blue: 0)
-    }
-    
-    public static var blue: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 0, blue: 255)
-    }
-    
-    public static var black: RGBA<Int> {
-        return RGBA<Int>(gray: 0)
-    }
-    
-    public static var white: RGBA<Int> {
-        return RGBA<Int>(gray: 255)
-    }
-    
-    public static var transparent: RGBA<Int> {
-        return RGBA<Int>(gray: 0, alpha: 0)
-    }
-
-    public var gray: Int {
-        return (red + green + blue) / 3
-    }
-}
-
 extension RGBA where Channel == UInt8 {
     public init(red: UInt8, green: UInt8, blue: UInt8) {
         self.init(red: red, green: green, blue: blue, alpha: UInt8.max)
@@ -70,7 +32,7 @@ extension RGBA where Channel == UInt8 {
     }
 
     public var gray: UInt8 {
-        return UInt8((UInt(red) + UInt(green) + UInt(blue)) / 3)
+        return UInt8((Int(red) + Int(green) + Int(blue)) / 3)
     }
     
     public init(red: Int, green: Int, blue: Int, alpha: Int) {
@@ -164,7 +126,7 @@ extension RGBA where Channel == UInt16 {
     }
 
     public var gray: UInt16 {
-        return UInt16((UInt(red) + UInt(green) + UInt(blue)) / 3)
+        return UInt16((Int(red) + Int(green) + Int(blue)) / 3)
     }
     
     public init(red: Int, green: Int, blue: Int, alpha: Int) {
@@ -297,6 +259,44 @@ extension RGBA where Channel == UInt64 {
 
     public var gray: UInt64 {
         return (red / 3 + green / 3 + blue / 3) + (red % 3 + green % 3 + blue % 3) / 3
+    }
+}
+
+extension RGBA where Channel == Int {
+    public init(red: Int, green: Int, blue: Int) {
+        self.init(red: red, green: green, blue: blue, alpha: 255)
+    }
+    
+    public init(gray: Int) {
+        self.init(gray: gray, alpha: 255)
+    }
+
+    public static var red: RGBA<Int> {
+        return RGBA<Int>(red: 255, green: 0, blue: 0)
+    }
+    
+    public static var green: RGBA<Int> {
+        return RGBA<Int>(red: 0, green: 255, blue: 0)
+    }
+    
+    public static var blue: RGBA<Int> {
+        return RGBA<Int>(red: 0, green: 0, blue: 255)
+    }
+    
+    public static var black: RGBA<Int> {
+        return RGBA<Int>(gray: 0)
+    }
+    
+    public static var white: RGBA<Int> {
+        return RGBA<Int>(gray: 255)
+    }
+    
+    public static var transparent: RGBA<Int> {
+        return RGBA<Int>(gray: 0, alpha: 0)
+    }
+
+    public var gray: Int {
+        return (red + green + blue) / 3
     }
 }
 

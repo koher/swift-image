@@ -1,16 +1,16 @@
-% types = ['Int', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
-% max_values = {
-%   'Int'   : '255',
+% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Int', 'Float', 'Double']
+% type_to_max_value = {
 %   'UInt8' : 'UInt8.max',
 %   'UInt16': 'UInt16.max',
 %   'UInt32': 'UInt32.max',
 %   'UInt64': 'UInt64.max',
+%   'Int'   : '255',
 %   'Float' : '1',
 %   'Double': '1',
 % }
 % summables = {
-%   'UInt8' : 'UInt',
-%   'UInt16': 'UInt',
+%   'UInt8' : 'Int',
+%   'UInt16': 'Int',
 %   'UInt32': 'UInt64',
 % }
 % int_convertibles = {'UInt8', 'UInt16'}
@@ -21,23 +21,23 @@
 %   end
 extension RGBA where Channel == ${type} {
     public init(red: ${type}, green: ${type}, blue: ${type}) {
-        self.init(red: red, green: green, blue: blue, alpha: ${max_values[type]})
+        self.init(red: red, green: green, blue: blue, alpha: ${type_to_max_value[type]})
     }
     
     public init(gray: ${type}) {
-        self.init(gray: gray, alpha: ${max_values[type]})
+        self.init(gray: gray, alpha: ${type_to_max_value[type]})
     }
 
     public static var red: RGBA<${type}> {
-        return RGBA<${type}>(red: ${max_values[type]}, green: 0, blue: 0)
+        return RGBA<${type}>(red: ${type_to_max_value[type]}, green: 0, blue: 0)
     }
     
     public static var green: RGBA<${type}> {
-        return RGBA<${type}>(red: 0, green: ${max_values[type]}, blue: 0)
+        return RGBA<${type}>(red: 0, green: ${type_to_max_value[type]}, blue: 0)
     }
     
     public static var blue: RGBA<${type}> {
-        return RGBA<${type}>(red: 0, green: 0, blue: ${max_values[type]})
+        return RGBA<${type}>(red: 0, green: 0, blue: ${type_to_max_value[type]})
     }
     
     public static var black: RGBA<${type}> {
@@ -45,7 +45,7 @@ extension RGBA where Channel == ${type} {
     }
     
     public static var white: RGBA<${type}> {
-        return RGBA<${type}>(gray: ${max_values[type]})
+        return RGBA<${type}>(gray: ${type_to_max_value[type]})
     }
     
     public static var transparent: RGBA<${type}> {
