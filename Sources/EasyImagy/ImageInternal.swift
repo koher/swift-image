@@ -1,7 +1,14 @@
 import Foundation
 
 extension Image {
-    internal func _convoluted<W, Summable>(by kernel: Image<W>, toSummable: (Pixel) -> Summable, product: (Summable, W) -> Summable, zero: Summable, sum: (Summable, Summable) -> Summable, toOriginal: (Summable) -> Pixel) -> Image<Pixel> {
+    internal func _convoluted<W, Summable>(
+        by kernel: Image<W>,
+        toSummable: (Pixel) -> Summable,
+        product: (Summable, W) -> Summable,
+        zero: Summable,
+        sum: (Summable, Summable) -> Summable,
+        toOriginal: (Summable) -> Pixel
+    ) -> Image<Pixel> {
         precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
         precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
         
@@ -37,7 +44,7 @@ extension Image {
         product: (Summable, Float) -> Summable,
         sum: (Summable, Summable) -> Summable,
         toOriginal: (Summable) -> Pixel
-        ) -> Pixel {
+    ) -> Pixel {
         let width = self.width
         let height = self.height
         
@@ -100,7 +107,7 @@ extension Image {
         sum: (Summable, Summable) -> Summable,
         toOriginal: (Summable) -> Pixel,
         transform: (Float, Float) -> (Float, Float)
-        ) -> Image<Pixel> {
+    ) -> Image<Pixel> {
         guard width >= 0 else { fatalError("`width` must be greater than or equal to 0: \(width)") }
         guard height >= 0 else { fatalError("`width` must be greater than or equal to 0: \(height)") }
         
