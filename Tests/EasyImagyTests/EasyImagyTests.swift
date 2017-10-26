@@ -33,7 +33,7 @@ import EasyImagy
             let binarized: Image<RGBA<UInt8>> = image.map { $0.gray < 128 ? .black : .white }
             
             // From/to `UIImage`
-            image = Image<RGBA>(uiImage: imageView.image!)!
+            image = Image<RGBA<UInt8>>(uiImage: imageView.image!)!
             imageView.image = image.uiImage
 
             /**/ _ = binarized[0, 0]
@@ -48,26 +48,26 @@ import EasyImagy
         func testInitialization() {
             do {
                 /**/ if never() {
-                let image = Image<RGBA>(named: "ImageName")!
+                let image = Image<RGBA<UInt8>>(named: "ImageName")!
                 /**/ _ = image.count
                 /**/ }
             }
             do {
                 /**/ if never() {
-                let image = Image<RGBA>(contentsOfFile: "path/to/file")!
+                let image = Image<RGBA<UInt8>>(contentsOfFile: "path/to/file")!
                 /**/ _ = image.count
                 /**/ }
             }
             do {
                 /**/ if never() {
-                let image = Image<RGBA>(data: Data(/* ... */))!
+                let image = Image<RGBA<UInt8>>(data: Data(/* ... */))!
                 /**/ _ = image.count
                 /**/ }
             }
             do {
                 /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-                /**/ imageView.image = Image<RGBA>(width: 1, height: 1, pixel: RGBA.black).uiImage
-                let image = Image<RGBA>(uiImage: imageView.image!)!
+                /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).uiImage
+                let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)!
                 /**/ _ = image.count
             }
             do {

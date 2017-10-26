@@ -7,7 +7,7 @@ import EasyImagy
     class ImageCoreGraphicsTests: XCTestCase {
         func testCgImage() {
             do {
-                let image = Image<RGBA>(width: 2, height: 2, pixels: [
+                let image = Image<RGBA<UInt8>>(width: 2, height: 2, pixels: [
                     RGBA<UInt8>(red: 0, green: 1, blue: 2, alpha: 255),
                     RGBA<UInt8>(red: 253, green: 254, blue: 255, alpha: 255),
                     RGBA<UInt8>(red: 10, green: 20, blue: 30, alpha: 102),
@@ -17,7 +17,7 @@ import EasyImagy
                 XCTAssertEqual(cgImage.width, image.width)
                 XCTAssertEqual(cgImage.height, image.height)
                 
-                let restored = Image<RGBA>(cgImage: cgImage)
+                let restored = Image<RGBA<UInt8>>(cgImage: cgImage)
                 XCTAssertEqual(restored.width, image.width)
                 XCTAssertEqual(restored.height, image.height)
                 XCTAssertEqual(restored[0, 0], image[0, 0])
@@ -44,7 +44,7 @@ import EasyImagy
         
         func testResizedTo() {
             do {
-                let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
+                let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none)
                 
                 XCTAssertEqual(4, image.width)
                 XCTAssertEqual(4, image.height)
@@ -131,7 +131,7 @@ import EasyImagy
             }
             
             do {
-                let image: Image<UInt8> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { $0.alpha }
+                let image: Image<UInt8> = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { $0.alpha }
                 
                 XCTAssertEqual( 64, image[0, 0])
                 XCTAssertEqual( 64, image[1, 0])
@@ -155,7 +155,7 @@ import EasyImagy
             }
             
             do {
-                let image: Image<Float> = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
+                let image: Image<Float> = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.resizedTo(width: 4, height: 4, interpolationQuality: CGInterpolationQuality.none).map { Float($0.alpha) / 255.0 }
                 
                 XCTAssertEqual(0.25, image[0, 0], accuracy: 0.002)
                 XCTAssertEqual(0.25, image[1, 0], accuracy: 0.002)

@@ -10,7 +10,7 @@ import AppKit
 class ImageTests: XCTestCase {
     func testInitNamed() {
         do {
-            let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
+            let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
             
             XCTAssertEqual(255, image[0, 0].red)
             XCTAssertEqual(  0, image[0, 0].green)
@@ -35,7 +35,7 @@ class ImageTests: XCTestCase {
     }
     
     func testInitWithImageSlice() {
-        let image = Image<RGBA>(Image(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2])
+        let image = Image<RGBA<UInt8>>(Image(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2])
         
         XCTAssertEqual(2, image.width)
         XCTAssertEqual(2, image.height)
@@ -64,7 +64,7 @@ class ImageTests: XCTestCase {
     
     
 	func testSequence() {
-        let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
+        let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
         
         for (i, pixel) in image.enumerated() {
             switch i {
@@ -95,7 +95,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testSubscriptGet() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))!
+		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))!
 		
 		XCTAssertEqual(255, image[0, 0].red)
 		XCTAssertEqual(  0, image[0, 0].green)
@@ -179,7 +179,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testSubscriptSet() {
-        var image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
+        var image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
         var original = image
         
         image[0, 0] = RGBA(red:  2, green:  3, blue:  5, alpha:  7)
@@ -229,7 +229,7 @@ class ImageTests: XCTestCase {
 	}
     
 	func testSubscriptRange() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2]
+		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2]
 		
 		XCTAssertEqual(2, image.width)
 		XCTAssertEqual(2, image.height)
@@ -256,7 +256,7 @@ class ImageTests: XCTestCase {
 	}
     
     func testSubscriptInterpolation() {
-        let image = Image<RGBA>(width: 3, height: 3, pixels: [
+        let image = Image<RGBA<UInt8>>(width: 3, height: 3, pixels: [
             RGBA<UInt8>(red:  0, green:  0, blue:  0, alpha:  0),
             RGBA<UInt8>(red:  2, green:  4, blue:  6, alpha:  8),
             RGBA<UInt8>(red:  4, green:  8, blue: 12, alpha: 16),
@@ -396,7 +396,7 @@ class ImageTests: XCTestCase {
     }
 	
 	func testXReversed() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.xReversed()
+		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.xReversed()
 
 		XCTAssertEqual(  0, image[0, 0].red)
 		XCTAssertEqual(255, image[0, 0].green)
@@ -420,7 +420,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testYReversed() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.yReversed()
+		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.yReversed()
 		
 		XCTAssertEqual(  0, image[0, 0].red)
 		XCTAssertEqual(  0, image[0, 0].green)
@@ -444,7 +444,7 @@ class ImageTests: XCTestCase {
 	}
 	
 	func testRotated() {
-		let image = Image<RGBA>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!
+		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!
 
 		for times in [-8, -4, 0, 4, 8] {
 			let rotated = image.rotated(times)
