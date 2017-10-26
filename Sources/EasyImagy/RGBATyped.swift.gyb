@@ -122,3 +122,19 @@ extension RGBA where Channel == ${type} {
 %   end
 }
 % end
+%
+% numeric_types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
+% for to_type in numeric_types:
+
+extension RGBA where Channel == ${to_type} {
+%   for i, from_type in enumerate(numeric_types):
+%     if i > 0:
+
+%     end
+    public init(_ rgba: RGBA<${from_type}>) {
+        self.init(red: ${to_type}(rgba.red), green: ${to_type}(rgba.green), blue: ${to_type}(rgba.blue), alpha: ${to_type}(rgba.alpha))
+    }
+%   end
+}
+% end
+
