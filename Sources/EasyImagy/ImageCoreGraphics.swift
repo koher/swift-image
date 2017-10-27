@@ -34,9 +34,7 @@
                 }
             }
             
-            let ps: [Pixel] = [Pixel](UnsafeBufferPointer<Pixel>(start: UnsafeMutablePointer<RGBA<UInt8>>(mutating: pixels)!.withMemoryRebound(to: Pixel.self, capacity: pixels.count) { $0 }, count: pixels.count))
-            
-            self.init(width: width, height: height, pixels: ps)
+            self.init(width: width, height: height, pixels: pixels)
         }
     }
     
