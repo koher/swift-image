@@ -18,6 +18,17 @@ extension RGBA { // Additional initializers
     }
 }
 
+extension RGBA {
+    public func map<T>(_ transform: (Channel) -> T) -> RGBA<T> {
+        return RGBA<T>(
+            red: transform(red),
+            green: transform(green),
+            blue: transform(blue),
+            alpha: transform(alpha)
+        )
+    }
+}
+
 extension RGBA where Channel == UInt8 {
     public init(_ rgbaInt: UInt32) {
         self.init(red: UInt8((rgbaInt >> 24) & 0xFF), green: UInt8((rgbaInt >> 16) & 0xFF), blue: UInt8((rgbaInt >> 8) & 0xFF), alpha: UInt8(rgbaInt & 0xFF))
