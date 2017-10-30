@@ -1,4 +1,4 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Int', 'Float', 'Double']
+% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
 % type_to_max_value = {
 %   'UInt8' : 'UInt8.max',
 %   'UInt16': 'UInt16.max',

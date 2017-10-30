@@ -262,44 +262,6 @@ extension RGBA where Channel == UInt64 {
     }
 }
 
-extension RGBA where Channel == Int {
-    public init(red: Int, green: Int, blue: Int) {
-        self.init(red: red, green: green, blue: blue, alpha: 255)
-    }
-    
-    public init(gray: Int) {
-        self.init(gray: gray, alpha: 255)
-    }
-
-    public static var red: RGBA<Int> {
-        return RGBA<Int>(red: 255, green: 0, blue: 0)
-    }
-    
-    public static var green: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 255, blue: 0)
-    }
-    
-    public static var blue: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 0, blue: 255)
-    }
-    
-    public static var black: RGBA<Int> {
-        return RGBA<Int>(gray: 0)
-    }
-    
-    public static var white: RGBA<Int> {
-        return RGBA<Int>(gray: 255)
-    }
-    
-    public static var transparent: RGBA<Int> {
-        return RGBA<Int>(gray: 0, alpha: 0)
-    }
-
-    public var gray: Int {
-        return (red + green + blue) / 3
-    }
-}
-
 extension RGBA where Channel == Float {
     public init(red: Float, green: Float, blue: Float) {
         self.init(red: red, green: green, blue: blue, alpha: 1)
