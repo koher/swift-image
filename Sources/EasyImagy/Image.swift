@@ -1,7 +1,7 @@
 public struct Image<Pixel> {
 	public let width: Int
 	public let height: Int
-	public fileprivate(set) var pixels: [Pixel]
+	public internal(set) var pixels: [Pixel]
 	
 	public init(width: Int, height: Int, pixels: [Pixel]) {
 		precondition(width >= 0, "`width` must be greater than or equal to 0: \(width)")
