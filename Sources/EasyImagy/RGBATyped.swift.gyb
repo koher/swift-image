@@ -124,17 +124,46 @@ extension RGBA where Channel == ${type} {
 % end
 %
 % numeric_types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
-% for to_type in numeric_types:
+% for type in numeric_types:
 
-extension RGBA where Channel == ${to_type} {
+extension RGBA where Channel == ${type} {
 %   for i, from_type in enumerate(numeric_types):
 %     if i > 0:
 
 %     end
     public init(_ rgba: RGBA<${from_type}>) {
-        self.init(red: ${to_type}(rgba.red), green: ${to_type}(rgba.green), blue: ${to_type}(rgba.blue), alpha: ${to_type}(rgba.alpha))
+        self.init(red: ${type}(rgba.red), green: ${type}(rgba.green), blue: ${type}(rgba.blue), alpha: ${type}(rgba.alpha))
     }
 %   end
 }
 % end
+%
+% types = numeric_types + ['Bool']
+% arithmetic_operators = ['+', '-', '*', '/']
+% float_operators = arithmetic_operators
+% int_operators = arithmetic_operators + ['%', '&', '|', '^']
+% bool_operators = ['&&', '||']
+% float_operators = float_operators + [o + '=' for o in float_operators]
+% int_operators = int_operators + ['&' + o for o in arithmetic_operators if o != '/'] + [o + '=' for o in  int_operators]
+% type_to_operators = { type: int_operators if 'Int' in type else (bool_operators if type == 'Bool' else float_operators) for type in types }
+% for type in types:
 
+extension RGBA where Channel == ${type} {
+%   for i, operator in enumerate(type_to_operators[type]):
+%     if i > 0:
+
+%     end
+%     if operator.endswith('='):
+    public static func ${operator}(lhs: inout RGBA<${type}>, rhs: RGBA<${type}>) {
+        lhs.red ${operator} rhs.red
+        lhs.green ${operator} rhs.green
+        lhs.blue ${operator} rhs.blue
+        lhs.alpha ${operator} rhs.alpha
+%     else:
+    public static func ${operator}(lhs: RGBA<${type}>, rhs: RGBA<${type}>) -> RGBA<${type}> {
+        return RGBA<${type}>(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
+%     end
+    }
+%   end
+}
+% end
