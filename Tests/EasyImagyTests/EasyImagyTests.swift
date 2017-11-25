@@ -33,7 +33,7 @@ import EasyImagy
             let binarized: Image<RGBA<UInt8>> = image.map { $0.gray < 128 ? .black : .white }
             
             // From/to `UIImage`
-            image = Image<RGBA<UInt8>>(uiImage: imageView.image!)!
+            image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
             imageView.image = image.uiImage
 
             /**/ _ = binarized[0, 0]
@@ -67,7 +67,7 @@ import EasyImagy
             do {
                 /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
                 /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).uiImage
-                let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)!
+                let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
                 /**/ _ = image.count
             }
             do {
