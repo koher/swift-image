@@ -30,7 +30,7 @@ extension Image where Pixel == RGBA<UInt8> {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -40,7 +40,7 @@ extension Image where Pixel == RGBA<UInt8> {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -84,7 +84,7 @@ extension Image where Pixel == RGBA<UInt16> {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -94,7 +94,7 @@ extension Image where Pixel == RGBA<UInt16> {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -138,7 +138,7 @@ extension Image where Pixel == RGBA<UInt32> {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -148,7 +148,7 @@ extension Image where Pixel == RGBA<UInt32> {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -192,7 +192,7 @@ extension Image where Pixel == RGBA<Float> {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -202,7 +202,7 @@ extension Image where Pixel == RGBA<Float> {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -246,7 +246,7 @@ extension Image where Pixel == RGBA<Double> {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -256,7 +256,7 @@ extension Image where Pixel == RGBA<Double> {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -300,7 +300,7 @@ extension Image where Pixel == UInt8 {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -310,7 +310,7 @@ extension Image where Pixel == UInt8 {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -354,7 +354,7 @@ extension Image where Pixel == UInt16 {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -364,7 +364,7 @@ extension Image where Pixel == UInt16 {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -408,7 +408,7 @@ extension Image where Pixel == UInt32 {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -418,7 +418,7 @@ extension Image where Pixel == UInt32 {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -462,7 +462,7 @@ extension Image where Pixel == Float {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -472,7 +472,7 @@ extension Image where Pixel == Float {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
@@ -516,7 +516,7 @@ extension Image where Pixel == Double {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -526,7 +526,7 @@ extension Image where Pixel == Double {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif

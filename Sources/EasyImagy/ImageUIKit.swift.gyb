@@ -34,7 +34,7 @@ extension Image where Pixel == ${pixel_type} {
 #endif
     }
     
-    fileprivate init?(uiImageOrNil: UIImage?) {
+    private init?(uiImageOrNil: UIImage?) {
         guard let uiImage: UIImage = uiImageOrNil else { return nil }
         self.init(uiImage: uiImage)
     }
@@ -44,7 +44,7 @@ extension Image where Pixel == ${pixel_type} {
     }
     
 #if os(iOS) || os(tvOS)
-    public init?(named name: String, inBundle bundle: Bundle?, compatibleWithTraitCollection traitCollection: UITraitCollection? = nil) {
+    public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
 #endif
