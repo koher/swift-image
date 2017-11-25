@@ -41,8 +41,12 @@ import EasyImagy
         
         func testIntroduction() {
             /**/ let image = Image<RGBA<UInt8>>(width: 10, height: 10, pixel: .black)
-            let result = image.map { $0.gray }
-            /**/ _ = result[0, 0]
+            let grayscale = image.map { $0.gray }
+            /**/ _ = grayscale[0, 0]
+            
+            /**/ let x = 0, y = 0
+            var another = image // Not copied here because of copy-on-write
+            another[x, y] = RGBA(0xff0000ff) // Copied here lazily
         }
         
         func testInitialization() {
@@ -86,8 +90,8 @@ import EasyImagy
             /**/ let y = 0
             /**/ var image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .red)
             
-            // Gets a pixel by subscripts
             do {
+                // Gets a pixel by subscripts
                 let pixel = image[x, y]
                 /**/ _ = pixel
             }
@@ -118,8 +122,8 @@ import EasyImagy
         func testCropping() {
             /**/ let image = Image<RGBA<UInt8>>(width: 128, height: 128, pixel: .red)
             
-            let slice: ImageSlice<RGBA<UInt8>> = image[32..<64, 32..<64] // no copy cost
-            let cropped = Image<RGBA<UInt8>>(slice) // copy is done here
+            let slice: ImageSlice<RGBA<UInt8>> = image[32..<64, 32..<64] // No copying costs
+            let cropped = Image<RGBA<UInt8>>(slice) // Copying is executed here
             
             /**/ _ = cropped.count
         }

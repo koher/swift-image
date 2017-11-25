@@ -1,10 +1,10 @@
 EasyImagy
 ===========================
 
-_EasyImagy_ makes it easy to handle images in Swift.
+_EasyImagy_ makes it easy to process images in Swift.
 
 ```swift
-var image = Image<RGBA>(named: "ImageName")!
+var image = Image<RGBA<UInt8>>(named: "ImageName")!
 
 print(image[x, y])
 image[x, y] = RGBA(red: 255, green: 0, blue: 0, alpha: 127)
@@ -16,35 +16,47 @@ for pixel in image {
 }
 
 // Converts the image (e.g. binarizations)
-let binarized: Image<RGBA> = image.map { $0.gray < 128 ? .black : .white }
+let binarized: Image<RGBA<UInt8>> = image.map { $0.gray < 128 ? .black : .white }
 
 // From/to `UIImage`
-image = Image<RGBA>(uiImage: imageView.image!)!
+image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
 imageView.image = image.uiImage
 ```
 
 Introduction
 ---------------------------
 
-Handling images by _CoreGraphics_ is too complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides the easier way to handle images in exchange for some performance.
+Processing images by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides easier APIs to process images.
 
-Typically `Image`s in _EasyImagy_ are used with `RGBA`. `RGBA` is a simple structure declared as follows.
+Typically the `Image` type is used with the `RGBA` type. The `RGBA` is a simple structure declared as follows.
 
 ```swift
-struct RGBA {
-    var red: UInt8
-    var green: UInt8
-    var blue: UInt8
-    var alpha: UInt8
+struct RGBA<Channel> {
+    var red: Channel
+    var green: Channel
+    var blue: Channel
+    var alpha: Channel
 }
 ```
 
-You can access to a pixel easily using subscripts like `image[x, y]` and its channels by properties `red`, `green`, `blue` and `alpha`.
+You can easily access to pixels using subscripts like `image[x, y]` and also their channels using properties `red`, `green`, `blue` and `alpha`.
 
-`Image` and `RGBA` also provide some convenient methods and properties to make it easy to process images. For example, it is possible to convert an image to grayscale combining `Image#map` with `RGBA#gray` in one line as shown below.
+In addition, `Image` and `RGBA` provide some powerful APIs to process images. For example, it is possible to convert an image to grayscale combining `Image.map` with `RGBA.gray` in one line as shown below.
 
 ```swift
-let result = image.map { $0.gray }
+let grayscale: Image<UInt8> = image.map { $0.gray }
+```
+
+Another notable feature of _EasyImagy_ is that the `Image` is a `struct`, i.e. a value type, with copy-on-write. It means
+
+- `Image` instances never be shared
+- defensive copying is unnecessary
+- no wastful copying of `Image` instances
+- copying is executed lazily when it is required
+
+```swift
+var another = image // Not copied here because of copy-on-write
+another[x, y] = RGBA(0xff0000ff) // Copied here lazily
 ```
 
 Usage
@@ -59,27 +71,27 @@ import EasyImagy
 ### Initialization
 
 ```swift
-let image = Image<RGBA>(named: "ImageName")!
+let image = Image<RGBA<UInt8>>(named: "ImageName")!
 ```
 
 ```swift
-let image = Image<RGBA>(contentsOfFile: "path/to/file")!
+let image = Image<RGBA<UInt8>>(contentsOfFile: "path/to/file")!
 ```
 
 ```swift
-let image = Image<RGBA>(data: NSData(/* ... */))!
+let image = Image<RGBA<UInt8>>(data: Data(/* ... */))!
 ```
 
 ```swift
-let image = Image<RGBA>(uiImage: imageView.image!)!
+let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
 ```
 
 ```swift
-let image = Image<RGBA>(width: 640, height: 480, pixel: .black) // a black image
+let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black image
 ```
 
 ```swift
-let image = Image<RGBA>(width: 640, height: 480, pixels: pixels)
+let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels)
 ```
 
 ### Access to a pixel
@@ -97,12 +109,12 @@ image[x, y].alpha = 127
 
 ```swift
 // Safe get for a pixel
-if let pixel = image.pixel(x, y) {
+if let pixel = image.pixelAt(x: x, y: y) {
     print(pixel.red)
     print(pixel.green)
     print(pixel.blue)
     print(pixel.alpha)
-
+    
     print(pixel.gray) // (red + green + blue) / 3
     print(pixel) // formatted like "#FF0000FF"
 } else {
@@ -122,45 +134,45 @@ for pixel in image {
 ### Rotation
 
 ```swift
-let result = image.rotate() // Rotate clockwise
+let result = image.rotated() // Rotate clockwise
 ```
 
 ```swift
-let result = image.rotate(-1) // Rotate counterclockwise
+let result = image.rotated(-1) // Rotate counterclockwise
 ```
 
 ```swift
-let result = image.rotate(2) // Rotate by 180 degrees
+let result = image.rotated(2) // Rotate by 180 degrees
 ```
 
 ### Flip
 
 ```swift
-let result = image.flipX() // Flip Horizontally
+let result = image.xReversed() // Flip Horizontally
 ```
 
 ```swift
-let result = image.flipY() // Flip Vertically
+let result = image.yReversed() // Flip Vertically
 ```
 
 ### Resizing
 
 ```swift
-let result = image.resize(width: 100, height: 100)
+let result = image.resizedTo(width: 100, height: 100)
 ```
 
 ```swift
-let result = image.resize(width: 100, height: 100,
+let result = image.resizedTo(width: 100, height: 100,
     interpolationQuality: kCGInterpolationNone) // Nearest neighbor
 ```
 
 ### Crop
 
-Slicing is done with no copy cost.
+Slicing is executed with no copying costs.
 
 ```swift
-let slice: ImageSlice<RGBA> = image[32..<64, 32..<64] // no copy cost
-let cropped = Image<RGBA>(slice) // copy is done here
+let slice: ImageSlice<RGBA<UInt8>> = image[32..<64, 32..<64] // No copying costs
+let cropped = Image<RGBA<UInt8>>(slice) // Copying is executed here
 ```
 
 ### Conversion
@@ -170,7 +182,7 @@ let cropped = Image<RGBA>(slice) // copy is done here
 #### Grayscale
 
 ```swift
-let result: Image<UInt8> = image.map { (pixel: RGBA) -> UInt8 in
+let result: Image<UInt8> = image.map { (pixel: RGBA<UInt8>) -> UInt8 in
     pixel.gray
 }
 ```
@@ -183,21 +195,21 @@ let result = image.map { $0.gray }
 #### Binarization
 
 ```swift
-let result = image.map { (pixel: RGBA) -> RGBA in
-    pixel.gray < 128 ? RGBA.black : RGBA.white
+let result: Image<Bool> = image.map { (pixel: RGBA<UInt8>) -> Bool in
+    pixel.gray >= 128
 }
 ```
 
 ```swift
 // Shortened form
-let result = image.map { $0.gray < 128 ? .black : .white }
+let result = image.map { $0.gray >= 128 }
 ```
 
 #### Binarization (auto threshold)
 
 ```swift
 let threshold = UInt8(image.reduce(0) { $0 + $1.grayInt } / image.count)
-let result = image.map { $0.gray < threshold ? .black : .white }
+let result = image.map { $0.gray >= threshold }
 ```
 
 #### Mean filter
@@ -225,7 +237,7 @@ let result = image.convoluted(kernel)
 #### From UIImage
 
 ```swift
-let image = Image<RGBA>(uiImage: imageView.image!)!
+let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)!
 ```
 
 #### To UIImage
@@ -256,7 +268,7 @@ import PackageDescription
 let package = Package(
   ...
   dependencies: [
-    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.3.0-alpha.6"),
+    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.4.0-alpha"),
   ],
   targets: [
     .target(
@@ -273,7 +285,7 @@ let package = Package(
 **Cartfile**
 
 ```
-github "koher/EasyImagy" "0.3.0-alpha.6"
+github "koher/EasyImagy" "0.4.0-alpha"
 ```
 
 ### Manually
