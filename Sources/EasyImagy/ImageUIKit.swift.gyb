@@ -4,21 +4,27 @@ import UIKit
 #if os(iOS) || os(tvOS)
 import CoreImage
 #endif
+
+#if os(watchOS)
+// Hack to simplify code
+private enum CIImage {
+    var extent: CGRect { fatalError() }
+}
+private class CIContext {
+    func createCGImage(_ image: CIImage, from: CGRect) -> CGImage? { return nil }
+}
+extension UIImage {
+    fileprivate var ciImage: CIImage? { return nil }
+}
+#endif
 % for is_rgba in [True, False]:
 %   for type in types:
 %     pixel_type = f'RGBA<{type}>' if is_rgba else type
     
 extension Image where Pixel == ${pixel_type} {
     public init(uiImage: UIImage) {
-%     for core_image_available in [True, False]:
-%       if core_image_available:
-        #if os(iOS) || os(tvOS)
-%       else:
-        #else
-%       end
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-%       if core_image_available:
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // Fails when the `ciImage` has an infinite extent.
@@ -26,22 +32,13 @@ extension Image where Pixel == ${pixel_type} {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
-%       end
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-%         if core_image_available:
                 fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
-%         else:
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-%         end
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-%       if not core_image_available:
-        #endif
-%       end
-%     end
     }
     
     private init?(uiImageOrNil: UIImage?) {

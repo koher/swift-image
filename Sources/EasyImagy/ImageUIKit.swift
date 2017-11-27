@@ -3,10 +3,22 @@ import UIKit
 #if os(iOS) || os(tvOS)
 import CoreImage
 #endif
+
+#if os(watchOS)
+// Hack to simplify code
+private enum CIImage {
+    var extent: CGRect { fatalError() }
+}
+private class CIContext {
+    func createCGImage(_ image: CIImage, from: CGRect) -> CGImage? { return nil }
+}
+extension UIImage {
+    fileprivate var ciImage: CIImage? { return nil }
+}
+#endif
     
 extension Image where Pixel == RGBA<UInt8> {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -23,17 +35,6 @@ extension Image where Pixel == RGBA<UInt8> {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -66,7 +67,6 @@ extension Image where Pixel == RGBA<UInt8> {
     
 extension Image where Pixel == RGBA<UInt16> {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -83,17 +83,6 @@ extension Image where Pixel == RGBA<UInt16> {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -126,7 +115,6 @@ extension Image where Pixel == RGBA<UInt16> {
     
 extension Image where Pixel == RGBA<UInt32> {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -143,17 +131,6 @@ extension Image where Pixel == RGBA<UInt32> {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -186,7 +163,6 @@ extension Image where Pixel == RGBA<UInt32> {
     
 extension Image where Pixel == RGBA<Float> {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -203,17 +179,6 @@ extension Image where Pixel == RGBA<Float> {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -246,7 +211,6 @@ extension Image where Pixel == RGBA<Float> {
     
 extension Image where Pixel == RGBA<Double> {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -263,17 +227,6 @@ extension Image where Pixel == RGBA<Double> {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -306,7 +259,6 @@ extension Image where Pixel == RGBA<Double> {
     
 extension Image where Pixel == UInt8 {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -323,17 +275,6 @@ extension Image where Pixel == UInt8 {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -366,7 +307,6 @@ extension Image where Pixel == UInt8 {
     
 extension Image where Pixel == UInt16 {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -383,17 +323,6 @@ extension Image where Pixel == UInt16 {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -426,7 +355,6 @@ extension Image where Pixel == UInt16 {
     
 extension Image where Pixel == UInt32 {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -443,17 +371,6 @@ extension Image where Pixel == UInt32 {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -486,7 +403,6 @@ extension Image where Pixel == UInt32 {
     
 extension Image where Pixel == Float {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -503,17 +419,6 @@ extension Image where Pixel == Float {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -546,7 +451,6 @@ extension Image where Pixel == Float {
     
 extension Image where Pixel == Double {
     public init(uiImage: UIImage) {
-        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
@@ -563,17 +467,6 @@ extension Image where Pixel == Double {
             }
             self.init(width: 0, height: 0, pixels: [])
         }
-        #else
-        if let cgImage = uiImage.cgImage {
-            self.init(cgImage: cgImage)
-        } else {
-            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
-            guard uiImage.size == .zero else {
-                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
-            }
-            self.init(width: 0, height: 0, pixels: [])
-        }
-        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
