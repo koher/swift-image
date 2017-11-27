@@ -232,18 +232,24 @@ let kernel = Image<Int>(width: 5, height: 5, pixels: [
 let result = image.convoluted(kernel)
 ```
 
-### With UIImage
-
-#### From UIImage
+### With `UIImage`
 
 ```swift
-let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)!
+// From `UIImage`
+let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
+
+// To `UIImage`
+imageView.image = image.uiImage
 ```
 
-#### To UIImage
+### With `NSImage`
 
 ```swift
-imageView.image = image.uiImage
+// From `NSImage`
+let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
+
+// To `NSImage`
+imageView.image = image.nsImage
 ```
 
 Requirements
