@@ -11,15 +11,15 @@ extension Image where Pixel == RGBA<UInt8> {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -29,7 +29,7 @@ extension Image where Pixel == RGBA<UInt8> {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -71,15 +71,15 @@ extension Image where Pixel == RGBA<UInt16> {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -89,7 +89,7 @@ extension Image where Pixel == RGBA<UInt16> {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -131,15 +131,15 @@ extension Image where Pixel == RGBA<UInt32> {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -149,7 +149,7 @@ extension Image where Pixel == RGBA<UInt32> {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -191,15 +191,15 @@ extension Image where Pixel == RGBA<Float> {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -209,7 +209,7 @@ extension Image where Pixel == RGBA<Float> {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -251,15 +251,15 @@ extension Image where Pixel == RGBA<Double> {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -269,7 +269,7 @@ extension Image where Pixel == RGBA<Double> {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -311,15 +311,15 @@ extension Image where Pixel == UInt8 {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -329,7 +329,7 @@ extension Image where Pixel == UInt8 {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -371,15 +371,15 @@ extension Image where Pixel == UInt16 {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -389,7 +389,7 @@ extension Image where Pixel == UInt16 {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -431,15 +431,15 @@ extension Image where Pixel == UInt32 {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -449,7 +449,7 @@ extension Image where Pixel == UInt32 {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -491,15 +491,15 @@ extension Image where Pixel == Float {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -509,7 +509,7 @@ extension Image where Pixel == Float {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -551,15 +551,15 @@ extension Image where Pixel == Double {
             self.init(cgImage: cgImage)
         } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
-            // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
+            // Fails when the `ciImage` has an infinite extent.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
-                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
+                fatalError("Failed to create a `CGImage` from an internal `CIImage` object from the given `UIImage` instance (\(uiImage)).")
             }
             self.init(cgImage: cgImage)
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though both the `cgImage` and the `ciImage` of the instance are `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
@@ -569,7 +569,7 @@ extension Image where Pixel == Double {
         } else {
             // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
             guard uiImage.size == .zero else {
-                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+                fatalError("The `size` of the given `UIImage` instance (\(uiImage)) is not equal to `.zero` though the `cgImage` of the instance is `nil`.")
             }
             self.init(width: 0, height: 0, pixels: [])
         }
