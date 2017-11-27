@@ -6,28 +6,34 @@ import CoreImage
     
 extension Image where Pixel == RGBA<UInt8> {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -39,11 +45,11 @@ extension Image where Pixel == RGBA<UInt8> {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -60,28 +66,34 @@ extension Image where Pixel == RGBA<UInt8> {
     
 extension Image where Pixel == RGBA<UInt16> {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -93,11 +105,11 @@ extension Image where Pixel == RGBA<UInt16> {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -114,28 +126,34 @@ extension Image where Pixel == RGBA<UInt16> {
     
 extension Image where Pixel == RGBA<UInt32> {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -147,11 +165,11 @@ extension Image where Pixel == RGBA<UInt32> {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -168,28 +186,34 @@ extension Image where Pixel == RGBA<UInt32> {
     
 extension Image where Pixel == RGBA<Float> {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -201,11 +225,11 @@ extension Image where Pixel == RGBA<Float> {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -222,28 +246,34 @@ extension Image where Pixel == RGBA<Float> {
     
 extension Image where Pixel == RGBA<Double> {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -255,11 +285,11 @@ extension Image where Pixel == RGBA<Double> {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -276,28 +306,34 @@ extension Image where Pixel == RGBA<Double> {
     
 extension Image where Pixel == UInt8 {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -309,11 +345,11 @@ extension Image where Pixel == UInt8 {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -330,28 +366,34 @@ extension Image where Pixel == UInt8 {
     
 extension Image where Pixel == UInt16 {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -363,11 +405,11 @@ extension Image where Pixel == UInt16 {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -384,28 +426,34 @@ extension Image where Pixel == UInt16 {
     
 extension Image where Pixel == UInt32 {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -417,11 +465,11 @@ extension Image where Pixel == UInt32 {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -438,28 +486,34 @@ extension Image where Pixel == UInt32 {
     
 extension Image where Pixel == Float {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -471,11 +525,11 @@ extension Image where Pixel == Float {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
@@ -492,28 +546,34 @@ extension Image where Pixel == Float {
     
 extension Image where Pixel == Double {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+        #if os(iOS) || os(tvOS)
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
+        #else
+        if let cgImage = uiImage.cgImage {
+            self.init(cgImage: cgImage)
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-        self.init(cgImage: cgImage)
-#endif
+        #endif
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -525,11 +585,11 @@ extension Image where Pixel == Double {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))

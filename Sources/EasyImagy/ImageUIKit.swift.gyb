@@ -10,28 +10,38 @@ import CoreImage
     
 extension Image where Pixel == ${pixel_type} {
     public init(uiImage: UIImage) {
-#if os(iOS) || os(tvOS)
+%     for core_image_available in [True, False]:
+%       if core_image_available:
+        #if os(iOS) || os(tvOS)
+%       else:
+        #else
+%       end
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
-        } else {
-            // This `guard` can be replaced with `!` if you are sure that `uiImage.ciImage` never be nil.
-            guard let ciImage = uiImage.ciImage else {
-                fatalError("Failed to get both `cgImage` and `ciImage` from this `UIImage` instance: \(uiImage).")
-            }
+%       if core_image_available:
+        } else if let ciImage = uiImage.ciImage {
             let context = CIContext()
             // This `guard` can be replaced with `!` if you are sure that the `createCGImage` below never fails.
             guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
                 fatalError("Failed to create a `CGImage` from an internal `CIImage` object from this `UIImage` instance: \(uiImage)")
             }
             self.init(cgImage: cgImage)
+%       end
+        } else {
+            // This `gurad` can be replaced with `assert` if you are sure that the `size` is always equal to `.zero`.
+            guard uiImage.size == .zero else {
+%         if core_image_available:
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though both `cgImage` and `ciImage` of the instance are `nil`.")
+%         else:
+                fatalError("The `size` of this `UIImage` instance (\(uiImage)) is not equal to `.zero` though `cgImage` of the instance is `nil`.")
+%         end
+            }
+            self.init(width: 0, height: 0, pixels: [])
         }
-#else // watchOS
-        // This `guard` can be replaced with `!` if you are sure that `uiImage.cgImage` never be nil.
-        guard let cgImage = uiImage.cgImage else {
-            fatalError("Failed to get `cgImage` from this `UIImage` instance: \(uiImage).")
-        }
-        self.init(cgImage: cgImage)
-#endif
+%       if not core_image_available:
+        #endif
+%       end
+%     end
     }
     
     private init?(uiImageOrNil: UIImage?) {
@@ -43,11 +53,11 @@ extension Image where Pixel == ${pixel_type} {
         self.init(uiImageOrNil: UIImage(named: name))
     }
     
-#if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS)
     public init?(named name: String, in bundle: Bundle?, compatibleWith traitCollection: UITraitCollection?) {
         self.init(uiImageOrNil: UIImage(named: name, in: bundle, compatibleWith: traitCollection))
     }
-#endif
+    #endif
     
     public init?(contentsOfFile path: String) {
         self.init(uiImageOrNil: UIImage(contentsOfFile: path))
