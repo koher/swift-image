@@ -1,22 +1,6 @@
 import Foundation
 
 extension Image {
-    internal func _map<T>(_ transform: (Pixel) -> T) -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: pixels.map(transform))
-    }
-    
-    internal func _map<T>(_ transform: (_ x: Int, _ y: Int, _ pixel: Pixel) -> T) -> Image<T> {
-        var pixels: [T] = []
-        pixels.reserveCapacity(count)
-        var generator = makeIterator()
-        for y in 0..<height {
-            for x in 0..<width {
-                pixels.append(transform(x, y, generator.next()!))
-            }
-        }
-        return Image<T>(width: width, height: height, pixels: pixels)
-    }
-    
     internal func _convoluted<W, Summable>(
         by kernel: Image<W>,
         toSummable: (Pixel) -> Summable,

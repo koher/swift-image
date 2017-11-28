@@ -102,22 +102,6 @@ public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
 	return true
 }
 
-extension Image { // Higher-order methods
-	public func map<T>(_ transform: (Pixel) -> T) -> Image<T> {
-		return _map(transform)
-	}
-	
-	public func map<T>(_ transform: (_ x: Int, _ y: Int, _ pixel: Pixel) -> T) -> Image<T> {
-		return _map(transform)
-	}
-	
-	public mutating func update(_ transform: (Pixel) -> Pixel) {
-		for i in 0..<count {
-			pixels[i] = transform(pixels[i])
-		}
-	}
-}
-
 extension Image { // Operations
 	public func xReversed() -> Image<Pixel> {
 		var pixels = [Pixel]()

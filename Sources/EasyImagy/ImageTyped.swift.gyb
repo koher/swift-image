@@ -1,51 +1,3 @@
-% basic_channel_types = [
-%   'Int',
-%   'Int8',
-%   'Int16',
-%   'Int32',
-%   'Int64',
-%   'UInt',
-%   'UInt8',
-%   'UInt16',
-%   'UInt32',
-%   'UInt64',
-%   'Float',
-%   'Double',
-%   'Bool',
-%   'String',
-% ]
-% basic_types = [f'RGBA<{t}>' for t in basic_channel_types] + basic_channel_types
-%
-% for i, type in enumerate(basic_types):
-%   if i > 0:
-
-%   end
-extension Image where Pixel == ${type} { // map
-%   for j, target_type in enumerate(basic_types):
-%     if j > 0:
-
-%     end
-    public func map(_ transform: (${type}) -> ${target_type}) -> Image<${target_type}> {
-        return self._map(transform)
-    }
-%   end
-}
-% end
-%
-% for i, type in enumerate(basic_types):
-
-extension Image where Pixel == ${type} { // map with indices
-%   for j, target_type in enumerate(basic_types):
-%     if j > 0:
-
-%     end
-    public func map(_ transform: (_ x: Int, _ y: Int, _ pixel: ${type}) -> ${target_type}) -> Image<${target_type}> {
-        return self._map(transform)
-    }
-%   end
-}
-% end
-%
 % channel_types = [
 %   'UInt8',
 %   'UInt16',
@@ -57,7 +9,9 @@ extension Image where Pixel == ${type} { // map with indices
 % types = [f'RGBA<{t}>' for t in channel_types] + channel_types
 %
 % for i, type in enumerate(types):
+%   if i > 0:
 
+%   end
 extension Image where Pixel == ${type} { // Convolution
     public func convoluted(by kernel: Image<Int>) -> Image<${type}> {
         return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
