@@ -6,19 +6,12 @@ public struct Image<Pixel> {
 	public init(width: Int, height: Int, pixels: [Pixel]) {
 		precondition(width >= 0, "`width` must be greater than or equal to 0: \(width)")
 		precondition(height >= 0, "`height` must be greater than or equal to 0: \(height)")
-		
+        let count = width * height
+        precondition(pixels.count == count, "`pixels.count` (\(pixels.count)) must be equal to `width` (\(width)) * `height` (\(height)) (= \(count)).")
+
 		self.width = width
 		self.height = height
-		
-		let count = width * height
-
-		precondition(pixels.count >= count, "`pixels` must have more elements than `width` * `height`: \(count) < \(width) * \(height)")
-		
-		if pixels.count == count {
-			self.pixels = pixels
-		} else {
-			self.pixels = [Pixel](pixels[0..<count])
-		}
+        self.pixels = pixels
 	}
 }
 
