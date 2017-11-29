@@ -6,12 +6,9 @@
 
 % end
 extension ${image_type} {
-    % first = True
-    % for range_type_1 in range_types:
-    %     for range_type_2 in range_types:
-    %         if first:
-    %             first = False
-    %         else:
+    % for i, range_type_1 in enumerate(range_types):
+    %     for j, range_type_2 in enumerate(range_types):
+    %         if i > 0 or j > 0:
 
     %         end
     public subscript(xRange: ${range_type_1}<Int>, yRange: ${range_type_2}<Int>) -> ImageSlice<Pixel> {
@@ -44,11 +41,8 @@ extension ${image_type} {
         % end
     }
 
-    % first = True
-    % for range_type in range_types:
-    %     if first:
-    %         first = False
-    %     else:
+    % for i, range_type in enumerate(range_types):
+    %     if i > 0:
 
     %     end
     public subscript(xRange: UnboundedRange, yRange: ${range_type}<Int>) -> ImageSlice<Pixel> {
