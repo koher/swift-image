@@ -1,6 +1,16 @@
 import Foundation
 
 extension Image {
+    internal var xRange: CountableRange<Int> {
+        return 0..<width
+    }
+    
+    internal var yRange: CountableRange<Int> {
+        return 0..<height
+    }
+}
+
+extension Image {
     internal func _convoluted<W, Summable>(
         by kernel: Image<W>,
         toSummable: (Pixel) -> Summable,
