@@ -7,32 +7,30 @@ public enum InterpolationMethod {
 }
 
 extension Image {
-    internal func interpolatedPixelByNearestNeighborWithPreconditions(x: Float, y: Float) -> Pixel {
+    internal func interpolatedPixelByNearestNeighbor(x: Float, y: Float, pixelAt: (Int, Int) -> Pixel) -> Pixel {
         let xi = Int(round(x))
         let yi = Int(round(y))
-        return self[xi, yi] // Preconditions are checked in this `subscript`
+        return pixelAt(xi, yi)
     }
     
-    internal func interpolatedPixelByBilinearWithPreconditions<Summable>(
+    internal func interpolatedPixelByBilinear<Summable>(
         x: Float,
         y: Float,
         toSummable: (Pixel) -> Summable,
         product: (Summable, Float) -> Summable,
         sum: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Pixel
+        toOriginal: (Summable) -> Pixel,
+        pixelAt: (Int, Int) -> Pixel
     ) -> Pixel {
         let x0 = Int(floor(x))
         let y0 = Int(floor(y))
         let x1 = Int(ceil(x))
         let y1 = Int(ceil(y))
         
-        precondition(0 <= x0 && x1 < width, "`x` is out of bounds: \(x)")
-        precondition(0 <= y0 && y1 < width, "`y` is out of bounds: \(y)")
-
-        let v00 = self[x0, y0]
-        let v01 = self[x1, y0]
-        let v10 = self[x0, y1]
-        let v11 = self[x1, y1]
+        let v00 = pixelAt(x0, y0)
+        let v01 = pixelAt(x1, y0)
+        let v10 = pixelAt(x0, y1)
+        let v11 = pixelAt(x1, y1)
         
         let wx = x - Float(x0)
         let wy = y - Float(y0)

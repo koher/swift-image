@@ -83,7 +83,7 @@ extension Image {
         for y in 0..<height {
             for x in 0..<width {
                 let transformed = transform(Float(x), Float(y))
-                pixels.append(interpolatedPixelByBilinearWithPreconditions(x: transformed.0, y: transformed.1, toSummable: toSummable, product: product, sum: sum, toOriginal: toOriginal))
+                pixels.append(interpolatedPixelByBilinear(x: transformed.0, y: transformed.1, toSummable: toSummable, product: product, sum: sum, toOriginal: toOriginal) { self[$0, $1] })
             }
         }
         

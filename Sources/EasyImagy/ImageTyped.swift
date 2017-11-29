@@ -169,15 +169,24 @@ extension Image where Pixel == Double { // Convolution
 extension Image where Pixel == RGBA<UInt8> { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt8> {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<UInt8> {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt8> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -189,15 +198,24 @@ extension Image where Pixel == RGBA<UInt8> { // Interpolation, Transformation
 extension Image where Pixel == RGBA<UInt16> { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt16> {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<UInt16> {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt16> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -209,15 +227,24 @@ extension Image where Pixel == RGBA<UInt16> { // Interpolation, Transformation
 extension Image where Pixel == RGBA<UInt32> { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt32> {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<UInt32> {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt32> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -229,15 +256,24 @@ extension Image where Pixel == RGBA<UInt32> { // Interpolation, Transformation
 extension Image where Pixel == RGBA<Int> { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Int> {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Int> {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Int> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -249,15 +285,24 @@ extension Image where Pixel == RGBA<Int> { // Interpolation, Transformation
 extension Image where Pixel == RGBA<Float> { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Float> {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Float> {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Float> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -269,15 +314,24 @@ extension Image where Pixel == RGBA<Float> { // Interpolation, Transformation
 extension Image where Pixel == RGBA<Double> { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Double> {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Double> {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Double> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -289,15 +343,24 @@ extension Image where Pixel == RGBA<Double> { // Interpolation, Transformation
 extension Image where Pixel == UInt8 { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt8 {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> UInt8 {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt8 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -309,15 +372,24 @@ extension Image where Pixel == UInt8 { // Interpolation, Transformation
 extension Image where Pixel == UInt16 { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt16 {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> UInt16 {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt16 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -329,15 +401,24 @@ extension Image where Pixel == UInt16 { // Interpolation, Transformation
 extension Image where Pixel == UInt32 { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt32 {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> UInt32 {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt32 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -349,15 +430,24 @@ extension Image where Pixel == UInt32 { // Interpolation, Transformation
 extension Image where Pixel == Int { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Int {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Int {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Int {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -369,15 +459,24 @@ extension Image where Pixel == Int { // Interpolation, Transformation
 extension Image where Pixel == Float { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Float {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Float {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Float {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
@@ -389,15 +488,24 @@ extension Image where Pixel == Float { // Interpolation, Transformation
 extension Image where Pixel == Double { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Double {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Double {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Double {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 

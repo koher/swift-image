@@ -32,15 +32,24 @@ extension Image where Pixel == ${type} { // Convolution
 extension Image where Pixel == ${type} { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> ${type} {
-        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
     }
 
     public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> ${type} {
         switch interpolationMethod {
             case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 
