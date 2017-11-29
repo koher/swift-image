@@ -21,12 +21,8 @@ extension Image {
         return pixelIndexWithAssertionsAt(x: x, y: y)
     }
     
-    // TODO: examine alternatives of this method
-    internal func safePixelIndexAt(x: Int, y: Int) -> Int {
-        return pixelIndexWithAssertionsAt(
-            x: clamp(x, lower: 0, upper: width - 1),
-            y: clamp(y, lower: 0, upper: height - 1)
-        )
+    internal func pixelWithAssertionsAt(x: Int, y: Int) -> Pixel {
+        return pixels[pixelIndexWithAssertionsAt(x: x, y: y)]
     }
 }
 
@@ -48,6 +44,9 @@ extension Image {
         var pixels: [Pixel] = []
         pixels.reserveCapacity(count)
         
+        let maxWidth = width - 1
+        let maxHeight = height - 1
+        
         for y in 0..<height {
             for x in 0..<width {
                 var weightedValues: [Summable] = []
@@ -55,7 +54,7 @@ extension Image {
                     for fx in 0..<kernel.width {
                         let dx = fx - hw
                         let dy = fy - hh
-                        let summablePixel = toSummable(self.pixels[safePixelIndexAt(x: x + dx, y: y + dy)])
+                        let summablePixel = toSummable(extrapolatedPixelByEdgingAt(x: x + dx, y: y + dy, maxWidth: maxWidth, maxHeight: maxHeight))
                         let weight = kernel[fx, fy]
                         weightedValues.append(product(summablePixel, weight))
                     }
