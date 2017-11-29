@@ -33,45 +33,25 @@ extension Image {
 	}
 }
 
-extension Image { // Subscripts (Index)
-	private func isValidX(_ x: Int) -> Bool {
-		return 0 <= x && x < width
+extension Image {
+	public func pixelIndexAt(x: Int, y: Int) -> Int? {
+		guard xRange.contains(x) else { return nil }
+		guard yRange.contains(y) else { return nil }
+		return pixelIndexWithAssertionsAt(x: x, y: y)
 	}
-	
-	private func isValidY(_ y: Int) -> Bool {
-		return 0 <= y && y < height
-	}
-	
-	private func _pixelIndex(x: Int, y: Int) -> Int {
-		precondition(isValidX(x), "`x` is out of bounds: \(x)")
-		precondition(isValidY(y), "`y` is out of bounds: \(y)")
-		return y * width + x
-	}
-	
-	internal func _safePixelIndex(x: Int, y: Int) -> Int {
-		return _pixelIndex(x: clamp(x, lower: 0, upper: width - 1), y: clamp(y, lower: 0, upper: height - 1))
-	}
-	
-	public func pixelIndex(x: Int, y: Int) -> Int? {
-		guard isValidX(x) else { return nil }
-		guard isValidY(y) else { return nil }
-		return _pixelIndex(x: x, y: y)
-	}
-	
+    
+    public func pixelAt(x: Int, y: Int) -> Pixel? {
+        guard let pixelIndex = self.pixelIndexAt(x: x, y: y) else { return nil }
+        return pixels[pixelIndex]
+    }
+
 	public subscript(x: Int, y: Int) -> Pixel {
 		get {
-			return pixels[_pixelIndex(x: x, y: y)]
+			return pixels[pixelIndexWithPreconditionsAt(x: x, y: y)]
 		}
 		set {
-			pixels[_pixelIndex(x: x, y: y)] = newValue
+			pixels[pixelIndexWithPreconditionsAt(x: x, y: y)] = newValue
 		}
-	}
-}
-
-extension Image { // safe get
-	public func pixelAt(x: Int, y: Int) -> Pixel? {
-		guard let pixelIndex = self.pixelIndex(x: x, y: y) else { return nil }
-		return pixels[pixelIndex]
 	}
 }
 
@@ -102,7 +82,7 @@ extension Image { // Operations
 		let maxX = width - 1
 		for y in 0..<height {
 			for x in 0..<width {
-				pixels.append(self.pixels[pixelIndex(x: maxX - x, y: y)!])
+				pixels.append(self.pixels[pixelIndexWithAssertionsAt(x: maxX - x, y: y)])
 			}
 		}
 		
@@ -115,7 +95,7 @@ extension Image { // Operations
 		let maxY = height - 1
 		for y in 0..<height {
 			for x in 0..<width {
-				pixels.append(self.pixels[pixelIndex(x: x, y: maxY - y)!])
+				pixels.append(self.pixels[pixelIndexWithAssertionsAt(x: x, y: maxY - y)])
 			}
 		}
 		
@@ -136,7 +116,7 @@ extension Image { // Operations
 			let maxX = height - 1
 			for y in 0..<width {
 				for x in 0..<height {
-					pixels.append(self.pixels[pixelIndex(x: y, y: maxX - x)!])
+					pixels.append(self.pixels[pixelIndexWithAssertionsAt(x: y, y: maxX - x)])
 				}
 			}
 			
@@ -148,7 +128,7 @@ extension Image { // Operations
 			let maxY = height - 1
 			for y in 0..<height {
 				for x in 0..<width {
-					pixels.append(self.pixels[pixelIndex(x: maxX - x, y: maxY - y)!])
+					pixels.append(self.pixels[pixelIndexWithAssertionsAt(x: maxX - x, y: maxY - y)])
 				}
 			}
 			
@@ -159,7 +139,7 @@ extension Image { // Operations
 			let maxY = width - 1
 			for y in 0..<width {
 				for x in 0..<height {
-					pixels.append(self.pixels[pixelIndex(x: maxY - y, y: x)!])
+					pixels.append(self.pixels[pixelIndexWithAssertionsAt(x: maxY - y, y: x)])
 				}
 			}
 			

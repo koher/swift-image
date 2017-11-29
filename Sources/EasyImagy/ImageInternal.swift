@@ -8,6 +8,26 @@ extension Image {
     internal var yRange: CountableRange<Int> {
         return 0..<height
     }
+    
+    internal func pixelIndexWithAssertionsAt(x: Int, y: Int) -> Int {
+        assert(xRange.contains(x), "`x` is out of bounds: \(x)")
+        assert(yRange.contains(y), "`y` is out of bounds: \(y)")
+        return y * width + x
+    }
+    
+    internal func pixelIndexWithPreconditionsAt(x: Int, y: Int) -> Int {
+        precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
+        precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
+        return pixelIndexWithAssertionsAt(x: x, y: y)
+    }
+    
+    // TODO: examine alternatives of this method
+    internal func safePixelIndexAt(x: Int, y: Int) -> Int {
+        return pixelIndexWithAssertionsAt(
+            x: clamp(x, lower: 0, upper: width - 1),
+            y: clamp(y, lower: 0, upper: height - 1)
+        )
+    }
 }
 
 extension Image {
@@ -35,7 +55,7 @@ extension Image {
                     for fx in 0..<kernel.width {
                         let dx = fx - hw
                         let dy = fy - hh
-                        let summablePixel = toSummable(self.pixels[_safePixelIndex(x: x + dx, y: y + dy)])
+                        let summablePixel = toSummable(self.pixels[safePixelIndexAt(x: x + dx, y: y + dy)])
                         let weight = kernel[fx, fy]
                         weightedValues.append(product(summablePixel, weight))
                     }
