@@ -16,7 +16,6 @@
 		D6134A4B1F852A64005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
 		D6134A4C1F852A64005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134A4D1F852A64005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
-		D6134A4E1F852A64005592A2 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A421F852A57005592A2 /* SubscriptTests.swift */; };
 		D6134A4F1F852A64005592A2 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A461F852A57005592A2 /* UtilTests.swift */; };
 		D6134A501F852A85005592A2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2B1F852A49005592A2 /* Image.swift */; };
 		D6134A511F852A85005592A2 /* ImageAppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2C1F852A49005592A2 /* ImageAppKit.swift */; };
@@ -41,7 +40,6 @@
 		D6134A891F85CF6F005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
 		D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
-		D6134A8C1F85CF6F005592A2 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A421F852A57005592A2 /* SubscriptTests.swift */; };
 		D6134A8D1F85CF6F005592A2 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A461F852A57005592A2 /* UtilTests.swift */; };
 		D6134A8F1F85CFA4005592A2 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D6134A2A1F852A49005592A2 /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6134AAB1F85D1FA005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134AA21F85D1F9005592A2 /* EasyImagy.framework */; };
@@ -60,7 +58,6 @@
 		D6134AC81F85D2BF005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
 		D6134AC91F85D2BF005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134ACA1F85D2BF005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
-		D6134ACB1F85D2BF005592A2 /* SubscriptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A421F852A57005592A2 /* SubscriptTests.swift */; };
 		D6134ACC1F85D2BF005592A2 /* UtilTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A461F852A57005592A2 /* UtilTests.swift */; };
 		D6134ADA1F85DA5C005592A2 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D6134A2A1F852A49005592A2 /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6134ADB1F85DA5C005592A2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2B1F852A49005592A2 /* Image.swift */; };
@@ -144,7 +141,6 @@
 		D6134A3F1F852A57005592A2 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		D6134A401F852A57005592A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6134A411F852A57005592A2 /* RGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBATests.swift; sourceTree = "<group>"; };
-		D6134A421F852A57005592A2 /* SubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptTests.swift; sourceTree = "<group>"; };
 		D6134A461F852A57005592A2 /* UtilTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilTests.swift; sourceTree = "<group>"; };
 		D6134A471F852A57005592A2 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		D6134A601F852C80005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,7 +284,6 @@
 				D62C6EC11FCBA67500E7DF02 /* ImageUIKitTests.swift */,
 				D6134A401F852A57005592A2 /* Info.plist */,
 				D6134A411F852A57005592A2 /* RGBATests.swift */,
-				D6134A421F852A57005592A2 /* SubscriptTests.swift */,
 				D62C6ED01FCD666600E7DF02 /* Util.swift */,
 				D6134A461F852A57005592A2 /* UtilTests.swift */,
 			);
@@ -608,7 +603,6 @@
 				D6134A4A1F852A64005592A2 /* ImageCoreGraphicsTest.swift in Sources */,
 				D62C6ED11FCD666600E7DF02 /* Util.swift in Sources */,
 				D6134A4D1F852A64005592A2 /* RGBATests.swift in Sources */,
-				D6134A4E1F852A64005592A2 /* SubscriptTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,7 +639,6 @@
 				D6134A881F85CF6F005592A2 /* ImageCoreGraphicsTest.swift in Sources */,
 				D62C6ED21FCD666600E7DF02 /* Util.swift in Sources */,
 				D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */,
-				D6134A8C1F85CF6F005592A2 /* SubscriptTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,7 +675,6 @@
 				D6134AC71F85D2BF005592A2 /* ImageCoreGraphicsTest.swift in Sources */,
 				D62C6ED31FCD666600E7DF02 /* Util.swift in Sources */,
 				D6134ACA1F85D2BF005592A2 /* RGBATests.swift in Sources */,
-				D6134ACB1F85D2BF005592A2 /* SubscriptTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
