@@ -1,0 +1,41 @@
+% types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Bool']
+% arithmetic_operators = ['+', '-', '*', '/']
+% float_operators = arithmetic_operators
+% int_operators = arithmetic_operators + ['%', '&', '|', '^']
+% bool_operators = ['&&', '||']
+% float_operators = float_operators + [o + '=' for o in float_operators]
+% int_operators = int_operators + ['&' + o for o in arithmetic_operators if o != '/'] + [o + '=' for o in  int_operators]
+% type_to_operators = { type: int_operators if 'Int' in type else (bool_operators if type == 'Bool' else float_operators) for type in types }
+% type_to_prefix_operators = { type: ['!'] if type == 'Bool' else (['+'] if type.startswith('UInt') else ['+', '-']) for type in types }
+% for i, (channel, type) in enumerate([(t, f'RGBA<{t}>') for t in types] + [(t, t) for t in types]):
+%   if i > 0:
+
+%   end
+extension Image where Pixel == ${type} {
+%   for i, operator in enumerate(type_to_operators[channel]):
+%     if i > 0:
+
+%     end
+%     if operator.endswith('='):
+    public static func ${operator}(lhs: inout Image<${type}>, rhs: Image<${type}>) {
+        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        for i in lhs.pixels.indices {
+            lhs.pixels[i] ${operator} rhs.pixels[i]
+        }
+%     else:
+    public static func ${operator}(lhs: Image<${type}>, rhs: Image<${type}>) -> Image<${type}> {
+        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        let pixels = zip(lhs, rhs).map { $0 ${operator} $1 }
+        return Image<${type}>(width: lhs.width, height: lhs.height, pixels: pixels)
+%     end
+    }
+%   end
+%
+%   for operator in type_to_prefix_operators[channel]:
+
+    prefix public static func ${operator}(a: Image<${type}>) -> Image<${type}> {
+        return Image<${type}>(width: a.width, height: a.height, pixels: a.pixels.map { ${operator}$0 })
+    }
+%   end
+}
+% end
