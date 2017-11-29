@@ -1,36 +1,61 @@
 % image_types = ['Image', 'ImageSlice']
-% infinite_range_types = ['PartialRangeFrom', 'PartialRangeThrough', 'PartialRangeUpTo', 'CountablePartialRangeFrom', 'UnboundedRange']
-% infinite_range_type_set = set(infinite_range_types)
-% range_types = ['CountableRange', 'CountableClosedRange', 'Range', 'ClosedRange'] + infinite_range_types
+% range_types = [
+%   'CountableRange',
+%   'CountableClosedRange' 
+%   'Range',
+%   'ClosedRange',
+%   'PartialRangeFrom',
+%   'PartialRangeThrough',
+%   'PartialRangeUpTo',
+%   'CountablePartialRangeFrom',
+%   'UnboundedRange'
+% ]
+% range_types = [t if t == 'UnboundedRange' else f'{t}<Int>' for t in range_types]
 %
 % for i, image_type in enumerate(image_types):
-%     if i > 0:
+%   if i > 0:
 
-%     end
+%   end
 extension ${image_type} {
-    % for j, range_type_1 in enumerate(range_types):
-    %     type_raprameter_1 = '' if range_type_1 == 'UnboundedRange' else '<Int>'
-    %     for k, range_type_2 in enumerate(range_types):
-    %         if j > 0 or k > 0:
-
-    %         end
-    %         type_raprameter_2 = '' if range_type_2 == 'UnboundedRange' else '<Int>'
-    public subscript(xRange: ${range_type_1}${type_raprameter_1}, yRange: ${range_type_2}${type_raprameter_2}) -> ImageSlice<Pixel> {
-        % if range_type_1 == 'CountableRange' and range_type_2 == 'CountableRange':
-        %     if image_type == 'Image':
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+%   if image_type == 'Image':
         return ImageSlice(image: self, xRange: xRange, yRange: yRange)
-        %     elif image_type == 'ImageSlice':
+%   elif image_type == 'ImageSlice':
         precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(self.xRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         return image[xRange, yRange]
-        %     else:
-        %         raise(Exception('Never reaches here.'))
-        %     end
-        % else:
-        return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange)]
-        % end
+%   else:
+%     raise(Exception('Never reaches here.'))
+%   end
     }
-    %     end
-    % end
+
+%   for range_type_1 in range_types:
+%     for range_type_2 in range_types:
+%       if range_type_1 != 'CountableRange' or range_type_2 != 'CountableRange':
+%#    @_specialize(exported: true, where R1 == ${range_type_1}, R2 == ${range_type_2})
+%       end
+%     end
+%   end
+    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> ImageSlice<Pixel> where R1.Bound == Int, R2.Bound == Int {
+        return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange)]
+    }
+
+%   for range_type_1 in range_types:
+%#    @_specialize(exported: true, where R1 == ${range_type_1})
+%   end
+    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> ImageSlice<Pixel> where R1.Bound == Int {
+        return self[countableRange(from: xRange, relativeTo: self.xRange), self.yRange]
+    }
+
+%   for range_type_2 in range_types:
+%#    @_specialize(exported: true, where R1 == ${range_type_2})
+%   end
+    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> ImageSlice<Pixel> where R2.Bound == Int {
+        return self[self.xRange, countableRange(from: yRange, relativeTo: self.yRange)]
+    }
+
+    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> {
+        return self[self.xRange, self.yRange]
+    }
 }
 % end

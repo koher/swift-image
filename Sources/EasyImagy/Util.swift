@@ -31,7 +31,3 @@ internal func countableRange(from range: Range<Int>, relativeTo collection: Coun
 internal func countableRange(from range: ClosedRange<Int>, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {
     return CountableRange(range)
 }
-
-internal func countableRange(from range: UnboundedRange, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {
-    return collection
-}
