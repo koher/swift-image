@@ -167,8 +167,18 @@ extension Image where Pixel == Double { // Convolution
 }
 
 extension Image where Pixel == RGBA<UInt8> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt8> {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<UInt8> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<UInt8>> {
@@ -177,8 +187,18 @@ extension Image where Pixel == RGBA<UInt8> { // Interpolation, Transformation
 }
 
 extension Image where Pixel == RGBA<UInt16> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt16> {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<UInt16> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<UInt16>> {
@@ -187,8 +207,18 @@ extension Image where Pixel == RGBA<UInt16> { // Interpolation, Transformation
 }
 
 extension Image where Pixel == RGBA<UInt32> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt32> {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<UInt32> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<UInt32>> {
@@ -197,8 +227,18 @@ extension Image where Pixel == RGBA<UInt32> { // Interpolation, Transformation
 }
 
 extension Image where Pixel == RGBA<Int> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Int> {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Int> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<Int>> {
@@ -207,8 +247,18 @@ extension Image where Pixel == RGBA<Int> { // Interpolation, Transformation
 }
 
 extension Image where Pixel == RGBA<Float> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Float> {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Float> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<Float>> {
@@ -217,8 +267,18 @@ extension Image where Pixel == RGBA<Float> { // Interpolation, Transformation
 }
 
 extension Image where Pixel == RGBA<Double> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Double> {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Double> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<Double>> {
@@ -227,8 +287,18 @@ extension Image where Pixel == RGBA<Double> { // Interpolation, Transformation
 }
 
 extension Image where Pixel == UInt8 { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt8 {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> UInt8 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt8> {
@@ -237,8 +307,18 @@ extension Image where Pixel == UInt8 { // Interpolation, Transformation
 }
 
 extension Image where Pixel == UInt16 { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt16 {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> UInt16 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt16> {
@@ -247,8 +327,18 @@ extension Image where Pixel == UInt16 { // Interpolation, Transformation
 }
 
 extension Image where Pixel == UInt32 { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt32 {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> UInt32 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<UInt32> {
@@ -257,8 +347,18 @@ extension Image where Pixel == UInt32 { // Interpolation, Transformation
 }
 
 extension Image where Pixel == Int { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Int {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Int {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Int> {
@@ -267,8 +367,18 @@ extension Image where Pixel == Int { // Interpolation, Transformation
 }
 
 extension Image where Pixel == Float { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Float {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Float {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float> {
@@ -277,8 +387,18 @@ extension Image where Pixel == Float { // Interpolation, Transformation
 }
 
 extension Image where Pixel == Double { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Double {
-        return self._interpolate(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Double {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighborWithPreconditions(x: x, y: y)
+            case .bilinear:
+                return interpolatedPixelByBilinearWithPreconditions(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:))
+        }
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {

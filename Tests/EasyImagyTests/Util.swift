@@ -7,7 +7,7 @@ internal func XCTAssertEqual<Channel: Equatable>(
     _ message: @autoclosure () -> String = "",
     file: StaticString = #file,
     line: UInt = #line
-    ) {
+) {
     do {
         let e1 = try expression1()
         let e2 = try expression2()
@@ -27,7 +27,7 @@ internal func XCTAssertEqual<Pixel: Equatable>(
     _ message: @autoclosure () -> String = "",
     file: StaticString = #file,
     line: UInt = #line
-    ) {
+) {
     do {
         let e1 = try expression1()
         let e2 = try expression2()
@@ -52,7 +52,7 @@ internal func XCTAssertEqual<Channel: Equatable>(
     _ message: @autoclosure () -> String = "",
     file: StaticString = #file,
     line: UInt = #line
-    ) {
+) {
     do {
         let e1 = try expression1()
         let e2 = try expression2()

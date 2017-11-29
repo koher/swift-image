@@ -67,68 +67,6 @@ extension Image {
         return Image<Pixel>(width: width, height: height, pixels: pixels)
     }
     
-    internal func _interpolate<Summable>(
-        x: Float,
-        y: Float,
-        toSummable: (Pixel) -> Summable,
-        product: (Summable, Float) -> Summable,
-        sum: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Pixel
-    ) -> Pixel {
-        let width = self.width
-        let height = self.height
-        
-        var x0 = Int(floor(x))
-        var y0 = Int(floor(y))
-        var x1 = x0 + 1
-        var y1 = y0 + 1
-        
-        if x1 <= 0 {
-            x0 = 0
-            
-            if x1 < 0 {
-                x1 = 0
-            }
-        } else if x0 >= width - 1 {
-            if x0 >= width {
-                x0 = width - 1
-            }
-            
-            x1 = width - 1
-        }
-        
-        if y1 <= 0 {
-            y0 = 0
-            
-            if y1 < 0 {
-                y1 = 0
-            }
-        } else if y0 >= height - 1 {
-            if y0 >= height {
-                y0 = height - 1
-            }
-            
-            y1 = height - 1
-        }
-        
-        let v00 = self[x0, y0]
-        let v01 = self[x1, y0]
-        let v10 = self[x0, y1]
-        let v11 = self[x1, y1]
-        
-        let wx = x - Float(x0)
-        let wy = y - Float(y0)
-        let w00 = (1.0 - wx) * (1.0 - wy)
-        let w01 = wx * (1.0 - wy)
-        let w10 = (1.0 - wx) * wy
-        let w11 = wx * wy
-        
-        return toOriginal(sum(
-            sum(product(toSummable(v00), w00), product(toSummable(v01), w01)),
-            sum(product(toSummable(v10), w10), product(toSummable(v11), w11))
-        ))
-    }
-    
     internal func _transformed<Summable>(
         width: Int,
         height: Int,
@@ -146,7 +84,7 @@ extension Image {
         for y in 0..<height {
             for x in 0..<width {
                 let transformed = transform(Float(x), Float(y))
-                pixels.append(_interpolate(x: transformed.0, y: transformed.1, toSummable: toSummable, product: product, sum: sum, toOriginal: toOriginal))
+                pixels.append(interpolatedPixelByBilinearWithPreconditions(x: transformed.0, y: transformed.1, toSummable: toSummable, product: product, sum: sum, toOriginal: toOriginal))
             }
         }
         
