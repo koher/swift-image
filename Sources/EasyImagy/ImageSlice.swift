@@ -63,13 +63,13 @@ private func validRange(_ range: CountableRange<Int>, maxValue: Int) -> Countabl
 public struct PixelGenerator<Pixel>: IteratorProtocol {
     public typealias Element = Pixel
     
-    fileprivate let image: Image<Pixel>
+    private let image: Image<Pixel>
     
-    fileprivate let xRange: CountableRange<Int>
-    fileprivate let yRange: CountableRange<Int>
+    private let xRange: CountableRange<Int>
+    private let yRange: CountableRange<Int>
     
-    fileprivate var x: Int
-    fileprivate var y: Int
+    private var x: Int
+    private var y: Int
     
     init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
         self.image = image

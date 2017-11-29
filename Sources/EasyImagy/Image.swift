@@ -34,15 +34,15 @@ extension Image {
 }
 
 extension Image { // Subscripts (Index)
-	fileprivate func isValidX(_ x: Int) -> Bool {
+	private func isValidX(_ x: Int) -> Bool {
 		return 0 <= x && x < width
 	}
 	
-	fileprivate func isValidY(_ y: Int) -> Bool {
+	private func isValidY(_ y: Int) -> Bool {
 		return 0 <= y && y < height
 	}
 	
-	fileprivate func _pixelIndex(x: Int, y: Int) -> Int {
+	private func _pixelIndex(x: Int, y: Int) -> Int {
 		precondition(isValidX(x), "`x` is out of bounds: \(x)")
 		precondition(isValidY(y), "`y` is out of bounds: \(y)")
 		return y * width + x
