@@ -103,6 +103,13 @@
 		D62C6EE81FCE8F5B00E7DF02 /* ExtrapolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EE31FCE8F1800E7DF02 /* ExtrapolationTests.swift */; };
 		D62C6EE91FCE8F5C00E7DF02 /* ExtrapolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EE31FCE8F1800E7DF02 /* ExtrapolationTests.swift */; };
 		D62C6EEA1FCE8F5D00E7DF02 /* ExtrapolationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EE31FCE8F1800E7DF02 /* ExtrapolationTests.swift */; };
+		D63109121FCFD7DE009974D0 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109111FCFD7DE009974D0 /* Convolution.swift */; };
+		D63109131FCFD7DE009974D0 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109111FCFD7DE009974D0 /* Convolution.swift */; };
+		D63109141FCFD7DE009974D0 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109111FCFD7DE009974D0 /* Convolution.swift */; };
+		D63109151FCFD7DE009974D0 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109111FCFD7DE009974D0 /* Convolution.swift */; };
+		D631091B1FCFF27C009974D0 /* ConvolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109161FCFF252009974D0 /* ConvolutionTests.swift */; };
+		D631091C1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109161FCFF252009974D0 /* ConvolutionTests.swift */; };
+		D631091D1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63109161FCFF252009974D0 /* ConvolutionTests.swift */; };
 		D66840591F9F426200D1DE7F /* Summable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66840581F9F426200D1DE7F /* Summable.swift */; };
 		D668405A1F9F427D00D1DE7F /* Summable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66840581F9F426200D1DE7F /* Summable.swift */; };
 		D668405B1F9F427D00D1DE7F /* Summable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66840581F9F426200D1DE7F /* Summable.swift */; };
@@ -170,6 +177,8 @@
 		D62C6ED91FCE5F7600E7DF02 /* InterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolationTests.swift; sourceTree = "<group>"; };
 		D62C6EDE1FCE6BD800E7DF02 /* Extrapolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extrapolation.swift; sourceTree = "<group>"; };
 		D62C6EE31FCE8F1800E7DF02 /* ExtrapolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrapolationTests.swift; sourceTree = "<group>"; };
+		D63109111FCFD7DE009974D0 /* Convolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convolution.swift; sourceTree = "<group>"; };
+		D63109161FCFF252009974D0 /* ConvolutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvolutionTests.swift; sourceTree = "<group>"; };
 		D66840581F9F426200D1DE7F /* Summable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,6 +272,7 @@
 		D6134A291F852A49005592A2 /* EasyImagy */ = {
 			isa = PBXGroup;
 			children = (
+				D63109111FCFD7DE009974D0 /* Convolution.swift */,
 				D6134A2A1F852A49005592A2 /* EasyImagy.h */,
 				D62C6EDE1FCE6BD800E7DF02 /* Extrapolation.swift */,
 				D6134A2B1F852A49005592A2 /* Image.swift */,
@@ -296,6 +306,7 @@
 		D6134A3A1F852A57005592A2 /* EasyImagyTests */ = {
 			isa = PBXGroup;
 			children = (
+				D63109161FCFF252009974D0 /* ConvolutionTests.swift */,
 				D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */,
 				D62C6EE31FCE8F1800E7DF02 /* ExtrapolationTests.swift */,
 				D6134A3C1F852A57005592A2 /* ImageAppKitTests.swift */,
@@ -608,6 +619,7 @@
 				D62C6EC71FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
 				D6134A551F852A85005592A2 /* ImageUIKit.swift in Sources */,
 				D6134A531F852A85005592A2 /* ImageSlice.swift in Sources */,
+				D63109121FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D6134A521F852A85005592A2 /* ImageCoreGraphics.swift in Sources */,
 				D6134A541F852A85005592A2 /* ImageTyped.swift in Sources */,
 				D60D48A51FA0E3360047F2D3 /* ImageInternal.swift in Sources */,
@@ -622,6 +634,7 @@
 				D6134A491F852A64005592A2 /* ImageAppKitTests.swift in Sources */,
 				D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC31FCBA6B800E7DF02 /* ImageUIKitTests.swift in Sources */,
+				D631091D1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */,
 				D62C6EEA1FCE8F5D00E7DF02 /* ExtrapolationTests.swift in Sources */,
 				D62C6EDB1FCE5F7D00E7DF02 /* InterpolationTests.swift in Sources */,
 				D6134A4F1F852A64005592A2 /* UtilTests.swift in Sources */,
@@ -648,6 +661,7 @@
 				D62C6EC81FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
 				D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */,
 				D6134A7D1F85CF5E005592A2 /* ImageCoreGraphics.swift in Sources */,
+				D63109131FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D6134A7F1F85CF5E005592A2 /* ImageTyped.swift in Sources */,
 				D668405A1F9F427D00D1DE7F /* Summable.swift in Sources */,
 				D62C6EBE1FC9DB4200E7DF02 /* ImageInternal.swift in Sources */,
@@ -662,6 +676,7 @@
 				D6134A871F85CF6F005592A2 /* ImageAppKitTests.swift in Sources */,
 				D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC41FCBA6B900E7DF02 /* ImageUIKitTests.swift in Sources */,
+				D631091C1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */,
 				D62C6EE91FCE8F5C00E7DF02 /* ExtrapolationTests.swift in Sources */,
 				D62C6EDC1FCE5F7E00E7DF02 /* InterpolationTests.swift in Sources */,
 				D6134A8D1F85CF6F005592A2 /* UtilTests.swift in Sources */,
@@ -688,6 +703,7 @@
 				D62C6EC91FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
 				D6134ABD1F85D2AF005592A2 /* ImageSlice.swift in Sources */,
 				D6134ABC1F85D2AF005592A2 /* ImageCoreGraphics.swift in Sources */,
+				D63109141FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D6134ABE1F85D2AF005592A2 /* ImageTyped.swift in Sources */,
 				D668405B1F9F427D00D1DE7F /* Summable.swift in Sources */,
 				D62C6EBF1FC9DB4300E7DF02 /* ImageInternal.swift in Sources */,
@@ -702,6 +718,7 @@
 				D6134AC61F85D2BF005592A2 /* ImageAppKitTests.swift in Sources */,
 				D6134AC51F85D2BF005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC51FCBA6BA00E7DF02 /* ImageUIKitTests.swift in Sources */,
+				D631091B1FCFF27C009974D0 /* ConvolutionTests.swift in Sources */,
 				D62C6EE81FCE8F5B00E7DF02 /* ExtrapolationTests.swift in Sources */,
 				D62C6EDD1FCE5F7E00E7DF02 /* InterpolationTests.swift in Sources */,
 				D6134ACC1F85D2BF005592A2 /* UtilTests.swift in Sources */,
@@ -728,6 +745,7 @@
 				D62C6ECA1FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
 				D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */,
 				D6134ADD1F85DA5C005592A2 /* ImageCoreGraphics.swift in Sources */,
+				D63109151FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D6134ADF1F85DA5C005592A2 /* ImageTyped.swift in Sources */,
 				D668405C1F9F427F00D1DE7F /* Summable.swift in Sources */,
 				D62C6EC01FC9DB4400E7DF02 /* ImageInternal.swift in Sources */,

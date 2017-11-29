@@ -1,168 +1,168 @@
 extension Image where Pixel == RGBA<UInt8> { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<RGBA<UInt8>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt8>> = .edging) -> Image<RGBA<UInt8>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<RGBA<UInt8>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt8>> = .edging) -> Image<RGBA<UInt8>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<RGBA<UInt8>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt8>> = .edging) -> Image<RGBA<UInt8>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == RGBA<UInt16> { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<RGBA<UInt16>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt16>> = .edging) -> Image<RGBA<UInt16>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<RGBA<UInt16>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt16>> = .edging) -> Image<RGBA<UInt16>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<RGBA<UInt16>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt16>> = .edging) -> Image<RGBA<UInt16>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == RGBA<UInt32> { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<RGBA<UInt32>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt32>> = .edging) -> Image<RGBA<UInt32>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<RGBA<UInt32>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt32>> = .edging) -> Image<RGBA<UInt32>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<RGBA<UInt32>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt32>> = .edging) -> Image<RGBA<UInt32>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == RGBA<Int> { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<RGBA<Int>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Int>> = .edging) -> Image<RGBA<Int>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<RGBA<Int>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Int>> = .edging) -> Image<RGBA<Int>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<RGBA<Int>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Int>> = .edging) -> Image<RGBA<Int>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == RGBA<Float> { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<RGBA<Float>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float>> = .edging) -> Image<RGBA<Float>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<RGBA<Float>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float>> = .edging) -> Image<RGBA<Float>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<RGBA<Float>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float>> = .edging) -> Image<RGBA<Float>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == RGBA<Double> { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<RGBA<Double>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Double>> = .edging) -> Image<RGBA<Double>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<RGBA<Double>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Double>> = .edging) -> Image<RGBA<Double>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<RGBA<Double>> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Double>> = .edging) -> Image<RGBA<Double>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == UInt8 { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edging) -> Image<UInt8> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edging) -> Image<UInt8> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<UInt8> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edging) -> Image<UInt8> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == UInt16 { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<UInt16> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt16> = .edging) -> Image<UInt16> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<UInt16> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt16> = .edging) -> Image<UInt16> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<UInt16> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt16> = .edging) -> Image<UInt16> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == UInt32 { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<UInt32> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt32> = .edging) -> Image<UInt32> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<UInt32> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt32> = .edging) -> Image<UInt32> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<UInt32> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt32> = .edging) -> Image<UInt32> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Int { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<Int> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Int> = .edging) -> Image<Int> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<Int> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Int> = .edging) -> Image<Int> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<Int> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Int> = .edging) -> Image<Int> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Float { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<Float> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float> = .edging) -> Image<Float> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<Float> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float> = .edging) -> Image<Float> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<Float> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float> = .edging) -> Image<Float> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 
 extension Image where Pixel == Double { // Convolution
-    public func convoluted(by kernel: Image<Int>) -> Image<Double> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edging) -> Image<Double> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(by kernel: Image<Float>) -> Image<Double> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edging) -> Image<Double> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(by kernel: Image<Double>) -> Image<Double> {
-        return self._convoluted(by: kernel, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edging) -> Image<Double> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
 

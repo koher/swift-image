@@ -453,25 +453,6 @@ class ImageTests: XCTestCase {
 		}
 	}
     
-    func testConvoluted() {
-        let image = Image<Int>(width: 2, height: 2, pixels: [1, 2, 3, 4])
-        
-        let kernel = Image<Int>(width: 5, height: 5, pixels: [
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1,
-        ])
-        
-        let convoluted = image.convoluted(by: kernel)
-        
-        XCTAssertEqual(55, convoluted[0, 0])
-        XCTAssertEqual(60, convoluted[1, 0])
-        XCTAssertEqual(65, convoluted[0, 1])
-        XCTAssertEqual(70, convoluted[1, 1])
-    }
-    
 	func testCopyOnWritePerformanceOfCopy() { // Fast
         let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.transparent)
 		measure {

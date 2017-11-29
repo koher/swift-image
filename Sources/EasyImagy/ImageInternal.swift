@@ -27,45 +27,6 @@ extension Image {
 }
 
 extension Image {
-    internal func _convoluted<W, Summable>(
-        by kernel: Image<W>,
-        toSummable: (Pixel) -> Summable,
-        product: (Summable, W) -> Summable,
-        zero: Summable,
-        sum: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Pixel
-    ) -> Image<Pixel> {
-        precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
-        precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
-        
-        let hw = kernel.width / 2  // halfWidth
-        let hh = kernel.height / 2 // halfHeight
-        
-        var pixels: [Pixel] = []
-        pixels.reserveCapacity(count)
-        
-        let maxWidth = width - 1
-        let maxHeight = height - 1
-        
-        for y in 0..<height {
-            for x in 0..<width {
-                var weightedValues: [Summable] = []
-                for fy in 0..<kernel.height {
-                    for fx in 0..<kernel.width {
-                        let dx = fx - hw
-                        let dy = fy - hh
-                        let summablePixel = toSummable(extrapolatedPixelByEdgingAt(x: x + dx, y: y + dy, maxWidth: maxWidth, maxHeight: maxHeight))
-                        let weight = kernel[fx, fy]
-                        weightedValues.append(product(summablePixel, weight))
-                    }
-                }
-                pixels.append(toOriginal(weightedValues.reduce(zero) { sum($0, $1) }))
-            }
-        }
-        
-        return Image<Pixel>(width: width, height: height, pixels: pixels)
-    }
-    
     internal func _transformed<Summable>(
         width: Int,
         height: Int,
