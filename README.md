@@ -15,8 +15,8 @@ for pixel in image {
     // ...
 }
 
-// Converts the image (e.g. binarizations)
-let binarized: Image<RGBA<UInt8>> = image.map { $0.gray < 128 ? .black : .white }
+// Processes images (e.g. binarizations)
+let binarized: Image<Bool> = image.map { $0.gray >= 127 }
 
 // From/to `UIImage`
 image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
