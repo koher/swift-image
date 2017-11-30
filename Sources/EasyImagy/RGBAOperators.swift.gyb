@@ -1,38 +1,60 @@
-% types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Bool']
-% arithmetic_operators = ['+', '-', '*', '/']
-% float_operators = arithmetic_operators
-% int_operators = arithmetic_operators + ['%', '&', '|', '^']
-% bool_operators = ['&&', '||']
-% float_operators = float_operators + [o + '=' for o in float_operators]
-% int_operators = int_operators + ['&' + o for o in arithmetic_operators if o != '/'] + [o + '=' for o in  int_operators]
-% type_to_operators = { type: int_operators if 'Int' in type else (bool_operators if type == 'Bool' else float_operators) for type in types }
-% type_to_prefix_operators = { type: ['!'] if type == 'Bool' else (['+'] if type.startswith('UInt') else ['+', '-']) for type in types }
+% types = [
+%   'Numeric',
+%   'SignedNumeric',
+%   'BinaryInteger',
+%   'FixedWidthInteger',
+%   'FloatingPoint',
+%   'Bool',
+% ]
+% type_to_operators = {
+%   'Numeric': ['+', '-', '*', '+=', '-=', '*='],
+%   'SignedNumeric': [],
+%   'BinaryInteger': ['/', '%', '&', '|', '^', '<<', '>>', '/=', '%=', '&=', '|=', '^=', '<<=', '>>='],
+%   'FixedWidthInteger': ['&+', '&-', '&*', '&<<', '&>>', '&<<=', '&>>='],
+%   'FloatingPoint': ['/', '/='],
+%   'Bool': ['&&', '||']
+% }
+% type_to_prefix_operators = {
+%   'Numeric': ['+'],
+%   'SignedNumeric': ['-'],
+%   'BinaryInteger': [],
+%   'FixedWidthInteger': [],
+%   'FloatingPoint': [],
+%   'Bool': ['!'],
+% }
 % for i, type in enumerate(types):
 %   if i > 0:
 
 %   end
-extension RGBA where Channel == ${type} {
-%   for i, operator in enumerate(type_to_operators[type]):
-%     if i > 0:
+extension RGBA where Channel ${'==' if type == 'Bool' else ':'} ${type} {
+%   first = True
+%   for operator in type_to_operators[type]:
+%     if first:
+%       first = False
+%     else:
 
 %     end
 %     if operator.endswith('='):
-    public static func ${operator}(lhs: inout RGBA<${type}>, rhs: RGBA<${type}>) {
+    public static func ${operator}(lhs: inout RGBA<Channel>, rhs: RGBA<Channel>) {
         lhs.red ${operator} rhs.red
         lhs.green ${operator} rhs.green
         lhs.blue ${operator} rhs.blue
         lhs.alpha ${operator} rhs.alpha
 %     else:
-    public static func ${operator}(lhs: RGBA<${type}>, rhs: RGBA<${type}>) -> RGBA<${type}> {
-        return RGBA<${type}>(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
+    public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
 %     end
     }
 %   end
 %
 %   for operator in type_to_prefix_operators[type]:
+%     if first:
+%       first = False
+%     else:
 
-    prefix public static func ${operator}(a: RGBA<${type}>) -> RGBA<${type}> {
-        return RGBA<${type}>(red: ${operator}a.red, green: ${operator}a.green, blue: ${operator}a.blue, alpha: ${operator}a.alpha)
+%     end
+    prefix public static func ${operator}(a: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA(red: ${operator}a.red, green: ${operator}a.green, blue: ${operator}a.blue, alpha: ${operator}a.alpha)
     }
 %   end
 }
