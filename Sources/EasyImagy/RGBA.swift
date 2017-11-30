@@ -50,10 +50,3 @@ extension RGBA : CustomDebugStringConvertible {
         return description
     }
 }
-
-// FIXME: with conditional conformance
-extension RGBA where Channel: Equatable {
-    public static func ==(lhs: RGBA, rhs: RGBA) -> Bool {
-        return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
-    }
-}

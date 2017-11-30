@@ -4,18 +4,52 @@
 %   'BinaryInteger',
 %   'FixedWidthInteger',
 %   'FloatingPoint',
+%   'Equatable',
+%   'Comparable',
 %   'Bool',
 % ]
 % concrete_types = set([
 %   'Bool'
 % ])
 % type_to_operators = {
-%   'Numeric': ['+', '-', '*', '+=', '-=', '*='],
+%   'Numeric': ['+', '-', '*'],
 %   'SignedNumeric': [],
-%   'BinaryInteger': ['/', '%', '&', '|', '^', '<<', '>>', '/=', '%=', '&=', '|=', '^=', '<<=', '>>='],
-%   'FixedWidthInteger': ['&+', '&-', '&*', '&<<', '&>>', '&<<=', '&>>='],
-%   'FloatingPoint': ['/', '/='],
-%   'Bool': ['&&', '||']
+%   'BinaryInteger': ['/', '%', '&', '|', '^', '<<', '>>'],
+%   'FixedWidthInteger': ['&+', '&-', '&*', '&<<', '&>>'],
+%   'FloatingPoint': ['/'],
+%   'Bool': ['&&', '||'],
+%   'Equatable': [],
+%   'Comparable': [],
+% }
+% type_to_compound_assignment_operators = {
+%   'Numeric': ['+=', '-=', '*='],
+%   'SignedNumeric': [],
+%   'BinaryInteger': ['/=', '%=', '&=', '|=', '^=', '<<=', '>>='],
+%   'FixedWidthInteger': ['&<<=', '&>>='],
+%   'FloatingPoint': ['/='],
+%   'Bool': [],
+%   'Equatable': [],
+%   'Comparable': [],
+% }
+% type_to_equality_operators = {
+%   'Numeric': [],
+%   'SignedNumeric': [],
+%   'BinaryInteger': [],
+%   'FixedWidthInteger': [],
+%   'FloatingPoint': [],
+%   'Bool': [],
+%   'Equatable': ['==', '!='],
+%   'Comparable': [],
+% }
+% type_to_comparison_operators = {
+%   'Numeric': [],
+%   'SignedNumeric': [],
+%   'BinaryInteger': [],
+%   'FixedWidthInteger': [],
+%   'FloatingPoint': [],
+%   'Bool': [],
+%   'Equatable': [],
+%   'Comparable': ['<', '<=', '>', '>='],
 % }
 % type_to_prefix_operators = {
 %   'Numeric': ['+'],
@@ -24,6 +58,8 @@
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
 %   'Bool': ['!'],
+%   'Equatable': [],
+%   'Comparable': [],
 % }
 % type_to_concrete_types = {
 %   'Numeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
@@ -32,10 +68,15 @@
 %   'FixedWidthInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
 %   'FloatingPoint': ['Float', 'Double', 'Float80'],
 %   'Bool': [],
+%   'Equatable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80', 'Bool'],
+%   'Comparable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
 % }
 % for i, type in enumerate(types):
 %   if i > 0:
 
+%   end
+%   if type == 'Equatable':
+// FIXME: with conditional conformance
 %   end
 extension RGBA where Channel ${'==' if type in concrete_types else ':'} ${type} {
 %   first = True
@@ -48,16 +89,54 @@ extension RGBA where Channel ${'==' if type in concrete_types else ':'} ${type} 
 %     for concrete_type in type_to_concrete_types[type]:
     @_specialize(exported: true, where Channel == ${concrete_type})
 %     end
-%     if operator.endswith('='):
+    public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
+    }
+%   end
+%
+%   for operator in type_to_compound_assignment_operators[type]:
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Channel == ${concrete_type})
+%     end
     public static func ${operator}(lhs: inout RGBA<Channel>, rhs: RGBA<Channel>) {
         lhs.red ${operator} rhs.red
         lhs.green ${operator} rhs.green
         lhs.blue ${operator} rhs.blue
         lhs.alpha ${operator} rhs.alpha
+    }
+%   end
+%
+%   for operator in type_to_equality_operators[type]:
+%     if first:
+%       first = False
 %     else:
-    public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Channel> {
-        return RGBA(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
+
 %     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Channel == ${concrete_type})
+%     end
+%     and_or = '&&' if operator == '==' else '||'
+    public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> Bool {
+        return lhs.red ${operator} rhs.red ${and_or} lhs.green ${operator} rhs.green ${and_or} lhs.blue ${operator} rhs.blue ${and_or} lhs.alpha ${operator} rhs.alpha
+    }
+%   end
+%
+%   for operator in type_to_comparison_operators[type]:
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Channel == ${concrete_type})
+%     end
+    public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Bool> {
+        return RGBA<Bool>(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
     }
 %   end
 %
