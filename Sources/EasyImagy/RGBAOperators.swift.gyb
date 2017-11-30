@@ -9,7 +9,7 @@
 %   'Bool',
 % ]
 % concrete_types = set([
-%   'Bool'
+%   'Bool',
 % ])
 % type_to_operators = {
 %   'Numeric': ['+', '-', '*'],
@@ -17,9 +17,9 @@
 %   'BinaryInteger': ['/', '%', '&', '|', '^', '<<', '>>'],
 %   'FixedWidthInteger': ['&+', '&-', '&*', '&<<', '&>>'],
 %   'FloatingPoint': ['/'],
-%   'Bool': ['&&', '||'],
 %   'Equatable': [],
 %   'Comparable': [],
+%   'Bool': ['&&', '||'],
 % }
 % type_to_compound_assignment_operators = {
 %   'Numeric': ['+=', '-=', '*='],
@@ -27,9 +27,9 @@
 %   'BinaryInteger': ['/=', '%=', '&=', '|=', '^=', '<<=', '>>='],
 %   'FixedWidthInteger': ['&<<=', '&>>='],
 %   'FloatingPoint': ['/='],
-%   'Bool': [],
 %   'Equatable': [],
 %   'Comparable': [],
+%   'Bool': [],
 % }
 % type_to_equality_operators = {
 %   'Numeric': [],
@@ -37,9 +37,9 @@
 %   'BinaryInteger': [],
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
-%   'Bool': [],
 %   'Equatable': ['==', '!='],
 %   'Comparable': [],
+%   'Bool': [],
 % }
 % type_to_comparison_operators = {
 %   'Numeric': [],
@@ -47,9 +47,9 @@
 %   'BinaryInteger': [],
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
-%   'Bool': [],
 %   'Equatable': [],
 %   'Comparable': ['<', '<=', '>', '>='],
+%   'Bool': [],
 % }
 % type_to_prefix_operators = {
 %   'Numeric': ['+'],
@@ -57,9 +57,9 @@
 %   'BinaryInteger': [],
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
-%   'Bool': ['!'],
 %   'Equatable': [],
 %   'Comparable': [],
+%   'Bool': ['!'],
 % }
 % type_to_concrete_types = {
 %   'Numeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
@@ -67,9 +67,9 @@
 %   'BinaryInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
 %   'FixedWidthInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
 %   'FloatingPoint': ['Float', 'Double', 'Float80'],
-%   'Bool': [],
 %   'Equatable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80', 'Bool'],
 %   'Comparable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
+%   'Bool': [],
 % }
 % for i, type in enumerate(types):
 %   if i > 0:
