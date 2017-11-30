@@ -6,6 +6,9 @@
 %   'FloatingPoint',
 %   'Bool',
 % ]
+% concrete_types = set([
+%   'Bool'
+% ])
 % type_to_operators = {
 %   'Numeric': ['+', '-', '*', '+=', '-=', '*='],
 %   'SignedNumeric': [],
@@ -22,17 +25,28 @@
 %   'FloatingPoint': [],
 %   'Bool': ['!'],
 % }
+% type_to_concrete_types = {
+%   'Numeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
+%   'SignedNumeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'Float', 'Double', 'Float80'],
+%   'BinaryInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
+%   'FixedWidthInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
+%   'FloatingPoint': ['Float', 'Double', 'Float80'],
+%   'Bool': [],
+% }
 % for i, type in enumerate(types):
 %   if i > 0:
 
 %   end
-extension RGBA where Channel ${'==' if type == 'Bool' else ':'} ${type} {
+extension RGBA where Channel ${'==' if type in concrete_types else ':'} ${type} {
 %   first = True
 %   for operator in type_to_operators[type]:
 %     if first:
 %       first = False
 %     else:
 
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Channel == ${concrete_type})
 %     end
 %     if operator.endswith('='):
     public static func ${operator}(lhs: inout RGBA<Channel>, rhs: RGBA<Channel>) {
@@ -52,6 +66,9 @@ extension RGBA where Channel ${'==' if type == 'Bool' else ':'} ${type} {
 %       first = False
 %     else:
 
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Channel == ${concrete_type})
 %     end
     prefix public static func ${operator}(a: RGBA<Channel>) -> RGBA<Channel> {
         return RGBA(red: ${operator}a.red, green: ${operator}a.green, blue: ${operator}a.blue, alpha: ${operator}a.alpha)
