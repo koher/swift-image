@@ -55,20 +55,6 @@ extension Image {
 	}
 }
 
-public func ==<Pixel: Equatable>(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-	if lhs.width != rhs.width || lhs.height != rhs.height {
-		return false
-	}
-	
-	for (pixel1, pixel2) in zip(lhs, rhs) {
-		if pixel1 != pixel2 {
-			return false
-		}
-	}
-	
-	return true
-}
-
 extension Image { // Operations
 	public func xReversed() -> Image<Pixel> {
 		var pixels = [Pixel]()
