@@ -286,52 +286,6 @@ class ImageTests: XCTestCase {
 		XCTAssertEqual(  0, image[1, 0].blue)
 		XCTAssertEqual(127, image[1, 0].alpha)
 	}
-    
-    func testMapWithIndices() {
-        do {
-            let original = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
-            let image = original.map { (x: Int, y: Int, pixel: RGBA<UInt8>) -> RGBA<UInt8> in
-                return RGBA<UInt8>(red: UInt8(x + 42), green: UInt8(y + 42), blue: UInt8((Int(pixel.red) + Int(pixel.blue)) / 2), alpha: UInt8((Int(pixel.green) + Int(pixel.alpha)) / 2))
-            }
-            
-            XCTAssertEqual( 42, image[0, 0].red)
-            XCTAssertEqual( 42, image[0, 0].green)
-            XCTAssertEqual(127, image[0, 0].blue)
-            XCTAssertEqual( 32, image[0, 0].alpha)
-            
-            XCTAssertEqual( 43, image[1, 0].red)
-            XCTAssertEqual( 42, image[1, 0].green)
-            XCTAssertEqual(  0, image[1, 0].blue)
-            XCTAssertEqual(191, image[1, 0].alpha)
-            
-            XCTAssertEqual( 42, image[0, 1].red)
-            XCTAssertEqual( 43, image[0, 1].green)
-            XCTAssertEqual(127, image[0, 1].blue)
-            XCTAssertEqual( 95, image[0, 1].alpha)
-            
-            XCTAssertEqual( 43, image[1, 1].red)
-            XCTAssertEqual( 43, image[1, 1].green)
-            XCTAssertEqual(127, image[1, 1].blue)
-            XCTAssertEqual(255, image[1, 1].alpha)
-        }
-        
-        do {
-            let original = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!
-            let image = original.map { (x: Int, y: Int, pixel: RGBA<UInt8>) -> RGBA<UInt8> in
-                RGBA<UInt8>(red: x + 42, green: y + 42, blue: (pixel.redInt + pixel.blueInt) / 2, alpha: (pixel.greenInt + pixel.alphaInt) / 2)
-            }
-            
-            XCTAssertEqual( 42, image[0, 0].red)
-            XCTAssertEqual( 42, image[0, 0].green)
-            XCTAssertEqual(255, image[0, 0].blue)
-            XCTAssertEqual(191, image[0, 0].alpha)
-            
-            XCTAssertEqual( 43, image[1, 0].red)
-            XCTAssertEqual( 42, image[1, 0].green)
-            XCTAssertEqual(  0, image[1, 0].blue)
-            XCTAssertEqual(127, image[1, 0].alpha)
-        }
-    }
 	
 	func testXReversed() {
 		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.xReversed()

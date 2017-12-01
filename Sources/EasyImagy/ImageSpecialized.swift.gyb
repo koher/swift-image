@@ -26,23 +26,6 @@ extension Image {
     }
     
 % for type in basic_types:
-%   for target_type in basic_types:
-    @_specialize(exported: true, where Pixel == ${type}, T == ${target_type})
-%   end
-% end
-    public func map<T>(_ transform: (_ x: Int, _ y: Int, _ pixel: Pixel) -> T) -> Image<T> {
-        var pixels: [T] = []
-        pixels.reserveCapacity(count)
-        var generator = makeIterator()
-        for y in 0..<height {
-            for x in 0..<width {
-                pixels.append(transform(x, y, generator.next()!))
-            }
-        }
-        return Image<T>(width: width, height: height, pixels: pixels)
-    }
-    
-% for type in basic_types:
     @_specialize(exported: true, where Pixel == ${type})
 % end
     public mutating func update(_ transform: (Pixel) -> Pixel) {

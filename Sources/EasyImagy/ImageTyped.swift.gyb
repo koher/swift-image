@@ -30,7 +30,7 @@ extension Image where Pixel == ${type} { // Convolution
 %
 % for i, type in enumerate(types):
 
-extension Image where Pixel == ${type} { // Interpolation, Transformation
+extension Image where Pixel == ${type} { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> ${type} {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -52,10 +52,6 @@ extension Image where Pixel == ${type} { // Interpolation, Transformation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
-    }
-
-    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<${type}> {
-        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }
 % end
