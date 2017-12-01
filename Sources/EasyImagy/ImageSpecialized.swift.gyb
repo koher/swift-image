@@ -28,9 +28,9 @@ extension Image {
 % for type in basic_types:
     @_specialize(exported: true, where Pixel == ${type})
 % end
-    public mutating func update(_ transform: (Pixel) -> Pixel) {
-        for i in 0..<count {
-            pixels[i] = transform(pixels[i])
+    public mutating func update(_ body: (inout Pixel) -> ()) {
+        for i in pixels.indices {
+            body(&pixels[i])
         }
     }
 }

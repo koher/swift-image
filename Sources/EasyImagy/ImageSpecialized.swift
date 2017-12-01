@@ -815,9 +815,9 @@ extension Image {
     @_specialize(exported: true, where Pixel == Double)
     @_specialize(exported: true, where Pixel == Float80)
     @_specialize(exported: true, where Pixel == Bool)
-    public mutating func update(_ transform: (Pixel) -> Pixel) {
-        for i in 0..<count {
-            pixels[i] = transform(pixels[i])
+    public mutating func update(_ body: (inout Pixel) -> ()) {
+        for i in pixels.indices {
+            body(&pixels[i])
         }
     }
 }

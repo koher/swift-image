@@ -286,6 +286,18 @@ class ImageTests: XCTestCase {
 		XCTAssertEqual(  0, image[1, 0].blue)
 		XCTAssertEqual(127, image[1, 0].alpha)
 	}
+    
+    func testUpdate() {
+        var image = Image<UInt8>(width: 3, height: 2, pixels: [
+            1, 2, 3,
+            4, 5, 6,
+        ])
+        image.update { $0 *= 2 }
+        XCTAssertEqual(image, Image<UInt8>(width: 3, height: 2, pixels: [
+            2,  4,  6,
+            8, 10, 12,
+        ]))
+    }
 	
 	func testXReversed() {
 		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!.xReversed()
