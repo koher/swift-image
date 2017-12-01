@@ -82,6 +82,20 @@ extension Image where Pixel == RGBA<Double> { // Convolution
     }
 }
 
+extension Image where Pixel == RGBA<Float80> { // Convolution
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float80>> = .edging) -> Image<RGBA<Float80>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    }
+
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float80>> = .edging) -> Image<RGBA<Float80>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float80>> = .edging) -> Image<RGBA<Float80>> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    }
+}
+
 extension Image where Pixel == UInt8 { // Convolution
     public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edging) -> Image<UInt8> {
         return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
@@ -162,6 +176,20 @@ extension Image where Pixel == Double { // Convolution
     }
 
     public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edging) -> Image<Double> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    }
+}
+
+extension Image where Pixel == Float80 { // Convolution
+    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float80> = .edging) -> Image<Float80> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    }
+
+    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float80> = .edging) -> Image<Float80> {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float80> = .edging) -> Image<Float80> {
         return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }
@@ -340,6 +368,35 @@ extension Image where Pixel == RGBA<Double> { // Interpolation, Transformation
     }
 }
 
+extension Image where Pixel == RGBA<Float80> { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
+    public subscript(x: Float, y: Float) -> RGBA<Float80> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> RGBA<Float80> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Float80> {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+        }
+    }
+
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<RGBA<Float80>> {
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+    }
+}
+
 extension Image where Pixel == UInt8 { // Interpolation, Transformation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt8 {
@@ -510,6 +567,35 @@ extension Image where Pixel == Double { // Interpolation, Transformation
     }
 
     public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Double> {
+        return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
+    }
+}
+
+extension Image where Pixel == Float80 { // Interpolation, Transformation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
+    public subscript(x: Float, y: Float) -> Float80 {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+    }
+
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> Float80 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Float80 {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+        }
+    }
+
+    public func transformed(width: Int, height: Int, transform: (Float, Float) -> (Float, Float)) -> Image<Float80> {
         return self._transformed(width: width, height: height, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:), transform: transform)
     }
 }

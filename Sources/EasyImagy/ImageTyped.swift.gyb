@@ -5,6 +5,7 @@
 %   'Int',
 %   'Float',
 %   'Double',
+%   'Float80',
 % ]
 % types = [f'RGBA<{t}>' for t in channel_types] + channel_types
 %

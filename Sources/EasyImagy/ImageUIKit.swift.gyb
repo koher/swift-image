@@ -1,4 +1,4 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
+% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Float80', 'Bool']
 #if os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
 #if os(iOS) || os(tvOS)
