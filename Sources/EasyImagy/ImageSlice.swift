@@ -55,16 +55,12 @@ extension ImageSlice { // safe get
 }
 
 extension ImageSlice {
-    public func makeIterator() -> PixelGenerator<Pixel> {
-        return PixelGenerator(image: image, xRange: validRange(xRange, maxValue: image.width), yRange: validRange(yRange, maxValue: image.height))
+    public func makeIterator() -> PixelIterator<Pixel> {
+        return PixelIterator(image: image, xRange: xRange, yRange: yRange)
     }
 }
 
-private func validRange(_ range: CountableRange<Int>, maxValue: Int) -> CountableRange<Int> {
-    return max(0, range.lowerBound)..<min(maxValue, range.upperBound)
-}
-
-public struct PixelGenerator<Pixel>: IteratorProtocol {
+public struct PixelIterator<Pixel>: IteratorProtocol {
     public typealias Element = Pixel
     
     private let image: Image<Pixel>
