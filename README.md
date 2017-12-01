@@ -83,15 +83,23 @@ let image = Image<RGBA<UInt8>>(data: Data(/* ... */))!
 ```
 
 ```swift
-let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
+let image = Image<RGBA<UInt8>>(uiImage: imageView.image!) // from a UIImage
 ```
 
 ```swift
-let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black image
+let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from pixels
 ```
 
 ```swift
-let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels)
+let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black RGBA image
+```
+
+```swift
+let image = Image<UInt8>(width: 640, height: 480, pixel: .min) // a black grayscale image
+```
+
+```swift
+let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binarized image
 ```
 
 ### Access to a pixel

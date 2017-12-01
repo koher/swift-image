@@ -79,15 +79,21 @@ class EasyImagySample: XCTestCase {
             /**/ _ = image.count
         }
         #endif
+        do {
+            let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black RGBA image
             /**/ _ = image.count
         }
         do {
-            let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black image
+            let image = Image<UInt8>(width: 640, height: 480, pixel: .min) // a black grayscale image
+            /**/ _ = image.count
+        }
+        do {
+            let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binarized image
             /**/ _ = image.count
         }
         do {
             /**/ let pixels = [RGBA<UInt8>](repeating: .black, count: 640 * 480)
-            let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels)
+            let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from pixels
             /**/ _ = image.count
         }
     }
