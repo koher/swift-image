@@ -81,6 +81,46 @@ class ImageOperatorsTests: XCTestCase {
         ]))
     }
     
+    func testIsEqual() {
+        do {
+            let a = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            let b = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            XCTAssertEqual(a == b, true)
+        }
+        
+        do {
+            let a = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            let b = Image<Int>(width: 1, height: 2, pixels: [3, 9])
+            XCTAssertEqual(a == b, false)
+        }
+        
+        do {
+            let a = Image<Int>(width: 2, height: 1, pixels: [3, 4])
+            let b = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            XCTAssertEqual(a == b, false)
+        }
+    }
+    
+    func testIsNotEqual() {
+        do {
+            let a = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            let b = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            XCTAssertEqual(a != b, false)
+        }
+        
+        do {
+            let a = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            let b = Image<Int>(width: 1, height: 2, pixels: [3, 9])
+            XCTAssertEqual(a != b, true)
+        }
+        
+        do {
+            let a = Image<Int>(width: 2, height: 1, pixels: [3, 4])
+            let b = Image<Int>(width: 1, height: 2, pixels: [3, 4])
+            XCTAssertEqual(a != b, true)
+        }
+    }
+
     func testNegate() {
         let a = Image<Int>(width: 3, height: 2, pixels: [
              1,  2,  3,

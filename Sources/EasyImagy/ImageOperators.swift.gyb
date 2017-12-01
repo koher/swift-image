@@ -234,9 +234,9 @@ extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
 %     for concrete_type in type_to_concrete_types[type]:
     @_specialize(exported: true, where Pixel == ${concrete_type})
 %     end
-%     initial, and_or = ('true', '&&') if operator == '==' else ('false', '||')
+%     initial, and_or, different_size,  = ('true', '&&', 'false') if operator == '==' else ('false', '||', 'true')
     public static func ${operator}(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return ${different_size} }
         return zip(lhs, rhs).reduce(${initial}) { $0 ${and_or} $1.0 ${operator} $1.1 }
     }
 %   end

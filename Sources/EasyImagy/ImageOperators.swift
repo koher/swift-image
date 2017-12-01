@@ -535,7 +535,7 @@ extension Image where Pixel : Equatable {
     @_specialize(exported: true, where Pixel == Float80)
     @_specialize(exported: true, where Pixel == Bool)
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
@@ -554,7 +554,7 @@ extension Image where Pixel : Equatable {
     @_specialize(exported: true, where Pixel == Float80)
     @_specialize(exported: true, where Pixel == Bool)
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 }
@@ -831,12 +831,12 @@ extension Image where Pixel == RGBA<Int> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -1049,12 +1049,12 @@ extension Image where Pixel == RGBA<Int8> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -1267,12 +1267,12 @@ extension Image where Pixel == RGBA<Int16> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -1485,12 +1485,12 @@ extension Image where Pixel == RGBA<Int32> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -1703,12 +1703,12 @@ extension Image where Pixel == RGBA<Int64> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -1921,12 +1921,12 @@ extension Image where Pixel == RGBA<UInt> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -2135,12 +2135,12 @@ extension Image where Pixel == RGBA<UInt8> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -2349,12 +2349,12 @@ extension Image where Pixel == RGBA<UInt16> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -2563,12 +2563,12 @@ extension Image where Pixel == RGBA<UInt32> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -2777,12 +2777,12 @@ extension Image where Pixel == RGBA<UInt64> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -2869,12 +2869,12 @@ extension Image where Pixel == RGBA<Float> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -2965,12 +2965,12 @@ extension Image where Pixel == RGBA<Double> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -3061,12 +3061,12 @@ extension Image where Pixel == RGBA<Float80> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 
@@ -3117,12 +3117,12 @@ extension Image where Pixel == RGBA<Bool> {
     }
 
     public static func ==(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`==` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
         return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
     }
 
     public static func !=(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`!=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
         return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
     }
 }
