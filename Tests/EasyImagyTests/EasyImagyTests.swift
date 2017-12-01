@@ -8,7 +8,7 @@ import XCTest
 import EasyImagy
 
 class EasyImagySample: XCTestCase {
-    #if os(iOS)
+    #if os(iOS) || os(watchOS) || os(tvOS)
     func testSample() {
         /**/ let x = 0
         /**/ let y = 0
@@ -50,19 +50,21 @@ class EasyImagySample: XCTestCase {
         var another = image // Not copied here because of copy-on-write
         another[x, y] = RGBA(0xff0000ff) // Copied here lazily
     }
+    #endif
     
     func testInitialization() {
+        #if os(iOS) || os(watchOS) || os(tvOS)
         do {
             /**/ if never() {
-                let image = Image<RGBA<UInt8>>(named: "ImageName")!
-                /**/ _ = image.count
-                /**/ }
+            let image = Image<RGBA<UInt8>>(named: "ImageName")!
+            /**/ _ = image.count
+            /**/ }
         }
         do {
             /**/ if never() {
-                let image = Image<RGBA<UInt8>>(contentsOfFile: "path/to/file")!
-                /**/ _ = image.count
-                /**/ }
+            let image = Image<RGBA<UInt8>>(contentsOfFile: "path/to/file")!
+            /**/ _ = image.count
+            /**/ }
         }
         do {
             /**/ if never() {
@@ -73,7 +75,10 @@ class EasyImagySample: XCTestCase {
         do {
             /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
             /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).uiImage
-            let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
+            let image = Image<RGBA<UInt8>>(uiImage: imageView.image!) // from a UIImage
+            /**/ _ = image.count
+        }
+        #endif
             /**/ _ = image.count
         }
         do {
@@ -129,7 +134,7 @@ class EasyImagySample: XCTestCase {
         
         /**/ _ = cropped.count
     }
-    
+    #if os(iOS) || os(watchOS) || os(tvOS)
     func testWithUIImage() {
         /**/ if never() {
             let imageView = UIImageView()

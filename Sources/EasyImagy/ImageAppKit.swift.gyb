@@ -1,5 +1,5 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Float80', 'Bool']
-#if os(OSX)
+#if os(macOS)
 import AppKit
 % for is_rgba in [True, False]:
 %   for type in types:

@@ -1,4 +1,4 @@
-#if os(OSX)
+#if os(macOS)
 import AppKit
     
 extension Image where Pixel == RGBA<UInt8> {

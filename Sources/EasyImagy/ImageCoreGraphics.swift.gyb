@@ -6,7 +6,7 @@
 %   'UInt32': 'Int64',
 % }
 %
-#if os(iOS) || os(OSX) || os(watchOS) || os(tvOS)
+#if os(iOS) || os(macOS) || os(watchOS) || os(tvOS)
     import CoreGraphics
     import Foundation
 % for type in uint_types:
