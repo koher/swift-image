@@ -1,4 +1,4 @@
-public struct Image<Pixel> {
+public struct Image<Pixel> : ImageProtocol {
 	public let width: Int
 	public let height: Int
 	public internal(set) var pixels: [Pixel]
@@ -24,12 +24,6 @@ extension Image { // Additional initializers
 extension Image { // Initializers for ImageSlice
 	public init(_ imageSlice: ImageSlice<Pixel>) {
 		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)
-	}
-}
-
-extension Image {
-	public var count: Int {
-		return width * height
 	}
 }
 

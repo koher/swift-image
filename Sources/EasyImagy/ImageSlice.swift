@@ -1,5 +1,5 @@
-public struct ImageSlice<Pixel> {
-    internal let image: Image<Pixel>
+public struct ImageSlice<Pixel> : ImageProtocol {
+    internal var image: Image<Pixel>
     internal let xRange: CountableRange<Int>
     internal let yRange: CountableRange<Int>
     
@@ -18,7 +18,7 @@ public struct ImageSlice<Pixel> {
     public var height: Int {
         return yRange.count
     }
-    
+
     public var pixels: [Pixel] {
         return map { $0 }
     }
@@ -28,17 +28,21 @@ extension ImageSlice {
     public var count: Int {
         return width * height
     }
-    
-    public var validCount: Int {
-        return getValidCount(xRange, maxCount: image.width) * getValidCount(yRange, maxCount: image.height)
-    }
 }
 
-extension ImageSlice { // Subscripts (Index)
+extension ImageSlice {
     public subscript(x: Int, y: Int) -> Pixel {
-        precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
-        precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
-        return image[x, y]
+        get {
+            precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
+            precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
+            return image[x, y]
+        }
+        
+        set {
+            precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
+            precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
+            image[x, y] = newValue
+        }
     }
 }
 
