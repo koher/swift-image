@@ -54,7 +54,7 @@ extension ImageSlice { // safe get
     }
 }
 
-extension ImageSlice: Sequence {
+extension ImageSlice {
     public func makeIterator() -> PixelGenerator<Pixel> {
         return PixelGenerator(image: image, xRange: validRange(xRange, maxValue: image.width), yRange: validRange(yRange, maxValue: image.height))
     }

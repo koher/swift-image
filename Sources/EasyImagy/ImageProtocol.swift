@@ -1,4 +1,4 @@
-public protocol ImageProtocol {
+public protocol ImageProtocol : Sequence {
     associatedtype Pixel
     
     var width: Int { get }

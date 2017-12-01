@@ -49,7 +49,7 @@ extension Image {
 	}
 }
 
-extension Image : Sequence {
+extension Image {
 	public func makeIterator() -> IndexingIterator<[Pixel]> {
 		return pixels.makeIterator()
 	}
