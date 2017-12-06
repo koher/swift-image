@@ -45,13 +45,23 @@ extension ImageProtocol {
 }
 
 extension ImageProtocol {
+    public init() {
+        self.init(width: 0, height: 0, pixels: [])
+    }
+    
+    public init(pixel: Pixel) {
+        self.init(width: 1, height: 1, pixel: pixel)
+    }
+    
     public init(width: Int, height: Int, pixel: Pixel) {
         self.init(width: width, height: height, pixels: [Pixel](repeating: pixel, count: width * height))
+    }
+    
+    public init<S: Sequence>(width: Int, height: Int, pixels: S) where S.Element == Pixel {
+        self.init(width: width, height: height, pixels: Array(pixels))
     }
 
     public var count: Int {
         return width * height
     }
-    
-    
 }
