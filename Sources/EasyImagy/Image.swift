@@ -56,6 +56,18 @@ extension Image {
 }
 
 extension Image { // Operations
+    public func transposed() -> Image<Pixel> {
+        var pixels = [Pixel]()
+        
+        for x in 0..<width {
+            for y in 0..<height {
+                pixels.append(self[x, y])
+            }
+        }
+        
+        return Image(width: height, height: width, pixels: pixels)
+    }
+    
 	public func xReversed() -> Image<Pixel> {
 		var pixels = [Pixel]()
 
