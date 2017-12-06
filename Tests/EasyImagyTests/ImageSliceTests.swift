@@ -8,6 +8,25 @@ import EasyImagy
 #endif
 
 class ImageSliceTests: XCTestCase {
+    func testInit() {
+        do {
+            let slice = ImageSlice<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            XCTAssertEqual(slice.width, 3)
+            XCTAssertEqual(slice.height, 2)
+            XCTAssertEqual(slice.xRange, 0..<3)
+            XCTAssertEqual(slice.yRange, 0..<2)
+            XCTAssertEqual(slice[0, 0], 1)
+            XCTAssertEqual(slice[1, 0], 2)
+            XCTAssertEqual(slice[2, 0], 3)
+            XCTAssertEqual(slice[0, 1], 4)
+            XCTAssertEqual(slice[1, 1], 5)
+            XCTAssertEqual(slice[2, 1], 6)
+        }
+    }
+    
     func testSequence() {
         do {
             let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test4x4.png")))![1...2, 1...2]

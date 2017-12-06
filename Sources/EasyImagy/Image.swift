@@ -15,12 +15,6 @@ public struct Image<Pixel> : ImageProtocol {
 	}
 }
 
-extension Image { // Additional initializers
-	public init(width: Int, height: Int, pixel: Pixel) {
-		self.init(width: width, height: height, pixels: [Pixel](repeating: pixel, count: width * height))
-	}
-}
-
 extension Image { // Initializers for ImageSlice
 	public init(_ imageSlice: ImageSlice<Pixel>) {
 		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)

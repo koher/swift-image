@@ -1,6 +1,8 @@
 public protocol ImageProtocol : Sequence {
     associatedtype Pixel
     
+    init(width: Int, height: Int, pixels: [Pixel])
+    
     var width: Int { get }
     var height: Int { get }
     subscript(x: Int, y: Int) -> Pixel { get set }
@@ -13,6 +15,10 @@ public protocol ImageProtocol : Sequence {
 }
 
 extension ImageProtocol {
+    public init(width: Int, height: Int, pixel: Pixel) {
+        self.init(width: width, height: height, pixels: [Pixel](repeating: pixel, count: width * height))
+    }
+
     public var count: Int {
         return width * height
     }

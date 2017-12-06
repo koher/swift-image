@@ -1,14 +1,12 @@
 public struct ImageSlice<Pixel> : ImageProtocol {
     internal var image: Image<Pixel>
-    internal let xRange: CountableRange<Int>
-    internal let yRange: CountableRange<Int>
+    public let xRange: CountableRange<Int>
+    public let yRange: CountableRange<Int>
     
-    public init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
-        precondition((0..<image.width).isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition((0..<image.height).isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
-        self.image = image
-        self.xRange = xRange
-        self.yRange = yRange
+    public init(width: Int, height: Int, pixels: [Pixel]) {
+        image = Image<Pixel>(width: width, height: height, pixels: pixels)
+        xRange = image.xRange
+        yRange = image.yRange
     }
     
     public var width: Int {
