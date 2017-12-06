@@ -9,14 +9,6 @@ public struct ImageSlice<Pixel> : ImageProtocol {
         yRange = image.yRange
     }
     
-    public var width: Int {
-        return xRange.count
-    }
-    
-    public var height: Int {
-        return yRange.count
-    }
-
     public var pixels: [Pixel] {
         return map { $0 }
     }
@@ -39,12 +31,6 @@ public struct ImageSlice<Pixel> : ImageProtocol {
         precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(self.xRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         return image[xRange, yRange]
-    }
-}
-
-extension ImageSlice {
-    public var count: Int {
-        return width * height
     }
 }
 
