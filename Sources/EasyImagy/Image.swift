@@ -13,6 +13,27 @@ public struct Image<Pixel> : ImageProtocol {
 		self.height = height
         self.pixels = pixels
 	}
+    
+    public var xRange: CountableRange<Int> {
+        return 0..<width
+    }
+    
+    public var yRange: CountableRange<Int> {
+        return 0..<height
+    }
+    
+    public subscript(x: Int, y: Int) -> Pixel {
+        get {
+            return pixels[pixelIndexWithPreconditionsAt(x: x, y: y)]
+        }
+        set {
+            pixels[pixelIndexWithPreconditionsAt(x: x, y: y)] = newValue
+        }
+    }
+
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+        return ImageSlice(image: self, xRange: xRange, yRange: yRange)
+    }
 }
 
 extension Image { // Initializers for ImageSlice
@@ -32,15 +53,6 @@ extension Image {
         guard let pixelIndex = self.pixelIndexAt(x: x, y: y) else { return nil }
         return pixels[pixelIndex]
     }
-
-	public subscript(x: Int, y: Int) -> Pixel {
-		get {
-			return pixels[pixelIndexWithPreconditionsAt(x: x, y: y)]
-		}
-		set {
-			pixels[pixelIndexWithPreconditionsAt(x: x, y: y)] = newValue
-		}
-	}
 }
 
 extension Image {

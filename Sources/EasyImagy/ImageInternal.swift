@@ -1,14 +1,6 @@
 import Foundation
 
 extension Image {
-    internal var xRange: CountableRange<Int> {
-        return 0..<width
-    }
-    
-    internal var yRange: CountableRange<Int> {
-        return 0..<height
-    }
-    
     internal func pixelIndexWithAssertionsAt(x: Int, y: Int) -> Int {
         assert(xRange.contains(x), "`x` is out of bounds: \(x)")
         assert(yRange.contains(y), "`y` is out of bounds: \(y)")

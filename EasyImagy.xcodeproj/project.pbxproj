@@ -82,10 +82,6 @@
 		D62C6EC81FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC61FCC18E600E7DF02 /* ImageSpecialized.swift */; };
 		D62C6EC91FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC61FCC18E600E7DF02 /* ImageSpecialized.swift */; };
 		D62C6ECA1FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC61FCC18E600E7DF02 /* ImageSpecialized.swift */; };
-		D62C6ECC1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ECB1FCD29C800E7DF02 /* RangedSubscript.swift */; };
-		D62C6ECD1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ECB1FCD29C800E7DF02 /* RangedSubscript.swift */; };
-		D62C6ECE1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ECB1FCD29C800E7DF02 /* RangedSubscript.swift */; };
-		D62C6ECF1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ECB1FCD29C800E7DF02 /* RangedSubscript.swift */; };
 		D62C6ED11FCD666600E7DF02 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ED01FCD666600E7DF02 /* Util.swift */; };
 		D62C6ED21FCD666600E7DF02 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ED01FCD666600E7DF02 /* Util.swift */; };
 		D62C6ED31FCD666600E7DF02 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6ED01FCD666600E7DF02 /* Util.swift */; };
@@ -193,7 +189,6 @@
 		D6134AD21F85D800005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62C6EC11FCBA67500E7DF02 /* ImageUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUIKitTests.swift; sourceTree = "<group>"; };
 		D62C6EC61FCC18E600E7DF02 /* ImageSpecialized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSpecialized.swift; sourceTree = "<group>"; };
-		D62C6ECB1FCD29C800E7DF02 /* RangedSubscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangedSubscript.swift; sourceTree = "<group>"; };
 		D62C6ED01FCD666600E7DF02 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		D62C6ED41FCE55EB00E7DF02 /* Interpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpolation.swift; sourceTree = "<group>"; };
 		D62C6ED91FCE5F7600E7DF02 /* InterpolationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpolationTests.swift; sourceTree = "<group>"; };
@@ -316,7 +311,6 @@
 				D6134A301F852A49005592A2 /* ImageUIKit.swift */,
 				D6134A311F852A49005592A2 /* Info.plist */,
 				D62C6ED41FCE55EB00E7DF02 /* Interpolation.swift */,
-				D62C6ECB1FCD29C800E7DF02 /* RangedSubscript.swift */,
 				D6134A371F852A49005592A2 /* RGBA.swift */,
 				D63109231FCFFD85009974D0 /* RGBAOperators.swift */,
 				D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */,
@@ -648,7 +642,6 @@
 				D6FAC86A1FD1938400509BCB /* ImageProtocol.swift in Sources */,
 				D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */,
 				D6134A591F852A85005592A2 /* RGBA.swift in Sources */,
-				D62C6ECC1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */,
 				D62C6ED51FCE55EB00E7DF02 /* Interpolation.swift in Sources */,
 				D6134A501F852A85005592A2 /* Image.swift in Sources */,
 				D62C6EC71FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
@@ -696,7 +689,6 @@
 				D6FAC86B1FD1938400509BCB /* ImageProtocol.swift in Sources */,
 				D6134A841F85CF5E005592A2 /* RGBA.swift in Sources */,
 				D6134A7B1F85CF5E005592A2 /* Image.swift in Sources */,
-				D62C6ECD1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */,
 				D62C6ED61FCE55F700E7DF02 /* Interpolation.swift in Sources */,
 				D6134A801F85CF5E005592A2 /* ImageUIKit.swift in Sources */,
 				D62C6EC81FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
@@ -744,7 +736,6 @@
 				D6FAC86C1FD1938400509BCB /* ImageProtocol.swift in Sources */,
 				D6134AC31F85D2AF005592A2 /* RGBA.swift in Sources */,
 				D6134ABA1F85D2AF005592A2 /* Image.swift in Sources */,
-				D62C6ECE1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */,
 				D62C6ED71FCE55F800E7DF02 /* Interpolation.swift in Sources */,
 				D6134ABF1F85D2AF005592A2 /* ImageUIKit.swift in Sources */,
 				D62C6EC91FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,
@@ -792,7 +783,6 @@
 				D6FAC86D1FD1938400509BCB /* ImageProtocol.swift in Sources */,
 				D6134AE41F85DA5C005592A2 /* RGBA.swift in Sources */,
 				D6134ADB1F85DA5C005592A2 /* Image.swift in Sources */,
-				D62C6ECF1FCD29C800E7DF02 /* RangedSubscript.swift in Sources */,
 				D62C6ED81FCE55F800E7DF02 /* Interpolation.swift in Sources */,
 				D6134AE01F85DA5C005592A2 /* ImageUIKit.swift in Sources */,
 				D62C6ECA1FCC18E600E7DF02 /* ImageSpecialized.swift in Sources */,

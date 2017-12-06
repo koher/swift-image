@@ -20,15 +20,7 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     public var pixels: [Pixel] {
         return map { $0 }
     }
-}
-
-extension ImageSlice {
-    public var count: Int {
-        return width * height
-    }
-}
-
-extension ImageSlice {
+    
     public subscript(x: Int, y: Int) -> Pixel {
         get {
             precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
@@ -41,6 +33,18 @@ extension ImageSlice {
             precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
             image[x, y] = newValue
         }
+    }
+    
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+        precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
+        precondition(self.xRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
+        return image[xRange, yRange]
+    }
+}
+
+extension ImageSlice {
+    public var count: Int {
+        return width * height
     }
 }
 
