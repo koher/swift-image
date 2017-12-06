@@ -9,7 +9,7 @@ public struct ImageSlice<Pixel> : ImageProtocol {
         yRange = image.yRange
     }
     
-    public var pixels: [Pixel] {
+    internal var pixels: [Pixel] {
         return map { $0 }
     }
     
