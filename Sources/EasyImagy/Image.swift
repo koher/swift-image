@@ -38,7 +38,7 @@ public struct Image<Pixel> : ImageProtocol {
 
 extension Image { // Initializers for ImageSlice
 	public init(_ imageSlice: ImageSlice<Pixel>) {
-		self.init(width: imageSlice.width, height: imageSlice.height, pixels: imageSlice.pixels)
+		self.init(width: imageSlice.width, height: imageSlice.height, pixels: Array(imageSlice))
 	}
 }
 

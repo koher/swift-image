@@ -9,10 +9,6 @@ public struct ImageSlice<Pixel> : ImageProtocol {
         yRange = image.yRange
     }
     
-    internal var pixels: [Pixel] {
-        return map { $0 }
-    }
-    
     public subscript(x: Int, y: Int) -> Pixel {
         get {
             precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
