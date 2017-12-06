@@ -30,6 +30,12 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     }
 }
 
+extension ImageSlice {
+    public init(_ image: Image<Pixel>) {
+        self.init(image: image, xRange: image.xRange, yRange: image.yRange)
+    }
+}
+
 extension ImageSlice { // safe get
     public func pixelAt(x: Int, y: Int) -> Pixel? {
         guard xRange.contains(x) else { return nil }

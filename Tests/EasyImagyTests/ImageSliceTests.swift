@@ -25,6 +25,24 @@ class ImageSliceTests: XCTestCase {
             XCTAssertEqual(slice[1, 1], 5)
             XCTAssertEqual(slice[2, 1], 6)
         }
+        
+        do {
+            let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+                ])
+            let slice = ImageSlice(image)
+            XCTAssertEqual(slice.width, 3)
+            XCTAssertEqual(slice.height, 2)
+            XCTAssertEqual(slice.xRange, 0..<3)
+            XCTAssertEqual(slice.yRange, 0..<2)
+            XCTAssertEqual(slice[0, 0], 1)
+            XCTAssertEqual(slice[1, 0], 2)
+            XCTAssertEqual(slice[2, 0], 3)
+            XCTAssertEqual(slice[0, 1], 4)
+            XCTAssertEqual(slice[1, 1], 5)
+            XCTAssertEqual(slice[2, 1], 6)
+        }
     }
     
     func testSequence() {
