@@ -43,19 +43,6 @@ extension Image { // Initializers for ImageSlice
 }
 
 extension Image {
-	public func pixelIndexAt(x: Int, y: Int) -> Int? {
-		guard xRange.contains(x) else { return nil }
-		guard yRange.contains(y) else { return nil }
-		return pixelIndexWithAssertionsAt(x: x, y: y)
-	}
-    
-    public func pixelAt(x: Int, y: Int) -> Pixel? {
-        guard let pixelIndex = self.pixelIndexAt(x: x, y: y) else { return nil }
-        return pixels[pixelIndex]
-    }
-}
-
-extension Image {
 	public func makeIterator() -> IndexingIterator<[Pixel]> {
 		return pixels.makeIterator()
 	}

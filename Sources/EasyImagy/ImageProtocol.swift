@@ -64,4 +64,10 @@ extension ImageProtocol {
     public var count: Int {
         return width * height
     }
+
+    public func pixelAt(x: Int, y: Int) -> Pixel? {
+        guard xRange.contains(x) else { return nil }
+        guard yRange.contains(y) else { return nil }
+        return self[x, y]
+    }
 }

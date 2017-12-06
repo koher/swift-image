@@ -36,14 +36,6 @@ extension ImageSlice {
     }
 }
 
-extension ImageSlice { // safe get
-    public func pixelAt(x: Int, y: Int) -> Pixel? {
-        guard xRange.contains(x) else { return nil }
-        guard yRange.contains(y) else { return nil }
-        return image[x, y]
-    }
-}
-
 extension ImageSlice {
     public func makeIterator() -> PixelIterator<Pixel> {
         return PixelIterator(image: image, xRange: xRange, yRange: yRange)
