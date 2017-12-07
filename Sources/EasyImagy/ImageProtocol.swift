@@ -84,4 +84,83 @@ extension ImageProtocol {
         
         return Image(width: height, height: width, pixels: pixels)
     }
+    
+    public func xReversed() -> Image<Pixel> {
+        var pixels = [Pixel]()
+        
+        for y in yRange {
+            for x in xRange.reversed() {
+                pixels.append(self[x, y])
+            }
+        }
+        
+        return Image(width: width, height: height, pixels: pixels)
+    }
+    
+    public func yReversed() -> Image<Pixel> {
+        var pixels = [Pixel]()
+        
+        for y in yRange.reversed() {
+            for x in xRange {
+                pixels.append(self[x, y])
+            }
+        }
+        
+        return Image(width: width, height: height, pixels: pixels)
+    }
+    
+    public func rotated() -> Image<Pixel> {
+        return rotated(1)
+    }
+    
+    public func rotated(_ times: Int) -> Image<Pixel> {
+        switch times % 4 {
+        case 0:
+            if let zelf = self as? Image<Pixel> {
+                return zelf
+            } else {
+                var pixels = [Pixel]()
+                
+                for y in yRange {
+                    for x in xRange {
+                        pixels.append(self[x, y])
+                    }
+                }
+                
+                return Image(width: width, height: height, pixels: pixels)
+            }
+        case 1, -3:
+            var pixels = [Pixel]()
+            
+            for y in xRange {
+                for x in yRange.reversed() {
+                    pixels.append(self[y, x])
+                }
+            }
+            
+            return Image(width: height, height: width, pixels: pixels)
+        case 2, -2:
+            var pixels = [Pixel]()
+            
+            for y in yRange.reversed() {
+                for x in xRange.reversed() {
+                    pixels.append(self[x, y])
+                }
+            }
+            
+            return Image(width: width, height: height, pixels: pixels)
+        case 3, -1:
+            var pixels = [Pixel]()
+            
+            for y in xRange.reversed() {
+                for x in yRange {
+                    pixels.append(self[y, x])
+                }
+            }
+            
+            return Image(width: height, height: width, pixels: pixels)
+        default:
+            fatalError("Never reaches here.")
+        }
+    }
 }
