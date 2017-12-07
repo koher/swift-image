@@ -21,13 +21,13 @@ internal func XCTAssertEqual<Channel: Equatable>(
     }
 }
 
-internal func XCTAssertEqual<Pixel: Equatable>(
-    _ expression1: @autoclosure () throws -> Image<Pixel>,
-    _ expression2: @autoclosure () throws -> Image<Pixel>,
+internal func XCTAssertEqual<I: ImageProtocol>(
+    _ expression1: @autoclosure () throws -> I,
+    _ expression2: @autoclosure () throws -> I,
     _ message: @autoclosure () -> String = "",
     file: StaticString = #file,
     line: UInt = #line
-) {
+) where I.Pixel : Equatable {
     do {
         let e1 = try expression1()
         let e2 = try expression2()
@@ -36,9 +36,9 @@ internal func XCTAssertEqual<Pixel: Equatable>(
         XCTAssertEqual(e1.width, e2.width, m == "" ? "width" : "\(m) (width)", file: file, line: line)
         XCTAssertEqual(e1.height, e2.height, m == "" ? "height" : "\(m) (height)", file: file, line: line)
 
-        for y in 0..<e1.height {
-            for x in 0..<e1.width {
-                XCTAssertEqual(e1[x, y], e2[x, y], m == "" ? "[\(x), \(y)]" : "\(m) ([\(x), \(y)])", file: file, line: line)
+        for (y1, y2) in zip(e1.yRange, e2.yRange) {
+            for (x1, x2) in zip(e1.xRange, e2.xRange) {
+                XCTAssertEqual(e1[x1, y1], e2[x2, y2], m == "" ? "[\(x1), \(y1)], [\(x2), \(y2)]" : "\(m) ([\(x1), \(y1)], [\(x2), \(y2)])", file: file, line: line)
             }
         }
     } catch let error {

@@ -71,3 +71,17 @@ extension ImageProtocol {
         return self[x, y]
     }
 }
+
+extension ImageProtocol {
+    public func transposed() -> Image<Pixel> {
+        var pixels = [Pixel]()
+        
+        for x in xRange {
+            for y in yRange {
+                pixels.append(self[x, y])
+            }
+        }
+        
+        return Image(width: height, height: width, pixels: pixels)
+    }
+}
