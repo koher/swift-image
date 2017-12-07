@@ -272,19 +272,17 @@ class ImageTests: XCTestCase {
     }
 	
 	func testMap() {
-		let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x1.png")))!.map { pixel in
-			RGBA<UInt8>(red: pixel.red / 2, green: pixel.green / 2, blue: pixel.blue / 2, alpha: pixel.alpha / 2)
-		}
-        
-		XCTAssertEqual(127, image[0, 0].red)
-		XCTAssertEqual(127, image[0, 0].green)
-		XCTAssertEqual(127, image[0, 0].blue)
-		XCTAssertEqual( 63, image[0, 0].alpha)
-		
-		XCTAssertEqual(  0, image[1, 0].red)
-		XCTAssertEqual(  0, image[1, 0].green)
-		XCTAssertEqual(  0, image[1, 0].blue)
-		XCTAssertEqual(127, image[1, 0].alpha)
+        do {
+            let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            let result = image.map { $0 + 1 } // `result`'s type can be inferred.
+            XCTAssertEqual(result, Image(width: 3, height: 2, pixels: [
+                2, 3, 4,
+                5, 6, 7,
+            ]))
+        }
 	}
     
     func testUpdate() {

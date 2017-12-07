@@ -783,8 +783,8 @@ extension Image {
     @_specialize(exported: true, where Pixel == Bool, T == Double)
     @_specialize(exported: true, where Pixel == Bool, T == Float80)
     @_specialize(exported: true, where Pixel == Bool, T == Bool)
-    public func map<T>(_ transform: (Pixel) -> T) -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: pixels.map(transform))
+    public func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T> {
+        return Image<T>(width: width, height: height, pixels: try pixels.map(transform))
     }
     
     @_specialize(exported: true, where Pixel == RGBA<Int>)
@@ -815,9 +815,9 @@ extension Image {
     @_specialize(exported: true, where Pixel == Double)
     @_specialize(exported: true, where Pixel == Float80)
     @_specialize(exported: true, where Pixel == Bool)
-    public mutating func update(_ body: (inout Pixel) -> ()) {
+    public mutating func update(_ body: (inout Pixel) throws -> ()) rethrows {
         for i in pixels.indices {
-            body(&pixels[i])
+            try body(&pixels[i])
         }
     }
 }

@@ -21,16 +21,16 @@ extension Image {
     @_specialize(exported: true, where Pixel == ${type}, T == ${target_type})
 %   end
 % end
-    public func map<T>(_ transform: (Pixel) -> T) -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: pixels.map(transform))
+    public func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T> {
+        return Image<T>(width: width, height: height, pixels: try pixels.map(transform))
     }
     
 % for type in basic_types:
     @_specialize(exported: true, where Pixel == ${type})
 % end
-    public mutating func update(_ body: (inout Pixel) -> ()) {
+    public mutating func update(_ body: (inout Pixel) throws -> ()) rethrows {
         for i in pixels.indices {
-            body(&pixels[i])
+            try body(&pixels[i])
         }
     }
 }
