@@ -8,32 +8,6 @@ extension Image {
     }
 }
 
-extension Image {
-    internal func _transformed<Summable>(
-        width: Int,
-        height: Int,
-        toSummable: (Pixel) -> Summable,
-        product: (Summable, Float) -> Summable,
-        sum: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Pixel,
-        transform: (Float, Float) -> (Float, Float)
-    ) -> Image<Pixel> {
-        guard width >= 0 else { fatalError("`width` must be greater than or equal to 0: \(width)") }
-        guard height >= 0 else { fatalError("`width` must be greater than or equal to 0: \(height)") }
-        
-        var pixels: [Pixel] = []
-        pixels.reserveCapacity(width * height)
-        for y in 0..<height {
-            for x in 0..<width {
-                let transformed = transform(Float(x), Float(y))
-                pixels.append(interpolatedPixelByBilinear(x: transformed.0, y: transformed.1, toSummable: toSummable, product: product, sum: sum, toOriginal: toOriginal) { self[$0, $1] })
-            }
-        }
-        
-        return Image<Pixel>(width: width, height: height, pixels: pixels)
-    }
-}
-
 #if os(iOS) || os(OSX) || os(watchOS) || os(tvOS)
 
 import CoreGraphics
