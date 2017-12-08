@@ -15,7 +15,7 @@ extension Image {
             }
         case .edging:
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
-                extrapolatedPixelByEdgingAt(x: x, y: y, maxWidth: width - 1, maxHeight: height - 1)
+                extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(self.xRange), yRange: ClosedRange(self.yRange))
             }
         case .repeating:
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in

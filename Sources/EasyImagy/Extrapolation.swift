@@ -16,7 +16,7 @@ extension Image {
         case .filling(let value):
             return extrapolatedPixelByFillingAt(x: x, y: y, by: value)
         case .edging:
-            return extrapolatedPixelByEdgingAt(x: x, y: y, maxWidth: width - 1, maxHeight: height - 1)
+            return extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(self.xRange), yRange: ClosedRange(self.yRange))
         case .repeating:
             return extrapolatedPixelByRepeatingAt(x: x, y: y)
         case .mirroring:
@@ -40,8 +40,8 @@ extension Image {
         return self[x, y]
     }
     
-    internal func extrapolatedPixelByEdgingAt(x: Int, y: Int, maxWidth: Int, maxHeight: Int) -> Pixel {
-        return self[clamp(x, lower: 0, upper: maxWidth), clamp(y, lower: 0, upper: maxHeight)]
+    internal func extrapolatedPixelByEdgingAt(x: Int, y: Int, xRange: ClosedRange<Int>, yRange: ClosedRange<Int>) -> Pixel {
+        return self[clamp(x, lower: xRange.lowerBound, upper: xRange.upperBound), clamp(y, lower: yRange.lowerBound, upper: yRange.upperBound)]
     }
     
     internal func extrapolatedPixelByRepeatingAt(x: Int, y: Int) -> Pixel {
