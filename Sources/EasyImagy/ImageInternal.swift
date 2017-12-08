@@ -1,20 +1,10 @@
 import Foundation
 
 extension Image {
-    internal func pixelIndexWithAssertionsAt(x: Int, y: Int) -> Int {
-        assert(xRange.contains(x), "`x` is out of bounds: \(x)")
-        assert(yRange.contains(y), "`y` is out of bounds: \(y)")
-        return y * width + x
-    }
-    
-    internal func pixelIndexWithPreconditionsAt(x: Int, y: Int) -> Int {
+    internal func pixelIndexAt(x: Int, y: Int) -> Int {
         precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
         precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
-        return pixelIndexWithAssertionsAt(x: x, y: y)
-    }
-    
-    internal func pixelWithAssertionsAt(x: Int, y: Int) -> Pixel {
-        return pixels[pixelIndexWithAssertionsAt(x: x, y: y)]
+        return y * width + x
     }
 }
 

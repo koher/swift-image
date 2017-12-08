@@ -24,10 +24,10 @@ public struct Image<Pixel> : ImageProtocol {
     
     public subscript(x: Int, y: Int) -> Pixel {
         get {
-            return pixels[pixelIndexWithPreconditionsAt(x: x, y: y)]
+            return pixels[pixelIndexAt(x: x, y: y)]
         }
         set {
-            pixels[pixelIndexWithPreconditionsAt(x: x, y: y)] = newValue
+            pixels[pixelIndexAt(x: x, y: y)] = newValue
         }
     }
 

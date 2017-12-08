@@ -37,14 +37,11 @@ extension Image {
         guard xRange.contains(x) && yRange.contains(y) else {
             return value
         }
-        return pixelWithAssertionsAt(x: x, y: y)
+        return self[x, y]
     }
     
     internal func extrapolatedPixelByEdgingAt(x: Int, y: Int, maxWidth: Int, maxHeight: Int) -> Pixel {
-        return pixelWithAssertionsAt(
-            x: clamp(x, lower: 0, upper: maxWidth),
-            y: clamp(y, lower: 0, upper: maxHeight)
-        )
+        return self[clamp(x, lower: 0, upper: maxWidth), clamp(y, lower: 0, upper: maxHeight)]
     }
     
     internal func extrapolatedPixelByRepeatingAt(x: Int, y: Int) -> Pixel {
@@ -52,7 +49,7 @@ extension Image {
         let height = self.height
         let x2 = reminder(x, width)
         let y2 = reminder(y, height)
-        return pixelWithAssertionsAt(x: x2, y: y2)
+        return self[x2, y2]
     }
     
     internal func extrapolatedPixelByMirroringAt(
@@ -69,6 +66,6 @@ extension Image {
         let y2 = reminder(y, doubleHeight)
         let x3 = x2 < width ? x2 : doubleWidthMinusOne - x2
         let y3 = y2 < height ? y2 : doubleHeightMinusOne - y2
-        return pixelWithAssertionsAt(x: x3, y: y3)
+        return self[x3, y3]
     }
 }
