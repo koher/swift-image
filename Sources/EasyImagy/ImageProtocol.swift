@@ -60,6 +60,10 @@ extension ImageProtocol {
     public init<S: Sequence>(width: Int, height: Int, pixels: S) where S.Element == Pixel {
         self.init(width: width, height: height, pixels: Array(pixels))
     }
+    
+    public init<I: ImageProtocol>(_ image: I) where I.Pixel == Pixel {
+        self.init(width: image.width, height: image.height, pixels: image)
+    }
 
     public var count: Int {
         return width * height
@@ -119,15 +123,7 @@ extension ImageProtocol {
             if let zelf = self as? Image<Pixel> {
                 return zelf
             } else {
-                var pixels = [Pixel]()
-                
-                for y in yRange {
-                    for x in xRange {
-                        pixels.append(self[x, y])
-                    }
-                }
-                
-                return Image(width: width, height: height, pixels: pixels)
+                return Image(self)
             }
         case 1, -3:
             var pixels = [Pixel]()
