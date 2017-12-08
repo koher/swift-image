@@ -16,15 +16,17 @@ extension Image {
         case .filling(let value):
             return extrapolatedPixelByFillingAt(x: x, y: y, by: value)
         case .edging:
-            return extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(self.xRange), yRange: ClosedRange(self.yRange))
+            return extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
         case .repeating:
-            return extrapolatedPixelByRepeatingAt(x: x, y: y)
+            return extrapolatedPixelByRepeatingAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
         case .mirroring:
             let doubleWidth = width * 2
             let doubleHeight = height * 2
             return extrapolatedPixelByMirroringAt(
                 x: x,
                 y: y,
+                minX: xRange.lowerBound,
+                minY: yRange.lowerBound,
                 doubleWidth: doubleWidth,
                 doubleHeight: doubleHeight,
                 doubleWidthMinusOne: doubleWidth - 1,
@@ -44,17 +46,17 @@ extension Image {
         return self[clamp(x, lower: xRange.lowerBound, upper: xRange.upperBound), clamp(y, lower: yRange.lowerBound, upper: yRange.upperBound)]
     }
     
-    internal func extrapolatedPixelByRepeatingAt(x: Int, y: Int) -> Pixel {
-        let width = self.width
-        let height = self.height
-        let x2 = reminder(x, width)
-        let y2 = reminder(y, height)
+    internal func extrapolatedPixelByRepeatingAt(x: Int, y: Int, minX: Int, minY: Int, width: Int, height: Int) -> Pixel {
+        let x2 = reminder(x - minX, width) + minX
+        let y2 = reminder(y - minY, height) + minY
         return self[x2, y2]
     }
     
     internal func extrapolatedPixelByMirroringAt(
         x: Int,
         y: Int,
+        minX: Int,
+        minY: Int,
         doubleWidth: Int,
         doubleHeight: Int,
         doubleWidthMinusOne: Int,
@@ -62,10 +64,10 @@ extension Image {
     ) -> Pixel {
         let width = self.width
         let height = self.height
-        let x2 = reminder(x, doubleWidth)
-        let y2 = reminder(y, doubleHeight)
-        let x3 = x2 < width ? x2 : doubleWidthMinusOne - x2
-        let y3 = y2 < height ? y2 : doubleHeightMinusOne - y2
+        let x2 = reminder(x - minX, doubleWidth)
+        let y2 = reminder(y - minY, doubleHeight)
+        let x3 = (x2 < width ? x2 : doubleWidthMinusOne - x2) + minX
+        let y3 = (y2 < height ? y2 : doubleHeightMinusOne - y2) + minY
         return self[x3, y3]
     }
 }

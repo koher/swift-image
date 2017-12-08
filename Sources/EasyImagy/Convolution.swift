@@ -15,11 +15,11 @@ extension Image {
             }
         case .edging:
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
-                extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(self.xRange), yRange: ClosedRange(self.yRange))
+                extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
             }
         case .repeating:
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
-                extrapolatedPixelByRepeatingAt(x: x, y: y)
+                extrapolatedPixelByRepeatingAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
             }
         case .mirroring:
             let doubleWidth = width * 2
@@ -28,6 +28,8 @@ extension Image {
                 extrapolatedPixelByMirroringAt(
                     x: x,
                     y: y,
+                    minX: xRange.lowerBound,
+                    minY: yRange.lowerBound,
                     doubleWidth: doubleWidth,
                     doubleHeight: doubleHeight,
                     doubleWidthMinusOne: doubleWidth - 1,
