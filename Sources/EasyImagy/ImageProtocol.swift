@@ -1,5 +1,5 @@
 public protocol ImageProtocol : Sequence {
-    associatedtype Pixel = Iterator.Element
+    typealias Pixel = Iterator.Element
     
     init(width: Int, height: Int, pixels: [Pixel])
     
