@@ -10,7 +10,7 @@ private func reminder(_ a: Int, _ b: Int) -> Int {
     return result < 0 ? result + b : result
 }
 
-extension Image {
+extension ImageProtocol {
     public subscript(x: Int, y: Int, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
         switch extrapolationMethod {
         case .filling(let value):
