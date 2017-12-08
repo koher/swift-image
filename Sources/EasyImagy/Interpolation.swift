@@ -6,7 +6,7 @@ public enum InterpolationMethod {
     // case bicubic // Unimplemented yet
 }
 
-extension Image {
+extension ImageProtocol {
     internal func interpolatedPixelByNearestNeighbor(x: Float, y: Float, pixelAt: (Int, Int) -> Pixel) -> Pixel {
         let xi = Int(round(x))
         let yi = Int(round(y))

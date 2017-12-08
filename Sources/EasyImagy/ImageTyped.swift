@@ -194,7 +194,7 @@ extension Image where Pixel == Float80 { // Convolution
     }
 }
 
-extension Image where Pixel == RGBA<UInt8> { // Interpolation
+extension ImageProtocol where Element == RGBA<UInt8> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt8> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -219,7 +219,7 @@ extension Image where Pixel == RGBA<UInt8> { // Interpolation
     }
 }
 
-extension Image where Pixel == RGBA<UInt16> { // Interpolation
+extension ImageProtocol where Element == RGBA<UInt16> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt16> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -244,7 +244,7 @@ extension Image where Pixel == RGBA<UInt16> { // Interpolation
     }
 }
 
-extension Image where Pixel == RGBA<UInt32> { // Interpolation
+extension ImageProtocol where Element == RGBA<UInt32> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<UInt32> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -269,7 +269,7 @@ extension Image where Pixel == RGBA<UInt32> { // Interpolation
     }
 }
 
-extension Image where Pixel == RGBA<Int> { // Interpolation
+extension ImageProtocol where Element == RGBA<Int> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Int> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -294,7 +294,7 @@ extension Image where Pixel == RGBA<Int> { // Interpolation
     }
 }
 
-extension Image where Pixel == RGBA<Float> { // Interpolation
+extension ImageProtocol where Element == RGBA<Float> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Float> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -319,7 +319,7 @@ extension Image where Pixel == RGBA<Float> { // Interpolation
     }
 }
 
-extension Image where Pixel == RGBA<Double> { // Interpolation
+extension ImageProtocol where Element == RGBA<Double> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Double> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -344,7 +344,7 @@ extension Image where Pixel == RGBA<Double> { // Interpolation
     }
 }
 
-extension Image where Pixel == RGBA<Float80> { // Interpolation
+extension ImageProtocol where Element == RGBA<Float80> { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> RGBA<Float80> {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -369,7 +369,7 @@ extension Image where Pixel == RGBA<Float80> { // Interpolation
     }
 }
 
-extension Image where Pixel == UInt8 { // Interpolation
+extension ImageProtocol where Element == UInt8 { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt8 {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -394,7 +394,7 @@ extension Image where Pixel == UInt8 { // Interpolation
     }
 }
 
-extension Image where Pixel == UInt16 { // Interpolation
+extension ImageProtocol where Element == UInt16 { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt16 {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -419,7 +419,7 @@ extension Image where Pixel == UInt16 { // Interpolation
     }
 }
 
-extension Image where Pixel == UInt32 { // Interpolation
+extension ImageProtocol where Element == UInt32 { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> UInt32 {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -444,7 +444,7 @@ extension Image where Pixel == UInt32 { // Interpolation
     }
 }
 
-extension Image where Pixel == Int { // Interpolation
+extension ImageProtocol where Element == Int { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Int {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -469,7 +469,7 @@ extension Image where Pixel == Int { // Interpolation
     }
 }
 
-extension Image where Pixel == Float { // Interpolation
+extension ImageProtocol where Element == Float { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Float {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -494,7 +494,7 @@ extension Image where Pixel == Float { // Interpolation
     }
 }
 
-extension Image where Pixel == Double { // Interpolation
+extension ImageProtocol where Element == Double { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Double {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
@@ -519,7 +519,7 @@ extension Image where Pixel == Double { // Interpolation
     }
 }
 
-extension Image where Pixel == Float80 { // Interpolation
+extension ImageProtocol where Element == Float80 { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Float, y: Float) -> Float80 {
         return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
