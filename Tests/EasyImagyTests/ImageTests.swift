@@ -271,32 +271,6 @@ class ImageTests: XCTestCase {
         XCTAssertNil(image.pixelAt(x: 0, y: 2))
     }
 	
-	func testMap() {
-        do {
-            let image = Image<UInt8>(width: 3, height: 2, pixels: [
-                1, 2, 3,
-                4, 5, 6,
-            ])
-            let result = image.map { $0 + 1 } // `result`'s type can be inferred.
-            XCTAssertEqual(result, Image(width: 3, height: 2, pixels: [
-                2, 3, 4,
-                5, 6, 7,
-            ]))
-        }
-	}
-    
-    func testUpdate() {
-        var image = Image<UInt8>(width: 3, height: 2, pixels: [
-            1, 2, 3,
-            4, 5, 6,
-        ])
-        image.update { $0 *= 2 }
-        XCTAssertEqual(image, Image<UInt8>(width: 3, height: 2, pixels: [
-            2,  4,  6,
-            8, 10, 12,
-        ]))
-    }
-    
 	func testCopyOnWritePerformanceOfCopy() { // Fast
         let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.transparent)
 		measure {

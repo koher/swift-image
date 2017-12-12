@@ -16,6 +16,9 @@ public protocol ImageProtocol : Sequence {
     subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> ImageSlice<Pixel> where R1.Bound == Int { get }
     subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> ImageSlice<Pixel> where R2.Bound == Int { get }
     subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> { get }
+    
+    func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T>
+    mutating func update(_ body: (inout Pixel) throws -> ()) rethrows
 }
 
 extension ImageProtocol {

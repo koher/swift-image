@@ -70,3 +70,7 @@ internal func XCTAssertEqual<Channel: Equatable>(
         XCTAssertThrowsError(error, message, file: file, line: line)
     }
 }
+
+internal struct GeneralError : Error {
+    let message: String? = nil
+}
