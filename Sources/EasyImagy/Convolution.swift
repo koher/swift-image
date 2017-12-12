@@ -1,13 +1,13 @@
-extension Image {
-    internal func convoluted<W, Summable>(
-        with kernel: Image<W>,
+extension ImageProtocol {
+    internal func convoluted<W, Summable, Kernel: ImageProtocol>(
+        with kernel: Kernel,
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>,
         toSummable: (Pixel) -> Summable,
         product: (Summable, W) -> Summable,
         zero: Summable,
         sum: (Summable, Summable) -> Summable,
         toOriginal: (Summable) -> Pixel
-    ) -> Image<Pixel> {
+    ) -> Image<Pixel> where Kernel.Pixel == W {
         switch extrapolationMethod {
         case .filling(let value):
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
@@ -39,33 +39,39 @@ extension Image {
         }
     }
     
-    private func _convoluted<W, Summable>(
-        with kernel: Image<W>,
+    private func _convoluted<W, Summable, Kernel: ImageProtocol>(
+        with kernel: Kernel,
         toSummable: (Pixel) -> Summable,
         product: (Summable, W) -> Summable,
         zero: Summable,
         sum: (Summable, Summable) -> Summable,
         toOriginal: (Summable) -> Pixel,
         pixelAt: (Int, Int) -> Pixel
-    ) -> Image<Pixel> {
+    ) -> Image<Pixel> where Kernel.Pixel == W {
         precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
         precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
+
+        let xRange = self.xRange
+        let yRange = self.yRange
         
-        let hw = kernel.width / 2  // halfWidth
-        let hh = kernel.height / 2 // halfHeight
+        let kxRange = kernel.xRange
+        let kyRange = kernel.yRange
+        
+        let hw = kxRange.count / 2  // halfWidth
+        let hh = kyRange.count / 2 // halfHeight
         
         var pixels: [Pixel] = []
         pixels.reserveCapacity(count)
         
-        for y in 0..<height {
-            for x in 0..<width {
+        for y in yRange {
+            for x in xRange {
                 var weightedValues: [Summable] = []
-                for fy in 0..<kernel.height {
-                    for fx in 0..<kernel.width {
-                        let dx = fx - hw
-                        let dy = fy - hh
+                for ky in kyRange {
+                    for kx in kxRange {
+                        let dx = (kx - kxRange.lowerBound) - hw
+                        let dy = (ky - kyRange.lowerBound) - hh
                         let summablePixel = toSummable(pixelAt(x + dx, y + dy))
-                        let weight = kernel[fx, fy]
+                        let weight = kernel[kx, ky]
                         weightedValues.append(product(summablePixel, weight))
                     }
                 }

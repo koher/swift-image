@@ -13,16 +13,28 @@
 %   if i > 0:
 
 %   end
-extension Image where Pixel == ${type} { // Convolution
-    public func convoluted(with kernel: Image<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edging) -> Image<${type}> {
+extension ImageProtocol where Element == ${type} { // Convolution
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == Image<Int>)
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == ImageSlice<Int>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == Image<Int>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == ImageSlice<Int>)
+    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edging) -> Image<${type}> where Kernel.Pixel == Int {
         return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
     }
 
-    public func convoluted(with kernel: Image<Float>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edging) -> Image<${type}> {
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == Image<Float>)
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == ImageSlice<Float>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == Image<Float>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == ImageSlice<Float>)
+    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edging) -> Image<${type}> where Kernel.Pixel == Float {
         return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
     }
 
-    public func convoluted(with kernel: Image<Double>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edging) -> Image<${type}> {
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == Image<Double>)
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == ImageSlice<Double>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == Image<Double>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == ImageSlice<Double>)
+    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edging) -> Image<${type}> where Kernel.Pixel == Double {
         return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
     }
 }

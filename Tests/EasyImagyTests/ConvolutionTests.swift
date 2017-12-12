@@ -109,5 +109,45 @@ class ConvolutionTests: XCTestCase {
             XCTAssertEqual(convoluted[0, 1], 60)
             XCTAssertEqual(convoluted[1, 1], 55)
         }
+        
+        do { // `kernel` of `ImageSlice`
+            let image = Image<Int>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            let kernel0 = Image<Int>(width: 5, height: 5, pixels: [
+                99, 99, 99, 99, 99,
+                99,  1,  2,  3, 99,
+                99,  4,  5,  6, 99,
+                99,  7,  8,  9, 99,
+                99, 99, 99, 99, 99,
+            ])
+            let kernel: ImageSlice<Int> = kernel0[1...3, 1...3]
+            XCTAssertEqual(image.convoluted(with: kernel, extrapolatedBy: .filling(0)), Image<Int>(width: 3, height: 2, pixels: [
+                94, 154, 106,
+                58,  91,  58,
+            ]))
+        }
+
+        do { // `convoluted` for `ImageSlice`
+            let image = Image<Int>(width: 4, height: 4, pixels: [
+                99, 99, 99, 99,
+                99,  1,  2, 99,
+                99,  3,  4, 99,
+                99, 99, 99, 99,
+            ])
+            let slice: ImageSlice<Int> = image[1...2, 1...2]
+            let kernel = Image<Int>(width: 5, height: 5, pixels: [
+                2, 1, 1, 1, 2,
+                1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1,
+                2, 1, 1, 1, 2,
+            ])
+            XCTAssertEqual(slice.convoluted(with: kernel), Image<Int>(width: 2, height: 2, pixels: [
+                65, 70,
+                75, 80,
+            ]))
+        }
     }
 }
