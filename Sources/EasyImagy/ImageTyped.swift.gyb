@@ -32,25 +32,25 @@ extension Image where Pixel == ${type} { // Convolution
 
 extension ImageProtocol where Element == ${type} { // Interpolation
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
-    public subscript(x: Float, y: Float) -> ${type} {
-        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+    public subscript(x: Double, y: Double) -> ${type} {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
     }
 
-    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod) -> ${type} {
+    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod) -> ${type} {
         switch interpolationMethod {
             case .nearestNeighbor:
                 return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
             case .bilinear:
-                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1] }
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
     }
     
-    public subscript(x: Float, y: Float, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
+    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
         switch interpolationMethod {
             case .nearestNeighbor:
                 return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
             case .bilinear:
-                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableF }, product: Pixel.productF, sum: +, toOriginal: Pixel.init(summableF:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
         }
     }
 }

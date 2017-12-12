@@ -7,17 +7,17 @@ public enum InterpolationMethod {
 }
 
 extension ImageProtocol {
-    internal func interpolatedPixelByNearestNeighbor(x: Float, y: Float, pixelAt: (Int, Int) -> Pixel) -> Pixel {
+    internal func interpolatedPixelByNearestNeighbor(x: Double, y: Double, pixelAt: (Int, Int) -> Pixel) -> Pixel {
         let xi = Int(round(x))
         let yi = Int(round(y))
         return pixelAt(xi, yi)
     }
     
     internal func interpolatedPixelByBilinear<Summable>(
-        x: Float,
-        y: Float,
+        x: Double,
+        y: Double,
         toSummable: (Pixel) -> Summable,
-        product: (Summable, Float) -> Summable,
+        product: (Summable, Double) -> Summable,
         sum: (Summable, Summable) -> Summable,
         toOriginal: (Summable) -> Pixel,
         pixelAt: (Int, Int) -> Pixel
@@ -32,8 +32,8 @@ extension ImageProtocol {
         let v10 = pixelAt(x0, y1)
         let v11 = pixelAt(x1, y1)
         
-        let wx = x - Float(x0)
-        let wy = y - Float(y0)
+        let wx = x - Double(x0)
+        let wy = y - Double(y0)
         let w00 = (1.0 - wx) * (1.0 - wy)
         let w01 = wx * (1.0 - wy)
         let w10 = (1.0 - wx) * wy
