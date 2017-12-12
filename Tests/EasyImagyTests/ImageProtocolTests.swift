@@ -20,6 +20,18 @@ class ImageProtocolTests : XCTestCase {
         ]))
     }
     
+    func testInitWithPixelAt() {
+        do {
+            let image = Image<Int>(width: 3, height: 2) { (x: Int, y: Int) -> Int in
+                (y + 1) * 10 + (x + 1)
+            }
+            XCTAssertEqual(image, Image<Int>(width: 3, height: 2, pixels: [
+                11, 12, 13,
+                21, 22, 23,
+            ]))
+        }
+    }
+    
     func testTransposed() {
         do {
             XCTAssertEqual(image.transposed(), Image<UInt8>(width: 2, height: 3, pixels: [

@@ -64,6 +64,18 @@ extension ImageProtocol {
     public init<I: ImageProtocol>(_ image: I) where I.Pixel == Pixel {
         self.init(width: image.width, height: image.height, pixels: image)
     }
+    
+    public init(width: Int, height: Int, pixelAt: (_ x: Int, _ y: Int) throws -> Pixel) rethrows {
+        var pixels = [Pixel]()
+        
+        for y in 0..<height {
+            for x in 0..<width {
+                pixels.append(try pixelAt(x, y))
+            }
+        }
+        
+        self.init(width: width, height: height, pixels: pixels)
+    }
 
     public var count: Int {
         return width * height
