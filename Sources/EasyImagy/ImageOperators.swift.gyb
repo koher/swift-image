@@ -190,7 +190,7 @@
 %   if type == 'Equatable':
 // FIXME: with conditional conformance
 %   end
-extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
+extension ImageProtocol where Element ${'==' if type in concrete_types else ':'} ${type} {
 %   first = True
 %   for i, operator in enumerate(type_to_operators[type]):
 %     if first:
@@ -199,9 +199,12 @@ extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
 
 %     end
 %     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Pixel == ${concrete_type})
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
 %     end
-    public static func ${operator}(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Image<Pixel> {
+    public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 ${operator} $1 }
         return Image(width: lhs.width, height: lhs.height, pixels: pixels)
@@ -215,12 +218,17 @@ extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
 
 %     end
 %     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Pixel == ${concrete_type})
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
 %     end
-    public static func ${operator}(lhs: inout Image<Pixel>, rhs: Image<Pixel>) {
+    public static func ${operator}<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        for i in lhs.pixels.indices {
-            lhs.pixels[i] ${operator} rhs.pixels[i]
+        for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
+            for (x1, x2) in zip(lhs.xRange, rhs.xRange) {
+                lhs[x1, y1] ${operator} rhs[x2, y2]
+            }
         }
     }
 %   end
@@ -232,10 +240,13 @@ extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
 
 %     end
 %     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Pixel == ${concrete_type})
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
 %     end
 %     initial, and_or, different_size,  = ('true', '&&', 'false') if operator == '==' else ('false', '||', 'true')
-    public static func ${operator}(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Bool {
+    public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Bool where I.Pixel == Pixel {
         guard lhs.width == rhs.width && lhs.height == rhs.height else { return ${different_size} }
         return zip(lhs, rhs).reduce(${initial}) { $0 ${and_or} $1.0 ${operator} $1.1 }
     }
@@ -248,10 +259,13 @@ extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
 
 %     end
 %     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Pixel == ${concrete_type})
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
 %     end
 %     return_pixel_type = 'RGBA<Bool>' if type.startswith('RGBA<') else 'Bool'
-    public static func ${operator}(lhs: Image<Pixel>, rhs: Image<Pixel>) -> Image<${return_pixel_type}> {
+    public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<${return_pixel_type}> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 ${operator} $1 }
         return Image<${return_pixel_type}>(width: lhs.width, height: lhs.height, pixels: pixels)
@@ -265,10 +279,11 @@ extension Image where Pixel ${'==' if type in concrete_types else ':'} ${type} {
 
 %     end
 %     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Pixel == ${concrete_type})
+    @_specialize(exported: true, where Self == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>)
 %     end
-    prefix public static func ${operator}(a: Image<Pixel>) -> Image<Pixel> {
-        return Image<Pixel>(width: a.width, height: a.height, pixels: a.pixels.map { ${operator}$0 })
+    prefix public static func ${operator}(a: Self) -> Image<Pixel> {
+        return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { ${operator}$0 })
     }
 %   end
 }
