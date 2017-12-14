@@ -296,7 +296,7 @@ class ImageTests: XCTestCase {
 		}
 	}
     
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if os(iOS) || os(macOS) || os(watchOS) || os(tvOS)
     func testData() {
         do {
             let image = Image<UInt8>(width: 3, height: 2, pixels: [

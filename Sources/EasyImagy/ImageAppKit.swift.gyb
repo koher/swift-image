@@ -1,5 +1,6 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Float80', 'Bool']
 #if os(macOS)
+import Foundation
 import AppKit
 % for is_rgba in [True, False]:
 %   for type in types:
@@ -34,6 +35,29 @@ extension Image where Pixel == ${pixel_type} {
     
     public var nsImage: NSImage {
         return NSImage(cgImage: cgImage, size: .zero)
+    }
+
+    public func data(using format: Image.Format) -> Data? {
+        let imageRep = NSBitmapImageRep(cgImage: cgImage)
+        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+
+        switch format {
+        case .png:
+            return imageRep.representation(using: .png, properties: [:])
+        case .jpeg(let complessionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        }
+    }
+
+    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+        guard let data = data(using: format) else {
+            throw Image.Format.FormattingError<Image<${pixel_type}>>(image: self, format: format)
+        }
+        try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
+    }
+
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
     }
 }
 %   end
