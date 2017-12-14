@@ -63,7 +63,11 @@ extension RGBA where Channel == ${type} {
 %     end
     }
 %   end
-%
+
+    internal static var selfZero: RGBA<${type}> {
+        return RGBA<${type}>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
 %   for summable_symbol, summable in zip(summable_sybmols, summables):
     
     internal static var summable${summable_symbol}Zero: RGBA<${summable}> {
@@ -112,7 +116,11 @@ extension ${type} {
 %     end
     }
 %   end
-%
+
+    internal static var selfZero: ${type} {
+        return 0
+    }
+
 %   for summable_symbol, summable in zip(summable_sybmols, summables):
     
     internal static var summable${summable_symbol}Zero: ${summable} {

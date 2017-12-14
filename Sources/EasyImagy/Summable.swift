@@ -46,6 +46,11 @@ extension RGBA where Channel == UInt8 {
     internal var summableD: RGBA<Double> {
         return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
+
+    internal static var selfZero: RGBA<UInt8> {
+        return RGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Int> {
         return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -96,6 +101,11 @@ extension RGBA where Channel == UInt16 {
     internal var summableD: RGBA<Double> {
         return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
+
+    internal static var selfZero: RGBA<UInt16> {
+        return RGBA<UInt16>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Int> {
         return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -146,6 +156,11 @@ extension RGBA where Channel == UInt32 {
     internal var summableD: RGBA<Double> {
         return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
+
+    internal static var selfZero: RGBA<UInt32> {
+        return RGBA<UInt32>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Int64> {
         return RGBA<Int64>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -196,6 +211,11 @@ extension RGBA where Channel == Int {
     internal var summableD: RGBA<Double> {
         return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
+
+    internal static var selfZero: RGBA<Int> {
+        return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Int> {
         return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -246,6 +266,11 @@ extension RGBA where Channel == Float {
     internal var summableD: RGBA<Double> {
         return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
     }
+
+    internal static var selfZero: RGBA<Float> {
+        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Float> {
         return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -296,6 +321,11 @@ extension RGBA where Channel == Double {
     internal var summableD: RGBA<Double> {
         return self
     }
+
+    internal static var selfZero: RGBA<Double> {
+        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Double> {
         return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -346,6 +376,11 @@ extension RGBA where Channel == Float80 {
     internal var summableD: RGBA<Float80> {
         return self
     }
+
+    internal static var selfZero: RGBA<Float80> {
+        return RGBA<Float80>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+
     
     internal static var summableIZero: RGBA<Float80> {
         return RGBA<Float80>(red: 0, green: 0, blue: 0, alpha: 0)
@@ -396,6 +431,11 @@ extension UInt8 {
     internal var summableD: Double {
         return Double(self)
     }
+
+    internal static var selfZero: UInt8 {
+        return 0
+    }
+
     
     internal static var summableIZero: Int {
         return 0
@@ -449,6 +489,11 @@ extension UInt16 {
     internal var summableD: Double {
         return Double(self)
     }
+
+    internal static var selfZero: UInt16 {
+        return 0
+    }
+
     
     internal static var summableIZero: Int {
         return 0
@@ -502,6 +547,11 @@ extension UInt32 {
     internal var summableD: Double {
         return Double(self)
     }
+
+    internal static var selfZero: UInt32 {
+        return 0
+    }
+
     
     internal static var summableIZero: Int64 {
         return 0
@@ -555,6 +605,11 @@ extension Int {
     internal var summableD: Double {
         return Double(self)
     }
+
+    internal static var selfZero: Int {
+        return 0
+    }
+
     
     internal static var summableIZero: Int {
         return 0
@@ -608,6 +663,11 @@ extension Float {
     internal var summableD: Double {
         return Double(self)
     }
+
+    internal static var selfZero: Float {
+        return 0
+    }
+
     
     internal static var summableIZero: Float {
         return 0
@@ -661,6 +721,11 @@ extension Double {
     internal var summableD: Double {
         return self
     }
+
+    internal static var selfZero: Double {
+        return 0
+    }
+
     
     internal static var summableIZero: Double {
         return 0
@@ -714,6 +779,11 @@ extension Float80 {
     internal var summableD: Float80 {
         return self
     }
+
+    internal static var selfZero: Float80 {
+        return 0
+    }
+
     
     internal static var summableIZero: Float80 {
         return 0

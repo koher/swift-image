@@ -1,3 +1,5 @@
+import Foundation
+
 public protocol ImageProtocol : Sequence {
     typealias Pixel = Iterator.Element
     
@@ -127,7 +129,7 @@ extension ImageProtocol {
         
         return Image(width: width, height: height, pixels: pixels)
     }
-    
+
     public func rotated() -> Image<Pixel> {
         return rotated(1)
     }
@@ -173,5 +175,13 @@ extension ImageProtocol {
         default:
             fatalError("Never reaches here.")
         }
+    }
+    
+    public func rotated(by angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: extrapolationMethod] }
+    }
+    
+    public func rotated(byDegrees angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi, extrapolatedBy: extrapolationMethod)
     }
 }
