@@ -1,12 +1,10 @@
 public struct ImageSlice<Pixel> : ImageProtocol {
-    internal var image: Image<Pixel>
+    internal var image: AnyImage<Pixel>
     public let xRange: CountableRange<Int>
     public let yRange: CountableRange<Int>
     
     public init(width: Int, height: Int, pixels: [Pixel]) {
-        image = Image<Pixel>(width: width, height: height, pixels: pixels)
-        xRange = image.xRange
-        yRange = image.yRange
+        self.init(image: Image<Pixel>(width: width, height: height, pixels: pixels), xRange: 0..<width, yRange: 0..<height)
     }
     
     public subscript(x: Int, y: Int) -> Pixel {
@@ -45,7 +43,7 @@ extension ImageSlice {
 public struct PixelIterator<Pixel>: IteratorProtocol {
     public typealias Element = Pixel
     
-    private let image: Image<Pixel>
+    private let image: AnyImage<Pixel>
     
     private let xRange: CountableRange<Int>
     private let yRange: CountableRange<Int>
@@ -53,7 +51,7 @@ public struct PixelIterator<Pixel>: IteratorProtocol {
     private var x: Int
     private var y: Int
     
-    init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
+    internal init(image: AnyImage<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
         self.image = image
         
         self.xRange = xRange
