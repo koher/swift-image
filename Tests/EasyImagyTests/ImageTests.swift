@@ -329,6 +329,21 @@ class ImageTests: XCTestCase {
             }
             XCTAssertEqual(restored, image, accuracy: 0.01)
         }
+        
+        do {
+            let image = Image<UInt8>(width: 0, height: 0, pixels: [])
+            XCTAssertNil(image.data(using: .png))
+        }
+        
+        do {
+            let image = Image<UInt8>(width: 0, height: 42, pixels: [])
+            XCTAssertNil(image.data(using: .png))
+        }
+        
+        do {
+            let image = Image<UInt8>(width: 42, height: 0, pixels: [])
+            XCTAssertNil(image.data(using: .png))
+        }
     }
 #endif
 }

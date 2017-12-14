@@ -1,6 +1,6 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Float80', 'Bool']
-import Foundation
 #if os(iOS) || os(watchOS) || os(tvOS)
+import Foundation
 import UIKit
 #if os(iOS) || os(tvOS)
 import CoreImage
@@ -70,6 +70,8 @@ extension Image where Pixel == ${pixel_type} {
     }
 
     public func data(using format: Image.Format) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)

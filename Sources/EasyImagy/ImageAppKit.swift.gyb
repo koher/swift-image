@@ -38,6 +38,8 @@ extension Image where Pixel == ${pixel_type} {
     }
 
     public func data(using format: Image.Format) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
