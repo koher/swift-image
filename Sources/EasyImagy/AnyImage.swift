@@ -1,5 +1,8 @@
+import Foundation
+
 public struct AnyImage<Pixel> : ImageProtocol {
-    private let box: AnyImageBox<Pixel>
+    private var box: AnyImageBox<Pixel>
+    private let lock = NSRecursiveLock()
     
     public init<I : ImageProtocol>(_ image: I) where I.Pixel == Pixel {
         box = ImageBox<I>(image)
@@ -23,6 +26,12 @@ public struct AnyImage<Pixel> : ImageProtocol {
         }
         
         set {
+            lock.lock()
+            defer { lock.unlock() }
+            
+            if !isKnownUniquelyReferenced(&box) {
+                box = box.copied()
+            }
             box[x, y] = newValue
         }
     }
@@ -63,6 +72,10 @@ extension AnyImage {
         public func makeIterator() -> AnyIterator<Pixel> {
             fatalError("Abstract")
         }
+        
+        public func copied() -> AnyImageBox<Pixel> {
+            fatalError("Abstract")
+        }
     }
     
     private class ImageBox<I : ImageProtocol> : AnyImageBox<I.Pixel> {
@@ -96,6 +109,10 @@ extension AnyImage {
         
         override public func makeIterator() -> AnyIterator<I.Pixel> {
             return AnyIterator(base.makeIterator())
+        }
+        
+        override public func copied() -> ImageBox<I> {
+            return ImageBox<I>(base)
         }
     }
 }

@@ -98,4 +98,17 @@ class AnyImageTests : XCTestCase {
             XCTAssertEqual(iterator.next(), nil)
         }
     }
+    
+    func testCopyOnWrite() {
+        var a = AnyImage<UInt8>(image)
+        let b = a
+        
+        XCTAssertEqual(a[0, 0], 1)
+        XCTAssertEqual(b[0, 0], 1)
+        
+        a[0, 0] = 9
+        
+        XCTAssertEqual(a[0, 0], 9)
+        XCTAssertEqual(b[0, 0], 1)
+    }
 }
