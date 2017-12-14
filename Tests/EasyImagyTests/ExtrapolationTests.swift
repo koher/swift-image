@@ -2,7 +2,7 @@ import XCTest
 import EasyImagy
 
 class ExtrapolationTests: XCTestCase {
-    func testSubscriptExtrapolation() {
+    func testSubscriptWithExtrapolation() {
         do {
             let image = Image<UInt8>(width: 3, height: 3, pixels: [
                 1, 2, 3,
@@ -460,6 +460,76 @@ class ExtrapolationTests: XCTestCase {
                 XCTAssertEqual(slice[-6, 10, extrapolatedBy: .mirroring], 7)
                 XCTAssertEqual(slice[10, 10, extrapolatedBy: .mirroring], 9)
             }
+        }
+    }
+    
+    func testSubscriptRangeWithExtrapolation() {
+        do {
+            let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            var slice = image[-4...6, -3...4, extrapolatedBy: .mirroring]
+            
+            XCTAssertEqual(slice, ImageSlice<UInt8>(width: 11, height: 8, pixels: [
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+            ]))
+            XCTAssertEqual(slice[-2, -1], 2)
+            
+            slice[-2, -1] = 9
+            
+            XCTAssertEqual(slice, ImageSlice<UInt8>(width: 11, height: 8, pixels: [
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                3, 3, 9, 1, 1, 2, 3, 3, 2, 1, 1,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+            ]))
+            XCTAssertEqual(slice[-2, -1], 9)
+        }
+        
+        do {
+            let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            let a = image[-1 ... 0, -1...0, extrapolatedBy: .repeating]
+            
+            XCTAssertEqual(a, ImageSlice<UInt8>(width: 2, height: 2, pixels: [
+                6, 4,
+                3, 1,
+            ]))
+            
+            var b = a[-4 ... -1, -3 ... -1, extrapolatedBy: .mirroring]
+            let c = b
+            
+            XCTAssertEqual(b, ImageSlice<UInt8>(width: 4, height: 3, pixels: [
+                1, 1, 3, 3,
+                4, 4, 6, 6,
+                4, 4, 6, 6,
+            ]))
+            XCTAssertEqual(b[-3, -3], 1)
+            XCTAssertEqual(c[-3, -3], 1)
+
+            b[-3, -3] = 9
+            
+            XCTAssertEqual(b, ImageSlice<UInt8>(width: 4, height: 3, pixels: [
+                1, 9, 3, 3,
+                4, 4, 6, 6,
+                4, 4, 6, 6,
+            ]))
+            XCTAssertEqual(b[-3, -3], 9)
+            XCTAssertEqual(c[-3, -3], 1)
         }
     }
 }

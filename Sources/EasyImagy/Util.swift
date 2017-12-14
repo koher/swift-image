@@ -13,7 +13,21 @@ extension CountableRange {
 }
 
 internal func countableRange<R: RangeExpression>(from range: R, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> where R.Bound == Int {
-    return CountableRange(range.relative(to: collection))
+    let all = Int.min ..< Int.max
+    let boundedRange: Range<Int> = range.relative(to: all)
+    let lowerBound: Int
+    let upperBound: Int
+    if boundedRange.lowerBound == .min {
+        lowerBound = Swift.max(boundedRange.lowerBound, collection.lowerBound)
+    } else {
+        lowerBound = boundedRange.lowerBound
+    }
+    if boundedRange.upperBound == .max {
+        upperBound = Swift.min(collection.upperBound, boundedRange.upperBound)
+    } else {
+        upperBound = boundedRange.upperBound
+    }
+    return lowerBound..<upperBound
 }
 
 internal func countableRange(from range: CountableRange<Int>, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {

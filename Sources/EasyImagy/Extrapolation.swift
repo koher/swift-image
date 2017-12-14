@@ -71,3 +71,34 @@ extension ImageProtocol {
         return self[x3, y3]
     }
 }
+
+extension ImageProtocol {
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ImageSlice<Pixel> {
+        return ImageSlice<Pixel>(
+            image: ExtrapolatedImage<Pixel>(
+                image: AnyImage<Pixel>(self),
+                xRange: xRange,
+                yRange: yRange,
+                extrapolationMethod: extrapolationMethod
+            ),
+            xRange: xRange,
+            yRange: yRange
+        )
+    }
+    
+    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ImageSlice<Pixel> where R1.Bound == Int, R2.Bound == Int {
+        return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange), extrapolatedBy: extrapolationMethod]
+    }
+    
+    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ImageSlice<Pixel> where R1.Bound == Int {
+        return self[countableRange(from: xRange, relativeTo: self.xRange), self.yRange, extrapolatedBy: extrapolationMethod]
+    }
+    
+    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ImageSlice<Pixel> where R2.Bound == Int {
+        return self[self.xRange, countableRange(from: yRange, relativeTo: self.yRange), extrapolatedBy: extrapolationMethod]
+    }
+    
+    public subscript(xRange: UnboundedRange, yRange: UnboundedRange, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ImageSlice<Pixel> {
+        return self[self.xRange, self.yRange, extrapolatedBy: extrapolationMethod]
+    }
+}
