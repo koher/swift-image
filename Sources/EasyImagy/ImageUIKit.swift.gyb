@@ -1,4 +1,5 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Float80', 'Bool']
+import Foundation
 #if os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
 #if os(iOS) || os(tvOS)
@@ -66,6 +67,26 @@ extension Image where Pixel == ${pixel_type} {
     
     public var uiImage: UIImage {
         return UIImage(cgImage: cgImage)
+    }
+
+    public func data(using format: Image.Format) -> Data? {
+        switch format {
+        case .png:
+            return UIImagePNGRepresentation(uiImage)
+        case .jpeg(let complessionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        }
+    }
+
+    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+        guard let data = data(using: format) else {
+            throw Image.Format.FormattingError<Image<${pixel_type}>>(image: self, format: format)
+        }
+        try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
+    }
+
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
     }
 }
 %   end

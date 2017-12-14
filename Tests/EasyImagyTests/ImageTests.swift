@@ -295,4 +295,40 @@ class ImageTests: XCTestCase {
 			XCTAssertEqual(8192 * 8192, copy.count)
 		}
 	}
+    
+#if os(iOS) || os(watchOS) || os(tvOS)
+    func testData() {
+        do {
+            let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            guard let data: Data = image.data(using: .png) else {
+                XCTFail()
+                fatalError()
+            }
+            guard let restored = Image<UInt8>(data: data) else {
+                XCTFail()
+                fatalError()
+            }
+            XCTAssertEqual(restored, image)
+        }
+        
+        do {
+            let image = Image<Double>(width: 3, height: 2, pixels: [
+                0.1, 0.2, 0.3,
+                0.4, 0.5, 0.6
+            ])
+            guard let data: Data = image.data(using: .jpeg(compressionQuality: 0.95)) else {
+                XCTFail()
+                fatalError()
+            }
+            guard let restored = Image<Double>(data: data) else {
+                XCTFail()
+                fatalError()
+            }
+            XCTAssertEqual(restored, image, accuracy: 0.01)
+        }
+    }
+#endif
 }

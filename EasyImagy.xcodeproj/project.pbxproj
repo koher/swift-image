@@ -131,6 +131,10 @@
 		D6B4EE131FE0DC4100B6B7B0 /* RotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */; };
 		D6B4EE141FE0DC4100B6B7B0 /* RotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */; };
 		D6B4EE151FE0DC4100B6B7B0 /* RotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */; };
+		D6B4EE171FE2038000B6B7B0 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */; };
+		D6B4EE181FE2038000B6B7B0 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */; };
+		D6B4EE191FE2038000B6B7B0 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */; };
+		D6B4EE1A1FE2038000B6B7B0 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */; };
 		D6C1C01E1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
 		D6C1C01F1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
 		D6C1C0201FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
@@ -216,6 +220,7 @@
 		D66840581F9F426200D1DE7F /* Summable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summable.swift; sourceTree = "<group>"; };
 		D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
+		D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
 		D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrderFunctionsTests.swift; sourceTree = "<group>"; };
 		D6D33DBA1FD97A8B00256FD0 /* ImageProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProtocolTests.swift; sourceTree = "<group>"; };
 		D6FAC8691FD1938400509BCB /* ImageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProtocol.swift; sourceTree = "<group>"; };
@@ -319,6 +324,7 @@
 				D6134A2B1F852A49005592A2 /* Image.swift */,
 				D6134A2C1F852A49005592A2 /* ImageAppKit.swift */,
 				D6134A2D1F852A49005592A2 /* ImageCoreGraphics.swift */,
+				D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */,
 				D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */,
 				D631091E1FCFFB4C009974D0 /* ImageOperators.swift */,
 				D6FAC8691FD1938400509BCB /* ImageProtocol.swift */,
@@ -674,6 +680,7 @@
 				D6134A521F852A85005592A2 /* ImageCoreGraphics.swift in Sources */,
 				D6134A541F852A85005592A2 /* ImageProtocolTyped.swift in Sources */,
 				D60D48A51FA0E3360047F2D3 /* ImageInternal.swift in Sources */,
+				D6B4EE171FE2038000B6B7B0 /* ImageFormat.swift in Sources */,
 				D631091F1FCFFB4C009974D0 /* ImageOperators.swift in Sources */,
 				D6FAC86F1FD8423F00509BCB /* ImageSliceInternal.swift in Sources */,
 			);
@@ -725,6 +732,7 @@
 				D6134A7F1F85CF5E005592A2 /* ImageProtocolTyped.swift in Sources */,
 				D668405A1F9F427D00D1DE7F /* Summable.swift in Sources */,
 				D62C6EBE1FC9DB4200E7DF02 /* ImageInternal.swift in Sources */,
+				D6B4EE181FE2038000B6B7B0 /* ImageFormat.swift in Sources */,
 				D63109201FCFFB4C009974D0 /* ImageOperators.swift in Sources */,
 				D6FAC8701FD8423F00509BCB /* ImageSliceInternal.swift in Sources */,
 			);
@@ -776,6 +784,7 @@
 				D6134ABE1F85D2AF005592A2 /* ImageProtocolTyped.swift in Sources */,
 				D668405B1F9F427D00D1DE7F /* Summable.swift in Sources */,
 				D62C6EBF1FC9DB4300E7DF02 /* ImageInternal.swift in Sources */,
+				D6B4EE191FE2038000B6B7B0 /* ImageFormat.swift in Sources */,
 				D63109211FCFFB4C009974D0 /* ImageOperators.swift in Sources */,
 				D6FAC8711FD8423F00509BCB /* ImageSliceInternal.swift in Sources */,
 			);
@@ -827,6 +836,7 @@
 				D6134ADF1F85DA5C005592A2 /* ImageProtocolTyped.swift in Sources */,
 				D668405C1F9F427F00D1DE7F /* Summable.swift in Sources */,
 				D62C6EC01FC9DB4400E7DF02 /* ImageInternal.swift in Sources */,
+				D6B4EE1A1FE2038000B6B7B0 /* ImageFormat.swift in Sources */,
 				D63109221FCFFB4C009974D0 /* ImageOperators.swift in Sources */,
 				D6FAC8721FD8423F00509BCB /* ImageSliceInternal.swift in Sources */,
 			);
