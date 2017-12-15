@@ -102,7 +102,7 @@ class ConvolutionTests: XCTestCase {
                 1, 1, 1, 1, 1,
             ])
 
-            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .mirroring)
+            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .reflecting)
             
             XCTAssertEqual(convoluted[0, 0], 70)
             XCTAssertEqual(convoluted[1, 0], 65)

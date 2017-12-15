@@ -21,7 +21,7 @@ extension ImageProtocol {
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
                 extrapolatedPixelByRepeatingAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
             }
-        case .mirroring:
+        case .reflecting:
             let doubleWidth = width * 2
             let doubleHeight = height * 2
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in

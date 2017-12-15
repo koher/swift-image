@@ -2,7 +2,7 @@ public enum ExtrapolationMethod<Pixel> {
     case filling(Pixel)
     case edging
     case repeating
-    case mirroring
+    case reflecting
 }
 
 private func reminder(_ a: Int, _ b: Int) -> Int {
@@ -19,7 +19,7 @@ extension ImageProtocol {
             return extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
         case .repeating:
             return extrapolatedPixelByRepeatingAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
-        case .mirroring:
+        case .reflecting:
             let doubleWidth = width * 2
             let doubleHeight = height * 2
             return extrapolatedPixelByMirroringAt(
