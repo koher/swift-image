@@ -130,12 +130,15 @@ extension ImageProtocol {
         return Image(width: width, height: height, pixels: pixels)
     }
 
-    public func rotated() -> Image<Pixel> {
-        return rotated(1)
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        precondition(angle % 90 == 0, "`angle` must be a multiple of 90: \(angle)")
+        return rotated(byRightAngleInDegrees: angle)
     }
-    
-    public func rotated(_ times: Int) -> Image<Pixel> {
-        switch times % 4 {
+
+    internal func rotated(byRightAngleInDegrees angle: Int) -> Image<Pixel> {
+        assert(angle % 90 == 0, "`angle` must be a multiple of 90: \(angle)")
+        
+        switch (angle / 90) % 4 {
         case 0:
             if let zelf = self as? Image<Pixel> {
                 return zelf
@@ -176,7 +179,7 @@ extension ImageProtocol {
             fatalError("Never reaches here.")
         }
     }
-    
+
     public func rotated(by angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: extrapolationMethod] }
     }

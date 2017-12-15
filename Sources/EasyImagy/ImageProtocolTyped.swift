@@ -714,6 +714,14 @@ extension ImageProtocol where Element == Float80 { // Interpolation
 }
 
 extension ImageProtocol where Element == RGBA<UInt8> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -740,6 +748,14 @@ extension ImageProtocol where Element == RGBA<UInt8> { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<UInt16> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -766,6 +782,14 @@ extension ImageProtocol where Element == RGBA<UInt16> { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<UInt32> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -792,6 +816,14 @@ extension ImageProtocol where Element == RGBA<UInt32> { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<Int> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -818,6 +850,14 @@ extension ImageProtocol where Element == RGBA<Int> { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<Float> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -844,6 +884,14 @@ extension ImageProtocol where Element == RGBA<Float> { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<Double> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -870,6 +918,14 @@ extension ImageProtocol where Element == RGBA<Double> { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<Float80> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -896,6 +952,14 @@ extension ImageProtocol where Element == RGBA<Float80> { // Rotation
 }
 
 extension ImageProtocol where Element == UInt8 { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -922,6 +986,14 @@ extension ImageProtocol where Element == UInt8 { // Rotation
 }
 
 extension ImageProtocol where Element == UInt16 { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -948,6 +1020,14 @@ extension ImageProtocol where Element == UInt16 { // Rotation
 }
 
 extension ImageProtocol where Element == UInt32 { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -974,6 +1054,14 @@ extension ImageProtocol where Element == UInt32 { // Rotation
 }
 
 extension ImageProtocol where Element == Int { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -1000,6 +1088,14 @@ extension ImageProtocol where Element == Int { // Rotation
 }
 
 extension ImageProtocol where Element == Float { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -1026,6 +1122,14 @@ extension ImageProtocol where Element == Float { // Rotation
 }
 
 extension ImageProtocol where Element == Double { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -1052,6 +1156,14 @@ extension ImageProtocol where Element == Double { // Rotation
 }
 
 extension ImageProtocol where Element == Float80 { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
     }
@@ -1078,6 +1190,14 @@ extension ImageProtocol where Element == Float80 { // Rotation
 }
 
 extension ImageProtocol where Element == RGBA<Bool> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: .filling(RGBA<Bool>(red: false, green: false, blue: false, alpha: false))] }
     }
@@ -1088,6 +1208,14 @@ extension ImageProtocol where Element == RGBA<Bool> { // Rotation
 }
 
 extension ImageProtocol where Element == Bool { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
     public func rotated(by angle: Double) -> Image<Pixel> {
         return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: .filling(false)] }
     }

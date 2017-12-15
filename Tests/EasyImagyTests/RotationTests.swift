@@ -43,5 +43,28 @@ class RotationTests : XCTestCase {
                 false, true, false,
             ]))
         }
+        
+        do {
+            let image = Image<Bool>(width: 2, height: 2, pixels: [
+                true,  false,
+                false, true,
+            ])
+            XCTAssertEqual(image.rotated(byDegrees: 45), Image<Bool>(width: 3, height: 3, pixels: [
+                false, true, false,
+                false, true, false,
+                false, true, false,
+            ]))
+        }
+        
+        do {
+            let image = Image<Int?>(width: 2, height: 2, pixels: [
+                2, nil,
+                nil, 3,
+            ])
+            XCTAssertEqual(image.rotated(byDegrees: 90), Image<Int?>(width: 2, height: 2, pixels: [
+                nil, 2,
+                3, nil,
+            ]))
+        }
     }
 }

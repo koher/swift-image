@@ -84,21 +84,21 @@ class ImageProtocolTests : XCTestCase {
     
     func testRotated() {
         do {
-            XCTAssertEqual(image.rotated(), Image(width: 2, height: 3, pixels: [
+            XCTAssertEqual(image.rotated(byDegrees: 90), Image(width: 2, height: 3, pixels: [
                 4, 1,
                 5, 2,
                 6, 3,
             ]))
 
             for times in [-8, -4, 0, 4, 8] {
-                XCTAssertEqual(image.rotated(times), Image(width: 3, height: 2, pixels: [
+                XCTAssertEqual(image.rotated(byDegrees: 90 * times), Image(width: 3, height: 2, pixels: [
                     1, 2, 3,
                     4, 5, 6,
                 ]))
             }
             
             for times in [-7, -3, 1, 5] {
-                XCTAssertEqual(image.rotated(times), Image(width: 2, height: 3, pixels: [
+                XCTAssertEqual(image.rotated(byDegrees: 90 * times), Image(width: 2, height: 3, pixels: [
                     4, 1,
                     5, 2,
                     6, 3,
@@ -106,14 +106,14 @@ class ImageProtocolTests : XCTestCase {
             }
             
             for times in [-6, -2, 2, 6] {
-                XCTAssertEqual(image.rotated(times), Image(width: 3, height: 2, pixels: [
+                XCTAssertEqual(image.rotated(byDegrees: 90 * times), Image(width: 3, height: 2, pixels: [
                     6, 5, 4,
                     3, 2, 1,
                 ]))
             }
             
             for times in [-5, -1, 3, 7] {
-                XCTAssertEqual(image.rotated(times), Image(width: 2, height: 3, pixels: [
+                XCTAssertEqual(image.rotated(byDegrees: 90 * times), Image(width: 2, height: 3, pixels: [
                     3, 6,
                     2, 5,
                     1, 4,
@@ -122,21 +122,21 @@ class ImageProtocolTests : XCTestCase {
         }
 
         do {
-            XCTAssertEqual(slice.rotated(), Image(width: 2, height: 3, pixels: [
+            XCTAssertEqual(slice.rotated(byDegrees: 90), Image(width: 2, height: 3, pixels: [
                 7, 2,
                 8, 3,
                 9, 4,
             ]))
 
             for times in [-8, -4, 0, 4, 8] {
-                XCTAssertEqual(slice.rotated(times), Image(width: 3, height: 2, pixels: [
+                XCTAssertEqual(slice.rotated(byDegrees: 90 * times), Image(width: 3, height: 2, pixels: [
                     2, 3, 4,
                     7, 8, 9,
                 ]))
             }
             
             for times in [-7, -3, 1, 5] {
-                XCTAssertEqual(slice.rotated(times), Image(width: 2, height: 3, pixels: [
+                XCTAssertEqual(slice.rotated(byDegrees: 90 * times), Image(width: 2, height: 3, pixels: [
                     7, 2,
                     8, 3,
                     9, 4,
@@ -144,14 +144,14 @@ class ImageProtocolTests : XCTestCase {
             }
             
             for times in [-6, -2, 2, 6] {
-                XCTAssertEqual(slice.rotated(times), Image(width: 3, height: 2, pixels: [
+                XCTAssertEqual(slice.rotated(byDegrees: 90 * times), Image(width: 3, height: 2, pixels: [
                     9, 8, 7,
                     4, 3, 2,
                 ]))
             }
             
             for times in [-5, -1, 3, 7] {
-                XCTAssertEqual(slice.rotated(times), Image(width: 2, height: 3, pixels: [
+                XCTAssertEqual(slice.rotated(byDegrees: 90 * times), Image(width: 2, height: 3, pixels: [
                     4, 9,
                     3, 8,
                     2, 7,

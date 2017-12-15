@@ -142,15 +142,16 @@ for pixel in image {
 ### Rotation
 
 ```swift
-let result = image.rotated() // Rotate clockwise
+let result = image.rotated(by: .pi) // Rotated clockwise by π
 ```
 
 ```swift
-let result = image.rotated(-1) // Rotate counterclockwise
+let result = image.rotated(byDegrees: 180) // Rotated clockwise by 180 degrees
 ```
 
 ```swift
-let result = image.rotated(2) // Rotate by 180 degrees
+// Rotated clockwise by π / 4 and fill the background with red
+let result = image.rotated(by: .pi / 4, extrapolatedBy: .filling(.red))
 ```
 
 ### Flip

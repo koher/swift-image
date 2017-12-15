@@ -132,6 +132,25 @@ class EasyImagySample: XCTestCase {
         }
     }
     
+    func testRotation() {
+        do {
+            /**/ let image = Image<UInt8>(width: 1, height: 1, pixel: 0)
+            let result = image.rotated(by: .pi) // Rotated clockwise by π
+            /**/ _ = result.count
+        }
+        do {
+            /**/ let image = Image<UInt8>(width: 1, height: 1, pixel: 0)
+            let result = image.rotated(byDegrees: 180) // Rotated clockwise by 180 degrees
+            /**/ _ = result.count
+        }
+        do {
+            /**/ let image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .red)
+            // Rotated clockwise by π / 4 and fill the background with red
+            let result = image.rotated(by: .pi / 4, extrapolatedBy: .filling(.red))
+            /**/ _ = result.count
+        }
+    }
+    
     func testCropping() {
         /**/ let image = Image<RGBA<UInt8>>(width: 128, height: 128, pixel: .red)
         
