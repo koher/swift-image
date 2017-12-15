@@ -2,15 +2,13 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     private var image: AnyImage<Pixel>
     public let xRange: CountableRange<Int>
     public let yRange: CountableRange<Int>
-    private let extrapolationMethod: ExtrapolationMethod<Pixel>?
     
-    internal init<I : ImageProtocol>(image: I, xRange: CountableRange<Int>, yRange: CountableRange<Int>, extrapolationMethod: ExtrapolationMethod<Pixel>? = nil) where I.Pixel == Pixel {
+    internal init<I : ImageProtocol>(image: I, xRange: CountableRange<Int>, yRange: CountableRange<Int>) where I.Pixel == Pixel {
         precondition(image.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(image.yRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         self.image = AnyImage<Pixel>(image)
         self.xRange = xRange
         self.yRange = yRange
-        self.extrapolationMethod = extrapolationMethod
     }
 
     public init(width: Int, height: Int, pixels: [Pixel]) {
@@ -21,33 +19,20 @@ public struct ImageSlice<Pixel> : ImageProtocol {
         get {
             precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
             precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
-            if let extrapolationMethod = extrapolationMethod {
-                return image[x, y, extrapolatedBy: extrapolationMethod]
-            } else {
-                return image[x, y]
-            }
+            return image[x, y]
         }
         
         set {
             precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
             precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
-            if let extrapolationMethod = extrapolationMethod {
-                // TODO
-                fatalError("Unimplemented: \(extrapolationMethod)")
-            } else {
-                image[x, y] = newValue
-            }
+            image[x, y] = newValue
         }
     }
     
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
         precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(self.xRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
-        if let extrapolationMethod = extrapolationMethod {
-            return image[xRange, yRange, extrapolatedBy: extrapolationMethod]
-        } else {
-            return image[xRange, yRange]
-        }
+        return image[xRange, yRange]
     }
 }
 
