@@ -378,6 +378,10 @@ extension ImageProtocol where Element == RGBA<UInt8> { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt8> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt8> {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -401,6 +405,10 @@ extension ImageProtocol where Element == RGBA<UInt16> { // Interpolation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt16> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
     }
     
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt16> {
@@ -428,6 +436,10 @@ extension ImageProtocol where Element == RGBA<UInt32> { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt32> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<UInt32> {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -451,6 +463,10 @@ extension ImageProtocol where Element == RGBA<Int> { // Interpolation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Int> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
     }
     
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Int> {
@@ -478,6 +494,10 @@ extension ImageProtocol where Element == RGBA<Float> { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Float> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Float> {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -501,6 +521,10 @@ extension ImageProtocol where Element == RGBA<Double> { // Interpolation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Double> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
     }
     
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Double> {
@@ -528,6 +552,10 @@ extension ImageProtocol where Element == RGBA<Float80> { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Float80> {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> RGBA<Float80> {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -551,6 +579,10 @@ extension ImageProtocol where Element == UInt8 { // Interpolation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt8 {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
     }
     
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt8 {
@@ -578,6 +610,10 @@ extension ImageProtocol where Element == UInt16 { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt16 {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt16 {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -601,6 +637,10 @@ extension ImageProtocol where Element == UInt32 { // Interpolation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt32 {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
     }
     
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> UInt32 {
@@ -628,6 +668,10 @@ extension ImageProtocol where Element == Int { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Int {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Int {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -651,6 +695,10 @@ extension ImageProtocol where Element == Float { // Interpolation
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
         }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Float {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
     }
     
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Float {
@@ -678,6 +726,10 @@ extension ImageProtocol where Element == Double { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Double {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Double {
         switch interpolationMethod {
             case .nearestNeighbor:
@@ -703,12 +755,1024 @@ extension ImageProtocol where Element == Float80 { // Interpolation
         }
     }
     
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Float80 {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Float80 {
         switch interpolationMethod {
             case .nearestNeighbor:
                 return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
             case .bilinear:
                 return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<UInt8> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<UInt16> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<UInt32> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<Int> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<Float> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<Double> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == RGBA<Float80> { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == UInt8 { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == UInt16 { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == UInt32 { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == Int { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == Float { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == Double { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        }
+    }
+}
+
+extension ImageProtocol where Element == Float80 { // Resizing
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: true,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edging] }
+            )
+        }
+    }
+
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edging] }
+            )
         }
     }
 }

@@ -18,8 +18,21 @@ extension Float: _Multipliable {}
 extension Double: _Multipliable {}
 extension Float80: _Multipliable {}
 
+internal protocol _Dividable {
+    static func /(lhs: Self, rhs: Self) -> Self
+}
+extension Int: _Dividable {}
+extension Int64: _Dividable {}
+extension Float: _Dividable {}
+extension Double: _Dividable {}
+extension Float80: _Dividable {}
+
 internal func *<T: _Multipliable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
     return RGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+}
+
+internal func /<T: _Dividable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
+    return RGBA<T>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
 }
 %
 % types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double', 'Float80']
@@ -85,6 +98,16 @@ extension RGBA where Channel == ${type} {
 %     end
     }
 %   end
+%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+
+    internal static func quotient${summable_symbol}(_ lhs: RGBA<${summable}>, _ rhs: ${summable_weight}) -> RGBA<${summable}> {
+%     if summable_weight == summable:
+        return lhs / rhs
+%     else:
+        return lhs / ${summable}(rhs)
+%     end
+    }
+%   end
 }
 % end
 %
@@ -136,6 +159,17 @@ extension ${type} {
         return lhs * rhs
 %     else:
         return lhs * ${summable}(rhs)
+%     end
+    }
+%   end
+%
+%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+    
+    internal static func quotient${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
+%     if summable_weight == summable:
+        return lhs / rhs
+%     else:
+        return lhs / ${summable}(rhs)
 %     end
     }
 %   end

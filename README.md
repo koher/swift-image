@@ -172,7 +172,7 @@ let result = image.resizedTo(width: 100, height: 100)
 
 ```swift
 let result = image.resizedTo(width: 100, height: 100,
-    interpolationQuality: kCGInterpolationNone) // Nearest neighbor
+    interpolatedBy: .nearestNeighbor) // Nearest neighbor
 ```
 
 ### Crop

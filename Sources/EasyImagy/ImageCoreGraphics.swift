@@ -53,13 +53,6 @@
                 toOriginal: UInt8.init
             )
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<UInt8>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == RGBA<UInt16> {
@@ -112,13 +105,6 @@
                 quotient: (/) as (Int, Int) -> Int,
                 toOriginal: UInt16.init
             )
-        }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<UInt16>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
         }
     }
     
@@ -173,13 +159,6 @@
                 toOriginal: UInt32.init
             )
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<UInt32>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == RGBA<Float> {
@@ -223,13 +202,6 @@
         
         public var cgImage: CGImage {
             return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-        }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<Float>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
         }
     }
     
@@ -275,13 +247,6 @@
         public var cgImage: CGImage {
             return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<Double>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == RGBA<Float80> {
@@ -325,13 +290,6 @@
         
         public var cgImage: CGImage {
             return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-        }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<Float80>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
         }
     }
     
@@ -377,13 +335,6 @@
         public var cgImage: CGImage {
             return map { $0.map { $0 ? (255 as UInt8) : (0 as UInt8) } }.cgImage
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<RGBA<Bool>> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == UInt8 {
@@ -424,13 +375,6 @@
                 colorSpace: Image<UInt8>.colorSpace,
                 bitmapInfo: Image<UInt8>.bitmapInfo
             )
-        }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<UInt8> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
         }
     }
     
@@ -473,13 +417,6 @@
                 bitmapInfo: Image<UInt16>.bitmapInfo
             )
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<UInt16> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == UInt32 {
@@ -521,13 +458,6 @@
                 bitmapInfo: Image<UInt32>.bitmapInfo
             )
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<UInt32> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == Float {
@@ -564,13 +494,6 @@
         
         public var cgImage: CGImage {
             return map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) }.cgImage
-        }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<Float> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
         }
     }
     
@@ -609,13 +532,6 @@
         public var cgImage: CGImage {
             return map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) }.cgImage
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<Double> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
     
     extension Image where Pixel == Float80 {
@@ -653,13 +569,6 @@
         public var cgImage: CGImage {
             return map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) }.cgImage
         }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<Float80> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
-        }
     }
 
     extension Image where Pixel == Bool {
@@ -696,13 +605,6 @@
         
         public var cgImage: CGImage {
             return map { $0 ? 255 as UInt8 : 0 as UInt8 }.cgImage
-        }
-        
-        public func resizedTo(width: Int, height: Int, interpolationQuality: CGInterpolationQuality = .default) -> Image<Bool> {
-            return Image(width: width, height: height) { context in
-                context.interpolationQuality = interpolationQuality
-                context.draw(self.cgImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-            }
         }
     }
 #endif
