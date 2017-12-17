@@ -47,15 +47,15 @@ extension Image where Pixel == RGBA<UInt8> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<UInt8>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -104,15 +104,15 @@ extension Image where Pixel == RGBA<UInt16> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<UInt16>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -161,15 +161,15 @@ extension Image where Pixel == RGBA<UInt32> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<UInt32>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -218,15 +218,15 @@ extension Image where Pixel == RGBA<Float> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<Float>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -275,15 +275,15 @@ extension Image where Pixel == RGBA<Double> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<Double>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -332,15 +332,15 @@ extension Image where Pixel == RGBA<Float80> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<Float80>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -389,15 +389,15 @@ extension Image where Pixel == RGBA<Bool> {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<RGBA<Bool>>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -446,15 +446,15 @@ extension Image where Pixel == UInt8 {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<UInt8>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -503,15 +503,15 @@ extension Image where Pixel == UInt16 {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<UInt16>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -560,15 +560,15 @@ extension Image where Pixel == UInt32 {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<UInt32>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -617,15 +617,15 @@ extension Image where Pixel == Float {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<Float>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -674,15 +674,15 @@ extension Image where Pixel == Double {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<Double>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -731,15 +731,15 @@ extension Image where Pixel == Float80 {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<Float80>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
     
@@ -788,15 +788,15 @@ extension Image where Pixel == Bool {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<Bool>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
 #endif

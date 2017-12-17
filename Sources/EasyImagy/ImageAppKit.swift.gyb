@@ -51,15 +51,15 @@ extension Image where Pixel == ${pixel_type} {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, formatting format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
         guard let data = data(using: format) else {
             throw Image.Format.FormattingError<Image<${pixel_type}>>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, formatting format: Image.Format) throws {
-        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, formatting: format)
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+        try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
 %   end
