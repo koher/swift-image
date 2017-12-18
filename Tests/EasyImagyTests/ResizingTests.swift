@@ -104,5 +104,18 @@ class ResizingTests : XCTestCase {
                 6.5, 8.0,
             ]), accuracy: 1.0e-10)
         }
+        
+        do { // Non-numeric Pixels
+            let image = Image<Bool>(width: 3, height: 2, pixels: [
+                true,  false, true,
+                false, true,  false,
+            ])
+            XCTAssertEqual(image.resizedTo(width: 6, height: 4), Image<Bool>(width: 6, height: 4, pixels: [
+                true,  true,  false, false, true,  true,
+                true,  true,  false, false, true,  true,
+                false, false, true,  true,  false, false,
+                false, false, true,  true,  false, false,
+            ]))
+        }
     }
 }

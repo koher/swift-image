@@ -1,10 +1,44 @@
+import Foundation
+
 extension ImageProtocol {
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: false,
+                toSummable: { _ -> Pixel in fatalError("Never reaches here.") },
+                zero: nil,
+                sum: { _, _ -> Pixel in fatalError("Never reaches here.") },
+                quotient: { _, _ -> Pixel in fatalError("Never reaches here.") },
+                pixelAt: { x, y in self[Int(round(x)), Int(round(y))] },
+                extrapolatedPixelAt: { x, y in self[Int(round(x)), Int(round(y)), extrapolatedBy: .edging] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: false,
+                toSummable: { _ -> Pixel in fatalError("Never reaches here.") },
+                zero: nil,
+                sum: { _, _ -> Pixel in fatalError("Never reaches here.") },
+                quotient: { _, _ -> Pixel in fatalError("Never reaches here.") },
+                pixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y))] },
+                extrapolatedPixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolatedBy: .edging] }
+            )
+        }
+    }
+    
     internal func resizedTo<Summable>(
         width: Int,
         height: Int,
         isAntialiased: Bool,
         toSummable: (Pixel) -> Summable,
-        zero: Summable,
+        zero: Summable?,
         sum: (Summable, Summable) -> Summable,
         quotient: (Summable, Int) -> Pixel,
         pixelAt: (Double, Double) -> Pixel,
@@ -45,7 +79,7 @@ extension ImageProtocol {
             width: width,
             height: height,
             toSummable: toSummable,
-            zero: zero,
+            zero: zero!,
             sum: sum,
             quotient: quotient
         )
