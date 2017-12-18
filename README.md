@@ -167,11 +167,11 @@ let result = image.yReversed() // Flip Vertically
 ### Resizing
 
 ```swift
-let result = image.resizedTo(width: 100, height: 100)
+let result = image.resizedTo(width: 320, height: 240)
 ```
 
 ```swift
-let result = image.resizedTo(width: 100, height: 100,
+let result = image.resizedTo(width: 320, height: 240,
     interpolatedBy: .nearestNeighbor) // Nearest neighbor
 ```
 

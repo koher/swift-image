@@ -151,6 +151,20 @@ class EasyImagySample: XCTestCase {
         }
     }
     
+    func testResizing() {
+        do {
+            /**/ let image = Image<UInt8>(width: 1, height: 1, pixel: 0)
+            let result = image.resizedTo(width: 320, height: 240)
+            /**/ _ = result.count
+        }
+        
+        do {
+            /**/ let image = Image<UInt8>(width: 1, height: 1, pixel: 0)
+            let result = image.resizedTo(width: 320, height: 240, interpolatedBy: .nearestNeighbor)
+            /**/ _ = result.count
+        }
+    }
+    
     func testCropping() {
         /**/ let image = Image<RGBA<UInt8>>(width: 128, height: 128, pixel: .red)
         

@@ -102,7 +102,7 @@ class ResizingTests : XCTestCase {
             XCTAssertEqual(image.resizedTo(width: 2, height: 2), Image<Double>(width: 2, height: 2, pixels: [
                 2.0, 3.5,
                 6.5, 8.0,
-                ]), accuracy: 1.0e-10)
+            ]), accuracy: 1.0e-10)
         }
     }
 }

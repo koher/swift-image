@@ -55,10 +55,7 @@ extension ImageProtocol {
         let sx = Double(xRange.count) / Double(width)
         let sy = Double(yRange.count) / Double(height)
         return Image<Pixel>(width: width, height: height, pixelAt: { x, y in
-            print(((Double(x) + 0.5) * sx - 0.5, (Double(y) + 0.5) * sy - 0.5))
-            let pixel = pixelAt((Double(x) + 0.5) * sx - 0.5, (Double(y) + 0.5) * sy - 0.5)
-            print(pixel)
-            return pixel
+            pixelAt((Double(x) + 0.5) * sx - 0.5, (Double(y) + 0.5) * sy - 0.5)
         })
     }
     
