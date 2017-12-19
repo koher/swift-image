@@ -13,19 +13,19 @@ extension ImageProtocol {
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
                 extrapolatedPixelByFillingAt(x: x, y: y, by: value)
             }
-        case .edging:
+        case .edge:
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
-                extrapolatedPixelByEdgingAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
+                extrapolatedPixelByEdgeAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
             }
-        case .repeating:
+        case .repeat:
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
-                extrapolatedPixelByRepeatingAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
+                extrapolatedPixelByRepeatAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
             }
-        case .reflecting:
+        case .reflection:
             let doubleWidth = width * 2
             let doubleHeight = height * 2
             return _convoluted(with: kernel, toSummable: toSummable, product: product, zero: zero, sum: sum, toOriginal: toOriginal) { x, y in
-                extrapolatedPixelByMirroringAt(
+                extrapolatedPixelByReflectionAt(
                     x: x,
                     y: y,
                     minX: xRange.lowerBound,

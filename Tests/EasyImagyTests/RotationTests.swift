@@ -10,7 +10,7 @@ class RotationTests : XCTestCase {
                 1, 2,
                 3, 4,
             ])
-            XCTAssertEqual(image.rotated(by: .pi / 4, interpolatedBy: .bilinear, extrapolatedBy: .edging), Image<Double>(width: 3, height: 3, pixels: [
+            XCTAssertEqual(image.rotated(by: .pi / 4, interpolatedBy: .bilinear, extrapolatedBy: .edge), Image<Double>(width: 3, height: 3, pixels: [
                 2.0, 1.0, 1.5,
                 3.0, 2.5, 2.0,
                 3.5, 4.0, 3.0,
@@ -25,7 +25,7 @@ class RotationTests : XCTestCase {
                 0, 0, 0, 0,
             ])
             let slice = image[1...2, 1...2]
-            XCTAssertEqual(slice.rotated(by: .pi / 4, interpolatedBy: .bilinear, extrapolatedBy: .edging), Image<Double>(width: 3, height: 3, pixels: [
+            XCTAssertEqual(slice.rotated(by: .pi / 4, interpolatedBy: .bilinear, extrapolatedBy: .edge), Image<Double>(width: 3, height: 3, pixels: [
                 2.0, 1.0, 1.5,
                 3.0, 2.5, 2.0,
                 3.5, 4.0, 3.0,

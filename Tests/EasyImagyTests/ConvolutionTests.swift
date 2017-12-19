@@ -61,7 +61,7 @@ class ConvolutionTests: XCTestCase {
                 2, 1, 1, 1, 2,
             ])
             
-            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .edging)
+            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .edge)
             
             XCTAssertEqual(convoluted[0, 0], 65)
             XCTAssertEqual(convoluted[1, 0], 70)
@@ -83,7 +83,7 @@ class ConvolutionTests: XCTestCase {
                 2, 1, 1, 1, 2,
             ])
             
-            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .repeating)
+            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .repeat)
             
             XCTAssertEqual(convoluted[0, 0], 59)
             XCTAssertEqual(convoluted[1, 0], 68)
@@ -102,7 +102,7 @@ class ConvolutionTests: XCTestCase {
                 1, 1, 1, 1, 1,
             ])
 
-            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .reflecting)
+            let convoluted = image.convoluted(with: kernel, extrapolatedBy: .reflection)
             
             XCTAssertEqual(convoluted[0, 0], 70)
             XCTAssertEqual(convoluted[1, 0], 65)

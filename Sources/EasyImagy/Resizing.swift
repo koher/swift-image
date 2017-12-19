@@ -14,7 +14,7 @@ extension ImageProtocol {
                 sum: { _, _ -> Pixel in fatalError("Never reaches here.") },
                 quotient: { _, _ -> Pixel in fatalError("Never reaches here.") },
                 pixelAt: { x, y in self[Int(round(x)), Int(round(y))] },
-                extrapolatedPixelAt: { x, y in self[Int(round(x)), Int(round(y)), extrapolatedBy: .edging] }
+                extrapolatedPixelAt: { x, y in self[Int(round(x)), Int(round(y)), extrapolatedBy: .edge] }
             )
         } else {
             let dox = Double(ox)
@@ -28,7 +28,7 @@ extension ImageProtocol {
                 sum: { _, _ -> Pixel in fatalError("Never reaches here.") },
                 quotient: { _, _ -> Pixel in fatalError("Never reaches here.") },
                 pixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y))] },
-                extrapolatedPixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolatedBy: .edging] }
+                extrapolatedPixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolatedBy: .edge] }
             )
         }
     }
