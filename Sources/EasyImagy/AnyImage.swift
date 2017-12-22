@@ -2,7 +2,7 @@ import Foundation
 
 public struct AnyImage<Pixel> : ImageProtocol {
     private var box: AnyImageBox<Pixel>
-    private let lock = NSRecursiveLock()
+    private let lock = NSLock()
     
     public init<I : ImageProtocol>(_ image: I) where I.Pixel == Pixel {
         box = ImageBox<I>(image)
