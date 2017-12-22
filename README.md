@@ -99,7 +99,7 @@ let image = Image<UInt8>(width: 640, height: 480, pixel: .min) // a black graysc
 ```
 
 ```swift
-let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binarized image
+let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binary image
 ```
 
 ### Access to a pixel

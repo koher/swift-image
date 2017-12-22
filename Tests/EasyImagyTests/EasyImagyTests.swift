@@ -88,7 +88,7 @@ class EasyImagySample: XCTestCase {
             /**/ _ = image.count
         }
         do {
-            let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binarized image
+            let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binary image
             /**/ _ = image.count
         }
         do {
