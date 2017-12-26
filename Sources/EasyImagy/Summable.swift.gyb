@@ -7,7 +7,6 @@ extension Int: _Summable {}
 extension Int64: _Summable {}
 extension Float: _Summable {}
 extension Double: _Summable {}
-extension Float80: _Summable {}
 
 internal protocol _Multipliable {
     static func *(lhs: Self, rhs: Self) -> Self
@@ -16,7 +15,6 @@ extension Int: _Multipliable {}
 extension Int64: _Multipliable {}
 extension Float: _Multipliable {}
 extension Double: _Multipliable {}
-extension Float80: _Multipliable {}
 
 internal protocol _Dividable {
     static func /(lhs: Self, rhs: Self) -> Self
@@ -25,7 +23,6 @@ extension Int: _Dividable {}
 extension Int64: _Dividable {}
 extension Float: _Dividable {}
 extension Double: _Dividable {}
-extension Float80: _Dividable {}
 
 internal func *<T: _Multipliable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
     return RGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
@@ -35,7 +32,7 @@ internal func /<T: _Dividable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
     return RGBA<T>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
 }
 %
-% types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double', 'Float80']
+% types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
 % type_to_summables = {
 %   'UInt8' : ['Int', 'Float', 'Double'],
 %   'UInt16': ['Int', 'Float', 'Double'],
@@ -43,7 +40,6 @@ internal func /<T: _Dividable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
 %   'Int'   : ['Int', 'Float', 'Double'],
 %   'Float' : ['Float', 'Float', 'Double'],
 %   'Double': ['Double', 'Double', 'Double'],
-%   'Float80': ['Float80', 'Float80', 'Float80'],
 % }
 % summable_sybmols = ['I', 'F', 'D']
 % summable_weights = ['Int', 'Float', 'Double']

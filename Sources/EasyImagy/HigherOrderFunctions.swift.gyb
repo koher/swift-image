@@ -12,7 +12,6 @@
 %   'UInt64',
 %   'Float',
 %   'Double',
-%   'Float80',
 %   'Bool',
 % ]
 % basic_types = [f'RGBA<{t}>' for t in basic_channel_types] + basic_channel_types

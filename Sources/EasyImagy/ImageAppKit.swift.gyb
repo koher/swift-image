@@ -1,4 +1,4 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Float80', 'Bool']
+% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
 #if os(macOS)
 import Foundation
 import AppKit

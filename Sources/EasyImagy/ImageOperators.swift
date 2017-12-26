@@ -47,10 +47,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func +<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`+` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 + $1 }
@@ -105,10 +101,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func -<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`-` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 - $1 }
@@ -163,10 +155,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func *<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`*` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 * $1 }
@@ -221,10 +209,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func +=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`+=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
@@ -282,10 +266,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func -=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`-=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
@@ -343,10 +323,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func *=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`*=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
@@ -380,8 +356,6 @@ extension ImageProtocol where Element : Numeric {
     @_specialize(exported: true, where Self == ImageSlice<Float>)
     @_specialize(exported: true, where Self == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>)
     prefix public static func +(a: Self) -> Image<Pixel> {
         return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { +$0 })
     }
@@ -402,8 +376,6 @@ extension ImageProtocol where Element : SignedNumeric {
     @_specialize(exported: true, where Self == ImageSlice<Float>)
     @_specialize(exported: true, where Self == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>)
     prefix public static func -(a: Self) -> Image<Pixel> {
         return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { -$0 })
     }
@@ -1415,10 +1387,6 @@ extension ImageProtocol where Element : FloatingPoint {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func /<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`/` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 / $1 }
@@ -1433,10 +1401,6 @@ extension ImageProtocol where Element : FloatingPoint {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func /=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`/=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
@@ -1497,10 +1461,6 @@ extension ImageProtocol where Element : Equatable {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     @_specialize(exported: true, where Self == Image<Bool>, I == Image<Bool>)
     @_specialize(exported: true, where Self == Image<Bool>, I == ImageSlice<Bool>)
     @_specialize(exported: true, where Self == ImageSlice<Bool>, I == Image<Bool>)
@@ -1558,10 +1518,6 @@ extension ImageProtocol where Element : Equatable {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     @_specialize(exported: true, where Self == Image<Bool>, I == Image<Bool>)
     @_specialize(exported: true, where Self == Image<Bool>, I == ImageSlice<Bool>)
     @_specialize(exported: true, where Self == ImageSlice<Bool>, I == Image<Bool>)
@@ -1621,10 +1577,6 @@ extension ImageProtocol where Element : Comparable {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func <<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Bool> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`<` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 < $1 }
@@ -1679,10 +1631,6 @@ extension ImageProtocol where Element : Comparable {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func <=<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Bool> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`<=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 <= $1 }
@@ -1737,10 +1685,6 @@ extension ImageProtocol where Element : Comparable {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func ><I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Bool> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`>` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 > $1 }
@@ -1795,10 +1739,6 @@ extension ImageProtocol where Element : Comparable {
     @_specialize(exported: true, where Self == Image<Double>, I == ImageSlice<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == Image<Double>)
     @_specialize(exported: true, where Self == ImageSlice<Double>, I == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == Image<Float80>, I == ImageSlice<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == Image<Float80>)
-    @_specialize(exported: true, where Self == ImageSlice<Float80>, I == ImageSlice<Float80>)
     public static func >=<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Bool> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`>=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 >= $1 }
@@ -4329,110 +4269,6 @@ extension ImageProtocol where Element == RGBA<Float> {
 }
 
 extension ImageProtocol where Element == RGBA<Double> {
-    public static func +<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`+` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 + $1 }
-        return Image(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func -<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`-` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 - $1 }
-        return Image(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func *<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`*` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 * $1 }
-        return Image(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func /<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`/` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 / $1 }
-        return Image(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func +=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`+=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
-            for (x1, x2) in zip(lhs.xRange, rhs.xRange) {
-                lhs[x1, y1] += rhs[x2, y2]
-            }
-        }
-    }
-
-    public static func -=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`-=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
-            for (x1, x2) in zip(lhs.xRange, rhs.xRange) {
-                lhs[x1, y1] -= rhs[x2, y2]
-            }
-        }
-    }
-
-    public static func *=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`*=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
-            for (x1, x2) in zip(lhs.xRange, rhs.xRange) {
-                lhs[x1, y1] *= rhs[x2, y2]
-            }
-        }
-    }
-
-    public static func /=<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`/=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
-            for (x1, x2) in zip(lhs.xRange, rhs.xRange) {
-                lhs[x1, y1] /= rhs[x2, y2]
-            }
-        }
-    }
-
-    public static func ==<I : ImageProtocol>(lhs: Self, rhs: I) -> Bool where I.Pixel == Pixel {
-        guard lhs.width == rhs.width && lhs.height == rhs.height else { return false }
-        return zip(lhs, rhs).reduce(true) { $0 && $1.0 == $1.1 }
-    }
-
-    public static func !=<I : ImageProtocol>(lhs: Self, rhs: I) -> Bool where I.Pixel == Pixel {
-        guard lhs.width == rhs.width && lhs.height == rhs.height else { return true }
-        return zip(lhs, rhs).reduce(false) { $0 || $1.0 != $1.1 }
-    }
-
-    public static func <<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<RGBA<Bool>> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`<` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 < $1 }
-        return Image<RGBA<Bool>>(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func <=<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<RGBA<Bool>> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`<=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 <= $1 }
-        return Image<RGBA<Bool>>(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func ><I : ImageProtocol>(lhs: Self, rhs: I) -> Image<RGBA<Bool>> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`>` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 > $1 }
-        return Image<RGBA<Bool>>(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    public static func >=<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<RGBA<Bool>> where I.Pixel == Pixel {
-        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`>=` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
-        let pixels = zip(lhs, rhs).map { $0 >= $1 }
-        return Image<RGBA<Bool>>(width: lhs.width, height: lhs.height, pixels: pixels)
-    }
-
-    prefix public static func +(a: Self) -> Image<Pixel> {
-        return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { +$0 })
-    }
-
-    prefix public static func -(a: Self) -> Image<Pixel> {
-        return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { -$0 })
-    }
-}
-
-extension ImageProtocol where Element == RGBA<Float80> {
     public static func +<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`+` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 + $1 }

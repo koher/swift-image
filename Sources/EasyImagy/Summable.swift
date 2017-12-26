@@ -7,7 +7,6 @@ extension Int: _Summable {}
 extension Int64: _Summable {}
 extension Float: _Summable {}
 extension Double: _Summable {}
-extension Float80: _Summable {}
 
 internal protocol _Multipliable {
     static func *(lhs: Self, rhs: Self) -> Self
@@ -16,7 +15,6 @@ extension Int: _Multipliable {}
 extension Int64: _Multipliable {}
 extension Float: _Multipliable {}
 extension Double: _Multipliable {}
-extension Float80: _Multipliable {}
 
 internal protocol _Dividable {
     static func /(lhs: Self, rhs: Self) -> Self
@@ -25,7 +23,6 @@ extension Int: _Dividable {}
 extension Int64: _Dividable {}
 extension Float: _Dividable {}
 extension Double: _Dividable {}
-extension Float80: _Dividable {}
 
 internal func *<T: _Multipliable>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
     return RGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
@@ -434,73 +431,6 @@ extension RGBA where Channel == Double {
 
     internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
         return lhs / rhs
-    }
-}
-
-extension RGBA where Channel == Float80 {
-    internal init(summableI: RGBA<Float80>) {
-        self = summableI
-    }
-
-    internal init(summableF: RGBA<Float80>) {
-        self = summableF
-    }
-
-    internal init(summableD: RGBA<Float80>) {
-        self = summableD
-    }
-    
-    internal var summableI: RGBA<Float80> {
-        return self
-    }
-    
-    internal var summableF: RGBA<Float80> {
-        return self
-    }
-    
-    internal var summableD: RGBA<Float80> {
-        return self
-    }
-
-    internal static var selfZero: RGBA<Float80> {
-        return RGBA<Float80>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Float80> {
-        return RGBA<Float80>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableFZero: RGBA<Float80> {
-        return RGBA<Float80>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableDZero: RGBA<Float80> {
-        return RGBA<Float80>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static func productI(_ lhs: RGBA<Float80>, _ rhs: Int) -> RGBA<Float80> {
-        return lhs * Float80(rhs)
-    }
-    
-    internal static func productF(_ lhs: RGBA<Float80>, _ rhs: Float) -> RGBA<Float80> {
-        return lhs * Float80(rhs)
-    }
-    
-    internal static func productD(_ lhs: RGBA<Float80>, _ rhs: Double) -> RGBA<Float80> {
-        return lhs * Float80(rhs)
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Float80>, _ rhs: Int) -> RGBA<Float80> {
-        return lhs / Float80(rhs)
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Float80>, _ rhs: Float) -> RGBA<Float80> {
-        return lhs / Float80(rhs)
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Float80>, _ rhs: Double) -> RGBA<Float80> {
-        return lhs / Float80(rhs)
     }
 }
 
@@ -921,75 +851,5 @@ extension Double {
     
     internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
-    }
-}
-
-extension Float80 {
-    internal init(summableI: Float80) {
-        self = summableI
-    }
-
-    internal init(summableF: Float80) {
-        self = summableF
-    }
-
-    internal init(summableD: Float80) {
-        self = summableD
-    }
-    
-    internal var summableI: Float80 {
-        return self
-    }
-    
-    internal var summableF: Float80 {
-        return self
-    }
-    
-    internal var summableD: Float80 {
-        return self
-    }
-
-    internal static var selfZero: Float80 {
-        return 0
-    }
-
-    
-    internal static var summableIZero: Float80 {
-        return 0
-        
-    }
-    
-    internal static var summableFZero: Float80 {
-        return 0
-        
-    }
-    
-    internal static var summableDZero: Float80 {
-        return 0
-        
-    }
-    
-    internal static func productI(_ lhs: Float80, _ rhs: Int) -> Float80 {
-        return lhs * Float80(rhs)
-    }
-    
-    internal static func productF(_ lhs: Float80, _ rhs: Float) -> Float80 {
-        return lhs * Float80(rhs)
-    }
-    
-    internal static func productD(_ lhs: Float80, _ rhs: Double) -> Float80 {
-        return lhs * Float80(rhs)
-    }
-    
-    internal static func quotientI(_ lhs: Float80, _ rhs: Int) -> Float80 {
-        return lhs / Float80(rhs)
-    }
-    
-    internal static func quotientF(_ lhs: Float80, _ rhs: Float) -> Float80 {
-        return lhs / Float80(rhs)
-    }
-    
-    internal static func quotientD(_ lhs: Float80, _ rhs: Double) -> Float80 {
-        return lhs / Float80(rhs)
     }
 }

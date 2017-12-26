@@ -1,4 +1,4 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80']
+% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
 % type_to_max_value = {
 %   'UInt8'  : 'UInt8.max',
 %   'UInt16' : 'UInt16.max',
@@ -7,7 +7,6 @@
 %   'Int'    : '255',
 %   'Float'  : '1',
 %   'Double' : '1',
-%   'Float80': '1',
 % }
 % summables = {
 %   'UInt8' : 'Int',
@@ -124,7 +123,7 @@ extension RGBA where Channel == ${type} {
 }
 % end
 %
-% numeric_types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80']
+% numeric_types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
 % for type in numeric_types:
 
 extension RGBA where Channel == ${type} {

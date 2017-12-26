@@ -62,13 +62,13 @@
 %   'Bool': ['!'],
 % }
 % type_to_concrete_types = {
-%   'Numeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
-%   'SignedNumeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'Float', 'Double', 'Float80'],
+%   'Numeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double'],
+%   'SignedNumeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'Float', 'Double'],
 %   'BinaryInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
 %   'FixedWidthInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
-%   'FloatingPoint': ['Float', 'Double', 'Float80'],
-%   'Equatable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80', 'Bool'],
-%   'Comparable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Float80'],
+%   'FloatingPoint': ['Float', 'Double'],
+%   'Equatable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Bool'],
+%   'Comparable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double'],
 %   'Bool': [],
 % }
 % for i, type in enumerate(types):

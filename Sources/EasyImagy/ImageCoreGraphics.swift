@@ -249,50 +249,6 @@
         }
     }
     
-    extension Image where Pixel == RGBA<Float80> {
-        private static var colorSpace: CGColorSpace {
-            return CGColorSpaceCreateDeviceRGB()
-        }
-        
-        private static var bitmapInfo: CGBitmapInfo {
-            return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-        }
-        
-        private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-            let pixels: [RGBA<UInt8>] = Image.drawnPixels(
-                width: width,
-                height: height,
-                defaultPixel: .transparent,
-                colorSpace: Image<RGBA<UInt8>>.colorSpace,
-                bitmapInfo: Image<RGBA<UInt8>>.bitmapInfo,
-                minValue: .min,
-                maxValue: .max,
-                isEqual: ==,
-                toSummable: Int.init,
-                product: (*) as (Int, Int) -> Int,
-                quotient: (/) as (Int, Int) -> Int,
-                toOriginal: UInt8.init,
-                setUp: setUp
-            )
-            
-            self.init(width: width, height: height, pixels: pixels.map { $0.map { Float80($0) / 255 } })
-        }
-        
-        public init(cgImage: CGImage) {
-            let width = cgImage.width
-            let height = cgImage.height
-            
-            self.init(width: width, height: height, setUp: { context in
-                let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
-                context.draw(cgImage, in: rect)
-            })
-        }
-        
-        public var cgImage: CGImage {
-            return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-        }
-    }
-    
     extension Image where Pixel == RGBA<Bool> {
         private static var colorSpace: CGColorSpace {
             return CGColorSpaceCreateDeviceRGB()
@@ -517,43 +473,6 @@
             )
             
             self.init(width: width, height: height, pixels: pixels.map { Double($0) / 255 })
-        }
-        
-        public init(cgImage: CGImage) {
-            let width = cgImage.width
-            let height = cgImage.height
-            
-            self.init(width: width, height: height, setUp: { context in
-                let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
-                context.draw(cgImage, in: rect)
-            })
-        }
-        
-        public var cgImage: CGImage {
-            return map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) }.cgImage
-        }
-    }
-    
-    extension Image where Pixel == Float80 {
-        private static var colorSpace: CGColorSpace {
-            return CGColorSpaceCreateDeviceGray()
-        }
-        
-        private static var bitmapInfo: CGBitmapInfo {
-            return CGBitmapInfo()
-        }
-        
-        private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-            let pixels: [UInt8] = Image.drawnPixels(
-                width: width,
-                height: height,
-                defaultPixel: 0,
-                colorSpace: Image<UInt8>.colorSpace,
-                bitmapInfo: Image<UInt8>.bitmapInfo,
-                setUp: setUp
-            )
-            
-            self.init(width: width, height: height, pixels: pixels.map { Float80($0) / 255 })
         }
         
         public init(cgImage: CGImage) {

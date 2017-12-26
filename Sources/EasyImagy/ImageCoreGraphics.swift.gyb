@@ -1,5 +1,5 @@
 % uint_types = ['UInt8', 'UInt16', 'UInt32']
-% float_types = ['Float', 'Double', 'Float80']
+% float_types = ['Float', 'Double']
 % type_to_summable = {
 %   'UInt8' : 'Int',
 %   'UInt16': 'Int',

@@ -338,44 +338,6 @@ extension RGBA where Channel == Double {
     }
 }
 
-extension RGBA where Channel == Float80 {
-    public init(red: Float80, green: Float80, blue: Float80) {
-        self.init(red: red, green: green, blue: blue, alpha: 1)
-    }
-    
-    public init(gray: Float80) {
-        self.init(gray: gray, alpha: 1)
-    }
-
-    public static var red: RGBA<Float80> {
-        return RGBA<Float80>(red: 1, green: 0, blue: 0)
-    }
-    
-    public static var green: RGBA<Float80> {
-        return RGBA<Float80>(red: 0, green: 1, blue: 0)
-    }
-    
-    public static var blue: RGBA<Float80> {
-        return RGBA<Float80>(red: 0, green: 0, blue: 1)
-    }
-    
-    public static var black: RGBA<Float80> {
-        return RGBA<Float80>(gray: 0)
-    }
-    
-    public static var white: RGBA<Float80> {
-        return RGBA<Float80>(gray: 1)
-    }
-    
-    public static var transparent: RGBA<Float80> {
-        return RGBA<Float80>(gray: 0, alpha: 0)
-    }
-
-    public var gray: Float80 {
-        return (red + green + blue) / 3
-    }
-}
-
 extension RGBA where Channel == Int {
     public init(_ rgba: RGBA<Int>) {
         self.init(red: Int(rgba.red), green: Int(rgba.green), blue: Int(rgba.blue), alpha: Int(rgba.alpha))
@@ -422,10 +384,6 @@ extension RGBA where Channel == Int {
     }
 
     public init(_ rgba: RGBA<Double>) {
-        self.init(red: Int(rgba.red), green: Int(rgba.green), blue: Int(rgba.blue), alpha: Int(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
         self.init(red: Int(rgba.red), green: Int(rgba.green), blue: Int(rgba.blue), alpha: Int(rgba.alpha))
     }
 }
@@ -478,10 +436,6 @@ extension RGBA where Channel == Int8 {
     public init(_ rgba: RGBA<Double>) {
         self.init(red: Int8(rgba.red), green: Int8(rgba.green), blue: Int8(rgba.blue), alpha: Int8(rgba.alpha))
     }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: Int8(rgba.red), green: Int8(rgba.green), blue: Int8(rgba.blue), alpha: Int8(rgba.alpha))
-    }
 }
 
 extension RGBA where Channel == Int16 {
@@ -530,10 +484,6 @@ extension RGBA where Channel == Int16 {
     }
 
     public init(_ rgba: RGBA<Double>) {
-        self.init(red: Int16(rgba.red), green: Int16(rgba.green), blue: Int16(rgba.blue), alpha: Int16(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
         self.init(red: Int16(rgba.red), green: Int16(rgba.green), blue: Int16(rgba.blue), alpha: Int16(rgba.alpha))
     }
 }
@@ -586,10 +536,6 @@ extension RGBA where Channel == Int32 {
     public init(_ rgba: RGBA<Double>) {
         self.init(red: Int32(rgba.red), green: Int32(rgba.green), blue: Int32(rgba.blue), alpha: Int32(rgba.alpha))
     }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: Int32(rgba.red), green: Int32(rgba.green), blue: Int32(rgba.blue), alpha: Int32(rgba.alpha))
-    }
 }
 
 extension RGBA where Channel == Int64 {
@@ -638,10 +584,6 @@ extension RGBA where Channel == Int64 {
     }
 
     public init(_ rgba: RGBA<Double>) {
-        self.init(red: Int64(rgba.red), green: Int64(rgba.green), blue: Int64(rgba.blue), alpha: Int64(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
         self.init(red: Int64(rgba.red), green: Int64(rgba.green), blue: Int64(rgba.blue), alpha: Int64(rgba.alpha))
     }
 }
@@ -694,10 +636,6 @@ extension RGBA where Channel == UInt {
     public init(_ rgba: RGBA<Double>) {
         self.init(red: UInt(rgba.red), green: UInt(rgba.green), blue: UInt(rgba.blue), alpha: UInt(rgba.alpha))
     }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: UInt(rgba.red), green: UInt(rgba.green), blue: UInt(rgba.blue), alpha: UInt(rgba.alpha))
-    }
 }
 
 extension RGBA where Channel == UInt8 {
@@ -746,10 +684,6 @@ extension RGBA where Channel == UInt8 {
     }
 
     public init(_ rgba: RGBA<Double>) {
-        self.init(red: UInt8(rgba.red), green: UInt8(rgba.green), blue: UInt8(rgba.blue), alpha: UInt8(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
         self.init(red: UInt8(rgba.red), green: UInt8(rgba.green), blue: UInt8(rgba.blue), alpha: UInt8(rgba.alpha))
     }
 }
@@ -802,10 +736,6 @@ extension RGBA where Channel == UInt16 {
     public init(_ rgba: RGBA<Double>) {
         self.init(red: UInt16(rgba.red), green: UInt16(rgba.green), blue: UInt16(rgba.blue), alpha: UInt16(rgba.alpha))
     }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: UInt16(rgba.red), green: UInt16(rgba.green), blue: UInt16(rgba.blue), alpha: UInt16(rgba.alpha))
-    }
 }
 
 extension RGBA where Channel == UInt32 {
@@ -854,10 +784,6 @@ extension RGBA where Channel == UInt32 {
     }
 
     public init(_ rgba: RGBA<Double>) {
-        self.init(red: UInt32(rgba.red), green: UInt32(rgba.green), blue: UInt32(rgba.blue), alpha: UInt32(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
         self.init(red: UInt32(rgba.red), green: UInt32(rgba.green), blue: UInt32(rgba.blue), alpha: UInt32(rgba.alpha))
     }
 }
@@ -910,10 +836,6 @@ extension RGBA where Channel == UInt64 {
     public init(_ rgba: RGBA<Double>) {
         self.init(red: UInt64(rgba.red), green: UInt64(rgba.green), blue: UInt64(rgba.blue), alpha: UInt64(rgba.alpha))
     }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: UInt64(rgba.red), green: UInt64(rgba.green), blue: UInt64(rgba.blue), alpha: UInt64(rgba.alpha))
-    }
 }
 
 extension RGBA where Channel == Float {
@@ -962,10 +884,6 @@ extension RGBA where Channel == Float {
     }
 
     public init(_ rgba: RGBA<Double>) {
-        self.init(red: Float(rgba.red), green: Float(rgba.green), blue: Float(rgba.blue), alpha: Float(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
         self.init(red: Float(rgba.red), green: Float(rgba.green), blue: Float(rgba.blue), alpha: Float(rgba.alpha))
     }
 }
@@ -1017,63 +935,5 @@ extension RGBA where Channel == Double {
 
     public init(_ rgba: RGBA<Double>) {
         self.init(red: Double(rgba.red), green: Double(rgba.green), blue: Double(rgba.blue), alpha: Double(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: Double(rgba.red), green: Double(rgba.green), blue: Double(rgba.blue), alpha: Double(rgba.alpha))
-    }
-}
-
-extension RGBA where Channel == Float80 {
-    public init(_ rgba: RGBA<Int>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Int8>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Int16>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Int32>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Int64>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<UInt>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<UInt8>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<UInt16>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<UInt32>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<UInt64>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Double>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
-    }
-
-    public init(_ rgba: RGBA<Float80>) {
-        self.init(red: Float80(rgba.red), green: Float80(rgba.green), blue: Float80(rgba.blue), alpha: Float80(rgba.alpha))
     }
 }
