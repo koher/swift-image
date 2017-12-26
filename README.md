@@ -300,7 +300,7 @@ let package = Package(
 **Cartfile**
 
 ```
-github "koher/EasyImagy" "0.4.0-alpha"
+github "koher/EasyImagy" "0.4.0-alpha.6"
 ```
 
 ### Manually
