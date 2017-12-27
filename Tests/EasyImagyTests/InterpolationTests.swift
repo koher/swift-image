@@ -548,4 +548,9 @@ class InterpolationTests: XCTestCase {
             XCTAssertEqual(image[3.0,  3.0,  interpolatedBy: .bilinear, extrapolatedBy: .repeat], 64)
         }
     }
+    
+    static var allTests = [
+        ("testSubscriptInterpolation", testSubscriptInterpolation),
+        ("testSubscriptInterpolationWithExtrapolation", testSubscriptInterpolationWithExtrapolation),
+    ]
 }

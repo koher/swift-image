@@ -159,4 +159,13 @@ class ImageProtocolTests : XCTestCase {
             }
         }
     }
+    
+    static var allTests = [
+        ("testSlice", testSlice),
+        ("testInitWithPixelAt", testInitWithPixelAt),
+        ("testTransposed", testTransposed),
+        ("testXReversed", testXReversed),
+        ("testYReversed", testYReversed),
+        ("testRotated", testRotated),
+    ]
 }

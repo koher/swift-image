@@ -37,4 +37,13 @@ class RGBAOperatorsTests: XCTestCase {
         let a = RGBA<Bool>(red: true, green: false, blue: false, alpha: true)
         XCTAssertEqual(!a, RGBA(red: false, green: true, blue: true, alpha: false))
     }
+    
+    static var allTests = [
+        ("testAdd", testAdd),
+        ("testAnd", testAnd),
+        ("testAddAsign", testAddAsign),
+        ("testSubtractAsign", testSubtractAsign),
+        ("testNegate", testNegate),
+        ("testNot", testNot),
+    ]
 }

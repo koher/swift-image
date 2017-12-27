@@ -67,4 +67,8 @@ class RotationTests : XCTestCase {
             ]))
         }
     }
+    
+    static var allTests = [
+        ("testRotated", testRotated),
+    ]
 }

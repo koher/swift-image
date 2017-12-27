@@ -90,4 +90,9 @@ class HigherOrderFunctionsTests : XCTestCase {
             ]))
         }
     }
+    
+    static var allTests = [
+        ("testMap", testMap),
+        ("testUpdate", testUpdate),
+    ]
 }

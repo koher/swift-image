@@ -1,11 +1,5 @@
 import XCTest
 import EasyImagy
-#if os(iOS)
-    import UIKit
-#endif
-#if os(OSX)
-    import AppKit
-#endif
 
 class ImageSliceTests: XCTestCase {
     func testInit() {
@@ -123,5 +117,11 @@ class ImageSliceTests: XCTestCase {
         XCTAssertNil(image.pixelAt(x: 0, y: -1))
         XCTAssertNil(image.pixelAt(x: 0, y: 3))
     }
-
+    
+    static var allTests = [
+        ("testInit", testInit),
+        ("testSequence", testSequence),
+        ("testSubscriptRange", testSubscriptRange),
+        ("testPixel", testPixel),
+    ]
 }

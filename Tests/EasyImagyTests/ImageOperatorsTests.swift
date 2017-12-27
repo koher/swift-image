@@ -281,5 +281,16 @@ class ImageOperatorsTests: XCTestCase {
             true, true,
         ]))
     }
+    
+    static var allTests = [
+        ("testAdd", testAdd),
+        ("testAnd", testAnd),
+        ("testAddAsign", testAddAsign),
+        ("testSubtractAsign", testSubtractAsign),
+        ("testIsEqual", testIsEqual),
+        ("testIsNotEqual", testIsNotEqual),
+        ("testNegate", testNegate),
+        ("testNot", testNot),
+    ]
 }
 

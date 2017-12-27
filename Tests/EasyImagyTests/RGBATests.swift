@@ -51,6 +51,12 @@ class RGBATests: XCTestCase {
             XCTAssertEqual(p.gray, .max - 2)
         }
     }
+    
+    static var allTests = [
+        ("testInit", testInit),
+        ("testDescription", testDescription),
+        ("testGray", testGray),
+    ]
 }
 
 // FIXME: remove this after conditional conformance is supported

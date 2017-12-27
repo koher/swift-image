@@ -532,4 +532,9 @@ class ExtrapolationTests: XCTestCase {
             XCTAssertEqual(c[-3, -3], 1)
         }
     }
+    
+    static var allTests = [
+        ("testSubscriptWithExtrapolation", testSubscriptWithExtrapolation),
+        ("testSubscriptRangeWithExtrapolation", testSubscriptRangeWithExtrapolation),
+    ]
 }

@@ -111,4 +111,14 @@ class AnyImageTests : XCTestCase {
         XCTAssertEqual(a[0, 0], 9)
         XCTAssertEqual(b[0, 0], 1)
     }
+    
+    static var allTests = [
+        ("testSlice", testSlice),
+        ("testXRange", testXRange),
+        ("testYRange", testYRange),
+        ("testSubscript", testSubscript),
+        ("testSubscriptRange", testSubscriptRange),
+        ("testSequence", testSequence),
+        ("testCopyOnWrite", testCopyOnWrite),
+    ]
 }
