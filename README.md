@@ -1,6 +1,8 @@
 EasyImagy
 ===========================
 
+[![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=dev)](https://travis-ci.org/koher/EasyImagy)
+
 _EasyImagy_ makes it easy to process images in Swift.
 
 ```swift
