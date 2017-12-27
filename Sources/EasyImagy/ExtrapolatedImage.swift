@@ -28,7 +28,7 @@ internal struct ExtrapolatedImage<Pixel> : ImageProtocol {
             assert(xRange.contains(x), "`x` is out of bounds: \(x)")
             assert(yRange.contains(y), "`y` is out of bounds: \(y)")
             if !image.xRange.contains(x) || !image.yRange.contains(y) {
-                var pixels = [Pixel]()
+                var pixels = [Iterator.Element]()
                 for y in yRange {
                     for x in xRange {
                         pixels.append(self[x, y])

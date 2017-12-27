@@ -17,7 +17,7 @@ internal func XCTAssertEqual<Channel: Equatable>(
         XCTAssertEqual(e1.blue, e2.blue, m == "" ? "blue" : "\(m) (blue)", file: file, line: line)
         XCTAssertEqual(e1.alpha, e2.alpha, m == "" ? "alpha" : "\(m) (alpha)", file: file, line: line)
     } catch let error {
-        XCTAssertThrowsError(error, message, file: file, line: line)
+        XCTAssertThrowsError(error, message(), file: file, line: line)
     }
 }
 
@@ -42,7 +42,7 @@ internal func XCTAssertEqual<I: ImageProtocol>(
             }
         }
     } catch let error {
-        XCTAssertThrowsError(error, message, file: file, line: line)
+        XCTAssertThrowsError(error, message(), file: file, line: line)
     }
 }
 
@@ -67,7 +67,7 @@ internal func XCTAssertEqual<Channel: Equatable>(
             }
         }
     } catch let error {
-        XCTAssertThrowsError(error, message, file: file, line: line)
+        XCTAssertThrowsError(error, message(), file: file, line: line)
     }
 }
 
@@ -93,7 +93,7 @@ internal func XCTAssertEqual<I: ImageProtocol, Wrapped: Equatable>(
             }
         }
     } catch let error {
-        XCTAssertThrowsError(error, message, file: file, line: line)
+        XCTAssertThrowsError(error, message(), file: file, line: line)
     }
 }
 
@@ -119,7 +119,7 @@ internal func XCTAssertEqual<I : ImageProtocol, F : FloatingPoint>(
             }
         }
     } catch let error {
-        XCTAssertThrowsError(error, message, file: file, line: line)
+        XCTAssertThrowsError(error, message(), file: file, line: line)
     }
 }
 

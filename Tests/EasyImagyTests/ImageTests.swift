@@ -65,7 +65,7 @@ class ImageTests: XCTestCase {
         XCTAssertEqual(iterator.next(), 4)
         XCTAssertEqual(iterator.next(), 5)
         XCTAssertEqual(iterator.next(), 6)
-        XCTAssertEqual(iterator.next(), nil)
+        XCTAssertNil(iterator.next())
 	}
 	
 	func testSubscriptGet() {
