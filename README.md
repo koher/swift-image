@@ -1,5 +1,4 @@
-EasyImagy
-===========================
+# EasyImagy
 
 [![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=dev)](https://travis-ci.org/koher/EasyImagy)
 
@@ -25,8 +24,7 @@ image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
 imageView.image = image.uiImage
 ```
 
-Introduction
----------------------------
+## Introduction
 
 Processing images by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides easier APIs to process images.
 
@@ -61,8 +59,7 @@ var another = image // Not copied here because of copy-on-write
 another[x, y] = RGBA(0xff0000ff) // Copied here lazily
 ```
 
-Usage
----------------------------
+## Usage
 
 ### Import
 
@@ -263,14 +260,12 @@ let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
 imageView.image = image.nsImage
 ```
 
-Requirements
----------------------------
+## Requirements
 
 - Swift 4 or later
 - Xcode 9 or later
 
-Installation
----------------------------
+## Installation
 
 ### Swift Package Manager
 
@@ -311,7 +306,6 @@ github "koher/EasyImagy" "0.4.0-alpha.7"
 2. Click your project icon and select the application target and the "General" tab.
 3. Add `EasyImagy.framework` to "Embedded Binaries".
 
-License
----------------------------
+## License
 
 [The MIT License](LICENSE)
