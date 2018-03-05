@@ -47,3 +47,21 @@ extension Image {
 		return pixels.makeIterator()
 	}
 }
+
+extension Image { // Pointers
+    public func withUnsafeBufferPointer<R>(_ body: (UnsafeBufferPointer<Pixel>) throws -> R) rethrows -> R {
+        return try pixels.withUnsafeBufferPointer(body)
+    }
+    
+    public mutating func withUnsafeMutableBufferPointer<R>(_ body: (inout UnsafeMutableBufferPointer<Pixel>) throws -> R) rethrows -> R {
+        return try pixels.withUnsafeMutableBufferPointer(body)
+    }
+    
+    public func withUnsafeBytes<R>(_ body: (UnsafeRawBufferPointer) throws -> R) rethrows -> R {
+        return try pixels.withUnsafeBytes(body)
+    }
+    
+    public mutating func withUnsafeMutableBytes<R>(_ body: (UnsafeMutableRawBufferPointer) throws -> R) rethrows -> R {
+        return try pixels.withUnsafeMutableBytes(body)
+    }
+}

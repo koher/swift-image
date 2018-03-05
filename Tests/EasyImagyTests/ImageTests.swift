@@ -154,8 +154,110 @@ class ImageTests: XCTestCase {
         XCTAssertNil(image.pixelAt(x: 0, y: -1))
         XCTAssertNil(image.pixelAt(x: 0, y: 2))
     }
+    
+    func testWithUnsafeBufferPointer() {
+        let image = Image<UInt8>(width: 3, height: 2, pixels: [
+            1, 2, 3,
+            4, 5, 6,
+        ])
+        
+        image.withUnsafeBufferPointer { p in
+            XCTAssertEqual(p.count, 6)
+            
+            XCTAssertEqual(p[0], 1)
+            XCTAssertEqual(p[1], 2)
+            XCTAssertEqual(p[2], 3)
+            XCTAssertEqual(p[3], 4)
+            XCTAssertEqual(p[4], 5)
+            XCTAssertEqual(p[5], 6)
+        }
+    }
 	
-	func testCopyOnWritePerformanceOfCopy() { // Fast
+    func testWithUnsafeMutableBufferPointer() {
+        var image = Image<UInt8>(width: 3, height: 2, pixels: [
+            1, 2, 3,
+            4, 5, 6,
+        ])
+        
+        image.withUnsafeMutableBufferPointer { p in
+            XCTAssertEqual(p.count, 6)
+            
+            XCTAssertEqual(p[0], 1)
+            XCTAssertEqual(p[1], 2)
+            XCTAssertEqual(p[2], 3)
+            XCTAssertEqual(p[3], 4)
+            XCTAssertEqual(p[4], 5)
+            XCTAssertEqual(p[5], 6)
+            
+            p[0] += 10
+            p[1] += 10
+            p[2] += 10
+            p[3] += 10
+            p[4] += 10
+            p[5] += 10
+        }
+        
+        XCTAssertEqual(image.pixelAt(x: 0, y: 0), 11)
+        XCTAssertEqual(image.pixelAt(x: 1, y: 0), 12)
+        XCTAssertEqual(image.pixelAt(x: 2, y: 0), 13)
+        
+        XCTAssertEqual(image.pixelAt(x: 0, y: 1), 14)
+        XCTAssertEqual(image.pixelAt(x: 1, y: 1), 15)
+        XCTAssertEqual(image.pixelAt(x: 2, y: 1), 16)
+    }
+    
+    func testWithUnsafeBytes() {
+        let image = Image<UInt8>(width: 3, height: 2, pixels: [
+            1, 2, 3,
+            4, 5, 6,
+        ])
+        
+        image.withUnsafeBytes { p in
+            XCTAssertEqual(p.count, 6)
+            
+            XCTAssertEqual(p[0], 1)
+            XCTAssertEqual(p[1], 2)
+            XCTAssertEqual(p[2], 3)
+            XCTAssertEqual(p[3], 4)
+            XCTAssertEqual(p[4], 5)
+            XCTAssertEqual(p[5], 6)
+        }
+    }
+    
+    func testWithUnsafeMutableBytes() {
+        var image = Image<UInt8>(width: 3, height: 2, pixels: [
+            1, 2, 3,
+            4, 5, 6,
+        ])
+        
+        image.withUnsafeMutableBytes { p in
+            XCTAssertEqual(p.count, 6)
+            
+            XCTAssertEqual(p[0], 1)
+            XCTAssertEqual(p[1], 2)
+            XCTAssertEqual(p[2], 3)
+            XCTAssertEqual(p[3], 4)
+            XCTAssertEqual(p[4], 5)
+            XCTAssertEqual(p[5], 6)
+            
+            p[0] += 10
+            p[1] += 10
+            p[2] += 10
+            p[3] += 10
+            p[4] += 10
+            p[5] += 10
+        }
+        
+        XCTAssertEqual(image.pixelAt(x: 0, y: 0), 11)
+        XCTAssertEqual(image.pixelAt(x: 1, y: 0), 12)
+        XCTAssertEqual(image.pixelAt(x: 2, y: 0), 13)
+        
+        XCTAssertEqual(image.pixelAt(x: 0, y: 1), 14)
+        XCTAssertEqual(image.pixelAt(x: 1, y: 1), 15)
+        XCTAssertEqual(image.pixelAt(x: 2, y: 1), 16)
+    }
+
+    func testCopyOnWritePerformanceOfCopy() { // Fast
         let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.transparent)
 		measure {
 			let copy = image
