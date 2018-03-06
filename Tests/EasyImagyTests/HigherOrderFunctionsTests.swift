@@ -91,6 +91,13 @@ class HigherOrderFunctionsTests : XCTestCase {
         }
     }
     
+    func testUpdatePerformance() {
+        var image = Image<Int>(width: 1024, height: 1024, pixels: 1...(1024 * 1024))
+        measure {
+            image.update { $0 += 1 }
+        }
+    }
+    
     static var allTests = [
         ("testMap", testMap),
         ("testUpdate", testUpdate),
