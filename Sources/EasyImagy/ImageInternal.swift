@@ -173,7 +173,47 @@ extension Image { // Gray
             intent: CGColorRenderingIntent.defaultIntent
         )!
     }
-
+    
+    internal static func withGeneratedCGImage<R, Pixel>(
+        image: Image<Pixel>,
+        colorSpace: CGColorSpace,
+        bitmapInfo: CGBitmapInfo,
+        body: (CGImage) throws -> R
+    ) rethrows -> R {
+        var image = image
+        let bytesPerPixel = MemoryLayout<Pixel>.size
+        let length = image.count * bytesPerPixel
+        let width = image.width
+        let height = image.height
+        
+        return try image.pixels.withUnsafeMutableBytes { bytes in
+            let provider: CGDataProvider = CGDataProvider(data: Data(
+                bytesNoCopy: bytes.baseAddress!,
+                    // `baseAddress` is `nil` if `bytes.count` is `0`.
+                    // However creating a `CGImage` with 0 pixels is illegal.
+                    // So calling this method with empty images are logic failures
+                    // and using `!` is justified.
+                count: length,
+                deallocator: .none
+            ) as CFData)!
+            
+            let cgImage = CGImage(
+                width: width,
+                height: height,
+                bitsPerComponent: bytesPerPixel * 8,
+                bitsPerPixel: bytesPerPixel * 8,
+                bytesPerRow: bytesPerPixel * width,
+                space: colorSpace,
+                bitmapInfo: bitmapInfo,
+                provider: provider,
+                decode: nil,
+                shouldInterpolate: false,
+                intent: CGColorRenderingIntent.defaultIntent
+            )!
+            
+            return try body(cgImage)
+        }
+    }
 }
     
 #endif

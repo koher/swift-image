@@ -198,6 +198,15 @@
                 bitmapInfo: Image<${type}>.bitmapInfo
             )
         }
+
+        public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+            return try Image.withGeneratedCGImage(
+                image: self,
+                colorSpace: Image<${type}>.colorSpace,
+                bitmapInfo: Image<${type}>.bitmapInfo,
+                body: body
+            )
+        }
     }
 % end
 %

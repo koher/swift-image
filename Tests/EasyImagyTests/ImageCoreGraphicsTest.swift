@@ -95,6 +95,28 @@ import EasyImagy
                 XCTAssertEqual(restored, image)
             }
         }
+        
+        func testWithCGImage() {
+            let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            
+            image.withCGImage { cgImage in
+                let restored = Image<UInt8>(cgImage: cgImage)
+                
+                XCTAssertEqual(restored.width, 3)
+                XCTAssertEqual(restored.height, 2)
+                
+                XCTAssertEqual(restored[0, 0], 1)
+                XCTAssertEqual(restored[1, 0], 2)
+                XCTAssertEqual(restored[2, 0], 3)
+                
+                XCTAssertEqual(restored[0, 1], 4)
+                XCTAssertEqual(restored[1, 1], 5)
+                XCTAssertEqual(restored[2, 1], 6)
+            }
+        }
     }
 
 #endif

@@ -332,6 +332,15 @@
                 bitmapInfo: Image<UInt8>.bitmapInfo
             )
         }
+
+        public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+            return try Image.withGeneratedCGImage(
+                image: self,
+                colorSpace: Image<UInt8>.colorSpace,
+                bitmapInfo: Image<UInt8>.bitmapInfo,
+                body: body
+            )
+        }
     }
     
     extension Image where Pixel == UInt16 {
@@ -373,6 +382,15 @@
                 bitmapInfo: Image<UInt16>.bitmapInfo
             )
         }
+
+        public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+            return try Image.withGeneratedCGImage(
+                image: self,
+                colorSpace: Image<UInt16>.colorSpace,
+                bitmapInfo: Image<UInt16>.bitmapInfo,
+                body: body
+            )
+        }
     }
     
     extension Image where Pixel == UInt32 {
@@ -412,6 +430,15 @@
                 image: self,
                 colorSpace: Image<UInt32>.colorSpace,
                 bitmapInfo: Image<UInt32>.bitmapInfo
+            )
+        }
+
+        public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+            return try Image.withGeneratedCGImage(
+                image: self,
+                colorSpace: Image<UInt32>.colorSpace,
+                bitmapInfo: Image<UInt32>.bitmapInfo,
+                body: body
             )
         }
     }
