@@ -48,11 +48,10 @@ extension Image {
 % end
     public mutating func update(_ body: (inout Pixel) throws -> ()) rethrows {
         let count = self.count
+        guard count > 0 else { return }
         try pixels.withUnsafeMutableBufferPointer {
-            var pointer = $0.baseAddress!
-            for _ in 0..<count {
+            for pointer in $0.baseAddress! ..< $0.baseAddress! + count {
                 try body(&pointer.pointee)
-                pointer += 1
             }
         }
     }
