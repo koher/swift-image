@@ -1421,7 +1421,8 @@ extension Image {
     @_specialize(exported: true, where Pixel == Double)
     @_specialize(exported: true, where Pixel == Bool)
     public mutating func update(_ body: (inout Pixel) throws -> ()) rethrows {
-        pixels.withUnsafeMutableBufferPointer {
+        let count = self.count
+        try pixels.withUnsafeMutableBufferPointer {
             var pointer = $0.baseAddress!
             for _ in 0..<count {
                 try body(&pointer.pointee)
