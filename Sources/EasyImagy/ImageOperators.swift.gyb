@@ -1,0 +1,282 @@
+% types = [
+%   'Numeric',
+%   'SignedNumeric',
+%   'BinaryInteger',
+%   'FixedWidthInteger',
+%   'FloatingPoint',
+%   'Equatable',
+%   'Comparable',
+%   'Bool',
+%   'RGBA<Int>',
+%   'RGBA<Int8>',
+%   'RGBA<Int16>',
+%   'RGBA<Int32>',
+%   'RGBA<Int64>',
+%   'RGBA<UInt>',
+%   'RGBA<UInt8>',
+%   'RGBA<UInt16>',
+%   'RGBA<UInt32>',
+%   'RGBA<UInt64>',
+%   'RGBA<Float>',
+%   'RGBA<Double>',
+%   'RGBA<Bool>',
+% ]
+% concrete_types = set([
+%   'Bool',
+%   'RGBA<Int>',
+%   'RGBA<Int8>',
+%   'RGBA<Int16>',
+%   'RGBA<Int32>',
+%   'RGBA<Int64>',
+%   'RGBA<UInt>',
+%   'RGBA<UInt8>',
+%   'RGBA<UInt16>',
+%   'RGBA<UInt32>',
+%   'RGBA<UInt64>',
+%   'RGBA<Float>',
+%   'RGBA<Double>',
+%   'RGBA<Bool>',
+% ])
+% type_to_operators = {
+%   'Numeric': ['+', '-', '*'],
+%   'SignedNumeric': [],
+%   'BinaryInteger': ['/', '%', '&', '|', '^', '<<', '>>'],
+%   'FixedWidthInteger': ['&+', '&-', '&*', '&<<', '&>>'],
+%   'FloatingPoint': ['/'],
+%   'Equatable': [],
+%   'Comparable': [],
+%   'Bool': ['&&', '||'],
+%   'RGBA<Int>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<Int8>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<Int16>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<Int32>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<Int64>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<UInt>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<UInt8>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<UInt16>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<UInt32>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<UInt64>': ['+', '-', '*', '/', '%', '&', '|', '^', '<<', '>>', '&+', '&-', '&*', '&<<', '&>>'],
+%   'RGBA<Float>': ['+', '-', '*', '/'],
+%   'RGBA<Double>': ['+', '-', '*', '/'],
+%   'RGBA<Bool>': ['&&', '||'],
+% }
+% type_to_compound_assignment_operators = {
+%   'Numeric': ['+=', '-=', '*='],
+%   'SignedNumeric': [],
+%   'BinaryInteger': ['/=', '%=', '&=', '|=', '^=', '<<=', '>>='],
+%   'FixedWidthInteger': ['&<<=', '&>>='],
+%   'FloatingPoint': ['/='],
+%   'Equatable': [],
+%   'Comparable': [],
+%   'Bool': [],
+%   'RGBA<Int>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<Int8>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<Int16>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<Int32>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<Int64>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<UInt>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<UInt8>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<UInt16>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<UInt32>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<UInt64>': ['+=', '-=', '*=', '/=', '%=', '&=', '|=', '^=', '<<=', '>>=', '&<<=', '&>>='],
+%   'RGBA<Float>': ['+=', '-=', '*=', '/='],
+%   'RGBA<Double>': ['+=', '-=', '*=', '/='],
+%   'RGBA<Bool>': [],
+% }
+% type_to_equality_operators = {
+%   'Numeric': [],
+%   'SignedNumeric': [],
+%   'BinaryInteger': [],
+%   'FixedWidthInteger': [],
+%   'FloatingPoint': [],
+%   'Equatable': ['==', '!='],
+%   'Comparable': [],
+%   'Bool': [],
+%   'RGBA<Int>': ['==', '!='],
+%   'RGBA<Int8>': ['==', '!='],
+%   'RGBA<Int16>': ['==', '!='],
+%   'RGBA<Int32>': ['==', '!='],
+%   'RGBA<Int64>': ['==', '!='],
+%   'RGBA<UInt>': ['==', '!='],
+%   'RGBA<UInt8>': ['==', '!='],
+%   'RGBA<UInt16>': ['==', '!='],
+%   'RGBA<UInt32>': ['==', '!='],
+%   'RGBA<UInt64>': ['==', '!='],
+%   'RGBA<Float>': ['==', '!='],
+%   'RGBA<Double>': ['==', '!='],
+%   'RGBA<Bool>': ['==', '!='],
+% }
+% type_to_comparison_operators = {
+%   'Numeric': [],
+%   'SignedNumeric': [],
+%   'BinaryInteger': [],
+%   'FixedWidthInteger': [],
+%   'FloatingPoint': [],
+%   'Equatable': [],
+%   'Comparable': ['<', '<=', '>', '>='],
+%   'Bool': [],
+%   'RGBA<Int>': ['<', '<=', '>', '>='],
+%   'RGBA<Int8>': ['<', '<=', '>', '>='],
+%   'RGBA<Int16>': ['<', '<=', '>', '>='],
+%   'RGBA<Int32>': ['<', '<=', '>', '>='],
+%   'RGBA<Int64>': ['<', '<=', '>', '>='],
+%   'RGBA<UInt>': ['<', '<=', '>', '>='],
+%   'RGBA<UInt8>': ['<', '<=', '>', '>='],
+%   'RGBA<UInt16>': ['<', '<=', '>', '>='],
+%   'RGBA<UInt32>': ['<', '<=', '>', '>='],
+%   'RGBA<UInt64>': ['<', '<=', '>', '>='],
+%   'RGBA<Float>': ['<', '<=', '>', '>='],
+%   'RGBA<Double>': ['<', '<=', '>', '>='],
+%   'RGBA<Bool>': [],
+% }
+% type_to_prefix_operators = {
+%   'Numeric': ['+'],
+%   'SignedNumeric': ['-'],
+%   'BinaryInteger': [],
+%   'FixedWidthInteger': [],
+%   'FloatingPoint': [],
+%   'Equatable': [],
+%   'Comparable': [],
+%   'Bool': ['!'],
+%   'RGBA<Int>': ['+', '-'],
+%   'RGBA<Int8>': ['+', '-'],
+%   'RGBA<Int16>': ['+', '-'],
+%   'RGBA<Int32>': ['+', '-'],
+%   'RGBA<Int64>': ['+', '-'],
+%   'RGBA<UInt>': ['+'],
+%   'RGBA<UInt8>': ['+'],
+%   'RGBA<UInt16>': ['+'],
+%   'RGBA<UInt32>': ['+'],
+%   'RGBA<UInt64>': ['+'],
+%   'RGBA<Float>': ['+', '-'],
+%   'RGBA<Double>': ['+', '-'],
+%   'RGBA<Bool>': [],
+% }
+% type_to_concrete_types = {
+%   'Numeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double'],
+%   'SignedNumeric': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'Float', 'Double'],
+%   'BinaryInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
+%   'FixedWidthInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
+%   'FloatingPoint': ['Float', 'Double'],
+%   'Equatable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Bool'],
+%   'Comparable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double'],
+%   'Bool': [],
+%   'RGBA<Int>': [],
+%   'RGBA<Int8>': [],
+%   'RGBA<Int16>': [],
+%   'RGBA<Int32>': [],
+%   'RGBA<Int64>': [],
+%   'RGBA<UInt>': [],
+%   'RGBA<UInt8>': [],
+%   'RGBA<UInt16>': [],
+%   'RGBA<UInt32>': [],
+%   'RGBA<UInt64>': [],
+%   'RGBA<Float>': [],
+%   'RGBA<Double>': [],
+%   'RGBA<Bool>': [],
+% }
+% for i, type in enumerate(types):
+%   if i > 0:
+
+%   end
+%   if type == 'Equatable':
+// FIXME: with conditional conformance
+%   end
+extension ImageProtocol where Element ${'==' if type in concrete_types else ':'} ${type} {
+%   first = True
+%   for i, operator in enumerate(type_to_operators[type]):
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+%     end
+    public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
+        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        let pixels = zip(lhs, rhs).map { $0 ${operator} $1 }
+        return Image(width: lhs.width, height: lhs.height, pixels: pixels)
+    }
+%   end
+%
+%   for i, operator in enumerate(type_to_compound_assignment_operators[type]):
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+%     end
+    public static func ${operator}<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
+        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
+            for (x1, x2) in zip(lhs.xRange, rhs.xRange) {
+                lhs[x1, y1] ${operator} rhs[x2, y2]
+            }
+        }
+    }
+%   end
+%
+%   for operator in type_to_equality_operators[type]:
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+%     end
+%     initial, and_or, different_size,  = ('true', '&&', 'false') if operator == '==' else ('false', '||', 'true')
+    public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Bool where I.Pixel == Pixel {
+        guard lhs.width == rhs.width && lhs.height == rhs.height else { return ${different_size} }
+        return zip(lhs, rhs).reduce(${initial}) { $0 ${and_or} $1.0 ${operator} $1.1 }
+    }
+%   end
+%
+%   for operator in type_to_comparison_operators[type]:
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
+%     end
+%     return_pixel_type = 'RGBA<Bool>' if type.startswith('RGBA<') else 'Bool'
+    public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<${return_pixel_type}> where I.Pixel == Pixel {
+        precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
+        let pixels = zip(lhs, rhs).map { $0 ${operator} $1 }
+        return Image<${return_pixel_type}>(width: lhs.width, height: lhs.height, pixels: pixels)
+    }
+%   end
+%
+%   for operator in type_to_prefix_operators[type]:
+%     if first:
+%       first = False
+%     else:
+
+%     end
+%     for concrete_type in type_to_concrete_types[type]:
+    @_specialize(exported: true, where Self == Image<${concrete_type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>)
+%     end
+    prefix public static func ${operator}(a: Self) -> Image<Pixel> {
+        return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { ${operator}$0 })
+    }
+%   end
+}
+% end

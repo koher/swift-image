@@ -1,0 +1,139 @@
+% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
+% type_to_max_value = {
+%   'UInt8'  : 'UInt8.max',
+%   'UInt16' : 'UInt16.max',
+%   'UInt32' : 'UInt32.max',
+%   'UInt64' : 'UInt64.max',
+%   'Int'    : '255',
+%   'Float'  : '1',
+%   'Double' : '1',
+% }
+% summables = {
+%   'UInt8' : 'Int',
+%   'UInt16': 'Int',
+%   'UInt32': 'UInt64',
+% }
+% int_convertibles = {'UInt8', 'UInt16'}
+%
+% for i, type in enumerate(types):
+%   if i > 0:
+
+%   end
+extension RGBA where Channel == ${type} {
+    public init(red: ${type}, green: ${type}, blue: ${type}) {
+        self.init(red: red, green: green, blue: blue, alpha: ${type_to_max_value[type]})
+    }
+    
+    public init(gray: ${type}) {
+        self.init(gray: gray, alpha: ${type_to_max_value[type]})
+    }
+
+    public static var red: RGBA<${type}> {
+        return RGBA<${type}>(red: ${type_to_max_value[type]}, green: 0, blue: 0)
+    }
+    
+    public static var green: RGBA<${type}> {
+        return RGBA<${type}>(red: 0, green: ${type_to_max_value[type]}, blue: 0)
+    }
+    
+    public static var blue: RGBA<${type}> {
+        return RGBA<${type}>(red: 0, green: 0, blue: ${type_to_max_value[type]})
+    }
+    
+    public static var black: RGBA<${type}> {
+        return RGBA<${type}>(gray: 0)
+    }
+    
+    public static var white: RGBA<${type}> {
+        return RGBA<${type}>(gray: ${type_to_max_value[type]})
+    }
+    
+    public static var transparent: RGBA<${type}> {
+        return RGBA<${type}>(gray: 0, alpha: 0)
+    }
+
+    public var gray: ${type} {
+%   if type == 'UInt64':
+        return (red / 3 + green / 3 + blue / 3) + (red % 3 + green % 3 + blue % 3) / 3
+%   elif type in summables:
+%     summable = summables[type]
+        return ${type}((${summable}(red) + ${summable}(green) + ${summable}(blue)) / 3)
+%   else:
+        return (red + green + blue) / 3
+%   end
+    }
+%   if type in int_convertibles:
+    
+    public init(red: Int, green: Int, blue: Int, alpha: Int) {
+        self.init(red: ${type}(red), green: ${type}(green), blue: ${type}(blue), alpha: ${type}(alpha))
+    }
+    
+    public init(red: Int, green: Int, blue: Int) {
+        self.init(red: ${type}(red), green: ${type}(green), blue: ${type}(blue))
+    }
+    
+    public init(gray: Int) {
+        self.init(gray: ${type}(gray))
+    }
+    
+    public init(gray: Int, alpha: Int) {
+        self.init(gray: ${type}(gray), alpha: ${type}(alpha))
+    }
+
+    public var redInt: Int {
+        get {
+            return Int(red)
+        }
+        set {
+            red = ${type}(newValue)
+        }
+    }
+    
+    public var greenInt: Int {
+        get {
+            return Int(green)
+        }
+        set {
+            green = ${type}(newValue)
+        }
+    }
+    
+    public var blueInt: Int {
+        get {
+            return Int(blue)
+        }
+        set {
+            blue = ${type}(newValue)
+        }
+    }
+    
+    public var alphaInt: Int {
+        get {
+            return Int(alpha)
+        }
+        set {
+            alpha = ${type}(newValue)
+        }
+    }
+
+    public var grayInt: Int {
+        return (redInt + greenInt + blueInt) / 3
+    }
+%   end
+}
+% end
+%
+% numeric_types = ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
+% for type in numeric_types:
+
+extension RGBA where Channel == ${type} {
+%   for i, from_type in enumerate(numeric_types):
+%     if i > 0:
+
+%     end
+    public init(_ rgba: RGBA<${from_type}>) {
+        self.init(red: ${type}(rgba.red), green: ${type}(rgba.green), blue: ${type}(rgba.blue), alpha: ${type}(rgba.alpha))
+    }
+%   end
+}
+% end

@@ -1,77 +1,65 @@
-public struct ImageSlice<Pixel> {
-    internal let image: Image<Pixel>
-    internal let xRange: CountableRange<Int>
-    internal let yRange: CountableRange<Int>
+public struct ImageSlice<Pixel> : ImageProtocol {
+    private var image: AnyImage<Pixel>
+    public let xRange: CountableRange<Int>
+    public let yRange: CountableRange<Int>
     
-    public init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
-        precondition((0..<image.width).isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition((0..<image.height).isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
-        self.image = image
+    internal init<I : ImageProtocol>(image: I, xRange: CountableRange<Int>, yRange: CountableRange<Int>) where I.Pixel == Pixel {
+        precondition(image.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
+        precondition(image.yRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
+        self.image = AnyImage<Pixel>(image)
         self.xRange = xRange
         self.yRange = yRange
     }
-    
-    public var width: Int {
-        return xRange.count
+
+    public init(width: Int, height: Int, pixels: [Pixel]) {
+        self.init(image: Image<Pixel>(width: width, height: height, pixels: pixels), xRange: 0..<width, yRange: 0..<height)
     }
     
-    public var height: Int {
-        return yRange.count
+    public subscript(x: Int, y: Int) -> Pixel {
+        get {
+            precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
+            precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
+            return image[x, y]
+        }
+        
+        set {
+            precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
+            precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
+            image[x, y] = newValue
+        }
     }
     
-    public var pixels: [Pixel] {
-        return map { $0 }
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+        precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
+        precondition(self.xRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
+        return image[xRange, yRange]
     }
 }
 
 extension ImageSlice {
-    public var count: Int {
-        return width * height
-    }
-    
-    public var validCount: Int {
-        return getValidCount(xRange, maxCount: image.width) * getValidCount(yRange, maxCount: image.height)
+    public init(_ image: Image<Pixel>) {
+        self.init(image: image, xRange: image.xRange, yRange: image.yRange)
     }
 }
 
-extension ImageSlice { // Subscripts (Index)
-    public subscript(x: Int, y: Int) -> Pixel {
-        precondition(xRange.contains(x), "`x` is out of bounds: \(x)")
-        precondition(yRange.contains(y), "`y` is out of bounds: \(y)")
-        return image[x, y]
+extension ImageSlice {
+    public func makeIterator() -> PixelIterator<Pixel> {
+        return PixelIterator(image: image, xRange: xRange, yRange: yRange)
     }
 }
 
-extension ImageSlice { // safe get
-    public func pixel(_ x: Int, _ y: Int) -> Pixel? {
-        guard xRange.contains(x) else { return nil }
-        guard yRange.contains(y) else { return nil }
-        return image[x, y]
-    }
-}
-
-extension ImageSlice: Sequence {
-    public func makeIterator() -> PixelGenerator<Pixel> {
-        return PixelGenerator(image: image, xRange: validRange(xRange, maxValue: image.width), yRange: validRange(yRange, maxValue: image.height))
-    }
-}
-
-private func validRange(_ range: CountableRange<Int>, maxValue: Int) -> CountableRange<Int> {
-    return max(0, range.lowerBound)..<min(maxValue, range.upperBound)
-}
-
-public struct PixelGenerator<Pixel>: IteratorProtocol {
+public struct PixelIterator<Pixel>: IteratorProtocol {
     public typealias Element = Pixel
     
-    fileprivate let image: Image<Pixel>
+    private let image: AnyImage<Pixel>
     
-    fileprivate let xRange: CountableRange<Int>
-    fileprivate let yRange: CountableRange<Int>
+    private let xRange: CountableRange<Int>
+    private let yRange: CountableRange<Int>
     
-    fileprivate var x: Int
-    fileprivate var y: Int
+    private var x: Int
+    private var y: Int
     
-    init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
+    internal init(image: AnyImage<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
         self.image = image
         
         self.xRange = xRange

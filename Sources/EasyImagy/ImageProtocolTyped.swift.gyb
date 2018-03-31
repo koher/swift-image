@@ -1,0 +1,195 @@
+% channel_types = [
+%   'UInt8',
+%   'UInt16',
+%   'UInt32',
+%   'Int',
+%   'Float',
+%   'Double',
+% ]
+% types = [f'RGBA<{t}>' for t in channel_types] + channel_types
+%
+import Foundation
+%
+% for i, type in enumerate(types):
+%   if i > 0:
+
+%   end
+extension ImageProtocol where Element == ${type} { // Convolution
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == Image<Int>)
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == ImageSlice<Int>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == Image<Int>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == ImageSlice<Int>)
+    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edge) -> Image<${type}> where Kernel.Pixel == Int {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
+    }
+
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == Image<Float>)
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == ImageSlice<Float>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == Image<Float>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == ImageSlice<Float>)
+    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edge) -> Image<${type}> where Kernel.Pixel == Float {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
+    }
+
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == Image<Double>)
+    @_specialize(exported: true, where Self == Image<${type}>, Kernel == ImageSlice<Double>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == Image<Double>)
+    @_specialize(exported: true, where Self == ImageSlice<${type}>, Kernel == ImageSlice<Double>)
+    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<${type}> = .edge) -> Image<${type}> where Kernel.Pixel == Double {
+        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
+    }
+}
+% end
+%
+% for i, type in enumerate(types):
+
+extension ImageProtocol where Element == ${type} { // Interpolation
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
+    public subscript(x: Double, y: Double) -> ${type} {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
+    }
+
+    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod) -> ${type} {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
+        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
+    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
+        switch interpolationMethod {
+            case .nearestNeighbor:
+                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            case .bilinear:
+                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+        }
+    }
+}
+% end
+%
+% for i, type in enumerate(types):
+
+extension ImageProtocol where Element == ${type} { // Resizing
+%   for j, explicit_interpolation in enumerate([False, True]):
+%     if j > 0:
+
+%     end
+    public func resizedTo(width: Int, height: Int${', interpolatedBy interpolationMethod: InterpolationMethod' if explicit_interpolation else ''}) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+%     if explicit_interpolation:
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+%     end
+%     for has_offset in [False, True]:
+%       if not has_offset:
+        if ox == 0 && oy == 0 {
+%       else:
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+%       end
+            return resizedTo(
+                width: width,
+                height: height,
+%     if explicit_interpolation:
+                isAntialiased: isAntialiased,
+%     else:
+                isAntialiased: true,
+%     end
+                toSummable: { $0.summableI },
+                zero: Pixel.summableIZero,
+                sum: +,
+                quotient: { a, b in Pixel.init(summableI: Pixel.quotientI(a, b)) },
+                pixelAt: { x, y in self[${'dox + x, doy + y' if has_offset else 'x, y'}${', interpolatedBy: interpolationMethod' if explicit_interpolation else ''}] },
+                extrapolatedPixelAt: { x, y in self[${'dox + x, doy + y' if has_offset else 'x, y'}${', interpolatedBy: interpolationMethod' if explicit_interpolation else ''}, extrapolatedBy: .edge] }
+            )
+%     end
+        }
+    }
+%   end
+}
+% end
+%
+% for i, type in enumerate(types):
+
+extension ImageProtocol where Element == ${type} { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
+    public func rotated(by angle: Double) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: .filling(.selfZero)] }
+    }
+    
+    public func rotated(byDegrees angle: Double) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi)
+    }
+
+    public func rotated(by angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: .bilinear, extrapolatedBy: extrapolationMethod] }
+    }
+    
+    public func rotated(byDegrees angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi, extrapolatedBy: extrapolationMethod)
+    }
+
+    public func rotated(by angle: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolatedBy: interpolationMethod, extrapolatedBy: extrapolationMethod] }
+    }
+    
+    public func rotated(byDegrees angle: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi, interpolatedBy: interpolationMethod, extrapolatedBy: extrapolationMethod)
+    }
+}
+% end
+
+extension ImageProtocol where Element == RGBA<Bool> { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
+    public func rotated(by angle: Double) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: .filling(RGBA<Bool>(red: false, green: false, blue: false, alpha: false))] }
+    }
+    
+    public func rotated(byDegrees angle: Double) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi)
+    }
+}
+
+extension ImageProtocol where Element == Bool { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+
+    public func rotated(by angle: Double) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: .filling(false)] }
+    }
+    
+    public func rotated(byDegrees angle: Double) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi)
+    }
+}

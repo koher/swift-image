@@ -1,0 +1,59 @@
+% image_types = ['Image', 'ImageSlice']
+% basic_channel_types = [
+%   'Int',
+%   'Int8',
+%   'Int16',
+%   'Int32',
+%   'Int64',
+%   'UInt',
+%   'UInt8',
+%   'UInt16',
+%   'UInt32',
+%   'UInt64',
+%   'Float',
+%   'Double',
+%   'Bool',
+% ]
+% basic_types = [f'RGBA<{t}>' for t in basic_channel_types] + basic_channel_types
+extension ImageProtocol {
+% for image_type in image_types:
+%   for type in basic_types:
+%     for target_type in basic_types:
+    @_specialize(exported: true, where Self == ${image_type}<${type}>, T == ${target_type})
+%     end
+%   end
+% end
+    public func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T> {
+        return Image<T>(width: width, height: height, pixels: try map(transform))
+    }
+
+    // No specialization for `Image` because it has special implementation
+% for type in basic_types:
+    @_specialize(exported: true, where Self == ImageSlice<${type}>)
+% end
+    public mutating func update(_ body: (inout Pixel) throws -> ()) rethrows {
+        for y in yRange {
+            for x in xRange {
+                try body(&self[x, y])
+            }
+        }
+    }
+}
+
+// Special implementation for `Image` for performance
+#if swift(>=4.1)
+extension Image {
+% for type in basic_types:
+    @_specialize(exported: true, where Pixel == ${type})
+% end
+    public mutating func update(_ body: (inout Pixel) throws -> ()) rethrows {
+        let count = self.count
+        guard count > 0 else { return }
+        try pixels.withUnsafeMutableBufferPointer {
+            for pointer in $0.baseAddress! ..< $0.baseAddress! + count {
+                try body(&pointer.pointee)
+            }
+        }
+    }
+}
+#endif
