@@ -476,8 +476,7 @@ extension RGBA where Channel : FloatingPoint {
     }
 }
 
-// FIXME: with conditional conformance
-extension RGBA where Channel : Equatable {
+extension RGBA : Equatable where Channel : Equatable {
     @_specialize(exported: true, where Channel == Int)
     @_specialize(exported: true, where Channel == Int8)
     @_specialize(exported: true, where Channel == Int16)

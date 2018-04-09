@@ -75,10 +75,7 @@
 %   if i > 0:
 
 %   end
-%   if type == 'Equatable':
-// FIXME: with conditional conformance
-%   end
-extension RGBA where Channel ${'==' if type in concrete_types else ':'} ${type} {
+extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'==' if type in concrete_types else ':'} ${type} {
 %   first = True
 %   for operator in type_to_operators[type]:
 %     if first:
