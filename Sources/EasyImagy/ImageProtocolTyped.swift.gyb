@@ -43,38 +43,6 @@ extension ImageProtocol where Element == ${type} { // Convolution
 %
 % for i, type in enumerate(types):
 
-extension ImageProtocol where Element == ${type} { // Interpolation
-    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
-    public subscript(x: Double, y: Double) -> ${type} {
-        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
-    }
-
-    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod) -> ${type} {
-        switch interpolationMethod {
-            case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
-            case .bilinear:
-                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1] }
-        }
-    }
-    
-    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
-        return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
-    }
-    
-    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> ${type} {
-        switch interpolationMethod {
-            case .nearestNeighbor:
-                return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
-            case .bilinear:
-                return interpolatedPixelByBilinear(x: x, y: y, toSummable: { $0.summableD }, product: Pixel.productD, sum: +, toOriginal: Pixel.init(summableD:)) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
-        }
-    }
-}
-% end
-%
-% for i, type in enumerate(types):
-
 extension ImageProtocol where Element == ${type} { // Resizing
 %   for j, explicit_interpolation in enumerate([False, True]):
 %     if j > 0:
