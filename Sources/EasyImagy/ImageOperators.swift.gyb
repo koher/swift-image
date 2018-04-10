@@ -21,6 +21,10 @@
 %   'RGBA<Double>',
 %   'RGBA<Bool>',
 % ]
+% image_types = [
+%   'Image',
+%   'ImageSlice',
+% ]
 % concrete_types = set([
 %   'Bool',
 %   'RGBA<Int>',
@@ -180,7 +184,9 @@
 
 %   end
 %   if type == 'Equatable':
-// FIXME: with conditional conformance
+%     for image_type in image_types:
+extension ${image_type} : Equatable where Pixel : Equatable {}
+%     end
 %   end
 extension ImageProtocol where Element ${'==' if type in concrete_types else ':'} ${type} {
 %   first = True
