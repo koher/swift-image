@@ -1,14 +1,14 @@
 import XCTest
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(UIKit)
     import UIKit
 #endif
-#if os(macOS)
+#if canImport(AppKit)
     import AppKit
 #endif
 import EasyImagy
 
 class EasyImagySample: XCTestCase {
-    #if os(iOS) || os(watchOS) || os(tvOS)
+    #if canImport(UIKit)
     func testSample() {
         /**/ let x = 0
         /**/ let y = 0
@@ -53,7 +53,7 @@ class EasyImagySample: XCTestCase {
     #endif
     
     func testInitialization() {
-        #if os(iOS) || os(watchOS) || os(tvOS)
+        #if canImport(UIKit)
         do {
             /**/ if never() {
             let image = Image<RGBA<UInt8>>(named: "ImageName")!
@@ -173,7 +173,7 @@ class EasyImagySample: XCTestCase {
         
         /**/ _ = cropped.count
     }
-    #if os(iOS) || os(watchOS) || os(tvOS)
+    #if canImport(UIKit)
     func testWithUIImage() {
         /**/ if never() {
             let imageView = UIImageView()
@@ -186,7 +186,7 @@ class EasyImagySample: XCTestCase {
         /**/ }
     }
     #endif
-    #if os(macOS)
+    #if canImport(AppKit)
     func testWithNSImage() {
         /**/ if never() {
             let imageView = NSImageView()

@@ -1,5 +1,5 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if canImport(UIKit)
 import Foundation
 import UIKit
 #if os(iOS) || os(tvOS)

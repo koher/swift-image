@@ -1,4 +1,4 @@
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if canImport(UIKit)
     import XCTest
     import EasyImagy
     import CoreGraphics

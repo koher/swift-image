@@ -8,7 +8,7 @@ extension Image {
     }
 }
 
-#if os(iOS) || os(OSX) || os(watchOS) || os(tvOS)
+#if canImport(CoreGraphics)
 
 import CoreGraphics
 

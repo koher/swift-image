@@ -1,4 +1,4 @@
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if canImport(UIKit)
 import Foundation
 import UIKit
 #if os(iOS) || os(tvOS)
