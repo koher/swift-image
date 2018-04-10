@@ -2,19 +2,41 @@ import Foundation
 
 extension ImageProtocol {
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
+        if width == 0 || height == 0 {
+            return Image<Pixel>(width: width, height: height, pixels: [])
+        }
+        
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        if ox == 0 && oy == 0 {
+            return resizedByInterpolationTo(width: width, height: height) { x, y in self[Int(round(x)), Int(round(y)), extrapolatedBy: .edge] }
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedByInterpolationTo(width: width, height: height) { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolatedBy: .edge] }
+        }
+    }
+    
+    private func resizedByInterpolationTo(width: Int, height: Int, pixelAt: (Double, Double) -> Pixel) -> Image<Pixel> {
+        let sx = Double(xRange.count) / Double(width)
+        let sy = Double(yRange.count) / Double(height)
+        return Image<Pixel>(width: width, height: height, pixelAt: { x, y in
+            pixelAt((Double(x) + 0.5) * sx - 0.5, (Double(y) + 0.5) * sy - 0.5)
+        })
+    }
+}
+
+extension ImageProtocol where Pixel : _Numeric {
+    public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
         if ox == 0 && oy == 0 {
             return resizedTo(
                 width: width,
                 height: height,
-                isAntialiased: false,
-                toSummable: { _ -> Pixel in fatalError("Never reaches here.") },
-                zero: nil,
-                sum: { _, _ -> Pixel in fatalError("Never reaches here.") },
-                quotient: { _, _ -> Pixel in fatalError("Never reaches here.") },
-                pixelAt: { x, y in self[Int(round(x)), Int(round(y))] },
-                extrapolatedPixelAt: { x, y in self[Int(round(x)), Int(round(y)), extrapolatedBy: .edge] }
+                isAntialiased: true,
+                pixelAt: { x, y in self[x, y] },
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edge] }
             )
         } else {
             let dox = Double(ox)
@@ -22,25 +44,47 @@ extension ImageProtocol {
             return resizedTo(
                 width: width,
                 height: height,
-                isAntialiased: false,
-                toSummable: { _ -> Pixel in fatalError("Never reaches here.") },
-                zero: nil,
-                sum: { _, _ -> Pixel in fatalError("Never reaches here.") },
-                quotient: { _, _ -> Pixel in fatalError("Never reaches here.") },
-                pixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y))] },
-                extrapolatedPixelAt: { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolatedBy: .edge] }
+                isAntialiased: true,
+                pixelAt: { x, y in self[dox + x, doy + y] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edge] }
             )
         }
     }
     
-    internal func resizedTo<Summable>(
+    public func resizedTo(width: Int, height: Int, interpolatedBy interpolationMethod: InterpolationMethod) -> Image<Pixel> {
+        let ox = xRange.lowerBound
+        let oy = yRange.lowerBound
+        let isAntialiased: Bool
+        if case .nearestNeighbor = interpolationMethod {
+            isAntialiased = false
+        } else {
+            isAntialiased = true
+        }
+        if ox == 0 && oy == 0 {
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edge] }
+            )
+        } else {
+            let dox = Double(ox)
+            let doy = Double(oy)
+            return resizedTo(
+                width: width,
+                height: height,
+                isAntialiased: isAntialiased,
+                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edge] }
+            )
+        }
+    }
+    
+    private func resizedTo(
         width: Int,
         height: Int,
         isAntialiased: Bool,
-        toSummable: (Pixel) -> Summable,
-        zero: Summable?,
-        sum: (Summable, Summable) -> Summable,
-        quotient: (Summable, Int) -> Pixel,
         pixelAt: (Double, Double) -> Pixel,
         extrapolatedPixelAt: (Double, Double) -> Pixel
     ) -> Image<Pixel> {
@@ -50,7 +94,7 @@ extension ImageProtocol {
         
         let xRange = self.xRange
         let yRange = self.yRange
-
+        
         if width == xRange.count && height == yRange.count {
             if let image = self as? Image<Pixel> {
                 return image
@@ -77,30 +121,11 @@ extension ImageProtocol {
         }
         return multiple.resizedByMeanTo(
             width: width,
-            height: height,
-            toSummable: toSummable,
-            zero: zero!,
-            sum: sum,
-            quotient: quotient
+            height: height
         )
     }
     
-    private func resizedByInterpolationTo(width: Int, height: Int, pixelAt: (Double, Double) -> Pixel) -> Image<Pixel> {
-        let sx = Double(xRange.count) / Double(width)
-        let sy = Double(yRange.count) / Double(height)
-        return Image<Pixel>(width: width, height: height, pixelAt: { x, y in
-            pixelAt((Double(x) + 0.5) * sx - 0.5, (Double(y) + 0.5) * sy - 0.5)
-        })
-    }
-    
-    private func resizedByMeanTo<Summable>(
-        width: Int,
-        height: Int,
-        toSummable: (Pixel) -> Summable,
-        zero: Summable,
-        sum: (Summable, Summable) -> Summable,
-        quotient: (Summable, Int) -> Pixel
-    ) -> Image<Pixel> {
+    private func resizedByMeanTo(width: Int, height: Int) -> Image<Pixel> {
         let xRange = self.xRange
         let yRange = self.yRange
         
@@ -117,13 +142,13 @@ extension ImageProtocol {
             for x in 0..<width {
                 let bx = x * sx
                 
-                var pixel = zero
+                var pixel = Pixel.summableIZero
                 for dy in 0..<sy {
                     for dx in 0..<sx {
-                        pixel = sum(pixel, toSummable(self[bx + dx, by + dy]))
+                        pixel = Pixel.IntType._sum(pixel, self[bx + dx, by + dy].summableI)
                     }
                 }
-                pixels.append(quotient(pixel, n))
+                pixels.append(Pixel.init(summableI: Pixel.quotientI(pixel, n)))
             }
         }
         
