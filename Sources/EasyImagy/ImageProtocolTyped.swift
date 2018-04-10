@@ -1,315 +1,4 @@
 import Foundation
-extension ImageProtocol where Element == RGBA<UInt8> { // Convolution
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt8>> = .edge) -> Image<RGBA<UInt8>> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt8>> = .edge) -> Image<RGBA<UInt8>> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt8>> = .edge) -> Image<RGBA<UInt8>> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == RGBA<UInt16> { // Convolution
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt16>> = .edge) -> Image<RGBA<UInt16>> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt16>> = .edge) -> Image<RGBA<UInt16>> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt16>> = .edge) -> Image<RGBA<UInt16>> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == RGBA<UInt32> { // Convolution
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt32>> = .edge) -> Image<RGBA<UInt32>> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt32>> = .edge) -> Image<RGBA<UInt32>> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<UInt32>> = .edge) -> Image<RGBA<UInt32>> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == RGBA<Int> { // Convolution
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Int>> = .edge) -> Image<RGBA<Int>> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Int>> = .edge) -> Image<RGBA<Int>> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Int>> = .edge) -> Image<RGBA<Int>> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == RGBA<Float> { // Convolution
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float>> = .edge) -> Image<RGBA<Float>> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float>> = .edge) -> Image<RGBA<Float>> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Float>> = .edge) -> Image<RGBA<Float>> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == RGBA<Double> { // Convolution
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Double>> = .edge) -> Image<RGBA<Double>> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Double>> = .edge) -> Image<RGBA<Double>> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<RGBA<Double>> = .edge) -> Image<RGBA<Double>> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == UInt8 { // Convolution
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edge) -> Image<UInt8> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edge) -> Image<UInt8> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt8> = .edge) -> Image<UInt8> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == UInt16 { // Convolution
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt16> = .edge) -> Image<UInt16> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt16> = .edge) -> Image<UInt16> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt16> = .edge) -> Image<UInt16> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == UInt32 { // Convolution
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt32> = .edge) -> Image<UInt32> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt32> = .edge) -> Image<UInt32> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<UInt32> = .edge) -> Image<UInt32> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == Int { // Convolution
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Int> = .edge) -> Image<Int> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Int> = .edge) -> Image<Int> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Int> = .edge) -> Image<Int> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == Float { // Convolution
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float> = .edge) -> Image<Float> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float> = .edge) -> Image<Float> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Float> = .edge) -> Image<Float> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
-
-extension ImageProtocol where Element == Double { // Convolution
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == ImageSlice<Int>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edge) -> Image<Double> where Kernel.Pixel == Int {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableI }, product: Pixel.productI, zero: Pixel.summableIZero, sum: +, toOriginal: Pixel.init(summableI:))
-    }
-
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == ImageSlice<Float>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edge) -> Image<Double> where Kernel.Pixel == Float {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableF }, product: Pixel.productF, zero: Pixel.summableFZero, sum: +, toOriginal: Pixel.init(summableF:))
-    }
-
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == ImageSlice<Double>)
-    public func convoluted<Kernel : ImageProtocol>(with kernel: Kernel, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Double> = .edge) -> Image<Double> where Kernel.Pixel == Double {
-        return self.convoluted(with: kernel, extrapolatedBy: extrapolationMethod, toSummable: { $0.summableD }, product: Pixel.productD, zero: Pixel.summableDZero, sum: +, toOriginal: Pixel.init(summableD:))
-    }
-}
 
 extension ImageProtocol where Element == RGBA<UInt8> { // Resizing
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
@@ -382,8 +71,8 @@ extension ImageProtocol where Element == RGBA<UInt8> { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == RGBA<UInt16> { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -454,8 +143,8 @@ extension ImageProtocol where Element == RGBA<UInt16> { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == RGBA<UInt32> { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -526,8 +215,8 @@ extension ImageProtocol where Element == RGBA<UInt32> { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == RGBA<Int> { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -598,8 +287,8 @@ extension ImageProtocol where Element == RGBA<Int> { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == RGBA<Float> { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -670,8 +359,8 @@ extension ImageProtocol where Element == RGBA<Float> { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == RGBA<Double> { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -742,8 +431,8 @@ extension ImageProtocol where Element == RGBA<Double> { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == UInt8 { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -814,8 +503,8 @@ extension ImageProtocol where Element == UInt8 { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == UInt16 { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -886,8 +575,8 @@ extension ImageProtocol where Element == UInt16 { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == UInt32 { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -958,8 +647,8 @@ extension ImageProtocol where Element == UInt32 { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == Int { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -1030,8 +719,8 @@ extension ImageProtocol where Element == Int { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == Float { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
@@ -1102,8 +791,8 @@ extension ImageProtocol where Element == Float { // Resizing
         }
     }
 }
-
 extension ImageProtocol where Element == Double { // Resizing
+
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
