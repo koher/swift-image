@@ -1,9 +1,32 @@
 import Foundation
 
+public protocol _Summable {
+    static func _sum(_ lhs: Self, _ rhs: Self) -> Self
+}
+
+extension Int : _Summable { public static func _sum(_ lhs: Int, _ rhs: Int) -> Int { return lhs + rhs } }
+extension Int64 : _Summable { public static func _sum(_ lhs: Int64, _ rhs: Int64) -> Int64 { return lhs + rhs } }
+extension Float : _Summable { public static func _sum(_ lhs: Float, _ rhs: Float) -> Float { return lhs + rhs } }
+extension Double : _Summable { public static func _sum(_ lhs: Double, _ rhs: Double) -> Double { return lhs + rhs } }
+extension RGBA : _Summable where Channel : _Summable {
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Int64)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func _sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : Channel._sum(lhs.red  , rhs.red),
+            green: Channel._sum(lhs.green, rhs.green),
+            blue : Channel._sum(lhs.blue , rhs.blue),
+            alpha: Channel._sum(lhs.alpha, rhs.alpha)
+        )
+    }
+}
+
 public protocol _Numeric {
-    associatedtype IntType
-    associatedtype FloatType
-    associatedtype DoubleType
+    associatedtype IntType    : _Summable
+    associatedtype FloatType  : _Summable
+    associatedtype DoubleType : _Summable
 
     init(summableI: IntType)
     init(summableF: FloatType)

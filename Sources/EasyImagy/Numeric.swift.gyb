@@ -1,4 +1,5 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
+% summable_types = ['Int', 'Int64', 'Float', 'Double']
 % type_to_summables = {
 %   'UInt8' : ['Int', 'Float', 'Double'],
 %   'UInt16': ['Int', 'Float', 'Double'],
@@ -12,10 +13,31 @@
 %
 import Foundation
 
+public protocol _Summable {
+    static func _sum(_ lhs: Self, _ rhs: Self) -> Self
+}
+
+% for type in summable_types:
+extension ${type} : _Summable { public static func _sum(_ lhs: ${type}, _ rhs: ${type}) -> ${type} { return lhs + rhs } }
+% end
+extension RGBA : _Summable where Channel : _Summable {
+% for type in summable_types:
+    @_specialize(exported: true, where Channel == ${type})
+% end
+    public static func _sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : Channel._sum(lhs.red  , rhs.red),
+            green: Channel._sum(lhs.green, rhs.green),
+            blue : Channel._sum(lhs.blue , rhs.blue),
+            alpha: Channel._sum(lhs.alpha, rhs.alpha)
+        )
+    }
+}
+
 public protocol _Numeric {
-    associatedtype IntType
-    associatedtype FloatType
-    associatedtype DoubleType
+    associatedtype IntType    : _Summable
+    associatedtype FloatType  : _Summable
+    associatedtype DoubleType : _Summable
 
     init(summableI: IntType)
     init(summableF: FloatType)
