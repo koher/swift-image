@@ -1,835 +1,571 @@
 import Foundation
 
-internal func *<T : Numeric>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
-    return RGBA<T>(red: lhs.red * rhs, green: lhs.green * rhs, blue: lhs.blue * rhs, alpha: lhs.alpha * rhs)
+public protocol _Numeric {
+    associatedtype IntType
+    associatedtype FloatType
+    associatedtype DoubleType
+
+    init(summableI: IntType)
+    init(summableF: FloatType)
+    init(summableD: DoubleType)
+    var summableI: IntType { get }
+    var summableF: FloatType { get }
+    var summableD: DoubleType { get }
+    static var selfZero: Self { get }
+    static var summableIZero: IntType { get }
+    static var summableFZero: FloatType { get }
+    static var summableDZero: DoubleType { get }
+    static func productI(_ lhs: IntType, _ rhs: Int) -> IntType
+    static func productF(_ lhs: FloatType, _ rhs: Float) -> FloatType
+    static func productD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
+    static func quotientI(_ lhs: IntType, _ rhs: Int) -> IntType
+    static func quotientF(_ lhs: FloatType, _ rhs: Float) -> FloatType
+    static func quotientD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
 }
 
-internal func /<T : BinaryInteger>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
-    return RGBA<T>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
-}
-
-internal func /<T : FloatingPoint>(lhs: RGBA<T>, rhs: T) -> RGBA<T> {
-    return RGBA<T>(red: lhs.red / rhs, green: lhs.green / rhs, blue: lhs.blue / rhs, alpha: lhs.alpha / rhs)
-}
-
-extension RGBA where Channel == UInt8 {
-    internal init(summableI: RGBA<Int>) {
-        self = RGBA<UInt8>(summableI)
-    }
-
-    internal init(summableF: RGBA<Float>) {
-        self = RGBA<UInt8>(summableF)
-    }
-
-    internal init(summableD: RGBA<Double>) {
-        self = RGBA<UInt8>(summableD)
+extension RGBA : _Numeric where Channel : _Numeric {
+    public typealias IntType = RGBA<Channel.IntType>
+    public typealias FloatType = RGBA<Channel.FloatType>
+    public typealias DoubleType = RGBA<Channel.DoubleType>
+    
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public init(summableI: RGBA<Channel.IntType>) {
+        self = RGBA<Channel>(red: Channel.init(summableI: summableI.red), green: Channel.init(summableI: summableI.green), blue: Channel.init(summableI: summableI.blue), alpha: Channel.init(summableI: summableI.alpha))
     }
     
-    internal var summableI: RGBA<Int> {
-        return RGBA<Int>(red: Int(red), green: Int(green), blue: Int(blue), alpha: Int(alpha))
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public init(summableF: RGBA<Channel.FloatType>) {
+        self = RGBA<Channel>(red: Channel.init(summableF: summableF.red), green: Channel.init(summableF: summableF.green), blue: Channel.init(summableF: summableF.blue), alpha: Channel.init(summableF: summableF.alpha))
     }
     
-    internal var summableF: RGBA<Float> {
-        return RGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public init(summableD: RGBA<Channel.DoubleType>) {
+        self = RGBA<Channel>(red: Channel.init(summableD: summableD.red), green: Channel.init(summableD: summableD.green), blue: Channel.init(summableD: summableD.blue), alpha: Channel.init(summableD: summableD.alpha))
     }
     
-    internal var summableD: RGBA<Double> {
-        return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
-    }
-
-    internal static var selfZero: RGBA<UInt8> {
-        return RGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
+    public var summableI: RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: red.summableI, green: green.summableI, blue: blue.summableI, alpha: alpha.summableI)
     }
     
-    internal static var summableFZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
+    public var summableF: RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: red.summableF, green: green.summableF, blue: blue.summableF, alpha: alpha.summableF)
     }
     
-    internal static var summableDZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
+    public var summableD: RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: red.summableD, green: green.summableD, blue: blue.summableD, alpha: alpha.summableD)
     }
     
-    internal static func productI(_ lhs: RGBA<Int>, _ rhs: Int) -> RGBA<Int> {
-        return lhs * rhs
+    public static var selfZero: RGBA<Channel> {
+        return RGBA<Channel>(red: Channel.selfZero, green: Channel.selfZero, blue: Channel.selfZero, alpha: Channel.selfZero)
     }
     
-    internal static func productF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs * rhs
+    public static var summableIZero: RGBA<Channel.IntType> {
+        let zero = Channel.summableIZero
+        return RGBA<Channel.IntType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
-    internal static func productD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs * rhs
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Int>, _ rhs: Int) -> RGBA<Int> {
-        return lhs / rhs
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs / rhs
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs / rhs
-    }
-}
-
-extension RGBA where Channel == UInt16 {
-    internal init(summableI: RGBA<Int>) {
-        self = RGBA<UInt16>(summableI)
-    }
-
-    internal init(summableF: RGBA<Float>) {
-        self = RGBA<UInt16>(summableF)
-    }
-
-    internal init(summableD: RGBA<Double>) {
-        self = RGBA<UInt16>(summableD)
+    public static var summableFZero: RGBA<Channel.FloatType> {
+        let zero = Channel.summableFZero
+        return RGBA<Channel.FloatType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
-    internal var summableI: RGBA<Int> {
-        return RGBA<Int>(red: Int(red), green: Int(green), blue: Int(blue), alpha: Int(alpha))
+    public static var summableDZero: RGBA<Channel.DoubleType> {
+        let zero = Channel.summableDZero
+        return RGBA<Channel.DoubleType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
-    internal var summableF: RGBA<Float> {
-        return RGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func productI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: Channel.productI(lhs.red, rhs), green: Channel.productI(lhs.green, rhs), blue: Channel.productI(lhs.blue, rhs), alpha: Channel.productI(lhs.alpha, rhs))
     }
     
-    internal var summableD: RGBA<Double> {
-        return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
-    }
-
-    internal static var selfZero: RGBA<UInt16> {
-        return RGBA<UInt16>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func productF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: Channel.productF(lhs.red, rhs), green: Channel.productF(lhs.green, rhs), blue: Channel.productF(lhs.blue, rhs), alpha: Channel.productF(lhs.alpha, rhs))
     }
     
-    internal static var summableFZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func productD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: Channel.productD(lhs.red, rhs), green: Channel.productD(lhs.green, rhs), blue: Channel.productD(lhs.blue, rhs), alpha: Channel.productD(lhs.alpha, rhs))
     }
     
-    internal static var summableDZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func quotientI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: Channel.quotientI(lhs.red, rhs), green: Channel.quotientI(lhs.green, rhs), blue: Channel.quotientI(lhs.blue, rhs), alpha: Channel.quotientI(lhs.alpha, rhs))
     }
     
-    internal static func productI(_ lhs: RGBA<Int>, _ rhs: Int) -> RGBA<Int> {
-        return lhs * rhs
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func quotientF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: Channel.quotientF(lhs.red, rhs), green: Channel.quotientF(lhs.green, rhs), blue: Channel.quotientF(lhs.blue, rhs), alpha: Channel.quotientF(lhs.alpha, rhs))
     }
     
-    internal static func productF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs * rhs
-    }
-    
-    internal static func productD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs * rhs
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Int>, _ rhs: Int) -> RGBA<Int> {
-        return lhs / rhs
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs / rhs
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs / rhs
-    }
-}
-
-extension RGBA where Channel == UInt32 {
-    internal init(summableI: RGBA<Int64>) {
-        self = RGBA<UInt32>(summableI)
-    }
-
-    internal init(summableF: RGBA<Float>) {
-        self = RGBA<UInt32>(summableF)
-    }
-
-    internal init(summableD: RGBA<Double>) {
-        self = RGBA<UInt32>(summableD)
-    }
-    
-    internal var summableI: RGBA<Int64> {
-        return RGBA<Int64>(red: Int64(red), green: Int64(green), blue: Int64(blue), alpha: Int64(alpha))
-    }
-    
-    internal var summableF: RGBA<Float> {
-        return RGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
-    }
-    
-    internal var summableD: RGBA<Double> {
-        return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
-    }
-
-    internal static var selfZero: RGBA<UInt32> {
-        return RGBA<UInt32>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Int64> {
-        return RGBA<Int64>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableFZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableDZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static func productI(_ lhs: RGBA<Int64>, _ rhs: Int) -> RGBA<Int64> {
-        return lhs * Int64(rhs)
-    }
-    
-    internal static func productF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs * rhs
-    }
-    
-    internal static func productD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs * rhs
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Int64>, _ rhs: Int) -> RGBA<Int64> {
-        return lhs / Int64(rhs)
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs / rhs
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs / rhs
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func quotientD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: Channel.quotientD(lhs.red, rhs), green: Channel.quotientD(lhs.green, rhs), blue: Channel.quotientD(lhs.blue, rhs), alpha: Channel.quotientD(lhs.alpha, rhs))
     }
 }
 
-extension RGBA where Channel == Int {
-    internal init(summableI: RGBA<Int>) {
-        self = summableI
-    }
-
-    internal init(summableF: RGBA<Float>) {
-        self = RGBA<Int>(summableF)
-    }
-
-    internal init(summableD: RGBA<Double>) {
-        self = RGBA<Int>(summableD)
-    }
-    
-    internal var summableI: RGBA<Int> {
-        return self
-    }
-    
-    internal var summableF: RGBA<Float> {
-        return RGBA<Float>(red: Float(red), green: Float(green), blue: Float(blue), alpha: Float(alpha))
-    }
-    
-    internal var summableD: RGBA<Double> {
-        return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
-    }
-
-    internal static var selfZero: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Int> {
-        return RGBA<Int>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableFZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableDZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static func productI(_ lhs: RGBA<Int>, _ rhs: Int) -> RGBA<Int> {
-        return lhs * rhs
-    }
-    
-    internal static func productF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs * rhs
-    }
-    
-    internal static func productD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs * rhs
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Int>, _ rhs: Int) -> RGBA<Int> {
-        return lhs / rhs
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs / rhs
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs / rhs
-    }
-}
-
-extension RGBA where Channel == Float {
-    internal init(summableI: RGBA<Float>) {
-        self = summableI
-    }
-
-    internal init(summableF: RGBA<Float>) {
-        self = summableF
-    }
-
-    internal init(summableD: RGBA<Double>) {
-        self = RGBA<Float>(summableD)
-    }
-    
-    internal var summableI: RGBA<Float> {
-        return self
-    }
-    
-    internal var summableF: RGBA<Float> {
-        return self
-    }
-    
-    internal var summableD: RGBA<Double> {
-        return RGBA<Double>(red: Double(red), green: Double(green), blue: Double(blue), alpha: Double(alpha))
-    }
-
-    internal static var selfZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableFZero: RGBA<Float> {
-        return RGBA<Float>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableDZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static func productI(_ lhs: RGBA<Float>, _ rhs: Int) -> RGBA<Float> {
-        return lhs * Float(rhs)
-    }
-    
-    internal static func productF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs * rhs
-    }
-    
-    internal static func productD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs * rhs
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Float>, _ rhs: Int) -> RGBA<Float> {
-        return lhs / Float(rhs)
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Float>, _ rhs: Float) -> RGBA<Float> {
-        return lhs / rhs
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs / rhs
-    }
-}
-
-extension RGBA where Channel == Double {
-    internal init(summableI: RGBA<Double>) {
-        self = summableI
-    }
-
-    internal init(summableF: RGBA<Double>) {
-        self = summableF
-    }
-
-    internal init(summableD: RGBA<Double>) {
-        self = summableD
-    }
-    
-    internal var summableI: RGBA<Double> {
-        return self
-    }
-    
-    internal var summableF: RGBA<Double> {
-        return self
-    }
-    
-    internal var summableD: RGBA<Double> {
-        return self
-    }
-
-    internal static var selfZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    
-    internal static var summableIZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableFZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static var summableDZero: RGBA<Double> {
-        return RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-    
-    internal static func productI(_ lhs: RGBA<Double>, _ rhs: Int) -> RGBA<Double> {
-        return lhs * Double(rhs)
-    }
-    
-    internal static func productF(_ lhs: RGBA<Double>, _ rhs: Float) -> RGBA<Double> {
-        return lhs * Double(rhs)
-    }
-    
-    internal static func productD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs * rhs
-    }
-
-    internal static func quotientI(_ lhs: RGBA<Double>, _ rhs: Int) -> RGBA<Double> {
-        return lhs / Double(rhs)
-    }
-
-    internal static func quotientF(_ lhs: RGBA<Double>, _ rhs: Float) -> RGBA<Double> {
-        return lhs / Double(rhs)
-    }
-
-    internal static func quotientD(_ lhs: RGBA<Double>, _ rhs: Double) -> RGBA<Double> {
-        return lhs / rhs
-    }
-}
-
-extension UInt8 {
-    internal init(summableI: Int) {
+extension UInt8 : _Numeric {
+    public init(summableI: Int) {
         self = UInt8(summableI)
     }
 
-    internal init(summableF: Float) {
+    public init(summableF: Float) {
         self = UInt8(summableF)
     }
 
-    internal init(summableD: Double) {
+    public init(summableD: Double) {
         self = UInt8(summableD)
     }
     
-    internal var summableI: Int {
+    public var summableI: Int {
         return Int(self)
     }
     
-    internal var summableF: Float {
+    public var summableF: Float {
         return Float(self)
     }
     
-    internal var summableD: Double {
+    public var summableD: Double {
         return Double(self)
     }
 
-    internal static var selfZero: UInt8 {
+    public static var selfZero: UInt8 {
         return 0
     }
 
     
-    internal static var summableIZero: Int {
+    public static var summableIZero: Int {
         return 0
         
     }
     
-    internal static var summableFZero: Float {
+    public static var summableFZero: Float {
         return 0
         
     }
     
-    internal static var summableDZero: Double {
+    public static var summableDZero: Double {
         return 0
         
     }
     
-    internal static func productI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func productI(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
     
-    internal static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    internal static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    internal static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs / rhs
     }
     
-    internal static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
-extension UInt16 {
-    internal init(summableI: Int) {
+extension UInt16 : _Numeric {
+    public init(summableI: Int) {
         self = UInt16(summableI)
     }
 
-    internal init(summableF: Float) {
+    public init(summableF: Float) {
         self = UInt16(summableF)
     }
 
-    internal init(summableD: Double) {
+    public init(summableD: Double) {
         self = UInt16(summableD)
     }
     
-    internal var summableI: Int {
+    public var summableI: Int {
         return Int(self)
     }
     
-    internal var summableF: Float {
+    public var summableF: Float {
         return Float(self)
     }
     
-    internal var summableD: Double {
+    public var summableD: Double {
         return Double(self)
     }
 
-    internal static var selfZero: UInt16 {
+    public static var selfZero: UInt16 {
         return 0
     }
 
     
-    internal static var summableIZero: Int {
+    public static var summableIZero: Int {
         return 0
         
     }
     
-    internal static var summableFZero: Float {
+    public static var summableFZero: Float {
         return 0
         
     }
     
-    internal static var summableDZero: Double {
+    public static var summableDZero: Double {
         return 0
         
     }
     
-    internal static func productI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func productI(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
     
-    internal static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    internal static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    internal static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs / rhs
     }
     
-    internal static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
-extension UInt32 {
-    internal init(summableI: Int64) {
+extension UInt32 : _Numeric {
+    public init(summableI: Int64) {
         self = UInt32(summableI)
     }
 
-    internal init(summableF: Float) {
+    public init(summableF: Float) {
         self = UInt32(summableF)
     }
 
-    internal init(summableD: Double) {
+    public init(summableD: Double) {
         self = UInt32(summableD)
     }
     
-    internal var summableI: Int64 {
+    public var summableI: Int64 {
         return Int64(self)
     }
     
-    internal var summableF: Float {
+    public var summableF: Float {
         return Float(self)
     }
     
-    internal var summableD: Double {
+    public var summableD: Double {
         return Double(self)
     }
 
-    internal static var selfZero: UInt32 {
+    public static var selfZero: UInt32 {
         return 0
     }
 
     
-    internal static var summableIZero: Int64 {
+    public static var summableIZero: Int64 {
         return 0
         
     }
     
-    internal static var summableFZero: Float {
+    public static var summableFZero: Float {
         return 0
         
     }
     
-    internal static var summableDZero: Double {
+    public static var summableDZero: Double {
         return 0
         
     }
     
-    internal static func productI(_ lhs: Int64, _ rhs: Int) -> Int64 {
+    public static func productI(_ lhs: Int64, _ rhs: Int) -> Int64 {
         return lhs * Int64(rhs)
     }
     
-    internal static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    internal static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    internal static func quotientI(_ lhs: Int64, _ rhs: Int) -> Int64 {
+    public static func quotientI(_ lhs: Int64, _ rhs: Int) -> Int64 {
         return lhs / Int64(rhs)
     }
     
-    internal static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
-extension Int {
-    internal init(summableI: Int) {
+extension Int : _Numeric {
+    public init(summableI: Int) {
         self = summableI
     }
 
-    internal init(summableF: Float) {
+    public init(summableF: Float) {
         self = Int(summableF)
     }
 
-    internal init(summableD: Double) {
+    public init(summableD: Double) {
         self = Int(summableD)
     }
     
-    internal var summableI: Int {
+    public var summableI: Int {
         return self
     }
     
-    internal var summableF: Float {
+    public var summableF: Float {
         return Float(self)
     }
     
-    internal var summableD: Double {
+    public var summableD: Double {
         return Double(self)
     }
 
-    internal static var selfZero: Int {
+    public static var selfZero: Int {
         return 0
     }
 
     
-    internal static var summableIZero: Int {
+    public static var summableIZero: Int {
         return 0
         
     }
     
-    internal static var summableFZero: Float {
+    public static var summableFZero: Float {
         return 0
         
     }
     
-    internal static var summableDZero: Double {
+    public static var summableDZero: Double {
         return 0
         
     }
     
-    internal static func productI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func productI(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
     
-    internal static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    internal static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    internal static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs / rhs
     }
     
-    internal static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
-extension Float {
-    internal init(summableI: Float) {
+extension Float : _Numeric {
+    public init(summableI: Float) {
         self = summableI
     }
 
-    internal init(summableF: Float) {
+    public init(summableF: Float) {
         self = summableF
     }
 
-    internal init(summableD: Double) {
+    public init(summableD: Double) {
         self = Float(summableD)
     }
     
-    internal var summableI: Float {
+    public var summableI: Float {
         return self
     }
     
-    internal var summableF: Float {
+    public var summableF: Float {
         return self
     }
     
-    internal var summableD: Double {
+    public var summableD: Double {
         return Double(self)
     }
 
-    internal static var selfZero: Float {
+    public static var selfZero: Float {
         return 0
     }
 
     
-    internal static var summableIZero: Float {
+    public static var summableIZero: Float {
         return 0
         
     }
     
-    internal static var summableFZero: Float {
+    public static var summableFZero: Float {
         return 0
         
     }
     
-    internal static var summableDZero: Double {
+    public static var summableDZero: Double {
         return 0
         
     }
     
-    internal static func productI(_ lhs: Float, _ rhs: Int) -> Float {
+    public static func productI(_ lhs: Float, _ rhs: Int) -> Float {
         return lhs * Float(rhs)
     }
     
-    internal static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    internal static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    internal static func quotientI(_ lhs: Float, _ rhs: Int) -> Float {
+    public static func quotientI(_ lhs: Float, _ rhs: Int) -> Float {
         return lhs / Float(rhs)
     }
     
-    internal static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
-extension Double {
-    internal init(summableI: Double) {
+extension Double : _Numeric {
+    public init(summableI: Double) {
         self = summableI
     }
 
-    internal init(summableF: Double) {
+    public init(summableF: Double) {
         self = summableF
     }
 
-    internal init(summableD: Double) {
+    public init(summableD: Double) {
         self = summableD
     }
     
-    internal var summableI: Double {
+    public var summableI: Double {
         return self
     }
     
-    internal var summableF: Double {
+    public var summableF: Double {
         return self
     }
     
-    internal var summableD: Double {
+    public var summableD: Double {
         return self
     }
 
-    internal static var selfZero: Double {
+    public static var selfZero: Double {
         return 0
     }
 
     
-    internal static var summableIZero: Double {
+    public static var summableIZero: Double {
         return 0
         
     }
     
-    internal static var summableFZero: Double {
+    public static var summableFZero: Double {
         return 0
         
     }
     
-    internal static var summableDZero: Double {
+    public static var summableDZero: Double {
         return 0
         
     }
     
-    internal static func productI(_ lhs: Double, _ rhs: Int) -> Double {
+    public static func productI(_ lhs: Double, _ rhs: Int) -> Double {
         return lhs * Double(rhs)
     }
     
-    internal static func productF(_ lhs: Double, _ rhs: Float) -> Double {
+    public static func productF(_ lhs: Double, _ rhs: Float) -> Double {
         return lhs * Double(rhs)
     }
     
-    internal static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    internal static func quotientI(_ lhs: Double, _ rhs: Int) -> Double {
+    public static func quotientI(_ lhs: Double, _ rhs: Int) -> Double {
         return lhs / Double(rhs)
     }
     
-    internal static func quotientF(_ lhs: Double, _ rhs: Float) -> Double {
+    public static func quotientF(_ lhs: Double, _ rhs: Float) -> Double {
         return lhs / Double(rhs)
     }
     
-    internal static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
