@@ -7,19 +7,52 @@ public enum InterpolationMethod {
 }
 
 extension ImageProtocol {
+    public subscript(x: Double, y: Double) -> Pixel {
+        return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+        return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
     internal func interpolatedPixelByNearestNeighbor(x: Double, y: Double, pixelAt: (Int, Int) -> Pixel) -> Pixel {
         let xi = Int(round(x))
         let yi = Int(round(y))
         return pixelAt(xi, yi)
     }
+}
+
+extension ImageProtocol where Pixel : _Numeric {
+    // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
+    public subscript(x: Double, y: Double) -> Pixel {
+        return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1] }
+    }
     
-    internal func interpolatedPixelByBilinear<Summable>(
+    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod) -> Pixel {
+        switch interpolationMethod {
+        case .nearestNeighbor:
+            return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
+        case .bilinear:
+            return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1] }
+        }
+    }
+    
+    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+        return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    }
+    
+    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+        switch interpolationMethod {
+        case .nearestNeighbor:
+            return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+        case .bilinear:
+            return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+        }
+    }
+
+    internal func interpolatedPixelByBilinear(
         x: Double,
         y: Double,
-        toSummable: (Pixel) -> Summable,
-        product: (Summable, Double) -> Summable,
-        sum: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Pixel,
         pixelAt: (Int, Int) -> Pixel
     ) -> Pixel {
         let x0 = Int(floor(x))
@@ -39,9 +72,11 @@ extension ImageProtocol {
         let w10 = (1.0 - wx) * wy
         let w11 = wx * wy
         
-        return toOriginal(sum(
-            sum(product(toSummable(v00), w00), product(toSummable(v01), w01)),
-            sum(product(toSummable(v10), w10), product(toSummable(v11), w11))
-        ))
+        return Pixel.init(summableD:
+            Pixel.DoubleType._sum(
+                Pixel.DoubleType._sum(Pixel.productD(v00.summableD, w00), Pixel.productD(v01.summableD, w01)),
+                Pixel.DoubleType._sum(Pixel.productD(v10.summableD, w10), Pixel.productD(v11.summableD, w11))
+            )
+        )
     }
 }
