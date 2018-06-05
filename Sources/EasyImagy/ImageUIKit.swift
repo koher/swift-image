@@ -70,9 +70,9 @@ extension Image where Pixel == RGBA<UInt8> {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -140,9 +140,9 @@ extension Image where Pixel == RGBA<UInt16> {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -210,9 +210,9 @@ extension Image where Pixel == RGBA<UInt32> {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -280,9 +280,9 @@ extension Image where Pixel == RGBA<Float> {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -350,9 +350,9 @@ extension Image where Pixel == RGBA<Double> {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -420,9 +420,9 @@ extension Image where Pixel == RGBA<Bool> {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -490,9 +490,9 @@ extension Image where Pixel == UInt8 {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -560,9 +560,9 @@ extension Image where Pixel == UInt16 {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -630,9 +630,9 @@ extension Image where Pixel == UInt32 {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -700,9 +700,9 @@ extension Image where Pixel == Float {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -770,9 +770,9 @@ extension Image where Pixel == Double {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
@@ -840,9 +840,9 @@ extension Image where Pixel == Bool {
 
         switch format {
         case .png:
-            return UIImagePNGRepresentation(uiImage)
+            return uiImage.pngData()
         case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+            return uiImage.jpegData(compressionQuality: CGFloat(complessionQuality))
         }
     }
 
