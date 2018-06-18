@@ -67,16 +67,46 @@ extension PremultipliedRGBA where Channel == UInt8 {
 
 extension PremultipliedRGBA : CustomStringConvertible {
     public var description: String {
-        if let zelf = self as? PremultipliedRGBA<UInt8> {
-            return String(format: "#%02X%02X%02X%02X", arguments: [zelf.red, zelf.green, zelf.blue, zelf.alpha])
-        } else {
-            return "PremultipliedRGBA(red: \(red), green: \(green), blue: \(blue), alpha: \(alpha))"
-        }
+        return "PremultipliedRGBA(red: \(red), green: \(green), blue: \(blue), alpha: \(alpha))"
     }
 }
 
 extension PremultipliedRGBA : CustomDebugStringConvertible {
     public var debugDescription: String {
         return description
+    }
+}
+
+extension PremultipliedRGBA : Equatable where Channel : Equatable {
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Int8)
+    @_specialize(exported: true, where Channel == Int16)
+    @_specialize(exported: true, where Channel == Int32)
+    @_specialize(exported: true, where Channel == Int64)
+    @_specialize(exported: true, where Channel == UInt)
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == UInt64)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func ==(lhs: PremultipliedRGBA<Channel>, rhs: PremultipliedRGBA<Channel>) -> Bool {
+        return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
+    }
+    
+    @_specialize(exported: true, where Channel == Int)
+    @_specialize(exported: true, where Channel == Int8)
+    @_specialize(exported: true, where Channel == Int16)
+    @_specialize(exported: true, where Channel == Int32)
+    @_specialize(exported: true, where Channel == Int64)
+    @_specialize(exported: true, where Channel == UInt)
+    @_specialize(exported: true, where Channel == UInt8)
+    @_specialize(exported: true, where Channel == UInt16)
+    @_specialize(exported: true, where Channel == UInt32)
+    @_specialize(exported: true, where Channel == UInt64)
+    @_specialize(exported: true, where Channel == Float)
+    @_specialize(exported: true, where Channel == Double)
+    public static func !=(lhs: PremultipliedRGBA<Channel>, rhs: PremultipliedRGBA<Channel>) -> Bool {
+        return lhs.red != rhs.red || lhs.green != rhs.green || lhs.blue != rhs.blue || lhs.alpha != rhs.alpha
     }
 }
