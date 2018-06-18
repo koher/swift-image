@@ -22,7 +22,7 @@ extension Image where Pixel == RGBA<${type}> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [RGBA<${type}>] = Image.drawnPixels(
+        let pixels: [RGBA<${type}>] = Image<RGBA<${type}>>.drawnPixels(
             width: width,
             height: height,
             defaultPixel: .transparent,
@@ -78,7 +78,7 @@ extension Image where Pixel == RGBA<${type}> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [RGBA<UInt8>] = Image.drawnPixels(
+        let pixels: [RGBA<UInt8>] = Image<RGBA<UInt8>>.drawnPixels(
             width: width,
             height: height,
             defaultPixel: .transparent,
@@ -123,7 +123,7 @@ extension Image where Pixel == RGBA<Bool> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [RGBA<UInt8>] = Image.drawnPixels(
+        let pixels: [RGBA<UInt8>] = Image<RGBA<UInt8>>.drawnPixels(
             width: width,
             height: height,
             defaultPixel: .transparent,
@@ -159,6 +159,99 @@ extension Image where Pixel == RGBA<Bool> {
 %
 % for type in uint_types:
 
+extension Image where Pixel == PremultipliedRGBA<${type}> {
+    private static var colorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceRGB()
+    }
+    
+    private static var bitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
+    
+    private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
+        let pixels: [PremultipliedRGBA<${type}>] = Image<PremultipliedRGBA<${type}>>.drawnPixels(
+            width: width,
+            height: height,
+            defaultPixel: PremultipliedRGBA<${type}>(red: 0, green: 0, blue: 0, alpha: 0),
+            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            setUp: setUp
+        )
+        
+        self.init(width: width, height: height, pixels: pixels)
+    }
+    
+    public init(cgImage: CGImage) {
+        let width = cgImage.width
+        let height = cgImage.height
+        
+        self.init(width: width, height: height, setUp: { context in
+            let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
+            context.draw(cgImage, in: rect)
+        })
+    }
+    
+    public var cgImage: CGImage {
+        return Image.generatedCGImage(
+            image: self,
+            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo
+        )
+    }
+
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try Image.withGeneratedCGImage(
+            image: self,
+            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            body: body
+        )
+    }
+}
+% end
+%
+% for type in float_types:
+
+extension Image where Pixel == PremultipliedRGBA<${type}> {
+    private static var colorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceRGB()
+    }
+    
+    private static var bitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
+    
+    private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
+        let pixels: [PremultipliedRGBA<UInt8>] = Image<PremultipliedRGBA<UInt8>>.drawnPixels(
+            width: width,
+            height: height,
+            defaultPixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0),
+            colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            setUp: setUp
+        )
+        
+        self.init(width: width, height: height, pixels: pixels.map { $0.map { ${type}($0) / 255 } })
+    }
+    
+    public init(cgImage: CGImage) {
+        let width = cgImage.width
+        let height = cgImage.height
+        
+        self.init(width: width, height: height, setUp: { context in
+            let rect = CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height))
+            context.draw(cgImage, in: rect)
+        })
+    }
+    
+    public var cgImage: CGImage {
+        return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
+    }
+}
+% end
+%
+% for type in uint_types:
+
 extension Image where Pixel == ${type} {
     private static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
@@ -169,7 +262,7 @@ extension Image where Pixel == ${type} {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [${type}] = Image.drawnPixels(
+        let pixels: [${type}] = Image<${type}>.drawnPixels(
             width: width,
             height: height,
             defaultPixel: 0,
@@ -222,7 +315,7 @@ extension Image where Pixel == ${type} {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [UInt8] = Image.drawnPixels(
+        let pixels: [UInt8] = Image<UInt8>.drawnPixels(
             width: width,
             height: height,
             defaultPixel: 0,
@@ -260,7 +353,7 @@ extension Image where Pixel == Bool {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [UInt8] = Image.drawnPixels(
+        let pixels: [UInt8] = Image<UInt8>.drawnPixels(
             width: width,
             height: height,
             defaultPixel: 0,

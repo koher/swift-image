@@ -114,8 +114,8 @@ extension Image { // RGBA
     }
 }
     
-extension Image { // Gray
-    internal static func drawnPixels<Pixel>(
+extension Image { // Gray or PremultipliedRGBA
+    internal static func drawnPixels(
         width: Int,
         height: Int,
         defaultPixel: Pixel,
