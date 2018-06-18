@@ -165,7 +165,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -175,6 +175,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
             defaultPixel: PremultipliedRGBA<${type}>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            componentType: ${type}.self,
             setUp: setUp
         )
         
@@ -218,7 +219,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -228,6 +229,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
             defaultPixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -268,6 +270,7 @@ extension Image where Pixel == ${type} {
             defaultPixel: 0,
             colorSpace: Image<${type}>.colorSpace,
             bitmapInfo: Image<${type}>.bitmapInfo,
+            componentType: ${type}.self,
             setUp: setUp
         )
         
@@ -321,6 +324,7 @@ extension Image where Pixel == ${type} {
             defaultPixel: 0,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -359,6 +363,7 @@ extension Image where Pixel == Bool {
             defaultPixel: 0,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         

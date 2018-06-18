@@ -299,7 +299,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -309,6 +309,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
             defaultPixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -349,7 +350,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -359,6 +360,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
             defaultPixel: PremultipliedRGBA<UInt16>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<UInt16>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo,
+            componentType: UInt16.self,
             setUp: setUp
         )
         
@@ -399,7 +401,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -409,6 +411,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
             defaultPixel: PremultipliedRGBA<UInt32>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<UInt32>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo,
+            componentType: UInt32.self,
             setUp: setUp
         )
         
@@ -449,7 +452,7 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -459,6 +462,7 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
             defaultPixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -486,7 +490,7 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
     }
     
     private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
@@ -496,6 +500,7 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
             defaultPixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0),
             colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -533,6 +538,7 @@ extension Image where Pixel == UInt8 {
             defaultPixel: 0,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -583,6 +589,7 @@ extension Image where Pixel == UInt16 {
             defaultPixel: 0,
             colorSpace: Image<UInt16>.colorSpace,
             bitmapInfo: Image<UInt16>.bitmapInfo,
+            componentType: UInt16.self,
             setUp: setUp
         )
         
@@ -633,6 +640,7 @@ extension Image where Pixel == UInt32 {
             defaultPixel: 0,
             colorSpace: Image<UInt32>.colorSpace,
             bitmapInfo: Image<UInt32>.bitmapInfo,
+            componentType: UInt32.self,
             setUp: setUp
         )
         
@@ -683,6 +691,7 @@ extension Image where Pixel == Float {
             defaultPixel: 0,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -720,6 +729,7 @@ extension Image where Pixel == Double {
             defaultPixel: 0,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         
@@ -757,6 +767,7 @@ extension Image where Pixel == Bool {
             defaultPixel: 0,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self,
             setUp: setUp
         )
         

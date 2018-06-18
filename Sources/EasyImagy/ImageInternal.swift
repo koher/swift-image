@@ -115,19 +115,18 @@ extension Image { // RGBA
 }
     
 extension Image { // Gray or PremultipliedRGBA
-    internal static func drawnPixels(
+    internal static func drawnPixels<Component>(
         width: Int,
         height: Int,
         defaultPixel: Pixel,
         colorSpace: CGColorSpace,
         bitmapInfo: CGBitmapInfo,
+        componentType: Component.Type,
         setUp: (CGContext) -> ()
     ) -> [Pixel] {
         assert(width >= 0)
         assert(height >= 0)
         
-        let bytesPerComponent = MemoryLayout<Pixel>.size
-
         let count = width * height
         var pixels = [Pixel](repeating: defaultPixel, count: count)
         
@@ -135,8 +134,8 @@ extension Image { // Gray or PremultipliedRGBA
             data: &pixels,
             width: width,
             height: height,
-            bitsPerComponent: bytesPerComponent * 8,
-            bytesPerRow: bytesPerComponent * width,
+            bitsPerComponent: MemoryLayout<Component>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * width,
             space: colorSpace,
             bitmapInfo: bitmapInfo.rawValue
         )!
