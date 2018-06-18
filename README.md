@@ -280,7 +280,7 @@ import PackageDescription
 let package = Package(
   ...
   dependencies: [
-    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.4.0"),
+    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.5.0-alpha"),
   ],
   targets: [
     .target(
@@ -297,7 +297,7 @@ let package = Package(
 **Cartfile**
 
 ```
-github "koher/EasyImagy" "0.4.0"
+github "koher/EasyImagy" "dev-0.5.0"
 ```
 
 ### Manually
