@@ -196,7 +196,8 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            componentType: ${type}.self
         )
     }
 
@@ -205,7 +206,8 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
             image: self,
             colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: ${type}.self
         )
     }
 }
@@ -291,7 +293,8 @@ extension Image where Pixel == ${type} {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo
+            bitmapInfo: Image<${type}>.bitmapInfo,
+            componentType: ${type}.self
         )
     }
 
@@ -300,7 +303,8 @@ extension Image where Pixel == ${type} {
             image: self,
             colorSpace: Image<${type}>.colorSpace,
             bitmapInfo: Image<${type}>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: ${type}.self
         )
     }
 }

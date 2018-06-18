@@ -330,7 +330,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo
+            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            componentType: UInt8.self
         )
     }
 
@@ -339,7 +340,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
             image: self,
             colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: UInt8.self
         )
     }
 }
@@ -381,7 +383,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<PremultipliedRGBA<UInt16>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo
+            bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo,
+            componentType: UInt16.self
         )
     }
 
@@ -390,7 +393,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
             image: self,
             colorSpace: Image<PremultipliedRGBA<UInt16>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: UInt16.self
         )
     }
 }
@@ -432,7 +436,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<PremultipliedRGBA<UInt32>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo
+            bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo,
+            componentType: UInt32.self
         )
     }
 
@@ -441,7 +446,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
             image: self,
             colorSpace: Image<PremultipliedRGBA<UInt32>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: UInt32.self
         )
     }
 }
@@ -559,7 +565,8 @@ extension Image where Pixel == UInt8 {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<UInt8>.colorSpace,
-            bitmapInfo: Image<UInt8>.bitmapInfo
+            bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self
         )
     }
 
@@ -568,7 +575,8 @@ extension Image where Pixel == UInt8 {
             image: self,
             colorSpace: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: UInt8.self
         )
     }
 }
@@ -610,7 +618,8 @@ extension Image where Pixel == UInt16 {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<UInt16>.colorSpace,
-            bitmapInfo: Image<UInt16>.bitmapInfo
+            bitmapInfo: Image<UInt16>.bitmapInfo,
+            componentType: UInt16.self
         )
     }
 
@@ -619,7 +628,8 @@ extension Image where Pixel == UInt16 {
             image: self,
             colorSpace: Image<UInt16>.colorSpace,
             bitmapInfo: Image<UInt16>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: UInt16.self
         )
     }
 }
@@ -661,7 +671,8 @@ extension Image where Pixel == UInt32 {
         return Image.generatedCGImage(
             image: self,
             colorSpace: Image<UInt32>.colorSpace,
-            bitmapInfo: Image<UInt32>.bitmapInfo
+            bitmapInfo: Image<UInt32>.bitmapInfo,
+            componentType: UInt32.self
         )
     }
 
@@ -670,7 +681,8 @@ extension Image where Pixel == UInt32 {
             image: self,
             colorSpace: Image<UInt32>.colorSpace,
             bitmapInfo: Image<UInt32>.bitmapInfo,
-            body: body
+            body: body,
+            componentType: UInt32.self
         )
     }
 }
