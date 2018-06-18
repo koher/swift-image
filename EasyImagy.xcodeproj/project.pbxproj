@@ -121,6 +121,9 @@
 		D668405A1F9F427D00D1DE7F /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66840581F9F426200D1DE7F /* Numeric.swift */; };
 		D668405B1F9F427D00D1DE7F /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66840581F9F426200D1DE7F /* Numeric.swift */; };
 		D668405C1F9F427F00D1DE7F /* Numeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66840581F9F426200D1DE7F /* Numeric.swift */; };
+		D66AFEE520D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */; };
+		D66AFEE620D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */; };
+		D66AFEE720D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */; };
 		D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE0F1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE101FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
@@ -228,6 +231,7 @@
 		D631092C1FD009B6009974D0 /* ImageOperatorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperatorsTests.swift; sourceTree = "<group>"; };
 		D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBA.swift; sourceTree = "<group>"; };
 		D66840581F9F426200D1DE7F /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
+		D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBATests.swift; sourceTree = "<group>"; };
 		D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
 		D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
@@ -386,6 +390,7 @@
 				D62C6EC11FCBA67500E7DF02 /* ImageUIKitTests.swift */,
 				D6134A401F852A57005592A2 /* Info.plist */,
 				D62C6ED91FCE5F7600E7DF02 /* InterpolationTests.swift */,
+				D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */,
 				D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */,
 				D6134A411F852A57005592A2 /* RGBATests.swift */,
 				D63109281FD0056B009974D0 /* RGBAOperatorsTests.swift */,
@@ -727,6 +732,7 @@
 				D6B8BF841FE57E22009C7C30 /* ResizingTests.swift in Sources */,
 				D6134A4D1F852A64005592A2 /* RGBATests.swift in Sources */,
 				D6D33DBB1FD97A8B00256FD0 /* ImageProtocolTests.swift in Sources */,
+				D66AFEE520D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +788,7 @@
 				D6B8BF851FE57E22009C7C30 /* ResizingTests.swift in Sources */,
 				D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */,
 				D6D33DBC1FD97A8B00256FD0 /* ImageProtocolTests.swift in Sources */,
+				D66AFEE620D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -837,6 +844,7 @@
 				D6B8BF861FE57E22009C7C30 /* ResizingTests.swift in Sources */,
 				D6134ACA1F85D2BF005592A2 /* RGBATests.swift in Sources */,
 				D6D33DBD1FD97A8B00256FD0 /* ImageProtocolTests.swift in Sources */,
+				D66AFEE720D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
