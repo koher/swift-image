@@ -156,6 +156,88 @@ import EasyImagy
                 }
             }
         }
+        
+        func testWithCGContext() {
+            // Draws lines with CoreGraphics as follows:
+            //
+            // Before
+            // ----
+            // ----
+            // ----
+            // ----
+            //
+            // After
+            // -*--
+            // -*--
+            // ****
+            // -*--
+
+            do {
+                var image = Image<PremultipliedRGBA<UInt8>>(width: 4, height: 4, pixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                image.withCGContext { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(UIColor.red.cgColor)
+                    context.move(to: CGPoint(x: 1, y: -1))
+                    context.addLine(to: CGPoint(x: 1, y: 4))
+                    context.move(to: CGPoint(x: -1, y: 2))
+                    context.addLine(to: CGPoint(x: 4, y: 2))
+                    context.strokePath()
+                }
+
+                XCTAssertEqual(image[0, 0], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[1, 0], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[2, 0], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[3, 0], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(image[0, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[1, 1], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[2, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[3, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(image[0, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[1, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[2, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[3, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(image[0, 3], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[1, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[2, 3], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(image[3, 3], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+            }
+            
+            do {
+                var image = Image<UInt8>(width: 4, height: 4, pixel: 0)
+                image.withCGContext { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(UIColor.white.cgColor)
+                    context.move(to: CGPoint(x: 1, y: -1))
+                    context.addLine(to: CGPoint(x: 1, y: 4))
+                    context.move(to: CGPoint(x: -1, y: 2))
+                    context.addLine(to: CGPoint(x: 4, y: 2))
+                    context.strokePath()
+                }
+
+                XCTAssertEqual(image[0, 0], 0)
+                XCTAssertEqual(image[1, 0], 255)
+                XCTAssertEqual(image[2, 0], 0)
+                XCTAssertEqual(image[3, 0], 0)
+                
+                XCTAssertEqual(image[0, 1], 0)
+                XCTAssertEqual(image[1, 1], 255)
+                XCTAssertEqual(image[2, 1], 0)
+                XCTAssertEqual(image[3, 1], 0)
+                
+                XCTAssertEqual(image[0, 2], 255)
+                XCTAssertEqual(image[1, 2], 255)
+                XCTAssertEqual(image[2, 2], 255)
+                XCTAssertEqual(image[3, 2], 255)
+                
+                XCTAssertEqual(image[0, 3], 0)
+                XCTAssertEqual(image[1, 3], 255)
+                XCTAssertEqual(image[2, 3], 0)
+                XCTAssertEqual(image[3, 3], 0)
+            }
+        }
     }
 
 #endif

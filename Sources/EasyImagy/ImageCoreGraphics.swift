@@ -344,6 +344,28 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
             componentType: UInt8.self
         )
     }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt8>>.size * width,
+            space: Image<PremultipliedRGBA<UInt8>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
+    }
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt16> {
@@ -397,6 +419,28 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
             componentType: UInt16.self
         )
     }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt16>>.size * width,
+            space: Image<PremultipliedRGBA<UInt16>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
+    }
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt32> {
@@ -449,6 +493,28 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
             body: body,
             componentType: UInt32.self
         )
+    }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt32>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt32>>.size * width,
+            space: Image<PremultipliedRGBA<UInt32>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
     }
 }
 
@@ -579,6 +645,28 @@ extension Image where Pixel == UInt8 {
             componentType: UInt8.self
         )
     }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
+            bytesPerRow: MemoryLayout<UInt8>.size * width,
+            space: Image<UInt8>.colorSpace,
+            bitmapInfo: Image<UInt8>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
+    }
 }
 
 extension Image where Pixel == UInt16 {
@@ -632,6 +720,28 @@ extension Image where Pixel == UInt16 {
             componentType: UInt16.self
         )
     }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
+            bytesPerRow: MemoryLayout<UInt16>.size * width,
+            space: Image<UInt16>.colorSpace,
+            bitmapInfo: Image<UInt16>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
+    }
 }
 
 extension Image where Pixel == UInt32 {
@@ -684,6 +794,28 @@ extension Image where Pixel == UInt32 {
             body: body,
             componentType: UInt32.self
         )
+    }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt32>.size * 8,
+            bytesPerRow: MemoryLayout<UInt32>.size * width,
+            space: Image<UInt32>.colorSpace,
+            bitmapInfo: Image<UInt32>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
     }
 }
 

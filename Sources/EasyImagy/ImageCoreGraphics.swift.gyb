@@ -210,6 +210,28 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
             componentType: ${type}.self
         )
     }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<${type}>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<${type}>>.size * width,
+            space: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
+    }
 }
 % end
 %
@@ -306,6 +328,28 @@ extension Image where Pixel == ${type} {
             body: body,
             componentType: ${type}.self
         )
+    }
+
+    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<${type}>.size * 8,
+            bytesPerRow: MemoryLayout<${type}>.size * width,
+            space: Image<${type}>.colorSpace,
+            bitmapInfo: Image<${type}>.bitmapInfo.rawValue
+        )!
+        context.scaleBy(x: 1, y: -1)
+        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+
+        try body(context)
     }
 }
 % end
