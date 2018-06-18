@@ -1,10 +1,15 @@
 % types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
+% outer_type_to_types = {
+%   'RGBA'             : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
+%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double'],
+%   ''                 : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
+% }
 #if canImport(AppKit)
 import Foundation
 import AppKit
-% for is_rgba in [True, False]:
-%   for type in types:
-%     pixel_type = f'RGBA<{type}>' if is_rgba else type
+% for outer_type in ['RGBA', 'PremultipliedRGBA', '']:
+%   for type in outer_type_to_types[outer_type]:
+%     pixel_type = f'{outer_type}<{type}>' if outer_type != '' else type
     
 extension Image where Pixel == ${pixel_type} {
     public init(nsImage: NSImage) {
