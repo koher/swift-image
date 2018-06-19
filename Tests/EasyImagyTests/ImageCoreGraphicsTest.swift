@@ -248,7 +248,7 @@ import EasyImagy
             
             do {
                 var image = Image<PremultipliedRGBA<UInt8>>(width: 4, height: 4, pixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
-                image.withCGContext(coordinates: .adjusted) { context in
+                image.withCGContext(coordinates: .natural) { context in
                     context.setLineWidth(1)
                     context.setStrokeColor(red)
                     context.move(to: CGPoint(x: 1, y: -1))
@@ -281,7 +281,7 @@ import EasyImagy
             
             do {
                 var image = Image<UInt8>(width: 4, height: 4, pixel: 0)
-                image.withCGContext(coordinates: .adjusted) { context in
+                image.withCGContext(coordinates: .natural) { context in
                     context.setLineWidth(1)
                     context.setStrokeColor(white)
                     context.move(to: CGPoint(x: 1, y: -1))

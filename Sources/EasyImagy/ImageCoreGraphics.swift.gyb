@@ -12,7 +12,7 @@ import Foundation
 
 public enum CGContextCoordinates {
     case original
-    case adjusted
+    case natural
 }
 % for type in uint_types:
 %   summable = type_to_summable[type]
@@ -216,7 +216,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
         )
     }
 
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -235,7 +235,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
         switch coordinates {
         case .original:
             break
-        case .adjusted:
+        case .natural:
             context.scaleBy(x: 1, y: -1)
             context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
         }
@@ -340,7 +340,7 @@ extension Image where Pixel == ${type} {
         )
     }
 
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -359,7 +359,7 @@ extension Image where Pixel == ${type} {
         switch coordinates {
         case .original:
             break
-        case .adjusted:
+        case .natural:
             context.scaleBy(x: 1, y: -1)
             context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
         }
