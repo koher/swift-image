@@ -9,17 +9,20 @@ internal struct ExtrapolatedImage<Pixels : ImageProtocol> : ImageProtocol {
     public let xRange: CountableRange<Int> = .min ..< .max
     public let yRange: CountableRange<Int> = .min ..< .max
     
+    private var pixels: [Coordinate: Pixel]
+    
     internal init(image: Pixels, extrapolationMethod: ExtrapolationMethod<Pixels.Pixel>) {
         self.image = image
         self.extrapolationMethod = extrapolationMethod
+        self.pixels = [:]
     }
     
     public subscript(x: Int, y: Int) -> Pixels.Pixel {
         get {
-            return image[x, y, extrapolatedBy: extrapolationMethod]
+            return pixels[Coordinate(x: x, y: y)] ?? image[x, y, extrapolatedBy: extrapolationMethod]
         }
         set {
-            fatalError("Unsupported.")
+            pixels[Coordinate(x: x, y: y)] = newValue
         }
     }
     
@@ -30,4 +33,9 @@ internal struct ExtrapolatedImage<Pixels : ImageProtocol> : ImageProtocol {
     public func makeIterator() -> ImageIterator<ExtrapolatedImage<Pixels>> {
         return ImageIterator(self)
     }
+}
+
+private struct Coordinate : Hashable {
+    var x: Int
+    var y: Int
 }

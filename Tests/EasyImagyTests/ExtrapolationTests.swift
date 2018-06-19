@@ -483,19 +483,19 @@ class ExtrapolationTests: XCTestCase {
             ]))
             XCTAssertEqual(slice[-2, -1], 2)
             
-//            slice[-2, -1] = 9
-//
-//            XCTAssertEqual(slice, AnyImage<UInt8>(width: 11, height: 8, pixels: [
-//                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
-//                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
-//                3, 3, 9, 1, 1, 2, 3, 3, 2, 1, 1,
-//                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
-//                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
-//                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
-//                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
-//                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
-//            ]))
-//            XCTAssertEqual(slice[-2, -1], 9)
+            slice[-2, -1] = 9
+
+            XCTAssertEqual(slice, AnyImage<UInt8>(width: 11, height: 8, pixels: [
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                3, 3, 9, 1, 1, 2, 3, 3, 2, 1, 1,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                6, 6, 5, 4, 4, 5, 6, 6, 5, 4, 4,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+                3, 3, 2, 1, 1, 2, 3, 3, 2, 1, 1,
+            ]))
+            XCTAssertEqual(slice[-2, -1], 9)
         }
         
         do {
@@ -511,7 +511,7 @@ class ExtrapolationTests: XCTestCase {
             ]))
             
             var b = a[-4 ... -1, -3 ... -1, extrapolatedBy: .reflection]
-//            let c = b
+            let c = b
             
             XCTAssertEqual(b, AnyImage<UInt8>(width: 4, height: 3, pixels: [
                 1, 1, 3, 3,
@@ -519,17 +519,17 @@ class ExtrapolationTests: XCTestCase {
                 4, 4, 6, 6,
             ]))
             XCTAssertEqual(b[-3, -3], 1)
-//            XCTAssertEqual(c[-3, -3], 1)
-//
-//            b[-3, -3] = 9
-//            
-//            XCTAssertEqual(b, AnyImage<UInt8>(width: 4, height: 3, pixels: [
-//                1, 9, 3, 3,
-//                4, 4, 6, 6,
-//                4, 4, 6, 6,
-//            ]))
-//            XCTAssertEqual(b[-3, -3], 9)
-//            XCTAssertEqual(c[-3, -3], 1)
+            XCTAssertEqual(c[-3, -3], 1)
+
+            b[-3, -3] = 9
+            
+            XCTAssertEqual(b, AnyImage<UInt8>(width: 4, height: 3, pixels: [
+                1, 9, 3, 3,
+                4, 4, 6, 6,
+                4, 4, 6, 6,
+            ]))
+            XCTAssertEqual(b[-3, -3], 9)
+            XCTAssertEqual(c[-3, -3], 1)
         }
     }
     
