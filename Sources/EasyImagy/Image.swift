@@ -1,4 +1,6 @@
 public struct Image<Pixel> : ImageProtocol {
+    public typealias SubImage = ImageSlice<Pixel>
+    
 	public let width: Int
 	public let height: Int
 	internal var pixels: [Pixel]

@@ -124,6 +124,10 @@
 		D66AFEE520D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */; };
 		D66AFEE620D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */; };
 		D66AFEE720D78D47003FE64C /* PremultipliedRGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */; };
+		D66AFEF520D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
+		D66AFEF620D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
+		D66AFEF720D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
+		D66AFEF820D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
 		D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE0F1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE101FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
@@ -232,6 +236,7 @@
 		D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBA.swift; sourceTree = "<group>"; };
 		D66840581F9F426200D1DE7F /* Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numeric.swift; sourceTree = "<group>"; };
 		D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBATests.swift; sourceTree = "<group>"; };
+		D66AFEF420D90296003FE64C /* ImageIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIterator.swift; sourceTree = "<group>"; };
 		D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
 		D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
@@ -346,6 +351,7 @@
 				D6134A2D1F852A49005592A2 /* ImageCoreGraphics.swift */,
 				D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */,
 				D60D48A41FA0E3360047F2D3 /* ImageInternal.swift */,
+				D66AFEF420D90296003FE64C /* ImageIterator.swift */,
 				D631091E1FCFFB4C009974D0 /* ImageOperators.swift */,
 				D6FAC8691FD1938400509BCB /* ImageProtocol.swift */,
 				D6134A2E1F852A49005592A2 /* ImageSlice.swift */,
@@ -695,6 +701,7 @@
 				D6134A591F852A85005592A2 /* RGBA.swift in Sources */,
 				D62C6ED51FCE55EB00E7DF02 /* Interpolation.swift in Sources */,
 				D6B4EE2A1FE4A1C300B6B7B0 /* Resizing.swift in Sources */,
+				D66AFEF520D90296003FE64C /* ImageIterator.swift in Sources */,
 				D6134A501F852A85005592A2 /* Image.swift in Sources */,
 				D62C6EC71FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134A551F852A85005592A2 /* ImageUIKit.swift in Sources */,
@@ -751,6 +758,7 @@
 				D6134A7B1F85CF5E005592A2 /* Image.swift in Sources */,
 				D62C6ED61FCE55F700E7DF02 /* Interpolation.swift in Sources */,
 				D6B4EE2B1FE4A1C300B6B7B0 /* Resizing.swift in Sources */,
+				D66AFEF620D90296003FE64C /* ImageIterator.swift in Sources */,
 				D6134A801F85CF5E005592A2 /* ImageUIKit.swift in Sources */,
 				D62C6EC81FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */,
@@ -807,6 +815,7 @@
 				D6134ABA1F85D2AF005592A2 /* Image.swift in Sources */,
 				D62C6ED71FCE55F800E7DF02 /* Interpolation.swift in Sources */,
 				D6B4EE2C1FE4A1C300B6B7B0 /* Resizing.swift in Sources */,
+				D66AFEF720D90296003FE64C /* ImageIterator.swift in Sources */,
 				D6134ABF1F85D2AF005592A2 /* ImageUIKit.swift in Sources */,
 				D62C6EC91FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134ABD1F85D2AF005592A2 /* ImageSlice.swift in Sources */,
@@ -863,6 +872,7 @@
 				D6134ADB1F85DA5C005592A2 /* Image.swift in Sources */,
 				D62C6ED81FCE55F800E7DF02 /* Interpolation.swift in Sources */,
 				D6B4EE2D1FE4A1C300B6B7B0 /* Resizing.swift in Sources */,
+				D66AFEF820D90296003FE64C /* ImageIterator.swift in Sources */,
 				D6134AE01F85DA5C005592A2 /* ImageUIKit.swift in Sources */,
 				D62C6ECA1FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */,

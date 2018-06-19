@@ -1,12 +1,16 @@
 public struct ImageSlice<Pixel> : ImageProtocol {
-    private var image: AnyImage<Pixel>
+    public typealias SubImage = ImageSlice<Pixel>
+    public typealias Iterator = ImageIterator<ImageSlice<Pixel>>
+    public typealias Element = Pixel // FIXME: Remove this line in the future. Swift 4.1 needs it to build `ImageSlice`.
+
+    private var image: Image<Pixel>
     public let xRange: CountableRange<Int>
     public let yRange: CountableRange<Int>
     
-    internal init<I : ImageProtocol>(image: I, xRange: CountableRange<Int>, yRange: CountableRange<Int>) where I.Pixel == Pixel {
+    internal init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
         precondition(image.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(image.yRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
-        self.image = AnyImage<Pixel>(image)
+        self.image = image
         self.xRange = xRange
         self.yRange = yRange
     }
@@ -43,41 +47,7 @@ extension ImageSlice {
 }
 
 extension ImageSlice {
-    public func makeIterator() -> PixelIterator<Pixel> {
-        return PixelIterator(image: image, xRange: xRange, yRange: yRange)
-    }
-}
-
-public struct PixelIterator<Pixel>: IteratorProtocol {
-    public typealias Element = Pixel
-    
-    private let image: AnyImage<Pixel>
-    
-    private let xRange: CountableRange<Int>
-    private let yRange: CountableRange<Int>
-    
-    private var x: Int
-    private var y: Int
-    
-    internal init(image: AnyImage<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
-        self.image = image
-        
-        self.xRange = xRange
-        self.yRange = yRange
-        
-        self.x = xRange.lowerBound
-        self.y = yRange.lowerBound
-    }
-    
-    public mutating func next() -> Pixel? {
-        if x == xRange.upperBound {
-            x = xRange.lowerBound
-            y += 1
-        }
-        
-        guard y < yRange.upperBound else { return nil }
-        defer { x += 1 }
-        
-        return image[x, y]
+    public func makeIterator() -> ImageIterator<ImageSlice<Pixel>> {
+        return ImageIterator<ImageSlice<Pixel>>(self)
     }
 }
