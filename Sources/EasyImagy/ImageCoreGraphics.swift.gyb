@@ -9,6 +9,11 @@
 #if canImport(CoreGraphics)
 import CoreGraphics
 import Foundation
+
+public enum CGContextCoordinates {
+    case original
+    case adjusted
+}
 % for type in uint_types:
 %   summable = type_to_summable[type]
 
@@ -211,7 +216,7 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -227,8 +232,13 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
             space: Image<PremultipliedRGBA<${type}>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
@@ -330,7 +340,7 @@ extension Image where Pixel == ${type} {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -346,8 +356,13 @@ extension Image where Pixel == ${type} {
             space: Image<${type}>.colorSpace,
             bitmapInfo: Image<${type}>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }

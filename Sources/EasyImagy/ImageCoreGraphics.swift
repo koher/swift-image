@@ -2,6 +2,11 @@
 import CoreGraphics
 import Foundation
 
+public enum CGContextCoordinates {
+    case original
+    case adjusted
+}
+
 extension Image where Pixel == RGBA<UInt8> {
     private static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
@@ -345,7 +350,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -361,8 +366,13 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
             space: Image<PremultipliedRGBA<UInt8>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
@@ -420,7 +430,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -436,8 +446,13 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
             space: Image<PremultipliedRGBA<UInt16>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
@@ -495,7 +510,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -511,8 +526,13 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
             space: Image<PremultipliedRGBA<UInt32>>.colorSpace,
             bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
@@ -646,7 +666,7 @@ extension Image where Pixel == UInt8 {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -662,8 +682,13 @@ extension Image where Pixel == UInt8 {
             space: Image<UInt8>.colorSpace,
             bitmapInfo: Image<UInt8>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
@@ -721,7 +746,7 @@ extension Image where Pixel == UInt16 {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -737,8 +762,13 @@ extension Image where Pixel == UInt16 {
             space: Image<UInt16>.colorSpace,
             bitmapInfo: Image<UInt16>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
@@ -796,7 +826,7 @@ extension Image where Pixel == UInt32 {
         )
     }
 
-    public mutating func withCGContext(_ body: (CGContext) throws -> Void) rethrows {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .adjusted, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
 
@@ -812,8 +842,13 @@ extension Image where Pixel == UInt32 {
             space: Image<UInt32>.colorSpace,
             bitmapInfo: Image<UInt32>.bitmapInfo.rawValue
         )!
-        context.scaleBy(x: 1, y: -1)
-        context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        switch coordinates {
+        case .original:
+            break
+        case .adjusted:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
 
         try body(context)
     }
