@@ -176,7 +176,7 @@ class EasyImagySample: XCTestCase {
     #if canImport(UIKit)
     func testWithUIImage() {
         /**/ if never() {
-            let imageView = UIImageView()
+            /**/ let imageView = UIImageView()
             
             // From `UIImage`
             let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
@@ -189,14 +189,32 @@ class EasyImagySample: XCTestCase {
     #if canImport(AppKit)
     func testWithNSImage() {
         /**/ if never() {
-            let imageView = NSImageView()
+            /**/ let imageView = NSImageView()
             
             // From `NSImage`
             let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
             
             // To `NSImage`
             imageView.image = image.nsImage
-            /**/ }
+        /**/ }
+    }
+    #endif
+    #if canImport(UIKit)
+    func testWithCoreGraphics() {
+        /**/ if never() {
+            /**/ let imageView = UIImageView()
+            
+            // Drawing on images with CoreGraphics
+            var image = Image<PremultipliedRGBA<UInt8>>(uiImage: imageView.image!)
+            image.withCGContext { context in
+                context.setLineWidth(1)
+                context.setStrokeColor(UIColor.red.cgColor)
+                context.move(to: CGPoint(x: -1, y: -1))
+                context.addLine(to: CGPoint(x: 640, y: 480))
+                context.strokePath()
+            }
+            imageView.image = image.uiImage
+        /**/ }
     }
     #endif
     
