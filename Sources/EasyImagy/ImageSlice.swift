@@ -1,6 +1,5 @@
 public struct ImageSlice<Pixel> : ImageProtocol {
     public typealias SubImage = ImageSlice<Pixel>
-    public typealias Iterator = ImageIterator<ImageSlice<Pixel>>
     public typealias Element = Pixel // FIXME: Remove this line in the future. Swift 4.1 needs it to build `ImageSlice`.
 
     private var image: Image<Pixel>
@@ -43,11 +42,5 @@ public struct ImageSlice<Pixel> : ImageProtocol {
 extension ImageSlice {
     public init(_ image: Image<Pixel>) {
         self.init(image: image, xRange: image.xRange, yRange: image.yRange)
-    }
-}
-
-extension ImageSlice {
-    public func makeIterator() -> ImageIterator<ImageSlice<Pixel>> {
-        return ImageIterator<ImageSlice<Pixel>>(self)
     }
 }

@@ -2,7 +2,6 @@ import Foundation
 
 public struct AnyImage<Pixel> : ImageProtocol {
     public typealias SubImage = AnyImage<Pixel>
-    public typealias Iterator = ImageIterator<AnyImage<Pixel>>
     public typealias Element = Pixel // FIXME: Remove this line in the future. Swift 4.1 needs it to build `AnyImage`.
 
     private var box: AnyImageBox<Pixel>
@@ -49,10 +48,6 @@ public struct AnyImage<Pixel> : ImageProtocol {
     
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> AnyImage<Pixel> {
         return AnyImage(box: self.box, xRange: xRange, yRange: yRange)
-    }
-    
-    public func makeIterator() -> ImageIterator<AnyImage<Pixel>> {
-        return ImageIterator(self)
     }
 }
 

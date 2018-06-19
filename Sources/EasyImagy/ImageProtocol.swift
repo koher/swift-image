@@ -48,6 +48,10 @@ extension ImageProtocol {
     public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> SubImage {
         return self[self.xRange, self.yRange]
     }
+    
+    public func makeIterator() -> ImageIterator<Self> {
+        return ImageIterator(self)
+    }
 }
 
 extension ImageProtocol {
