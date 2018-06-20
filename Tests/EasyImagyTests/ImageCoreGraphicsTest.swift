@@ -122,6 +122,85 @@ import EasyImagy
                 let restored = Image<Bool>(cgImage: cgImage)
                 XCTAssertEqual(restored, image)
             }
+            
+            do {
+                let image = Image<UInt8>(width: 3, height: 2, pixels: [
+                    1, 2, 3,
+                    4, 5, 6,
+                ])
+                
+                let cgImage = image.cgImage
+                let restored = Image<UInt8>(cgImage: cgImage)
+                
+                XCTAssertEqual(restored.width, 3)
+                XCTAssertEqual(restored.height, 2)
+                
+                XCTAssertEqual(restored[0, 0], 1)
+                XCTAssertEqual(restored[1, 0], 2)
+                XCTAssertEqual(restored[2, 0], 3)
+                
+                XCTAssertEqual(restored[0, 1], 4)
+                XCTAssertEqual(restored[1, 1], 5)
+                XCTAssertEqual(restored[2, 1], 6)
+            }
+            
+            do {
+                let slice: ImageSlice<UInt8> = Image<UInt8>(width: 5, height: 4, pixels: [
+                    0, 0, 0, 0, 0,
+                    0, 1, 2, 3, 0,
+                    0, 4, 5, 6, 0,
+                    0, 0, 0, 0, 0,
+                ])[1...3, 1...2]
+                
+                let cgImage = slice.cgImage
+                let restored = Image<UInt8>(cgImage: cgImage)
+                
+                XCTAssertEqual(restored.width, 3)
+                XCTAssertEqual(restored.height, 2)
+                
+                XCTAssertEqual(restored[0, 0], 1)
+                XCTAssertEqual(restored[1, 0], 2)
+                XCTAssertEqual(restored[2, 0], 3)
+                
+                XCTAssertEqual(restored[0, 1], 4)
+                XCTAssertEqual(restored[1, 1], 5)
+                XCTAssertEqual(restored[2, 1], 6)
+            }
+            
+            do {
+                let image = Image<PremultipliedRGBA<UInt8>>(width: 1, height: 2, pixels: [
+                    PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127),
+                    PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4),
+                ])
+                
+                let cgImage = image.cgImage
+                let restored = Image<PremultipliedRGBA<UInt8>>(cgImage: cgImage)
+                
+                XCTAssertEqual(restored.width, 1)
+                XCTAssertEqual(restored.height, 2)
+                
+                XCTAssertEqual(restored[0, 0], PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127))
+                XCTAssertEqual(restored[0, 1], PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4))
+            }
+            
+            do {
+                let transparent = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
+                let slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 3, height: 4, pixels: [
+                    transparent, transparent, transparent,
+                    transparent, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127), transparent,
+                    transparent, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4), transparent,
+                    transparent, transparent, transparent,
+                ])[1...1, 1...2]
+                
+                let cgImage = slice.cgImage
+                let restored = Image<PremultipliedRGBA<UInt8>>(cgImage: cgImage)
+                
+                XCTAssertEqual(restored.width, 1)
+                XCTAssertEqual(restored.height, 2)
+                
+                XCTAssertEqual(restored[0, 0], PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127))
+                XCTAssertEqual(restored[0, 1], PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4))
+            }
         }
         
         func testWithCGImage() {

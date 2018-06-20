@@ -969,6 +969,15 @@ extension Image where Pixel == Bool {
 }
 
 extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
+    public var cgImage: CGImage {
+        return ImageSlice<PremultipliedRGBA<UInt8>>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            componentType: UInt8.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<UInt8>>.withGeneratedCGImage(
             slice: self,
@@ -1006,6 +1015,15 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
 }
 
 extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
+    public var cgImage: CGImage {
+        return ImageSlice<PremultipliedRGBA<UInt16>>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<UInt16>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo,
+            componentType: UInt16.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<UInt16>>.withGeneratedCGImage(
             slice: self,
@@ -1043,6 +1061,15 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
 }
 
 extension ImageSlice where Pixel == PremultipliedRGBA<UInt32> {
+    public var cgImage: CGImage {
+        return ImageSlice<PremultipliedRGBA<UInt32>>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<UInt32>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo,
+            componentType: UInt32.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<UInt32>>.withGeneratedCGImage(
             slice: self,
@@ -1080,6 +1107,15 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt32> {
 }
 
 extension ImageSlice where Pixel == UInt8 {
+    public var cgImage: CGImage {
+        return ImageSlice<UInt8>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<UInt8>.colorSpace,
+            bitmapInfo: Image<UInt8>.bitmapInfo,
+            componentType: UInt8.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<UInt8>.withGeneratedCGImage(
             slice: self,
@@ -1117,6 +1153,15 @@ extension ImageSlice where Pixel == UInt8 {
 }
 
 extension ImageSlice where Pixel == UInt16 {
+    public var cgImage: CGImage {
+        return ImageSlice<UInt16>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<UInt16>.colorSpace,
+            bitmapInfo: Image<UInt16>.bitmapInfo,
+            componentType: UInt16.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<UInt16>.withGeneratedCGImage(
             slice: self,
@@ -1154,6 +1199,15 @@ extension ImageSlice where Pixel == UInt16 {
 }
 
 extension ImageSlice where Pixel == UInt32 {
+    public var cgImage: CGImage {
+        return ImageSlice<UInt32>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<UInt32>.colorSpace,
+            bitmapInfo: Image<UInt32>.bitmapInfo,
+            componentType: UInt32.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<UInt32>.withGeneratedCGImage(
             slice: self,

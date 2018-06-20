@@ -451,6 +451,15 @@ extension Image where Pixel == Bool {
 % for type in uint_types:
 
 extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
+    public var cgImage: CGImage {
+        return ImageSlice<PremultipliedRGBA<${type}>>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            componentType: ${type}.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<${type}>>.withGeneratedCGImage(
             slice: self,
@@ -491,6 +500,15 @@ extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
 % for type in uint_types:
 
 extension ImageSlice where Pixel == ${type} {
+    public var cgImage: CGImage {
+        return ImageSlice<${type}>.generatedCGImage(
+            slice: self,
+            colorSpace: Image<${type}>.colorSpace,
+            bitmapInfo: Image<${type}>.bitmapInfo,
+            componentType: ${type}.self
+        )
+    }
+
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<${type}>.withGeneratedCGImage(
             slice: self,
