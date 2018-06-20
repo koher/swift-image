@@ -44,3 +44,73 @@ extension ImageSlice {
         self.init(image: image, xRange: image.xRange, yRange: image.yRange)
     }
 }
+
+#if canImport(CoreGraphics)
+import Foundation
+import CoreGraphics
+
+extension ImageSlice { // Gray or PremultipliedRGBA
+    internal static func generatedCGImage<Component>(
+        slice: ImageSlice<Pixel>,
+        colorSpace: CGColorSpace,
+        bitmapInfo: CGBitmapInfo,
+        componentType: Component.Type
+    ) -> CGImage {
+        let length = slice.image.width * slice.height * MemoryLayout<Pixel>.size
+        
+        let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: slice.image.pixels) + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+        let provider: CGDataProvider = CGDataProvider(data: Data(
+            bytes: bytes,
+            count: length
+        ) as CFData)!
+        
+        return CGImage(
+            width: slice.width,
+            height: slice.height,
+            bitsPerComponent: MemoryLayout<Component>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * slice.image.width,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+    }
+    
+    internal static func withGeneratedCGImage<Component, R>(
+        slice: ImageSlice<Pixel>,
+        colorSpace: CGColorSpace,
+        bitmapInfo: CGBitmapInfo,
+        body: (CGImage) throws -> R,
+        componentType: Component.Type
+    ) rethrows -> R {
+        var slice = slice
+        let length = slice.image.width * slice.height * MemoryLayout<Pixel>.size
+        
+        let bytes: UnsafeMutablePointer<Pixel> = &slice.image.pixels + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+        let provider: CGDataProvider = CGDataProvider(data: Data(
+            bytesNoCopy: bytes,
+            count: length,
+            deallocator: .none
+        ) as CFData)!
+        
+        let cgImage = CGImage(
+            width: slice.width,
+            height: slice.height,
+            bitsPerComponent: MemoryLayout<Component>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * slice.image.width,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+        
+        return try body(cgImage)
+    }
+}
+#endif
