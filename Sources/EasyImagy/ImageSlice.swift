@@ -34,7 +34,7 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     
     public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
         precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
-        precondition(self.xRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
+        precondition(self.yRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         return image[xRange, yRange]
     }
 }
