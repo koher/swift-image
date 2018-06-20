@@ -56,13 +56,24 @@ extension ImageSlice { // Gray or PremultipliedRGBA
         bitmapInfo: CGBitmapInfo,
         componentType: Component.Type
     ) -> CGImage {
-        let length = slice.image.width * slice.height * MemoryLayout<Pixel>.size
+        let imageCount = slice.image.count
+        let pixelCount = slice.image.width * slice.height
+        let length = pixelCount * MemoryLayout<Pixel>.size
+        let offset = slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound
         
-        let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: slice.image.pixels) + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
-        let provider: CGDataProvider = CGDataProvider(data: Data(
-            bytes: bytes,
-            count: length
-        ) as CFData)!
+        var data: Data
+        if offset + pixelCount <= imageCount {
+            let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: slice.image.pixels) + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+            data = Data(bytes: bytes, count: length)
+        } else {
+            let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: slice.image.pixels) + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+            let pointer: UnsafeMutablePointer<UInt8> = UnsafeMutableRawPointer(bytes).bindMemory(to: UInt8.self, capacity: length)
+            data = Data(capacity: pixelCount * MemoryLayout<Pixel>.size)
+            data.append(pointer, count: (imageCount - offset) * MemoryLayout<Pixel>.size)
+            data.append(pointer, count: (offset + pixelCount - imageCount) * MemoryLayout<Pixel>.size)
+        }
+        
+        let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
         
         return CGImage(
             width: slice.width,
