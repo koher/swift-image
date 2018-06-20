@@ -165,11 +165,11 @@ extension Image where Pixel == RGBA<Bool> {
 % for type in uint_types:
 
 extension Image where Pixel == PremultipliedRGBA<${type}> {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
@@ -289,11 +289,11 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
 % for type in uint_types:
 
 extension Image where Pixel == ${type} {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
     
@@ -447,4 +447,85 @@ extension Image where Pixel == Bool {
         return map { $0 ? 255 as UInt8 : 0 as UInt8 }.cgImage
     }
 }
+%
+% for type in uint_types:
+
+extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<PremultipliedRGBA<${type}>>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            body: body,
+            componentType: ${type}.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<PremultipliedRGBA<${type}>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<${type}>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<${type}>>.size * self.image.width,
+            space: Image<PremultipliedRGBA<${type}>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+% end
+%
+% for type in uint_types:
+
+extension ImageSlice where Pixel == ${type} {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<${type}>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<${type}>.colorSpace,
+            bitmapInfo: Image<${type}>.bitmapInfo,
+            body: body,
+            componentType: ${type}.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<${type}> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<${type}>.size * 8,
+            bytesPerRow: MemoryLayout<${type}>.size * self.image.width,
+            space: Image<${type}>.colorSpace,
+            bitmapInfo: Image<${type}>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+% end
+%
 #endif

@@ -148,12 +148,56 @@ import EasyImagy
             }
             
             do {
+                let slice: ImageSlice<UInt8> = Image<UInt8>(width: 5, height: 4, pixels: [
+                    0, 0, 0, 0, 0,
+                    0, 1, 2, 3, 0,
+                    0, 4, 5, 6, 0,
+                    0, 0, 0, 0, 0,
+                ])[1...3, 1...2]
+                
+                slice.withCGImage { cgImage in
+                    let restored = Image<UInt8>(cgImage: cgImage)
+                    
+                    XCTAssertEqual(restored.width, 3)
+                    XCTAssertEqual(restored.height, 2)
+                    
+                    XCTAssertEqual(restored[0, 0], 1)
+                    XCTAssertEqual(restored[1, 0], 2)
+                    XCTAssertEqual(restored[2, 0], 3)
+                    
+                    XCTAssertEqual(restored[0, 1], 4)
+                    XCTAssertEqual(restored[1, 1], 5)
+                    XCTAssertEqual(restored[2, 1], 6)
+                }
+            }
+            
+            do {
                 let image = Image<PremultipliedRGBA<UInt8>>(width: 1, height: 2, pixels: [
                     PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127),
                     PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4),
                 ])
                 
                 image.withCGImage { cgImage in
+                    let restored = Image<PremultipliedRGBA<UInt8>>(cgImage: cgImage)
+                    
+                    XCTAssertEqual(restored.width, 1)
+                    XCTAssertEqual(restored.height, 2)
+                    
+                    XCTAssertEqual(restored[0, 0], PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127))
+                    XCTAssertEqual(restored[0, 1], PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4))
+                }
+            }
+            
+            do {
+                let transparent = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
+                let slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 3, height: 4, pixels: [
+                    transparent, transparent, transparent,
+                    transparent, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127), transparent,
+                    transparent, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4), transparent,
+                    transparent, transparent, transparent,
+                ])[1...1, 1...2]
+                
+                slice.withCGImage { cgImage in
                     let restored = Image<PremultipliedRGBA<UInt8>>(cgImage: cgImage)
                     
                     XCTAssertEqual(restored.width, 1)
@@ -376,6 +420,204 @@ import EasyImagy
                 XCTAssertEqual(image[1, 3], 255)
                 XCTAssertEqual(image[2, 3], 0)
                 XCTAssertEqual(image[3, 3], 0)
+            }
+            
+            do {
+                var slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 6, height: 6, pixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))[1...4, 1...4]
+                slice.withCGContext { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(red)
+                    context.move(to: CGPoint(x: 2, y: 0))
+                    context.addLine(to: CGPoint(x: 2, y: 5))
+                    context.move(to: CGPoint(x: 0, y: 3))
+                    context.addLine(to: CGPoint(x: 5, y: 3))
+                    context.strokePath()
+                }
+                
+                XCTAssertEqual(slice[1, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 1], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                
+                XCTAssertEqual(slice[1, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                
+                XCTAssertEqual(slice[1, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                
+                XCTAssertEqual(slice[1, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 4], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+            }
+            
+            do {
+                var slice: ImageSlice<UInt8> = Image<UInt8>(width: 6, height: 6, pixel: 0)[1...4, 1...4]
+                slice.withCGContext { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(white)
+                    context.move(to: CGPoint(x: 2, y: 0))
+                    context.addLine(to: CGPoint(x: 2, y: 5))
+                    context.move(to: CGPoint(x: 0, y: 3))
+                    context.addLine(to: CGPoint(x: 5, y: 3))
+                    context.strokePath()
+                }
+                
+                XCTAssertEqual(slice[1, 1], 0)
+                XCTAssertEqual(slice[2, 1], 255)
+                XCTAssertEqual(slice[3, 1], 0)
+                XCTAssertEqual(slice[4, 1], 0)
+                
+                XCTAssertEqual(slice[1, 2], 0)
+                XCTAssertEqual(slice[2, 2], 255)
+                XCTAssertEqual(slice[3, 2], 0)
+                XCTAssertEqual(slice[4, 2], 0)
+                
+                XCTAssertEqual(slice[1, 3], 255)
+                XCTAssertEqual(slice[2, 3], 255)
+                XCTAssertEqual(slice[3, 3], 255)
+                XCTAssertEqual(slice[4, 3], 255)
+                
+                XCTAssertEqual(slice[1, 4], 0)
+                XCTAssertEqual(slice[2, 4], 255)
+                XCTAssertEqual(slice[3, 4], 0)
+                XCTAssertEqual(slice[4, 4], 0)
+            }
+            
+            do {
+                var slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 6, height: 6, pixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))[1...4, 1...4]
+                slice.withCGContext(coordinates: .natural) { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(red)
+                    context.move(to: CGPoint(x: 2, y: 0))
+                    context.addLine(to: CGPoint(x: 2, y: 5))
+                    context.move(to: CGPoint(x: 0, y: 3))
+                    context.addLine(to: CGPoint(x: 5, y: 3))
+                    context.strokePath()
+                }
+
+                XCTAssertEqual(slice[1, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 1], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(slice[1, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(slice[1, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(slice[1, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 4], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+            }
+
+            do {
+                var slice: ImageSlice<UInt8> = Image<UInt8>(width: 6, height: 6, pixel: 0)[1...4, 1...4]
+                slice.withCGContext(coordinates: .natural) { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(white)
+                    context.move(to: CGPoint(x: 2, y: 0))
+                    context.addLine(to: CGPoint(x: 2, y: 5))
+                    context.move(to: CGPoint(x: 0, y: 3))
+                    context.addLine(to: CGPoint(x: 5, y: 3))
+                    context.strokePath()
+                }
+
+                XCTAssertEqual(slice[1, 1], 0)
+                XCTAssertEqual(slice[2, 1], 255)
+                XCTAssertEqual(slice[3, 1], 0)
+                XCTAssertEqual(slice[4, 1], 0)
+
+                XCTAssertEqual(slice[1, 2], 0)
+                XCTAssertEqual(slice[2, 2], 255)
+                XCTAssertEqual(slice[3, 2], 0)
+                XCTAssertEqual(slice[4, 2], 0)
+
+                XCTAssertEqual(slice[1, 3], 255)
+                XCTAssertEqual(slice[2, 3], 255)
+                XCTAssertEqual(slice[3, 3], 255)
+                XCTAssertEqual(slice[4, 3], 255)
+
+                XCTAssertEqual(slice[1, 4], 0)
+                XCTAssertEqual(slice[2, 4], 255)
+                XCTAssertEqual(slice[3, 4], 0)
+                XCTAssertEqual(slice[4, 4], 0)
+            }
+
+            do {
+                var slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 6, height: 6, pixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))[1...4, 1...4]
+                slice.withCGContext(coordinates: .original) { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(red)
+                    context.move(to: CGPoint(x: 1.5, y: 4.5))
+                    context.addLine(to: CGPoint(x: 1.5, y: -0.5))
+                    context.move(to: CGPoint(x: -0.5, y: 1.5))
+                    context.addLine(to: CGPoint(x: 4.5, y: 1.5))
+                    context.strokePath()
+                }
+
+                XCTAssertEqual(slice[1, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 1], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 1], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(slice[1, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 2], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 2], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(slice[1, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 3], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+
+                XCTAssertEqual(slice[1, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[2, 4], PremultipliedRGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[3, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+                XCTAssertEqual(slice[4, 4], PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 255))
+            }
+
+            do {
+                var slice: ImageSlice<UInt8> = Image<UInt8>(width: 6, height: 6, pixel: 0)[1...4, 1...4]
+                slice.withCGContext(coordinates: .original) { context in
+                    context.setLineWidth(1)
+                    context.setStrokeColor(white)
+                    context.move(to: CGPoint(x: 1.5, y: 4.5))
+                    context.addLine(to: CGPoint(x: 1.5, y: -0.5))
+                    context.move(to: CGPoint(x: -0.5, y: 1.5))
+                    context.addLine(to: CGPoint(x: 4.5, y: 1.5))
+                    context.strokePath()
+                }
+
+                XCTAssertEqual(slice[1, 1], 0)
+                XCTAssertEqual(slice[2, 1], 255)
+                XCTAssertEqual(slice[3, 1], 0)
+                XCTAssertEqual(slice[4, 1], 0)
+
+                XCTAssertEqual(slice[1, 2], 0)
+                XCTAssertEqual(slice[2, 2], 255)
+                XCTAssertEqual(slice[3, 2], 0)
+                XCTAssertEqual(slice[4, 2], 0)
+
+                XCTAssertEqual(slice[1, 3], 255)
+                XCTAssertEqual(slice[2, 3], 255)
+                XCTAssertEqual(slice[3, 3], 255)
+                XCTAssertEqual(slice[4, 3], 255)
+
+                XCTAssertEqual(slice[1, 4], 0)
+                XCTAssertEqual(slice[2, 4], 255)
+                XCTAssertEqual(slice[3, 4], 0)
+                XCTAssertEqual(slice[4, 4], 0)
             }
         }
     }

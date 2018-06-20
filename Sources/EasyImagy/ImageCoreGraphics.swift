@@ -299,11 +299,11 @@ extension Image where Pixel == RGBA<Bool> {
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt8> {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
@@ -379,11 +379,11 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt16> {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
@@ -459,11 +459,11 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt32> {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
     }
     
@@ -615,11 +615,11 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
 }
 
 extension Image where Pixel == UInt8 {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
     
@@ -695,11 +695,11 @@ extension Image where Pixel == UInt8 {
 }
 
 extension Image where Pixel == UInt16 {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
     
@@ -775,11 +775,11 @@ extension Image where Pixel == UInt16 {
 }
 
 extension Image where Pixel == UInt32 {
-    private static var colorSpace: CGColorSpace {
+    fileprivate static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
-    private static var bitmapInfo: CGBitmapInfo {
+    fileprivate static var bitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
     
@@ -965,6 +965,228 @@ extension Image where Pixel == Bool {
     
     public var cgImage: CGImage {
         return map { $0 ? 255 as UInt8 : 0 as UInt8 }.cgImage
+    }
+}
+
+extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<PremultipliedRGBA<UInt8>>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
+            body: body,
+            componentType: UInt8.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<PremultipliedRGBA<UInt8>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt8>>.size * self.image.width,
+            space: Image<PremultipliedRGBA<UInt8>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+
+extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<PremultipliedRGBA<UInt16>>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<UInt16>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo,
+            body: body,
+            componentType: UInt16.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<PremultipliedRGBA<UInt16>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt16>>.size * self.image.width,
+            space: Image<PremultipliedRGBA<UInt16>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt16>>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+
+extension ImageSlice where Pixel == PremultipliedRGBA<UInt32> {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<PremultipliedRGBA<UInt32>>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<PremultipliedRGBA<UInt32>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo,
+            body: body,
+            componentType: UInt32.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<PremultipliedRGBA<UInt32>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt32>.size * 8,
+            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt32>>.size * self.image.width,
+            space: Image<PremultipliedRGBA<UInt32>>.colorSpace,
+            bitmapInfo: Image<PremultipliedRGBA<UInt32>>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+
+extension ImageSlice where Pixel == UInt8 {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<UInt8>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<UInt8>.colorSpace,
+            bitmapInfo: Image<UInt8>.bitmapInfo,
+            body: body,
+            componentType: UInt8.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<UInt8> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
+            bytesPerRow: MemoryLayout<UInt8>.size * self.image.width,
+            space: Image<UInt8>.colorSpace,
+            bitmapInfo: Image<UInt8>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+
+extension ImageSlice where Pixel == UInt16 {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<UInt16>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<UInt16>.colorSpace,
+            bitmapInfo: Image<UInt16>.bitmapInfo,
+            body: body,
+            componentType: UInt16.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<UInt16> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
+            bytesPerRow: MemoryLayout<UInt16>.size * self.image.width,
+            space: Image<UInt16>.colorSpace,
+            bitmapInfo: Image<UInt16>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+
+extension ImageSlice where Pixel == UInt32 {
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        return try ImageSlice<UInt32>.withGeneratedCGImage(
+            slice: self,
+            colorSpace: Image<UInt32>.colorSpace,
+            bitmapInfo: Image<UInt32>.bitmapInfo,
+            body: body,
+            componentType: UInt32.self
+        )
+    }
+
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<UInt32> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<UInt32>.size * 8,
+            bytesPerRow: MemoryLayout<UInt32>.size * self.image.width,
+            space: Image<UInt32>.colorSpace,
+            bitmapInfo: Image<UInt32>.bitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
     }
 }
 #endif

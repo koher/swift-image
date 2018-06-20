@@ -185,33 +185,63 @@ extension Image { // Gray or PremultipliedRGBA
         let width = image.width
         let height = image.height
         
-        return try image.pixels.withUnsafeMutableBytes { bytes in
-            let provider: CGDataProvider = CGDataProvider(data: Data(
-                bytesNoCopy: bytes.baseAddress!,
-                    // `baseAddress` is `nil` if `bytes.count` is `0`.
-                    // However creating a `CGImage` with 0 pixels is illegal.
-                    // So calling this method with empty images are logic failures
-                    // and using `!` is justified.
-                count: length,
-                deallocator: .none
-            ) as CFData)!
-            
-            let cgImage = CGImage(
-                width: width,
-                height: height,
-                bitsPerComponent: MemoryLayout<Component>.size * 8,
-                bitsPerPixel: MemoryLayout<Pixel>.size * 8,
-                bytesPerRow: MemoryLayout<Pixel>.size * width,
-                space: colorSpace,
-                bitmapInfo: bitmapInfo,
-                provider: provider,
-                decode: nil,
-                shouldInterpolate: false,
-                intent: CGColorRenderingIntent.defaultIntent
-            )!
-            
-            return try body(cgImage)
-        }
+        let provider: CGDataProvider = CGDataProvider(data: Data(
+            bytesNoCopy: &image.pixels,
+            count: length,
+            deallocator: .none
+        ) as CFData)!
+        
+        let cgImage = CGImage(
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<Component>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * width,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+        
+        return try body(cgImage)
+    }
+}
+
+extension ImageSlice { // Gray or PremultipliedRGBA
+    internal static func withGeneratedCGImage<Component, R>(
+        slice: ImageSlice<Pixel>,
+        colorSpace: CGColorSpace,
+        bitmapInfo: CGBitmapInfo,
+        body: (CGImage) throws -> R,
+        componentType: Component.Type
+    ) rethrows -> R {
+        var slice = slice
+        let length = slice.count * MemoryLayout<Pixel>.size
+
+        let bytes: UnsafeMutablePointer<Pixel> = &slice.image.pixels + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+        let provider: CGDataProvider = CGDataProvider(data: Data(
+            bytesNoCopy: bytes,
+            count: length,
+            deallocator: .none
+        ) as CFData)!
+        
+        let cgImage = CGImage(
+            width: slice.width,
+            height: slice.height,
+            bitsPerComponent: MemoryLayout<Component>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * slice.image.width,
+            space: colorSpace,
+            bitmapInfo: bitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+        
+        return try body(cgImage)
     }
 }
     
