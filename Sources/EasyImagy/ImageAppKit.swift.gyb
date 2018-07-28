@@ -46,8 +46,8 @@ extension Image where Pixel == ${pixel_type} {
         switch format {
         case .png:
             return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let complessionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        case .jpeg(let compressionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
         }
     }
 
