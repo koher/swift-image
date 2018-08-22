@@ -52,7 +52,7 @@ extension ImageProtocol where Pixel : _Numeric {
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
     ) -> Image<Pixel> where Kernel.Pixel == Int {
         switch extrapolationMethod {
-        case .filling(let value):
+        case .constant(let value):
             return _convoluted(with: kernel) { x, y in
                 extrapolatedPixelByFillingAt(x: x, y: y, by: value)
             }
@@ -135,7 +135,7 @@ extension ImageProtocol where Pixel : _Numeric {
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
     ) -> Image<Pixel> where Kernel.Pixel == Float {
         switch extrapolationMethod {
-        case .filling(let value):
+        case .constant(let value):
             return _convoluted(with: kernel) { x, y in
                 extrapolatedPixelByFillingAt(x: x, y: y, by: value)
             }
@@ -218,7 +218,7 @@ extension ImageProtocol where Pixel : _Numeric {
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
     ) -> Image<Pixel> where Kernel.Pixel == Double {
         switch extrapolationMethod {
-        case .filling(let value):
+        case .constant(let value):
             return _convoluted(with: kernel) { x, y in
                 extrapolatedPixelByFillingAt(x: x, y: y, by: value)
             }

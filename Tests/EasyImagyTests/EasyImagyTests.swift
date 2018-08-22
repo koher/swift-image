@@ -146,7 +146,7 @@ class EasyImagySample: XCTestCase {
         do {
             /**/ let image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .red)
             // Rotated clockwise by π / 4 and fill the background with red
-            let result = image.rotated(by: .pi / 4, extrapolatedBy: .filling(.red))
+            let result = image.rotated(by: .pi / 4, extrapolatedBy: .constant(.red))
             /**/ _ = result.count
         }
     }

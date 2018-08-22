@@ -1,5 +1,5 @@
 public enum ExtrapolationMethod<Pixel> {
-    case filling(Pixel)
+    case constant(Pixel)
     case edge
     case `repeat`
     case reflection
@@ -13,7 +13,7 @@ private func reminder(_ a: Int, _ b: Int) -> Int {
 extension ImageProtocol {
     public subscript(x: Int, y: Int, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
         switch extrapolationMethod {
-        case .filling(let value):
+        case .constant(let value):
             return extrapolatedPixelByFillingAt(x: x, y: y, by: value)
         case .edge:
             return extrapolatedPixelByEdgeAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
