@@ -491,8 +491,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        case .jpeg(let compressionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
         }
     }
 
@@ -561,8 +561,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        case .jpeg(let compressionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
         }
     }
 
@@ -631,8 +631,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        case .jpeg(let compressionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
         }
     }
 
@@ -701,8 +701,8 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        case .jpeg(let compressionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
         }
     }
 
@@ -771,8 +771,8 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        case .jpeg(let compressionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
         }
     }
 

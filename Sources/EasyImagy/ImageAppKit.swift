@@ -384,8 +384,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
         switch format {
         case .png:
             return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let complessionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        case .jpeg(let compressionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
         }
     }
 
@@ -441,8 +441,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
         switch format {
         case .png:
             return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let complessionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        case .jpeg(let compressionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
         }
     }
 
@@ -498,8 +498,8 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
         switch format {
         case .png:
             return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let complessionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        case .jpeg(let compressionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
         }
     }
 
@@ -555,8 +555,8 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
         switch format {
         case .png:
             return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let complessionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        case .jpeg(let compressionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
         }
     }
 
@@ -612,8 +612,8 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
         switch format {
         case .png:
             return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let complessionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: complessionQuality)])
+        case .jpeg(let compressionQuality):
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
         }
     }
 
