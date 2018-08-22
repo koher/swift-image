@@ -11,7 +11,7 @@ private func reminder(_ a: Int, _ b: Int) -> Int {
 }
 
 extension ImageProtocol {
-    public subscript(x: Int, y: Int, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+    public subscript(x: Int, y: Int, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
         switch extrapolationMethod {
         case .filling(let value):
             return extrapolatedPixelByFillingAt(x: x, y: y, by: value)
@@ -73,26 +73,26 @@ extension ImageProtocol {
 }
 
 extension ImageProtocol {
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> {
+    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> {
         return ExtrapolatedImage<Self>(
             image: self,
             extrapolationMethod: extrapolationMethod
         )[xRange, yRange]
     }
     
-    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> where R1.Bound == Int, R2.Bound == Int {
-        return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange), extrapolatedBy: extrapolationMethod]
+    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> where R1.Bound == Int, R2.Bound == Int {
+        return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange), extrapolation: extrapolationMethod]
     }
     
-    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> where R1.Bound == Int {
-        return self[countableRange(from: xRange, relativeTo: self.xRange), self.yRange, extrapolatedBy: extrapolationMethod]
+    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> where R1.Bound == Int {
+        return self[countableRange(from: xRange, relativeTo: self.xRange), self.yRange, extrapolation: extrapolationMethod]
     }
     
-    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> where R2.Bound == Int {
-        return self[self.xRange, countableRange(from: yRange, relativeTo: self.yRange), extrapolatedBy: extrapolationMethod]
+    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> where R2.Bound == Int {
+        return self[self.xRange, countableRange(from: yRange, relativeTo: self.yRange), extrapolation: extrapolationMethod]
     }
     
-    public subscript(xRange: UnboundedRange, yRange: UnboundedRange, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> {
-        return self[self.xRange, self.yRange, extrapolatedBy: extrapolationMethod]
+    public subscript(xRange: UnboundedRange, yRange: UnboundedRange, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> AnyImage<Pixel> {
+        return self[self.xRange, self.yRange, extrapolation: extrapolationMethod]
     }
 }

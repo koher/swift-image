@@ -18,7 +18,7 @@ internal struct ExtrapolatedImage<Pixels : ImageProtocol> : ImageProtocol {
     
     public subscript(x: Int, y: Int) -> Pixels.Pixel {
         get {
-            return pixels[Coordinate(x: x, y: y)] ?? image[x, y, extrapolatedBy: extrapolationMethod]
+            return pixels[Coordinate(x: x, y: y)] ?? image[x, y, extrapolation: extrapolationMethod]
         }
         set {
             pixels[Coordinate(x: x, y: y)] = newValue

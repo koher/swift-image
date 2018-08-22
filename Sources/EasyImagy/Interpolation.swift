@@ -11,8 +11,8 @@ extension ImageProtocol {
         return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
     }
     
-    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
-        return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    public subscript(x: Double, y: Double, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+        return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolation: extrapolationMethod] }
     }
     
     internal func interpolatedPixelByNearestNeighbor(x: Double, y: Double, pixelAt: (Int, Int) -> Pixel) -> Pixel {
@@ -28,7 +28,7 @@ extension ImageProtocol where Pixel : _Numeric {
         return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1] }
     }
     
-    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod) -> Pixel {
+    public subscript(x: Double, y: Double, interpolation interpolationMethod: InterpolationMethod) -> Pixel {
         switch interpolationMethod {
         case .nearestNeighbor:
             return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1] }
@@ -37,16 +37,16 @@ extension ImageProtocol where Pixel : _Numeric {
         }
     }
     
-    public subscript(x: Double, y: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
-        return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+    public subscript(x: Double, y: Double, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+        return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1, extrapolation: extrapolationMethod] }
     }
     
-    public subscript(x: Double, y: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
+    public subscript(x: Double, y: Double, interpolation interpolationMethod: InterpolationMethod, extrapolation extrapolationMethod: ExtrapolationMethod<Pixel>) -> Pixel {
         switch interpolationMethod {
         case .nearestNeighbor:
-            return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            return interpolatedPixelByNearestNeighbor(x: x, y: y) { self[$0, $1, extrapolation: extrapolationMethod] }
         case .bilinear:
-            return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1, extrapolatedBy: extrapolationMethod] }
+            return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1, extrapolation: extrapolationMethod] }
         }
     }
 
