@@ -80,8 +80,8 @@ extension Image where Pixel == ${pixel_type} {
         switch format {
         case .png:
             return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let complessionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(complessionQuality))
+        case .jpeg(let compressionQuality):
+            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
         }
     }
 
