@@ -1,12 +1,6 @@
 #if canImport(AppKit) || canImport(UIKit)
 import XCTest
 import EasyImagy
-import CoreGraphics
-#if canImport(AppKit)
-import AppKit
-#elseif canImport(UIKit)
-import UIKit
-#endif
 
 class ImageAppUIKitTests: XCTestCase {
     func testPNGData() {
