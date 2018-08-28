@@ -62,32 +62,65 @@ class ImageSliceTests: XCTestCase {
     }
     
     func testSubscriptRange() {
-        let original = Image<UInt8>(width: 5, height: 4, pixels: [
-            0, 0, 0, 0, 0,
-            0, 1, 2, 3, 0,
-            0, 4, 5, 6, 0,
-            0, 0, 0, 0, 0,
-        ])
-        let slice: ImageSlice<UInt8> = original[1...3, 1...2]
-        
         do {
-            let slice2: ImageSlice<UInt8> = slice[1...1, 1...2]
+            let original = Image<UInt8>(width: 5, height: 4, pixels: [
+                0, 0, 0, 0, 0,
+                0, 1, 2, 3, 0,
+                0, 4, 5, 6, 0,
+                0, 0, 0, 0, 0,
+            ])
+            let slice: ImageSlice<UInt8> = original[1...3, 1...2]
             
-            XCTAssertEqual(slice2.width, 1)
-            XCTAssertEqual(slice2.height, 2)
+            do {
+                let slice2: ImageSlice<UInt8> = slice[1...1, 1...2]
+                
+                XCTAssertEqual(slice2.width, 1)
+                XCTAssertEqual(slice2.height, 2)
+                
+                XCTAssertEqual(slice[1, 1], 1)
+                XCTAssertEqual(slice[1, 2], 4)
+            }
             
-            XCTAssertEqual(slice[1, 1], 1)
-            XCTAssertEqual(slice[1, 2], 4)
+            do {
+                let slice2: ImageSlice<UInt8> = slice[2...3, 2...2]
+                
+                XCTAssertEqual(slice2.width, 2)
+                XCTAssertEqual(slice2.height, 1)
+                
+                XCTAssertEqual(slice[2, 2], 5)
+                XCTAssertEqual(slice[3, 2], 6)
+            }
         }
         
         do {
-            let slice2: ImageSlice<UInt8> = slice[2...3, 2...2]
+            let original = Image<UInt8>(width: 4, height: 5, pixels: [
+                0, 0, 0, 0,
+                0, 1, 2, 0,
+                0, 3, 4, 0,
+                0, 5, 6, 0,
+                0, 0, 0, 0,
+            ])
+            let slice: ImageSlice<UInt8> = original[1...2, 1...3]
             
-            XCTAssertEqual(slice2.width, 2)
-            XCTAssertEqual(slice2.height, 1)
+            do {
+                let slice2: ImageSlice<UInt8> = slice[1...2, 1...1]
+                
+                XCTAssertEqual(slice2.width, 2)
+                XCTAssertEqual(slice2.height, 1)
+                
+                XCTAssertEqual(slice[1, 1], 1)
+                XCTAssertEqual(slice[2, 1], 2)
+            }
             
-            XCTAssertEqual(slice[2, 2], 5)
-            XCTAssertEqual(slice[3, 2], 6)
+            do {
+                let slice2: ImageSlice<UInt8> = slice[2...2, 2...3]
+                
+                XCTAssertEqual(slice2.width, 1)
+                XCTAssertEqual(slice2.height, 2)
+                
+                XCTAssertEqual(slice[2, 2], 4)
+                XCTAssertEqual(slice[2, 3], 6)
+            }
         }
     }
     

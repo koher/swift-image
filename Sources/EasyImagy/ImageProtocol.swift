@@ -1,7 +1,8 @@
 import Foundation
 
 public protocol ImageProtocol : Sequence {
-    typealias Pixel = Iterator.Element
+    typealias Pixel = Element
+    associatedtype SubImage : ImageProtocol where SubImage.Element == Element
     
     init(width: Int, height: Int, pixels: [Pixel])
     
@@ -13,11 +14,11 @@ public protocol ImageProtocol : Sequence {
 
     subscript(x: Int, y: Int) -> Pixel { get set }
 
-    subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> { get }
-    subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> ImageSlice<Pixel> where R1.Bound == Int, R2.Bound == Int { get }
-    subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> ImageSlice<Pixel> where R1.Bound == Int { get }
-    subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> ImageSlice<Pixel> where R2.Bound == Int { get }
-    subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> { get }
+    subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> SubImage { get }
+    subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> SubImage where R1.Bound == Int, R2.Bound == Int { get }
+    subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> SubImage where R1.Bound == Int { get }
+    subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> SubImage where R2.Bound == Int { get }
+    subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> SubImage { get }
     
     func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T>
     mutating func update(_ body: (inout Pixel) throws -> ()) rethrows
@@ -32,20 +33,24 @@ extension ImageProtocol {
         return yRange.count
     }
     
-    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> ImageSlice<Pixel> where R1.Bound == Int, R2.Bound == Int {
+    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> SubImage where R1.Bound == Int, R2.Bound == Int {
         return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange)]
     }
     
-    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> ImageSlice<Pixel> where R1.Bound == Int {
+    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> SubImage where R1.Bound == Int {
         return self[countableRange(from: xRange, relativeTo: self.xRange), self.yRange]
     }
     
-    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> ImageSlice<Pixel> where R2.Bound == Int {
+    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> SubImage where R2.Bound == Int {
         return self[self.xRange, countableRange(from: yRange, relativeTo: self.yRange)]
     }
     
-    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> {
+    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> SubImage {
         return self[self.xRange, self.yRange]
+    }
+    
+    public func makeIterator() -> ImageIterator<Self> {
+        return ImageIterator(self)
     }
 }
 

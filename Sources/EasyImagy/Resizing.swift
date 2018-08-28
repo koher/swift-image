@@ -9,11 +9,11 @@ extension ImageProtocol {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound
         if ox == 0 && oy == 0 {
-            return resizedByInterpolationTo(width: width, height: height) { x, y in self[Int(round(x)), Int(round(y)), extrapolatedBy: .edge] }
+            return resizedByInterpolationTo(width: width, height: height) { x, y in self[Int(round(x)), Int(round(y)), extrapolation: .edge] }
         } else {
             let dox = Double(ox)
             let doy = Double(oy)
-            return resizedByInterpolationTo(width: width, height: height) { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolatedBy: .edge] }
+            return resizedByInterpolationTo(width: width, height: height) { x, y in self[Int(round(dox + x)), Int(round(doy + y)), extrapolation: .edge] }
         }
     }
     
@@ -36,7 +36,7 @@ extension ImageProtocol where Pixel : _Numeric {
                 height: height,
                 isAntialiased: true,
                 pixelAt: { x, y in self[x, y] },
-                extrapolatedPixelAt: { x, y in self[x, y, extrapolatedBy: .edge] }
+                extrapolatedPixelAt: { x, y in self[x, y, extrapolation: .edge] }
             )
         } else {
             let dox = Double(ox)
@@ -46,7 +46,7 @@ extension ImageProtocol where Pixel : _Numeric {
                 height: height,
                 isAntialiased: true,
                 pixelAt: { x, y in self[dox + x, doy + y] },
-                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolatedBy: .edge] }
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, extrapolation: .edge] }
             )
         }
     }
@@ -65,8 +65,8 @@ extension ImageProtocol where Pixel : _Numeric {
                 width: width,
                 height: height,
                 isAntialiased: isAntialiased,
-                pixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod] },
-                extrapolatedPixelAt: { x, y in self[x, y, interpolatedBy: interpolationMethod, extrapolatedBy: .edge] }
+                pixelAt: { x, y in self[x, y, interpolation: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[x, y, interpolation: interpolationMethod, extrapolation: .edge] }
             )
         } else {
             let dox = Double(ox)
@@ -75,8 +75,8 @@ extension ImageProtocol where Pixel : _Numeric {
                 width: width,
                 height: height,
                 isAntialiased: isAntialiased,
-                pixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod] },
-                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolatedBy: interpolationMethod, extrapolatedBy: .edge] }
+                pixelAt: { x, y in self[dox + x, doy + y, interpolation: interpolationMethod] },
+                extrapolatedPixelAt: { x, y in self[dox + x, doy + y, interpolation: interpolationMethod, extrapolation: .edge] }
             )
         }
     }
