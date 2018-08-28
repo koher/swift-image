@@ -1,4 +1,4 @@
-internal func getValidCount(_ range: CountableRange<Int>, maxCount: Int) -> Int {
+internal func getValidCount(_ range: Range<Int>, maxCount: Int) -> Int {
     return max(min(range.upperBound, maxCount) - max(range.lowerBound, 0), 0)
 }
 
@@ -6,13 +6,13 @@ internal func clamp<T: Comparable>(_ x: T, lower: T, upper: T) -> T {
     return min(max(x, lower), upper)
 }
 
-extension CountableRange {
-    internal func isSuperset(of other: CountableRange<Bound>) -> Bool {
+extension Range {
+    internal func isSuperset(of other: Range<Bound>) -> Bool {
         return lowerBound <= other.lowerBound && other.upperBound <= upperBound || other.isEmpty
     }
 }
 
-internal func countableRange<R: RangeExpression>(from range: R, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> where R.Bound == Int {
+internal func range<R: RangeExpression>(from range: R, relativeTo collection: Range<Int>) -> Range<Int> where R.Bound == Int {
     let all = Int.min ..< Int.max
     let boundedRange: Range<Int> = range.relative(to: all)
     let lowerBound: Int
@@ -30,10 +30,10 @@ internal func countableRange<R: RangeExpression>(from range: R, relativeTo colle
     return lowerBound..<upperBound
 }
 
-internal func countableRange(from range: CountableRange<Int>, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {
+internal func range(from range: Range<Int>, relativeTo collection: Range<Int>) -> Range<Int> {
     return range
 }
 
-internal func countableRange(from range: CountableClosedRange<Int>, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {
-    return CountableRange(range)
+internal func range(from range: ClosedRange<Int>, relativeTo collection: Range<Int>) -> Range<Int> {
+    return Range(range)
 }

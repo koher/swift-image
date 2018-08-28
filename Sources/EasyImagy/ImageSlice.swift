@@ -3,10 +3,10 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     public typealias Element = Pixel // FIXME: Remove this line in the future. Swift 4.1 needs it to build `ImageSlice`.
 
     internal var image: Image<Pixel>
-    public let xRange: CountableRange<Int>
-    public let yRange: CountableRange<Int>
+    public let xRange: Range<Int>
+    public let yRange: Range<Int>
     
-    internal init(image: Image<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
+    internal init(image: Image<Pixel>, xRange: Range<Int>, yRange: Range<Int>) {
         precondition(image.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(image.yRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         self.image = image
@@ -32,7 +32,7 @@ public struct ImageSlice<Pixel> : ImageProtocol {
         }
     }
     
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> ImageSlice<Pixel> {
         precondition(self.xRange.isSuperset(of: xRange), "`xRange` is out of bounds: \(xRange)")
         precondition(self.yRange.isSuperset(of: yRange), "`yRange` is out of bounds: \(yRange)")
         return image[xRange, yRange]

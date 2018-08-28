@@ -16,11 +16,11 @@ public struct Image<Pixel> : ImageProtocol {
         self.pixels = pixels
 	}
     
-    public var xRange: CountableRange<Int> {
+    public var xRange: Range<Int> {
         return 0..<width
     }
     
-    public var yRange: CountableRange<Int> {
+    public var yRange: Range<Int> {
         return 0..<height
     }
     
@@ -33,7 +33,7 @@ public struct Image<Pixel> : ImageProtocol {
         }
     }
 
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> ImageSlice<Pixel> {
         return ImageSlice(image: self, xRange: xRange, yRange: yRange)
     }
 }

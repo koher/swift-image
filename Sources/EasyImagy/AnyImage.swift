@@ -7,16 +7,16 @@ public struct AnyImage<Pixel> : ImageProtocol {
     private var box: AnyImageBox<Pixel>
     private let lock = NSLock()
     
-    public let xRange: CountableRange<Int>
-    public let yRange: CountableRange<Int>
+    public let xRange: Range<Int>
+    public let yRange: Range<Int>
     
-    private init(box: AnyImageBox<Pixel>, xRange: CountableRange<Int>, yRange: CountableRange<Int>) {
+    private init(box: AnyImageBox<Pixel>, xRange: Range<Int>, yRange: Range<Int>) {
         self.box = box
         self.xRange = xRange
         self.yRange = yRange
     }
     
-    internal init<I : ImageProtocol>(_ image: I, xRange: CountableRange<Int>, yRange: CountableRange<Int>) where I.Pixel == Pixel {
+    internal init<I : ImageProtocol>(_ image: I, xRange: Range<Int>, yRange: Range<Int>) where I.Pixel == Pixel {
         self.box = ImageBox<I>(image)
         self.xRange = xRange
         self.yRange = yRange
@@ -46,7 +46,7 @@ public struct AnyImage<Pixel> : ImageProtocol {
         }
     }
     
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> AnyImage<Pixel> {
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> AnyImage<Pixel> {
         return AnyImage(box: self.box, xRange: xRange, yRange: yRange)
     }
 }
