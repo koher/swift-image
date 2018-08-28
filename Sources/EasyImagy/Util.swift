@@ -1,7 +1,3 @@
-internal func getValidCount(_ range: Range<Int>, maxCount: Int) -> Int {
-    return max(min(range.upperBound, maxCount) - max(range.lowerBound, 0), 0)
-}
-
 internal func clamp<T: Comparable>(_ x: T, lower: T, upper: T) -> T {
     return min(max(x, lower), upper)
 }
@@ -28,12 +24,4 @@ internal func range<R: RangeExpression>(from range: R, relativeTo collection: Ra
         upperBound = boundedRange.upperBound
     }
     return lowerBound..<upperBound
-}
-
-internal func range(from range: Range<Int>, relativeTo collection: Range<Int>) -> Range<Int> {
-    return range
-}
-
-internal func range(from range: ClosedRange<Int>, relativeTo collection: Range<Int>) -> Range<Int> {
-    return Range(range)
 }
