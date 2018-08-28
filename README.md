@@ -299,7 +299,7 @@ import PackageDescription
 let package = Package(
   ...
   dependencies: [
-    .package(url: "https://github.com/koher/EasyImagy.git", .branch("swift-4.2")),
+    .package(url: "https://github.com/koher/EasyImagy.git", .branch("dev-0.6.0")),
   ],
   targets: [
     .target(
@@ -316,7 +316,7 @@ let package = Package(
 **Cartfile**
 
 ```
-github "koher/EasyImagy" "swift-4.2"
+github "koher/EasyImagy" "dev-0.6.0"
 ```
 
 ### Manually
