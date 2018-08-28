@@ -65,14 +65,22 @@ extension Image where Pixel == RGBA<UInt8> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -135,14 +143,22 @@ extension Image where Pixel == RGBA<UInt16> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -205,14 +221,22 @@ extension Image where Pixel == RGBA<UInt32> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -275,14 +299,22 @@ extension Image where Pixel == RGBA<Float> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -345,14 +377,22 @@ extension Image where Pixel == RGBA<Double> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -415,14 +455,22 @@ extension Image where Pixel == RGBA<Bool> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -485,14 +533,22 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -555,14 +611,22 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -625,14 +689,22 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -695,14 +767,22 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -765,14 +845,22 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -835,14 +923,22 @@ extension Image where Pixel == UInt8 {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -905,14 +1001,22 @@ extension Image where Pixel == UInt16 {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -975,14 +1079,22 @@ extension Image where Pixel == UInt32 {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -1045,14 +1157,22 @@ extension Image where Pixel == Float {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -1115,14 +1235,22 @@ extension Image where Pixel == Double {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
@@ -1185,14 +1313,22 @@ extension Image where Pixel == Bool {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
+        return uiImage.pngData()
+    }
 
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+    }
+
+    public func data(using format: Image.Format) -> Data? {
         switch format {
         case .png:
-            return uiImage.pngData()
+            return pngData()
         case .jpeg(let compressionQuality):
-            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 
