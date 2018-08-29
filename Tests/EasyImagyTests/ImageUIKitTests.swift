@@ -1,4 +1,4 @@
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if canImport(UIKit)
     import XCTest
     import EasyImagy
     import CoreGraphics
@@ -13,25 +13,53 @@
                 XCTAssertEqual(image.width, 2)
                 XCTAssertEqual(image.height, 2)
                 
-                XCTAssertEqual(255, image[0, 0].red)
-                XCTAssertEqual(  0, image[0, 0].green)
-                XCTAssertEqual(  0, image[0, 0].blue)
-                XCTAssertEqual( 64, image[0, 0].alpha)
+                XCTAssertEqual(image[0, 0].red,   255)
+                XCTAssertEqual(image[0, 0].green,   0)
+                XCTAssertEqual(image[0, 0].blue,    0)
+                XCTAssertEqual(image[0, 0].alpha,  64)
+
+                XCTAssertEqual(image[1, 0].red,     0)
+                XCTAssertEqual(image[1, 0].green, 255)
+                XCTAssertEqual(image[1, 0].blue,    0)
+                XCTAssertEqual(image[1, 0].alpha, 127)
+
+                XCTAssertEqual(image[0, 1].red,     0)
+                XCTAssertEqual(image[0, 1].green,   0)
+                XCTAssertEqual(image[0, 1].blue,  255)
+                XCTAssertEqual(image[0, 1].alpha, 191)
                 
-                XCTAssertEqual(  0, image[1, 0].red)
-                XCTAssertEqual(255, image[1, 0].green)
-                XCTAssertEqual(  0, image[1, 0].blue)
-                XCTAssertEqual(127, image[1, 0].alpha)
+                XCTAssertEqual(image[1, 1].red,   255)
+                XCTAssertEqual(image[1, 1].green, 255)
+                XCTAssertEqual(image[1, 1].blue,    0)
+                XCTAssertEqual(image[1, 1].alpha, 255)
+            }
+            
+            do {
+                let uiImage = UIImage(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
+                let image = Image<PremultipliedRGBA<UInt8>>(uiImage: uiImage)
                 
-                XCTAssertEqual(  0, image[0, 1].red)
-                XCTAssertEqual(  0, image[0, 1].green)
-                XCTAssertEqual(255, image[0, 1].blue)
-                XCTAssertEqual(191, image[0, 1].alpha)
+                XCTAssertEqual(image.width, 2)
+                XCTAssertEqual(image.height, 2)
                 
-                XCTAssertEqual(255, image[1, 1].red)
-                XCTAssertEqual(255, image[1, 1].green)
-                XCTAssertEqual(  0, image[1, 1].blue)
-                XCTAssertEqual(255, image[1, 1].alpha)
+                XCTAssertEqual(image[0, 0].red,    64)
+                XCTAssertEqual(image[0, 0].green,   0)
+                XCTAssertEqual(image[0, 0].blue,    0)
+                XCTAssertEqual(image[0, 0].alpha,  64)
+                
+                XCTAssertEqual(image[1, 0].red,     0)
+                XCTAssertEqual(image[1, 0].green, 127)
+                XCTAssertEqual(image[1, 0].blue,    0)
+                XCTAssertEqual(image[1, 0].alpha, 127)
+                
+                XCTAssertEqual(image[0, 1].red,     0)
+                XCTAssertEqual(image[0, 1].green,   0)
+                XCTAssertEqual(image[0, 1].blue,  191)
+                XCTAssertEqual(image[0, 1].alpha, 191)
+                
+                XCTAssertEqual(image[1, 1].red,   255)
+                XCTAssertEqual(image[1, 1].green, 255)
+                XCTAssertEqual(image[1, 1].blue,    0)
+                XCTAssertEqual(image[1, 1].alpha, 255)
             }
             
             do { // With `UIImage` from `CGImage`

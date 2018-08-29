@@ -1,0 +1,222 @@
+% types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
+% summable_types = ['Int', 'Int64', 'Float', 'Double']
+% type_to_summables = {
+%   'UInt8' : ['Int', 'Float', 'Double'],
+%   'UInt16': ['Int', 'Float', 'Double'],
+%   'UInt32': ['Int64', 'Float', 'Double'],
+%   'Int'   : ['Int', 'Float', 'Double'],
+%   'Float' : ['Float', 'Float', 'Double'],
+%   'Double': ['Double', 'Double', 'Double'],
+% }
+% summable_sybmols = ['I', 'F', 'D']
+% summable_weights = ['Int', 'Float', 'Double']
+%
+import Foundation
+
+public protocol _Summable {
+    static func _sum(_ lhs: Self, _ rhs: Self) -> Self
+}
+
+% for type in summable_types:
+extension ${type} : _Summable { public static func _sum(_ lhs: ${type}, _ rhs: ${type}) -> ${type} { return lhs + rhs } }
+% end
+extension RGBA : _Summable where Channel : _Summable {
+% for type in summable_types:
+    @_specialize(exported: true, where Channel == ${type})
+% end
+    public static func _sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : Channel._sum(lhs.red  , rhs.red),
+            green: Channel._sum(lhs.green, rhs.green),
+            blue : Channel._sum(lhs.blue , rhs.blue),
+            alpha: Channel._sum(lhs.alpha, rhs.alpha)
+        )
+    }
+}
+
+public protocol _Numeric {
+    associatedtype IntType    : _Summable
+    associatedtype FloatType  : _Summable
+    associatedtype DoubleType : _Summable
+
+    init(summableI: IntType)
+    init(summableF: FloatType)
+    init(summableD: DoubleType)
+    var summableI: IntType { get }
+    var summableF: FloatType { get }
+    var summableD: DoubleType { get }
+    static var selfZero: Self { get }
+    static var summableIZero: IntType { get }
+    static var summableFZero: FloatType { get }
+    static var summableDZero: DoubleType { get }
+    static func productI(_ lhs: IntType, _ rhs: Int) -> IntType
+    static func productF(_ lhs: FloatType, _ rhs: Float) -> FloatType
+    static func productD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
+    static func quotientI(_ lhs: IntType, _ rhs: Int) -> IntType
+    static func quotientF(_ lhs: FloatType, _ rhs: Float) -> FloatType
+    static func quotientD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
+}
+
+extension RGBA : _Numeric where Channel : _Numeric {
+    public typealias IntType = RGBA<Channel.IntType>
+    public typealias FloatType = RGBA<Channel.FloatType>
+    public typealias DoubleType = RGBA<Channel.DoubleType>
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public init(summableI: RGBA<Channel.IntType>) {
+        self = RGBA<Channel>(red: Channel.init(summableI: summableI.red), green: Channel.init(summableI: summableI.green), blue: Channel.init(summableI: summableI.blue), alpha: Channel.init(summableI: summableI.alpha))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public init(summableF: RGBA<Channel.FloatType>) {
+        self = RGBA<Channel>(red: Channel.init(summableF: summableF.red), green: Channel.init(summableF: summableF.green), blue: Channel.init(summableF: summableF.blue), alpha: Channel.init(summableF: summableF.alpha))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public init(summableD: RGBA<Channel.DoubleType>) {
+        self = RGBA<Channel>(red: Channel.init(summableD: summableD.red), green: Channel.init(summableD: summableD.green), blue: Channel.init(summableD: summableD.blue), alpha: Channel.init(summableD: summableD.alpha))
+    }
+    
+    public var summableI: RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: red.summableI, green: green.summableI, blue: blue.summableI, alpha: alpha.summableI)
+    }
+    
+    public var summableF: RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: red.summableF, green: green.summableF, blue: blue.summableF, alpha: alpha.summableF)
+    }
+    
+    public var summableD: RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: red.summableD, green: green.summableD, blue: blue.summableD, alpha: alpha.summableD)
+    }
+    
+    public static var selfZero: RGBA<Channel> {
+        return RGBA<Channel>(red: Channel.selfZero, green: Channel.selfZero, blue: Channel.selfZero, alpha: Channel.selfZero)
+    }
+    
+    public static var summableIZero: RGBA<Channel.IntType> {
+        let zero = Channel.summableIZero
+        return RGBA<Channel.IntType>(red: zero, green: zero, blue: zero, alpha: zero)
+    }
+    
+    public static var summableFZero: RGBA<Channel.FloatType> {
+        let zero = Channel.summableFZero
+        return RGBA<Channel.FloatType>(red: zero, green: zero, blue: zero, alpha: zero)
+    }
+    
+    public static var summableDZero: RGBA<Channel.DoubleType> {
+        let zero = Channel.summableDZero
+        return RGBA<Channel.DoubleType>(red: zero, green: zero, blue: zero, alpha: zero)
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public static func productI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: Channel.productI(lhs.red, rhs), green: Channel.productI(lhs.green, rhs), blue: Channel.productI(lhs.blue, rhs), alpha: Channel.productI(lhs.alpha, rhs))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public static func productF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: Channel.productF(lhs.red, rhs), green: Channel.productF(lhs.green, rhs), blue: Channel.productF(lhs.blue, rhs), alpha: Channel.productF(lhs.alpha, rhs))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public static func productD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: Channel.productD(lhs.red, rhs), green: Channel.productD(lhs.green, rhs), blue: Channel.productD(lhs.blue, rhs), alpha: Channel.productD(lhs.alpha, rhs))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public static func quotientI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: Channel.quotientI(lhs.red, rhs), green: Channel.quotientI(lhs.green, rhs), blue: Channel.quotientI(lhs.blue, rhs), alpha: Channel.quotientI(lhs.alpha, rhs))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public static func quotientF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: Channel.quotientF(lhs.red, rhs), green: Channel.quotientF(lhs.green, rhs), blue: Channel.quotientF(lhs.blue, rhs), alpha: Channel.quotientF(lhs.alpha, rhs))
+    }
+    
+%   for type in types:
+    @_specialize(exported: true, where Channel == ${type})
+%   end
+    public static func quotientD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: Channel.quotientD(lhs.red, rhs), green: Channel.quotientD(lhs.green, rhs), blue: Channel.quotientD(lhs.blue, rhs), alpha: Channel.quotientD(lhs.alpha, rhs))
+    }
+}
+% for type in types:
+
+extension ${type} : _Numeric {
+%   summables = type_to_summables[type]
+%
+%   for i, (summable_symbol, summable) in enumerate(zip(summable_sybmols, summables)):
+%     if i > 0:
+
+%     end
+    public init(summable${summable_symbol}: ${summable}) {
+%     if summable == type:
+        self = summable${summable_symbol}
+%     else:
+        self = ${type}(summable${summable_symbol})
+%     end
+    }
+%   end
+%
+%   for summable_symbol, summable in zip(summable_sybmols, summables):
+    
+    public var summable${summable_symbol}: ${summable} {
+%     if summable == type:
+        return self
+%     else:
+        return ${summable}(self)
+%     end
+    }
+%   end
+
+    public static var selfZero: ${type} {
+        return 0
+    }
+
+%   for summable_symbol, summable in zip(summable_sybmols, summables):
+    
+    public static var summable${summable_symbol}Zero: ${summable} {
+        return 0
+        
+    }
+%   end
+%
+%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+    
+    public static func product${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
+%     if summable_weight == summable:
+        return lhs * rhs
+%     else:
+        return lhs * ${summable}(rhs)
+%     end
+    }
+%   end
+%
+%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+    
+    public static func quotient${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
+%     if summable_weight == summable:
+        return lhs / rhs
+%     else:
+        return lhs / ${summable}(rhs)
+%     end
+    }
+%   end
+}
+% end

@@ -1,7 +1,65 @@
 import Foundation
 
 extension ImageProtocol {
-    internal func rotatedImageWith(
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        precondition(angle % 90 == 0, "`angle` must be a multiple of 90: \(angle)")
+        return rotated(byRightAngleInDegrees: angle)
+    }
+    
+    private func rotated(byRightAngleInDegrees angle: Int) -> Image<Pixel> {
+        assert(angle % 90 == 0, "`angle` must be a multiple of 90: \(angle)")
+        
+        switch (angle / 90) % 4 {
+        case 0:
+            if let zelf = self as? Image<Pixel> {
+                return zelf
+            } else {
+                return Image(self)
+            }
+        case 1, -3:
+            var pixels = [Pixel]()
+            
+            for y in xRange {
+                for x in yRange.reversed() {
+                    pixels.append(self[y, x])
+                }
+            }
+            
+            return Image(width: height, height: width, pixels: pixels)
+        case 2, -2:
+            var pixels = [Pixel]()
+            
+            for y in yRange.reversed() {
+                for x in xRange.reversed() {
+                    pixels.append(self[x, y])
+                }
+            }
+            
+            return Image(width: width, height: height, pixels: pixels)
+        case 3, -1:
+            var pixels = [Pixel]()
+            
+            for y in xRange.reversed() {
+                for x in yRange {
+                    pixels.append(self[y, x])
+                }
+            }
+            
+            return Image(width: height, height: width, pixels: pixels)
+        default:
+            fatalError("Never reaches here.")
+        }
+    }
+    
+    public func rotated(by angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolation: extrapolationMethod] }
+    }
+    
+    public func rotated(byDegrees angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi, extrapolatedBy: extrapolationMethod)
+    }
+
+    private func rotatedImageWith(
         angle: Double,
         pixelAt: (Double, Double) -> Pixel
     ) -> Image<Pixel> {
@@ -41,5 +99,57 @@ extension ImageProtocol {
 
             return pixelAt(x0 + ox0, y0 + oy0)
         })
+    }
+}
+
+extension ImageProtocol where Pixel : _Numeric {
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+    
+    public func rotated(by angle: Double) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolation: .bilinear, extrapolation: .constant(.selfZero)] }
+    }
+    
+    public func rotated(byDegrees angle: Double) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi)
+    }
+    
+    public func rotated(by angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolation: .bilinear, extrapolation: extrapolationMethod] }
+    }
+    
+    public func rotated(byDegrees angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi, extrapolatedBy: extrapolationMethod)
+    }
+    
+    public func rotated(by angle: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolation: interpolationMethod, extrapolation: extrapolationMethod] }
+    }
+    
+    public func rotated(byDegrees angle: Double, interpolatedBy interpolationMethod: InterpolationMethod, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi, interpolatedBy: interpolationMethod, extrapolatedBy: extrapolationMethod)
+    }
+}
+
+extension ImageProtocol where Element == Bool { // Rotation
+    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
+        if angle % 90 == 0 {
+            return rotated(byRightAngleInDegrees: angle)
+        } else {
+            return rotated(byDegrees: Double(angle))
+        }
+    }
+    
+    public func rotated(by angle: Double) -> Image<Pixel> {
+        return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolation: .constant(false)] }
+    }
+    
+    public func rotated(byDegrees angle: Double) -> Image<Pixel> {
+        return rotated(by: angle / 180.0 * .pi)
     }
 }

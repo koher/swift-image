@@ -58,23 +58,3 @@ class RGBATests: XCTestCase {
         ("testGray", testGray),
     ]
 }
-
-// FIXME: remove this after conditional conformance is supported
-extension RGBA: Equatable {
-    public static func ==(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> Bool {
-        if let l = lhs as? RGBA<UInt8>, let r = rhs as? RGBA<UInt8> {
-            return l == r
-        }
-        if let l = lhs as? RGBA<Int>, let r = rhs as? RGBA<Int> {
-            return l == r
-        }
-        if let l = lhs as? RGBA<Float>, let r = rhs as? RGBA<Float> {
-            return l == r
-        }
-        if let l = lhs as? RGBA<Double>, let r = rhs as? RGBA<Double> {
-            return l == r
-        }
-        fatalError()
-        
-    }
-}

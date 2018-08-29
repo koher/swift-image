@@ -86,6 +86,10 @@ let image = Image<RGBA<UInt8>>(uiImage: imageView.image!) // from a UIImage
 ```
 
 ```swift
+let image = Image<RGBA<UInt8>>(nsImage: imageView.image!) // from a NSImage
+```
+
+```swift
 let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from pixels
 ```
 
@@ -185,7 +189,7 @@ let cropped = Image<RGBA<UInt8>>(slice) // Copying is executed here
 
 ### Conversion
 
-`Image` can be converted by `map` as well as `Array`. Followings are the examples.
+`Image` can be converted by `map` in the same way as `Array`. Followings are the examples.
 
 #### Grayscale
 
@@ -260,6 +264,21 @@ let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
 imageView.image = image.nsImage
 ```
 
+### With CoreGraphics
+
+```swift
+// Drawing on images with CoreGraphics
+var image = Image<PremultipliedRGBA<UInt8>>(uiImage: imageView.image!)
+image.withCGContext { context in
+    context.setLineWidth(1)
+    context.setStrokeColor(UIColor.red.cgColor)
+    context.move(to: CGPoint(x: -1, y: -1))
+    context.addLine(to: CGPoint(x: 640, y: 480))
+    context.strokePath()
+}
+imageView.image = image.uiImage
+```
+
 ## Requirements
 
 - Swift 4 or later
@@ -280,7 +299,7 @@ import PackageDescription
 let package = Package(
   ...
   dependencies: [
-    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.4.0"),
+    .package(url: "https://github.com/koher/EasyImagy.git", from: "0.5.0"),
   ],
   targets: [
     .target(
@@ -297,7 +316,7 @@ let package = Package(
 **Cartfile**
 
 ```
-github "koher/EasyImagy" "0.4.0"
+github "koher/EasyImagy" ~> 0.5.0
 ```
 
 ### Manually

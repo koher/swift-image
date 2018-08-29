@@ -1411,7 +1411,8 @@ extension ImageProtocol where Element : FloatingPoint {
     }
 }
 
-// FIXME: with conditional conformance
+extension Image : Equatable where Pixel : Equatable {}
+extension ImageSlice : Equatable where Pixel : Equatable {}
 extension ImageProtocol where Element : Equatable {
     @_specialize(exported: true, where Self == Image<Int>, I == Image<Int>)
     @_specialize(exported: true, where Self == Image<Int>, I == ImageSlice<Int>)

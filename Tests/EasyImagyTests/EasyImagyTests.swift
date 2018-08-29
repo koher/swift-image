@@ -1,14 +1,14 @@
 import XCTest
-#if os(iOS) || os(tvOS) || os(watchOS)
+#if canImport(UIKit)
     import UIKit
 #endif
-#if os(macOS)
+#if canImport(AppKit)
     import AppKit
 #endif
 import EasyImagy
 
 class EasyImagySample: XCTestCase {
-    #if os(iOS) || os(watchOS) || os(tvOS)
+    #if canImport(UIKit)
     func testSample() {
         /**/ let x = 0
         /**/ let y = 0
@@ -53,7 +53,7 @@ class EasyImagySample: XCTestCase {
     #endif
     
     func testInitialization() {
-        #if os(iOS) || os(watchOS) || os(tvOS)
+        #if canImport(UIKit)
         do {
             /**/ if never() {
             let image = Image<RGBA<UInt8>>(named: "ImageName")!
@@ -146,7 +146,7 @@ class EasyImagySample: XCTestCase {
         do {
             /**/ let image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .red)
             // Rotated clockwise by π / 4 and fill the background with red
-            let result = image.rotated(by: .pi / 4, extrapolatedBy: .filling(.red))
+            let result = image.rotated(by: .pi / 4, extrapolatedBy: .constant(.red))
             /**/ _ = result.count
         }
     }
@@ -173,10 +173,10 @@ class EasyImagySample: XCTestCase {
         
         /**/ _ = cropped.count
     }
-    #if os(iOS) || os(watchOS) || os(tvOS)
+    #if canImport(UIKit)
     func testWithUIImage() {
         /**/ if never() {
-            let imageView = UIImageView()
+            /**/ let imageView = UIImageView()
             
             // From `UIImage`
             let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
@@ -186,17 +186,35 @@ class EasyImagySample: XCTestCase {
         /**/ }
     }
     #endif
-    #if os(macOS)
+    #if canImport(AppKit)
     func testWithNSImage() {
         /**/ if never() {
-            let imageView = NSImageView()
+            /**/ let imageView = NSImageView()
             
             // From `NSImage`
             let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
             
             // To `NSImage`
             imageView.image = image.nsImage
-            /**/ }
+        /**/ }
+    }
+    #endif
+    #if canImport(UIKit)
+    func testWithCoreGraphics() {
+        /**/ if never() {
+            /**/ let imageView = UIImageView()
+            
+            // Drawing on images with CoreGraphics
+            var image = Image<PremultipliedRGBA<UInt8>>(uiImage: imageView.image!)
+            image.withCGContext { context in
+                context.setLineWidth(1)
+                context.setStrokeColor(UIColor.red.cgColor)
+                context.move(to: CGPoint(x: -1, y: -1))
+                context.addLine(to: CGPoint(x: 640, y: 480))
+                context.strokePath()
+            }
+            imageView.image = image.uiImage
+        /**/ }
     }
     #endif
     

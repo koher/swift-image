@@ -38,6 +38,7 @@ internal func countableRange(from range: CountableClosedRange<Int>, relativeTo c
     return CountableRange(range)
 }
 
+#if !swift(>=4.1.50)
 internal func countableRange(from range: Range<Int>, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {
     return CountableRange(range)
 }
@@ -45,3 +46,4 @@ internal func countableRange(from range: Range<Int>, relativeTo collection: Coun
 internal func countableRange(from range: ClosedRange<Int>, relativeTo collection: CountableRange<Int>) -> CountableRange<Int> {
     return CountableRange(range)
 }
+#endif

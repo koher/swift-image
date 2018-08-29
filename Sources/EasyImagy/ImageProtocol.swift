@@ -1,7 +1,8 @@
 import Foundation
 
 public protocol ImageProtocol : Sequence {
-    typealias Pixel = Iterator.Element
+    typealias Pixel = Element
+    associatedtype SubImage : ImageProtocol where SubImage.Element == Element
     
     init(width: Int, height: Int, pixels: [Pixel])
     
@@ -13,11 +14,11 @@ public protocol ImageProtocol : Sequence {
 
     subscript(x: Int, y: Int) -> Pixel { get set }
 
-    subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> { get }
-    subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> ImageSlice<Pixel> where R1.Bound == Int, R2.Bound == Int { get }
-    subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> ImageSlice<Pixel> where R1.Bound == Int { get }
-    subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> ImageSlice<Pixel> where R2.Bound == Int { get }
-    subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> { get }
+    subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> SubImage { get }
+    subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> SubImage where R1.Bound == Int, R2.Bound == Int { get }
+    subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> SubImage where R1.Bound == Int { get }
+    subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> SubImage where R2.Bound == Int { get }
+    subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> SubImage { get }
     
     func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T>
     mutating func update(_ body: (inout Pixel) throws -> ()) rethrows
@@ -32,20 +33,24 @@ extension ImageProtocol {
         return yRange.count
     }
     
-    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> ImageSlice<Pixel> where R1.Bound == Int, R2.Bound == Int {
+    public subscript<R1: RangeExpression, R2: RangeExpression>(xRange: R1, yRange: R2) -> SubImage where R1.Bound == Int, R2.Bound == Int {
         return self[countableRange(from: xRange, relativeTo: self.xRange), countableRange(from: yRange, relativeTo: self.yRange)]
     }
     
-    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> ImageSlice<Pixel> where R1.Bound == Int {
+    public subscript<R1: RangeExpression>(xRange: R1, yRange: UnboundedRange) -> SubImage where R1.Bound == Int {
         return self[countableRange(from: xRange, relativeTo: self.xRange), self.yRange]
     }
     
-    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> ImageSlice<Pixel> where R2.Bound == Int {
+    public subscript<R2: RangeExpression>(xRange: UnboundedRange, yRange: R2) -> SubImage where R2.Bound == Int {
         return self[self.xRange, countableRange(from: yRange, relativeTo: self.yRange)]
     }
     
-    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> ImageSlice<Pixel> {
+    public subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> SubImage {
         return self[self.xRange, self.yRange]
+    }
+    
+    public func makeIterator() -> ImageIterator<Self> {
+        return ImageIterator(self)
     }
 }
 
@@ -128,63 +133,5 @@ extension ImageProtocol {
         }
         
         return Image(width: width, height: height, pixels: pixels)
-    }
-
-    public func rotated(byDegrees angle: Int) -> Image<Pixel> {
-        precondition(angle % 90 == 0, "`angle` must be a multiple of 90: \(angle)")
-        return rotated(byRightAngleInDegrees: angle)
-    }
-
-    internal func rotated(byRightAngleInDegrees angle: Int) -> Image<Pixel> {
-        assert(angle % 90 == 0, "`angle` must be a multiple of 90: \(angle)")
-        
-        switch (angle / 90) % 4 {
-        case 0:
-            if let zelf = self as? Image<Pixel> {
-                return zelf
-            } else {
-                return Image(self)
-            }
-        case 1, -3:
-            var pixels = [Pixel]()
-            
-            for y in xRange {
-                for x in yRange.reversed() {
-                    pixels.append(self[y, x])
-                }
-            }
-            
-            return Image(width: height, height: width, pixels: pixels)
-        case 2, -2:
-            var pixels = [Pixel]()
-            
-            for y in yRange.reversed() {
-                for x in xRange.reversed() {
-                    pixels.append(self[x, y])
-                }
-            }
-            
-            return Image(width: width, height: height, pixels: pixels)
-        case 3, -1:
-            var pixels = [Pixel]()
-            
-            for y in xRange.reversed() {
-                for x in yRange {
-                    pixels.append(self[y, x])
-                }
-            }
-            
-            return Image(width: height, height: width, pixels: pixels)
-        default:
-            fatalError("Never reaches here.")
-        }
-    }
-
-    public func rotated(by angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
-        return rotatedImageWith(angle: angle) { self[Int(round($0)), Int(round($1)), extrapolatedBy: extrapolationMethod] }
-    }
-    
-    public func rotated(byDegrees angle: Double, extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel>) -> Image<Pixel> {
-        return rotated(by: angle / 180.0 * .pi, extrapolatedBy: extrapolationMethod)
     }
 }

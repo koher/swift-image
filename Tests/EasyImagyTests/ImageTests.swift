@@ -1,14 +1,14 @@
 import XCTest
 import EasyImagy
-#if os(iOS)
+#if canImport(UIKit)
 import UIKit
 #endif
-#if os(OSX)
+#if canImport(AppKit)
 import AppKit
 #endif
 
 class ImageTests: XCTestCase {
-#if os(iOS) || os(macOS) || os(watchOS) || os(tvOS)
+#if canImport(UIKit) || canImport(AppKit)
     func testInitNamed() {
         do {
             let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
@@ -282,7 +282,7 @@ class ImageTests: XCTestCase {
 		}
 	}
     
-#if os(iOS) || os(macOS) || os(watchOS) || os(tvOS)
+#if canImport(UIKit) || canImport(AppKit)
     func testData() {
         do {
             let image = Image<UInt8>(width: 3, height: 2, pixels: [

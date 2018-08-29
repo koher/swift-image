@@ -1,4 +1,4 @@
-#if os(macOS)
+#if canImport(AppKit)
     import XCTest
     import EasyImagy
     import CoreGraphics

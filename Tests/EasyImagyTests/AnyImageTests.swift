@@ -70,13 +70,13 @@ class AnyImageTests : XCTestCase {
                 0, 4, 5, 6, 0,
                 0, 0, 0, 0, 0,
             ]))
-            let b: ImageSlice<UInt8> = a[1..<4, 1..<3]
+            let b: AnyImage<UInt8> = a[1..<4, 1..<3]
             
-            XCTAssertEqual(b, slice)
+            XCTAssertEqual(b, AnyImage(slice))
             
             let c = AnyImage<UInt8>(b)
             
-            XCTAssertEqual(c[2..<4, 2...2], ImageSlice(width: 2, height: 1, pixels: [5, 6]))
+            XCTAssertEqual(c[2..<4, 2...2], AnyImage(width: 2, height: 1, pixels: [5, 6]))
         }
     }
     
@@ -87,7 +87,7 @@ class AnyImageTests : XCTestCase {
                 4, 5, 6,
             ]))
             
-            let iterator = a.makeIterator()
+            var iterator = a.makeIterator()
             
             XCTAssertEqual(iterator.next(), 1)
             XCTAssertEqual(iterator.next(), 2)

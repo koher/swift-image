@@ -1,0 +1,98 @@
+% weight_types = ['Int', 'Float', 'Double']
+% pixel_types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
+% pixel_types = pixel_types + [f'RGBA<{type}>' for type in pixel_types]
+% type_to_symbol = {
+%   'Int'    : 'I',
+%   'Float'  : 'F',
+%   'Double' : 'D',
+% }
+%
+extension ImageProtocol where Pixel : _Numeric {
+% for i, type in enumerate(weight_types):
+%   if i > 0:
+
+%   end
+%   for pixel_type in pixel_types:
+    @_specialize(exported: true, where Self == Image<${pixel_type}>, Kernel == Image<${type}>)
+    @_specialize(exported: true, where Self == Image<${pixel_type}>, Kernel == ImageSlice<${type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${pixel_type}>, Kernel == Image<${type}>)
+    @_specialize(exported: true, where Self == ImageSlice<${pixel_type}>, Kernel == ImageSlice<${type}>)
+%   end
+    public func convoluted<Kernel: ImageProtocol>(
+        with kernel: Kernel,
+        extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
+    ) -> Image<Pixel> where Kernel.Pixel == ${type} {
+        switch extrapolationMethod {
+        case .constant(let value):
+            return _convoluted(with: kernel) { x, y in
+                extrapolatedPixelByFillingAt(x: x, y: y, by: value)
+            }
+        case .edge:
+            return _convoluted(with: kernel) { x, y in
+                extrapolatedPixelByEdgeAt(x: x, y: y, xRange: ClosedRange(xRange), yRange: ClosedRange(yRange))
+            }
+        case .repeat:
+            return _convoluted(with: kernel) { x, y in
+                extrapolatedPixelByRepeatAt(x: x, y: y, minX: xRange.lowerBound, minY: yRange.lowerBound, width: width, height: height)
+            }
+        case .reflection:
+            let doubleWidth = width * 2
+            let doubleHeight = height * 2
+            return _convoluted(with: kernel) { x, y in
+                extrapolatedPixelByReflectionAt(
+                    x: x,
+                    y: y,
+                    minX: xRange.lowerBound,
+                    minY: yRange.lowerBound,
+                    doubleWidth: doubleWidth,
+                    doubleHeight: doubleHeight,
+                    doubleWidthMinusOne: doubleWidth - 1,
+                    doubleHeightMinusOne: doubleHeight - 1
+                )
+            }
+        }
+    }
+% end
+%
+% for type in weight_types:
+%   symbol = type_to_symbol[type]
+
+    private func _convoluted<Kernel: ImageProtocol>(
+        with kernel: Kernel,
+        pixelAt: (Int, Int) -> Pixel
+    ) -> Image<Pixel> where Kernel.Pixel == ${type} {
+        precondition(kernel.width % 2 == 1, "The width of the `kernel` must be odd: \(kernel.width)")
+        precondition(kernel.height % 2 == 1, "The height of the `kernel` must be odd: \(kernel.height)")
+        
+        let xRange = self.xRange
+        let yRange = self.yRange
+        
+        let kxRange = kernel.xRange
+        let kyRange = kernel.yRange
+        
+        let hw = kxRange.count / 2  // halfWidth
+        let hh = kyRange.count / 2 // halfHeight
+        
+        var pixels: [Pixel] = []
+        pixels.reserveCapacity(count)
+        
+        for y in yRange {
+            for x in xRange {
+                var weightedValues: [Pixel.${type}Type] = []
+                for ky in kyRange {
+                    for kx in kxRange {
+                        let dx = (kx - kxRange.lowerBound) - hw
+                        let dy = (ky - kyRange.lowerBound) - hh
+                        let summablePixel = pixelAt(x + dx, y + dy).summable${symbol}
+                        let weight = kernel[kx, ky]
+                        weightedValues.append(Pixel.product${symbol}(summablePixel, weight))
+                    }
+                }
+                pixels.append(Pixel.init(summable${symbol}: weightedValues.reduce(Pixel.summable${symbol}Zero) { Pixel.${type}Type._sum($0, $1) }))
+            }
+        }
+        
+        return Image<Pixel>(width: width, height: height, pixels: pixels)
+    }
+% end
+}
