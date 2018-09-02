@@ -91,6 +91,16 @@ class HigherOrderFunctionsTests : XCTestCase {
         }
     }
     
+    func testMapPerformance() {
+        let image = Image<Int>(width: 1024, height: 1024, pixels: (1...(1024 * 1024)).map { _ in Int.random(in: .min ... (.max - 1)) })
+        var results: [Image<Int>] = []
+        measure {
+            results.append(image.map { $0 + 1 })
+        }
+        let result = results.randomElement()!
+        XCTAssertEqual(result.max()!, image.max()! + 1)
+    }
+    
     func testUpdatePerformance() {
         var image = Image<Int>(width: 1024, height: 1024, pixels: 1...(1024 * 1024))
         measure {
