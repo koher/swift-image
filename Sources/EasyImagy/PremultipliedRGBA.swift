@@ -78,34 +78,12 @@ extension PremultipliedRGBA : CustomDebugStringConvertible {
 }
 
 extension PremultipliedRGBA : Equatable where Channel : Equatable {
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Int8)
-    @_specialize(exported: true, where Channel == Int16)
-    @_specialize(exported: true, where Channel == Int32)
-    @_specialize(exported: true, where Channel == Int64)
-    @_specialize(exported: true, where Channel == UInt)
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == UInt64)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func ==(lhs: PremultipliedRGBA<Channel>, rhs: PremultipliedRGBA<Channel>) -> Bool {
         return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
     }
     
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Int8)
-    @_specialize(exported: true, where Channel == Int16)
-    @_specialize(exported: true, where Channel == Int32)
-    @_specialize(exported: true, where Channel == Int64)
-    @_specialize(exported: true, where Channel == UInt)
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == UInt64)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func !=(lhs: PremultipliedRGBA<Channel>, rhs: PremultipliedRGBA<Channel>) -> Bool {
         return lhs.red != rhs.red || lhs.green != rhs.green || lhs.blue != rhs.blue || lhs.alpha != rhs.alpha
     }

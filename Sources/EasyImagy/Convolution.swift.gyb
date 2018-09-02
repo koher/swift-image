@@ -12,12 +12,7 @@ extension ImageProtocol where Pixel : _Numeric {
 %   if i > 0:
 
 %   end
-%   for pixel_type in pixel_types:
-    @_specialize(exported: true, where Self == Image<${pixel_type}>, Kernel == Image<${type}>)
-    @_specialize(exported: true, where Self == Image<${pixel_type}>, Kernel == ImageSlice<${type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${pixel_type}>, Kernel == Image<${type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${pixel_type}>, Kernel == ImageSlice<${type}>)
-%   end
+    @inlinable
     public func convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
@@ -57,7 +52,8 @@ extension ImageProtocol where Pixel : _Numeric {
 % for type in weight_types:
 %   symbol = type_to_symbol[type]
 
-    private func _convoluted<Kernel: ImageProtocol>(
+    @usableFromInline
+    internal func _convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         pixelAt: (Int, Int) -> Pixel
     ) -> Image<Pixel> where Kernel.Pixel == ${type} {

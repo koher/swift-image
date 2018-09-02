@@ -35,6 +35,7 @@ extension ImageProtocol {
         }
     }
     
+    @usableFromInline
     internal func extrapolatedPixelByFillingAt(x: Int, y: Int, by value: Pixel) -> Pixel {
         guard xRange.contains(x) && yRange.contains(y) else {
             return value
@@ -42,16 +43,19 @@ extension ImageProtocol {
         return self[x, y]
     }
     
+    @usableFromInline
     internal func extrapolatedPixelByEdgeAt(x: Int, y: Int, xRange: ClosedRange<Int>, yRange: ClosedRange<Int>) -> Pixel {
         return self[clamp(x, lower: xRange.lowerBound, upper: xRange.upperBound), clamp(y, lower: yRange.lowerBound, upper: yRange.upperBound)]
     }
     
+    @usableFromInline
     internal func extrapolatedPixelByRepeatAt(x: Int, y: Int, minX: Int, minY: Int, width: Int, height: Int) -> Pixel {
         let x2 = reminder(x - minX, width) + minX
         let y2 = reminder(y - minY, height) + minY
         return self[x2, y2]
     }
     
+    @usableFromInline
     internal func extrapolatedPixelByReflectionAt(
         x: Int,
         y: Int,

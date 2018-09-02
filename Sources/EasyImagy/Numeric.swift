@@ -9,10 +9,7 @@ extension Int64 : _Summable { public static func _sum(_ lhs: Int64, _ rhs: Int64
 extension Float : _Summable { public static func _sum(_ lhs: Float, _ rhs: Float) -> Float { return lhs + rhs } }
 extension Double : _Summable { public static func _sum(_ lhs: Double, _ rhs: Double) -> Double { return lhs + rhs } }
 extension RGBA : _Summable where Channel : _Summable {
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Int64)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func _sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
         return RGBA<Channel>(
             red  : Channel._sum(lhs.red  , rhs.red),
@@ -51,32 +48,17 @@ extension RGBA : _Numeric where Channel : _Numeric {
     public typealias FloatType = RGBA<Channel.FloatType>
     public typealias DoubleType = RGBA<Channel.DoubleType>
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public init(summableI: RGBA<Channel.IntType>) {
         self = RGBA<Channel>(red: Channel.init(summableI: summableI.red), green: Channel.init(summableI: summableI.green), blue: Channel.init(summableI: summableI.blue), alpha: Channel.init(summableI: summableI.alpha))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public init(summableF: RGBA<Channel.FloatType>) {
         self = RGBA<Channel>(red: Channel.init(summableF: summableF.red), green: Channel.init(summableF: summableF.green), blue: Channel.init(summableF: summableF.blue), alpha: Channel.init(summableF: summableF.alpha))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public init(summableD: RGBA<Channel.DoubleType>) {
         self = RGBA<Channel>(red: Channel.init(summableD: summableD.red), green: Channel.init(summableD: summableD.green), blue: Channel.init(summableD: summableD.blue), alpha: Channel.init(summableD: summableD.alpha))
     }
@@ -112,62 +94,32 @@ extension RGBA : _Numeric where Channel : _Numeric {
         return RGBA<Channel.DoubleType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func productI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
         return RGBA<Channel.IntType>(red: Channel.productI(lhs.red, rhs), green: Channel.productI(lhs.green, rhs), blue: Channel.productI(lhs.blue, rhs), alpha: Channel.productI(lhs.alpha, rhs))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func productF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
         return RGBA<Channel.FloatType>(red: Channel.productF(lhs.red, rhs), green: Channel.productF(lhs.green, rhs), blue: Channel.productF(lhs.blue, rhs), alpha: Channel.productF(lhs.alpha, rhs))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func productD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
         return RGBA<Channel.DoubleType>(red: Channel.productD(lhs.red, rhs), green: Channel.productD(lhs.green, rhs), blue: Channel.productD(lhs.blue, rhs), alpha: Channel.productD(lhs.alpha, rhs))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func quotientI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
         return RGBA<Channel.IntType>(red: Channel.quotientI(lhs.red, rhs), green: Channel.quotientI(lhs.green, rhs), blue: Channel.quotientI(lhs.blue, rhs), alpha: Channel.quotientI(lhs.alpha, rhs))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func quotientF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
         return RGBA<Channel.FloatType>(red: Channel.quotientF(lhs.red, rhs), green: Channel.quotientF(lhs.green, rhs), blue: Channel.quotientF(lhs.blue, rhs), alpha: Channel.quotientF(lhs.alpha, rhs))
     }
     
-    @_specialize(exported: true, where Channel == UInt8)
-    @_specialize(exported: true, where Channel == UInt16)
-    @_specialize(exported: true, where Channel == UInt32)
-    @_specialize(exported: true, where Channel == Int)
-    @_specialize(exported: true, where Channel == Float)
-    @_specialize(exported: true, where Channel == Double)
+    @inlinable
     public static func quotientD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
         return RGBA<Channel.DoubleType>(red: Channel.quotientD(lhs.red, rhs), green: Channel.quotientD(lhs.green, rhs), blue: Channel.quotientD(lhs.blue, rhs), alpha: Channel.quotientD(lhs.alpha, rhs))
     }
