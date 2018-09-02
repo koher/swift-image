@@ -3,7 +3,7 @@ public struct Image<Pixel> : ImageProtocol {
     
 	public let width: Int
 	public let height: Int
-	internal var pixels: [Pixel]
+	@usableFromInline internal var pixels: [Pixel]
 	
 	public init(width: Int, height: Int, pixels: [Pixel]) {
 		precondition(width >= 0, "`width` must be greater than or equal to 0: \(width)")
