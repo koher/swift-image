@@ -145,7 +145,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
                 var pixel = Pixel.summableIZero
                 for dy in 0..<sy {
                     for dx in 0..<sx {
-                        pixel = Pixel.IntType._sum(pixel, self[bx + dx, by + dy].summableI)
+                        pixel = Pixel.IntType._ez_sum(pixel, self[bx + dx, by + dy].summableI)
                     }
                 }
                 pixels.append(Pixel.init(summableI: Pixel.quotientI(pixel, n)))

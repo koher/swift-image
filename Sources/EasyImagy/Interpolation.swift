@@ -73,9 +73,9 @@ extension ImageProtocol where Pixel : _NumericPixel {
         let w11 = wx * wy
         
         return Pixel.init(summableD:
-            Pixel.DoubleType._sum(
-                Pixel.DoubleType._sum(Pixel.productD(v00.summableD, w00), Pixel.productD(v01.summableD, w01)),
-                Pixel.DoubleType._sum(Pixel.productD(v10.summableD, w10), Pixel.productD(v11.summableD, w11))
+            Pixel.DoubleType._ez_sum(
+                Pixel.DoubleType._ez_sum(Pixel.productD(v00.summableD, w00), Pixel.productD(v01.summableD, w01)),
+                Pixel.DoubleType._ez_sum(Pixel.productD(v10.summableD, w10), Pixel.productD(v11.summableD, w11))
             )
         )
     }

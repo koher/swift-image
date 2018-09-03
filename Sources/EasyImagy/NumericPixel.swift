@@ -1,21 +1,21 @@
 import Foundation
 
 public protocol _Summable {
-    static func _sum(_ lhs: Self, _ rhs: Self) -> Self
+    static func _ez_sum(_ lhs: Self, _ rhs: Self) -> Self
 }
 
-extension Int : _Summable { public static func _sum(_ lhs: Int, _ rhs: Int) -> Int { return lhs + rhs } }
-extension Int64 : _Summable { public static func _sum(_ lhs: Int64, _ rhs: Int64) -> Int64 { return lhs + rhs } }
-extension Float : _Summable { public static func _sum(_ lhs: Float, _ rhs: Float) -> Float { return lhs + rhs } }
-extension Double : _Summable { public static func _sum(_ lhs: Double, _ rhs: Double) -> Double { return lhs + rhs } }
+extension Int : _Summable { public static func _ez_sum(_ lhs: Int, _ rhs: Int) -> Int { return lhs + rhs } }
+extension Int64 : _Summable { public static func _ez_sum(_ lhs: Int64, _ rhs: Int64) -> Int64 { return lhs + rhs } }
+extension Float : _Summable { public static func _ez_sum(_ lhs: Float, _ rhs: Float) -> Float { return lhs + rhs } }
+extension Double : _Summable { public static func _ez_sum(_ lhs: Double, _ rhs: Double) -> Double { return lhs + rhs } }
 extension RGBA : _Summable where Channel : _Summable {
     @inlinable
-    public static func _sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+    public static func _ez_sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
         return RGBA<Channel>(
-            red  : Channel._sum(lhs.red  , rhs.red),
-            green: Channel._sum(lhs.green, rhs.green),
-            blue : Channel._sum(lhs.blue , rhs.blue),
-            alpha: Channel._sum(lhs.alpha, rhs.alpha)
+            red  : Channel._ez_sum(lhs.red  , rhs.red),
+            green: Channel._ez_sum(lhs.green, rhs.green),
+            blue : Channel._ez_sum(lhs.blue , rhs.blue),
+            alpha: Channel._ez_sum(lhs.alpha, rhs.alpha)
         )
     }
 }
