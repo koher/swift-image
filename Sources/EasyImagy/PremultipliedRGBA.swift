@@ -16,7 +16,7 @@ public struct PremultipliedRGBA<Channel> where Channel : Numeric, Channel : Comp
     }
 }
 
-extension PremultipliedRGBA where Channel : _Numeric & UnsignedInteger & FixedWidthInteger, Channel.IntType : FixedWidthInteger {
+extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel.IntType : FixedWidthInteger {
     public init(_ rgba: RGBA<Channel>) {
         let numericAlpha: Channel.IntType = rgba.alpha.summableI
         let numericMaxAlpha: Channel.IntType = Channel.max.summableI

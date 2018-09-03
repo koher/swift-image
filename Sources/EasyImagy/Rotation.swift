@@ -102,7 +102,7 @@ extension ImageProtocol {
     }
 }
 
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
     public func rotated(byDegrees angle: Int) -> Image<Pixel> {
         if angle % 90 == 0 {
             return rotated(byRightAngleInDegrees: angle)

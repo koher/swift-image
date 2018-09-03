@@ -26,7 +26,7 @@ extension ImageProtocol {
     }
 }
 
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
     public func resizedTo(width: Int, height: Int) -> Image<Pixel> {
         let ox = xRange.lowerBound
         let oy = yRange.lowerBound

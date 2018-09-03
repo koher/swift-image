@@ -20,7 +20,7 @@ extension RGBA : _Summable where Channel : _Summable {
     }
 }
 
-public protocol _Numeric {
+public protocol _NumericPixel {
     associatedtype IntType    : _Summable
     associatedtype FloatType  : _Summable
     associatedtype DoubleType : _Summable
@@ -43,7 +43,7 @@ public protocol _Numeric {
     static func quotientD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
 }
 
-extension RGBA : _Numeric where Channel : _Numeric {
+extension RGBA : _NumericPixel where Channel : _NumericPixel {
     public typealias IntType = RGBA<Channel.IntType>
     public typealias FloatType = RGBA<Channel.FloatType>
     public typealias DoubleType = RGBA<Channel.DoubleType>
@@ -125,7 +125,7 @@ extension RGBA : _Numeric where Channel : _Numeric {
     }
 }
 
-extension UInt8 : _Numeric {
+extension UInt8 : _NumericPixel {
     public init(summableI: Int) {
         self = UInt8(summableI)
     }
@@ -195,7 +195,7 @@ extension UInt8 : _Numeric {
     }
 }
 
-extension UInt16 : _Numeric {
+extension UInt16 : _NumericPixel {
     public init(summableI: Int) {
         self = UInt16(summableI)
     }
@@ -265,7 +265,7 @@ extension UInt16 : _Numeric {
     }
 }
 
-extension UInt32 : _Numeric {
+extension UInt32 : _NumericPixel {
     public init(summableI: Int64) {
         self = UInt32(summableI)
     }
@@ -335,7 +335,7 @@ extension UInt32 : _Numeric {
     }
 }
 
-extension Int : _Numeric {
+extension Int : _NumericPixel {
     public init(summableI: Int) {
         self = summableI
     }
@@ -405,7 +405,7 @@ extension Int : _Numeric {
     }
 }
 
-extension Float : _Numeric {
+extension Float : _NumericPixel {
     public init(summableI: Float) {
         self = summableI
     }
@@ -475,7 +475,7 @@ extension Float : _Numeric {
     }
 }
 
-extension Double : _Numeric {
+extension Double : _NumericPixel {
     public init(summableI: Double) {
         self = summableI
     }

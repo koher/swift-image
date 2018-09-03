@@ -1,4 +1,4 @@
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
     @inlinable
     public func convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,

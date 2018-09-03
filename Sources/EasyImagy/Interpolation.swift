@@ -22,7 +22,7 @@ extension ImageProtocol {
     }
 }
 
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Double, y: Double) -> Pixel {
         return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1] }
