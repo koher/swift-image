@@ -97,7 +97,7 @@ extension ImageProtocol {
 extension ImageProtocol {
     public func transposed() -> Image<Pixel> {
         var pixels = [Pixel]()
-        pixels.reserveCapacity(xRange.count * yRange.count)
+        pixels.reserveCapacity(count)
         
         for x in xRange {
             for y in yRange {
@@ -110,7 +110,7 @@ extension ImageProtocol {
     
     public func xReversed() -> Image<Pixel> {
         var pixels = [Pixel]()
-        pixels.reserveCapacity(xRange.count * yRange.count)
+        pixels.reserveCapacity(count)
         
         for y in yRange {
             for x in xRange.reversed() {
@@ -123,7 +123,7 @@ extension ImageProtocol {
     
     public func yReversed() -> Image<Pixel> {
         var pixels = [Pixel]()
-        pixels.reserveCapacity(xRange.count * yRange.count)
+        pixels.reserveCapacity(count)
         
         for y in yRange.reversed() {
             for x in xRange {
@@ -151,7 +151,7 @@ extension ImageProtocol {
             }
         case 1, -3:
             var pixels = [Pixel]()
-            pixels.reserveCapacity(xRange.count * yRange.count)
+            pixels.reserveCapacity(count)
             
             for y in xRange {
                 for x in yRange.reversed() {
@@ -162,7 +162,7 @@ extension ImageProtocol {
             return Image(width: height, height: width, pixels: pixels)
         case 2, -2:
             var pixels = [Pixel]()
-            pixels.reserveCapacity(xRange.count * yRange.count)
+            pixels.reserveCapacity(count)
             
             for y in yRange.reversed() {
                 for x in xRange.reversed() {
@@ -173,7 +173,7 @@ extension ImageProtocol {
             return Image(width: width, height: height, pixels: pixels)
         case 3, -1:
             var pixels = [Pixel]()
-            pixels.reserveCapacity(xRange.count * yRange.count)
+            pixels.reserveCapacity(count)
             
             for y in xRange.reversed() {
                 for x in yRange {
