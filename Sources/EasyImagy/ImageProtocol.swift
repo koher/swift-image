@@ -77,6 +77,7 @@ extension ImageProtocol {
     
     public init(width: Int, height: Int, pixelAt: (_ x: Int, _ y: Int) throws -> Pixel) rethrows {
         var pixels = [Pixel]()
+        pixels.reserveCapacity(width * height)
         
         for y in 0..<height {
             for x in 0..<width {
@@ -101,6 +102,7 @@ extension ImageProtocol {
 extension ImageProtocol {
     public func transposed() -> Image<Pixel> {
         var pixels = [Pixel]()
+        pixels.reserveCapacity(count)
         
         for x in xRange {
             for y in yRange {
@@ -113,6 +115,7 @@ extension ImageProtocol {
     
     public func xReversed() -> Image<Pixel> {
         var pixels = [Pixel]()
+        pixels.reserveCapacity(count)
         
         for y in yRange {
             for x in xRange.reversed() {
@@ -125,6 +128,7 @@ extension ImageProtocol {
     
     public func yReversed() -> Image<Pixel> {
         var pixels = [Pixel]()
+        pixels.reserveCapacity(count)
         
         for y in yRange.reversed() {
             for x in xRange {
