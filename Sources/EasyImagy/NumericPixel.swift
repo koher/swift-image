@@ -25,22 +25,22 @@ public protocol _NumericPixel {
     associatedtype FloatType  : _Summable
     associatedtype DoubleType : _Summable
 
-    init(summableI: IntType)
-    init(summableF: FloatType)
-    init(summableD: DoubleType)
-    var summableI: IntType { get }
-    var summableF: FloatType { get }
-    var summableD: DoubleType { get }
-    static var selfZero: Self { get }
-    static var summableIZero: IntType { get }
-    static var summableFZero: FloatType { get }
-    static var summableDZero: DoubleType { get }
-    static func productI(_ lhs: IntType, _ rhs: Int) -> IntType
-    static func productF(_ lhs: FloatType, _ rhs: Float) -> FloatType
-    static func productD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
-    static func quotientI(_ lhs: IntType, _ rhs: Int) -> IntType
-    static func quotientF(_ lhs: FloatType, _ rhs: Float) -> FloatType
-    static func quotientD(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
+    init(_ez_summableInt: IntType)
+    init(_ez_summableFloat: FloatType)
+    init(_ez_summableDouble: DoubleType)
+    var _ez_summableInt: IntType { get }
+    var _ez_summableFloat: FloatType { get }
+    var _ez_summableDouble: DoubleType { get }
+    static var _ez_zero: Self { get }
+    static var _ez_summableIntZero: IntType { get }
+    static var _ez_summableFloatZero: FloatType { get }
+    static var _ez_summableDoubleZero: DoubleType { get }
+    static func _ez_productInt(_ lhs: IntType, _ rhs: Int) -> IntType
+    static func _ez_productFloat(_ lhs: FloatType, _ rhs: Float) -> FloatType
+    static func _ez_productDouble(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
+    static func _ez_quotientInt(_ lhs: IntType, _ rhs: Int) -> IntType
+    static func _ez_quotientFloat(_ lhs: FloatType, _ rhs: Float) -> FloatType
+    static func _ez_quotientDouble(_ lhs: DoubleType, _ rhs: Double) -> DoubleType
 }
 
 extension RGBA : _NumericPixel where Channel : _NumericPixel {
@@ -49,498 +49,498 @@ extension RGBA : _NumericPixel where Channel : _NumericPixel {
     public typealias DoubleType = RGBA<Channel.DoubleType>
     
     @inlinable
-    public init(summableI: RGBA<Channel.IntType>) {
-        self = RGBA<Channel>(red: Channel.init(summableI: summableI.red), green: Channel.init(summableI: summableI.green), blue: Channel.init(summableI: summableI.blue), alpha: Channel.init(summableI: summableI.alpha))
+    public init(_ez_summableInt: RGBA<Channel.IntType>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_summableInt: _ez_summableInt.red), green: Channel.init(_ez_summableInt: _ez_summableInt.green), blue: Channel.init(_ez_summableInt: _ez_summableInt.blue), alpha: Channel.init(_ez_summableInt: _ez_summableInt.alpha))
     }
     
     @inlinable
-    public init(summableF: RGBA<Channel.FloatType>) {
-        self = RGBA<Channel>(red: Channel.init(summableF: summableF.red), green: Channel.init(summableF: summableF.green), blue: Channel.init(summableF: summableF.blue), alpha: Channel.init(summableF: summableF.alpha))
+    public init(_ez_summableFloat: RGBA<Channel.FloatType>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_summableFloat: _ez_summableFloat.red), green: Channel.init(_ez_summableFloat: _ez_summableFloat.green), blue: Channel.init(_ez_summableFloat: _ez_summableFloat.blue), alpha: Channel.init(_ez_summableFloat: _ez_summableFloat.alpha))
     }
     
     @inlinable
-    public init(summableD: RGBA<Channel.DoubleType>) {
-        self = RGBA<Channel>(red: Channel.init(summableD: summableD.red), green: Channel.init(summableD: summableD.green), blue: Channel.init(summableD: summableD.blue), alpha: Channel.init(summableD: summableD.alpha))
+    public init(_ez_summableDouble: RGBA<Channel.DoubleType>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_summableDouble: _ez_summableDouble.red), green: Channel.init(_ez_summableDouble: _ez_summableDouble.green), blue: Channel.init(_ez_summableDouble: _ez_summableDouble.blue), alpha: Channel.init(_ez_summableDouble: _ez_summableDouble.alpha))
     }
     
-    public var summableI: RGBA<Channel.IntType> {
-        return RGBA<Channel.IntType>(red: red.summableI, green: green.summableI, blue: blue.summableI, alpha: alpha.summableI)
+    public var _ez_summableInt: RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: red._ez_summableInt, green: green._ez_summableInt, blue: blue._ez_summableInt, alpha: alpha._ez_summableInt)
     }
     
-    public var summableF: RGBA<Channel.FloatType> {
-        return RGBA<Channel.FloatType>(red: red.summableF, green: green.summableF, blue: blue.summableF, alpha: alpha.summableF)
+    public var _ez_summableFloat: RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: red._ez_summableFloat, green: green._ez_summableFloat, blue: blue._ez_summableFloat, alpha: alpha._ez_summableFloat)
     }
     
-    public var summableD: RGBA<Channel.DoubleType> {
-        return RGBA<Channel.DoubleType>(red: red.summableD, green: green.summableD, blue: blue.summableD, alpha: alpha.summableD)
+    public var _ez_summableDouble: RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: red._ez_summableDouble, green: green._ez_summableDouble, blue: blue._ez_summableDouble, alpha: alpha._ez_summableDouble)
     }
     
-    public static var selfZero: RGBA<Channel> {
-        return RGBA<Channel>(red: Channel.selfZero, green: Channel.selfZero, blue: Channel.selfZero, alpha: Channel.selfZero)
+    public static var _ez_zero: RGBA<Channel> {
+        return RGBA<Channel>(red: Channel._ez_zero, green: Channel._ez_zero, blue: Channel._ez_zero, alpha: Channel._ez_zero)
     }
     
-    public static var summableIZero: RGBA<Channel.IntType> {
-        let zero = Channel.summableIZero
+    public static var _ez_summableIntZero: RGBA<Channel.IntType> {
+        let zero = Channel._ez_summableIntZero
         return RGBA<Channel.IntType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
-    public static var summableFZero: RGBA<Channel.FloatType> {
-        let zero = Channel.summableFZero
+    public static var _ez_summableFloatZero: RGBA<Channel.FloatType> {
+        let zero = Channel._ez_summableFloatZero
         return RGBA<Channel.FloatType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
-    public static var summableDZero: RGBA<Channel.DoubleType> {
-        let zero = Channel.summableDZero
+    public static var _ez_summableDoubleZero: RGBA<Channel.DoubleType> {
+        let zero = Channel._ez_summableDoubleZero
         return RGBA<Channel.DoubleType>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
     @inlinable
-    public static func productI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
-        return RGBA<Channel.IntType>(red: Channel.productI(lhs.red, rhs), green: Channel.productI(lhs.green, rhs), blue: Channel.productI(lhs.blue, rhs), alpha: Channel.productI(lhs.alpha, rhs))
+    public static func _ez_productInt(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: Channel._ez_productInt(lhs.red, rhs), green: Channel._ez_productInt(lhs.green, rhs), blue: Channel._ez_productInt(lhs.blue, rhs), alpha: Channel._ez_productInt(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func productF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
-        return RGBA<Channel.FloatType>(red: Channel.productF(lhs.red, rhs), green: Channel.productF(lhs.green, rhs), blue: Channel.productF(lhs.blue, rhs), alpha: Channel.productF(lhs.alpha, rhs))
+    public static func _ez_productFloat(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: Channel._ez_productFloat(lhs.red, rhs), green: Channel._ez_productFloat(lhs.green, rhs), blue: Channel._ez_productFloat(lhs.blue, rhs), alpha: Channel._ez_productFloat(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func productD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
-        return RGBA<Channel.DoubleType>(red: Channel.productD(lhs.red, rhs), green: Channel.productD(lhs.green, rhs), blue: Channel.productD(lhs.blue, rhs), alpha: Channel.productD(lhs.alpha, rhs))
+    public static func _ez_productDouble(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: Channel._ez_productDouble(lhs.red, rhs), green: Channel._ez_productDouble(lhs.green, rhs), blue: Channel._ez_productDouble(lhs.blue, rhs), alpha: Channel._ez_productDouble(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func quotientI(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
-        return RGBA<Channel.IntType>(red: Channel.quotientI(lhs.red, rhs), green: Channel.quotientI(lhs.green, rhs), blue: Channel.quotientI(lhs.blue, rhs), alpha: Channel.quotientI(lhs.alpha, rhs))
+    public static func _ez_quotientInt(_ lhs: RGBA<Channel.IntType>, _ rhs: Int) -> RGBA<Channel.IntType> {
+        return RGBA<Channel.IntType>(red: Channel._ez_quotientInt(lhs.red, rhs), green: Channel._ez_quotientInt(lhs.green, rhs), blue: Channel._ez_quotientInt(lhs.blue, rhs), alpha: Channel._ez_quotientInt(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func quotientF(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
-        return RGBA<Channel.FloatType>(red: Channel.quotientF(lhs.red, rhs), green: Channel.quotientF(lhs.green, rhs), blue: Channel.quotientF(lhs.blue, rhs), alpha: Channel.quotientF(lhs.alpha, rhs))
+    public static func _ez_quotientFloat(_ lhs: RGBA<Channel.FloatType>, _ rhs: Float) -> RGBA<Channel.FloatType> {
+        return RGBA<Channel.FloatType>(red: Channel._ez_quotientFloat(lhs.red, rhs), green: Channel._ez_quotientFloat(lhs.green, rhs), blue: Channel._ez_quotientFloat(lhs.blue, rhs), alpha: Channel._ez_quotientFloat(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func quotientD(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
-        return RGBA<Channel.DoubleType>(red: Channel.quotientD(lhs.red, rhs), green: Channel.quotientD(lhs.green, rhs), blue: Channel.quotientD(lhs.blue, rhs), alpha: Channel.quotientD(lhs.alpha, rhs))
+    public static func _ez_quotientDouble(_ lhs: RGBA<Channel.DoubleType>, _ rhs: Double) -> RGBA<Channel.DoubleType> {
+        return RGBA<Channel.DoubleType>(red: Channel._ez_quotientDouble(lhs.red, rhs), green: Channel._ez_quotientDouble(lhs.green, rhs), blue: Channel._ez_quotientDouble(lhs.blue, rhs), alpha: Channel._ez_quotientDouble(lhs.alpha, rhs))
     }
 }
 
 extension UInt8 : _NumericPixel {
-    public init(summableI: Int) {
-        self = UInt8(summableI)
+    public init(_ez_summableInt: Int) {
+        self = UInt8(_ez_summableInt)
     }
 
-    public init(summableF: Float) {
-        self = UInt8(summableF)
+    public init(_ez_summableFloat: Float) {
+        self = UInt8(_ez_summableFloat)
     }
 
-    public init(summableD: Double) {
-        self = UInt8(summableD)
+    public init(_ez_summableDouble: Double) {
+        self = UInt8(_ez_summableDouble)
     }
     
-    public var summableI: Int {
+    public var _ez_summableInt: Int {
         return Int(self)
     }
     
-    public var summableF: Float {
+    public var _ez_summableFloat: Float {
         return Float(self)
     }
     
-    public var summableD: Double {
+    public var _ez_summableDouble: Double {
         return Double(self)
     }
 
-    public static var selfZero: UInt8 {
+    public static var _ez_zero: UInt8 {
         return 0
     }
 
     
-    public static var summableIZero: Int {
+    public static var _ez_summableIntZero: Int {
         return 0
         
     }
     
-    public static var summableFZero: Float {
+    public static var _ez_summableFloatZero: Float {
         return 0
         
     }
     
-    public static var summableDZero: Double {
+    public static var _ez_summableDoubleZero: Double {
         return 0
         
     }
     
-    public static func productI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
     
-    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_productFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_productDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    public static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func _ez_quotientInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs / rhs
     }
     
-    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_quotientFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_quotientDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
 extension UInt16 : _NumericPixel {
-    public init(summableI: Int) {
-        self = UInt16(summableI)
+    public init(_ez_summableInt: Int) {
+        self = UInt16(_ez_summableInt)
     }
 
-    public init(summableF: Float) {
-        self = UInt16(summableF)
+    public init(_ez_summableFloat: Float) {
+        self = UInt16(_ez_summableFloat)
     }
 
-    public init(summableD: Double) {
-        self = UInt16(summableD)
+    public init(_ez_summableDouble: Double) {
+        self = UInt16(_ez_summableDouble)
     }
     
-    public var summableI: Int {
+    public var _ez_summableInt: Int {
         return Int(self)
     }
     
-    public var summableF: Float {
+    public var _ez_summableFloat: Float {
         return Float(self)
     }
     
-    public var summableD: Double {
+    public var _ez_summableDouble: Double {
         return Double(self)
     }
 
-    public static var selfZero: UInt16 {
+    public static var _ez_zero: UInt16 {
         return 0
     }
 
     
-    public static var summableIZero: Int {
+    public static var _ez_summableIntZero: Int {
         return 0
         
     }
     
-    public static var summableFZero: Float {
+    public static var _ez_summableFloatZero: Float {
         return 0
         
     }
     
-    public static var summableDZero: Double {
+    public static var _ez_summableDoubleZero: Double {
         return 0
         
     }
     
-    public static func productI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
     
-    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_productFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_productDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    public static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func _ez_quotientInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs / rhs
     }
     
-    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_quotientFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_quotientDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
 extension UInt32 : _NumericPixel {
-    public init(summableI: Int64) {
-        self = UInt32(summableI)
+    public init(_ez_summableInt: Int64) {
+        self = UInt32(_ez_summableInt)
     }
 
-    public init(summableF: Float) {
-        self = UInt32(summableF)
+    public init(_ez_summableFloat: Float) {
+        self = UInt32(_ez_summableFloat)
     }
 
-    public init(summableD: Double) {
-        self = UInt32(summableD)
+    public init(_ez_summableDouble: Double) {
+        self = UInt32(_ez_summableDouble)
     }
     
-    public var summableI: Int64 {
+    public var _ez_summableInt: Int64 {
         return Int64(self)
     }
     
-    public var summableF: Float {
+    public var _ez_summableFloat: Float {
         return Float(self)
     }
     
-    public var summableD: Double {
+    public var _ez_summableDouble: Double {
         return Double(self)
     }
 
-    public static var selfZero: UInt32 {
+    public static var _ez_zero: UInt32 {
         return 0
     }
 
     
-    public static var summableIZero: Int64 {
+    public static var _ez_summableIntZero: Int64 {
         return 0
         
     }
     
-    public static var summableFZero: Float {
+    public static var _ez_summableFloatZero: Float {
         return 0
         
     }
     
-    public static var summableDZero: Double {
+    public static var _ez_summableDoubleZero: Double {
         return 0
         
     }
     
-    public static func productI(_ lhs: Int64, _ rhs: Int) -> Int64 {
+    public static func _ez_productInt(_ lhs: Int64, _ rhs: Int) -> Int64 {
         return lhs * Int64(rhs)
     }
     
-    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_productFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_productDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    public static func quotientI(_ lhs: Int64, _ rhs: Int) -> Int64 {
+    public static func _ez_quotientInt(_ lhs: Int64, _ rhs: Int) -> Int64 {
         return lhs / Int64(rhs)
     }
     
-    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_quotientFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_quotientDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
 extension Int : _NumericPixel {
-    public init(summableI: Int) {
-        self = summableI
+    public init(_ez_summableInt: Int) {
+        self = _ez_summableInt
     }
 
-    public init(summableF: Float) {
-        self = Int(summableF)
+    public init(_ez_summableFloat: Float) {
+        self = Int(_ez_summableFloat)
     }
 
-    public init(summableD: Double) {
-        self = Int(summableD)
+    public init(_ez_summableDouble: Double) {
+        self = Int(_ez_summableDouble)
     }
     
-    public var summableI: Int {
+    public var _ez_summableInt: Int {
         return self
     }
     
-    public var summableF: Float {
+    public var _ez_summableFloat: Float {
         return Float(self)
     }
     
-    public var summableD: Double {
+    public var _ez_summableDouble: Double {
         return Double(self)
     }
 
-    public static var selfZero: Int {
+    public static var _ez_zero: Int {
         return 0
     }
 
     
-    public static var summableIZero: Int {
+    public static var _ez_summableIntZero: Int {
         return 0
         
     }
     
-    public static var summableFZero: Float {
+    public static var _ez_summableFloatZero: Float {
         return 0
         
     }
     
-    public static var summableDZero: Double {
+    public static var _ez_summableDoubleZero: Double {
         return 0
         
     }
     
-    public static func productI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
     
-    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_productFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_productDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    public static func quotientI(_ lhs: Int, _ rhs: Int) -> Int {
+    public static func _ez_quotientInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs / rhs
     }
     
-    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_quotientFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_quotientDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
 extension Float : _NumericPixel {
-    public init(summableI: Float) {
-        self = summableI
+    public init(_ez_summableInt: Float) {
+        self = _ez_summableInt
     }
 
-    public init(summableF: Float) {
-        self = summableF
+    public init(_ez_summableFloat: Float) {
+        self = _ez_summableFloat
     }
 
-    public init(summableD: Double) {
-        self = Float(summableD)
+    public init(_ez_summableDouble: Double) {
+        self = Float(_ez_summableDouble)
     }
     
-    public var summableI: Float {
+    public var _ez_summableInt: Float {
         return self
     }
     
-    public var summableF: Float {
+    public var _ez_summableFloat: Float {
         return self
     }
     
-    public var summableD: Double {
+    public var _ez_summableDouble: Double {
         return Double(self)
     }
 
-    public static var selfZero: Float {
+    public static var _ez_zero: Float {
         return 0
     }
 
     
-    public static var summableIZero: Float {
+    public static var _ez_summableIntZero: Float {
         return 0
         
     }
     
-    public static var summableFZero: Float {
+    public static var _ez_summableFloatZero: Float {
         return 0
         
     }
     
-    public static var summableDZero: Double {
+    public static var _ez_summableDoubleZero: Double {
         return 0
         
     }
     
-    public static func productI(_ lhs: Float, _ rhs: Int) -> Float {
+    public static func _ez_productInt(_ lhs: Float, _ rhs: Int) -> Float {
         return lhs * Float(rhs)
     }
     
-    public static func productF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_productFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs * rhs
     }
     
-    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_productDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    public static func quotientI(_ lhs: Float, _ rhs: Int) -> Float {
+    public static func _ez_quotientInt(_ lhs: Float, _ rhs: Int) -> Float {
         return lhs / Float(rhs)
     }
     
-    public static func quotientF(_ lhs: Float, _ rhs: Float) -> Float {
+    public static func _ez_quotientFloat(_ lhs: Float, _ rhs: Float) -> Float {
         return lhs / rhs
     }
     
-    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_quotientDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }
 
 extension Double : _NumericPixel {
-    public init(summableI: Double) {
-        self = summableI
+    public init(_ez_summableInt: Double) {
+        self = _ez_summableInt
     }
 
-    public init(summableF: Double) {
-        self = summableF
+    public init(_ez_summableFloat: Double) {
+        self = _ez_summableFloat
     }
 
-    public init(summableD: Double) {
-        self = summableD
+    public init(_ez_summableDouble: Double) {
+        self = _ez_summableDouble
     }
     
-    public var summableI: Double {
+    public var _ez_summableInt: Double {
         return self
     }
     
-    public var summableF: Double {
+    public var _ez_summableFloat: Double {
         return self
     }
     
-    public var summableD: Double {
+    public var _ez_summableDouble: Double {
         return self
     }
 
-    public static var selfZero: Double {
+    public static var _ez_zero: Double {
         return 0
     }
 
     
-    public static var summableIZero: Double {
+    public static var _ez_summableIntZero: Double {
         return 0
         
     }
     
-    public static var summableFZero: Double {
+    public static var _ez_summableFloatZero: Double {
         return 0
         
     }
     
-    public static var summableDZero: Double {
+    public static var _ez_summableDoubleZero: Double {
         return 0
         
     }
     
-    public static func productI(_ lhs: Double, _ rhs: Int) -> Double {
+    public static func _ez_productInt(_ lhs: Double, _ rhs: Int) -> Double {
         return lhs * Double(rhs)
     }
     
-    public static func productF(_ lhs: Double, _ rhs: Float) -> Double {
+    public static func _ez_productFloat(_ lhs: Double, _ rhs: Float) -> Double {
         return lhs * Double(rhs)
     }
     
-    public static func productD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_productDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
     
-    public static func quotientI(_ lhs: Double, _ rhs: Int) -> Double {
+    public static func _ez_quotientInt(_ lhs: Double, _ rhs: Int) -> Double {
         return lhs / Double(rhs)
     }
     
-    public static func quotientF(_ lhs: Double, _ rhs: Float) -> Double {
+    public static func _ez_quotientFloat(_ lhs: Double, _ rhs: Float) -> Double {
         return lhs / Double(rhs)
     }
     
-    public static func quotientD(_ lhs: Double, _ rhs: Double) -> Double {
+    public static func _ez_quotientDouble(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs / rhs
     }
 }

@@ -112,7 +112,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
     }
     
     public func rotated(by angle: Double) -> Image<Pixel> {
-        return rotatedImageWith(angle: angle) { self[$0, $1, interpolation: .bilinear, extrapolation: .constant(.selfZero)] }
+        return rotatedImageWith(angle: angle) { self[$0, $1, interpolation: .bilinear, extrapolation: .constant(._ez_zero)] }
     }
     
     public func rotated(byDegrees angle: Double) -> Image<Pixel> {
