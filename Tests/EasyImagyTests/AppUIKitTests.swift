@@ -2,7 +2,7 @@
 import XCTest
 import EasyImagy
 
-class ImageAppUIKitTests: XCTestCase {
+class AppUIKitTests: XCTestCase {
     func testPNGData() {
         do {
             let image = Image<RGBA<UInt8>>(width: 3, height: 2, pixels: [

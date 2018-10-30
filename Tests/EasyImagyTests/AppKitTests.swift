@@ -4,7 +4,7 @@
     import CoreGraphics
     import AppKit
     
-    class ImageAppKitTests: XCTestCase {
+    class AppKitTests: XCTestCase {
         func testInitWithNSImage() {
             do {
                 let nsImage = NSImage(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png"))!
