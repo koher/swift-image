@@ -1,13 +1,8 @@
 % weight_types = ['Int', 'Float', 'Double']
 % pixel_types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
 % pixel_types = pixel_types + [f'RGBA<{type}>' for type in pixel_types]
-% type_to_symbol = {
-%   'Int'    : 'I',
-%   'Float'  : 'F',
-%   'Double' : 'D',
-% }
 %
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
 % for i, type in enumerate(weight_types):
 %   if i > 0:
 
@@ -50,7 +45,6 @@ extension ImageProtocol where Pixel : _Numeric {
 % end
 %
 % for type in weight_types:
-%   symbol = type_to_symbol[type]
 
     @usableFromInline
     internal func _convoluted<Kernel: ImageProtocol>(
@@ -79,12 +73,12 @@ extension ImageProtocol where Pixel : _Numeric {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summable${symbol}
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summable${type}
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.product${symbol}(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_product${type}(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summable${symbol}: weightedValues.reduce(Pixel.summable${symbol}Zero) { Pixel.${type}Type._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summable${type}: weightedValues.reduce(Pixel._ez_summable${type}Zero) { Pixel.${type}Type._ez_sum($0, $1) }))
             }
         }
         

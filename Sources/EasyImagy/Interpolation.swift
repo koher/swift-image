@@ -22,7 +22,7 @@ extension ImageProtocol {
     }
 }
 
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
     // Not implemented by default parameter values to improve performance especially when this `subscript` is called repeatedly
     public subscript(x: Double, y: Double) -> Pixel {
         return interpolatedPixelByBilinear(x: x, y: y) { self[$0, $1] }
@@ -72,10 +72,10 @@ extension ImageProtocol where Pixel : _Numeric {
         let w10 = (1.0 - wx) * wy
         let w11 = wx * wy
         
-        return Pixel.init(summableD:
-            Pixel.DoubleType._sum(
-                Pixel.DoubleType._sum(Pixel.productD(v00.summableD, w00), Pixel.productD(v01.summableD, w01)),
-                Pixel.DoubleType._sum(Pixel.productD(v10.summableD, w10), Pixel.productD(v11.summableD, w11))
+        return Pixel.init(_ez_summableDouble:
+            Pixel.DoubleType._ez_sum(
+                Pixel.DoubleType._ez_sum(Pixel._ez_productDouble(v00._ez_summableDouble, w00), Pixel._ez_productDouble(v01._ez_summableDouble, w01)),
+                Pixel.DoubleType._ez_sum(Pixel._ez_productDouble(v10._ez_summableDouble, w10), Pixel._ez_productDouble(v11._ez_summableDouble, w11))
             )
         )
     }

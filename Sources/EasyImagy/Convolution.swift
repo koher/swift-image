@@ -1,4 +1,4 @@
-extension ImageProtocol where Pixel : _Numeric {
+extension ImageProtocol where Pixel : _NumericPixel {
     @inlinable
     public func convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
@@ -134,12 +134,12 @@ extension ImageProtocol where Pixel : _Numeric {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summableI
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableInt
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.productI(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productInt(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summableI: weightedValues.reduce(Pixel.summableIZero) { Pixel.IntType._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summableInt: weightedValues.reduce(Pixel._ez_summableIntZero) { Pixel.IntType._ez_sum($0, $1) }))
             }
         }
         
@@ -173,12 +173,12 @@ extension ImageProtocol where Pixel : _Numeric {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summableF
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableFloat
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.productF(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productFloat(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summableF: weightedValues.reduce(Pixel.summableFZero) { Pixel.FloatType._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summableFloat: weightedValues.reduce(Pixel._ez_summableFloatZero) { Pixel.FloatType._ez_sum($0, $1) }))
             }
         }
         
@@ -212,12 +212,12 @@ extension ImageProtocol where Pixel : _Numeric {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summableD
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableDouble
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.productD(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productDouble(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summableD: weightedValues.reduce(Pixel.summableDZero) { Pixel.DoubleType._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summableDouble: weightedValues.reduce(Pixel._ez_summableDoubleZero) { Pixel.DoubleType._ez_sum($0, $1) }))
             }
         }
         
