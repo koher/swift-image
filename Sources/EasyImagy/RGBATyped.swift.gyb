@@ -1,17 +1,13 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double']
+% types = ['UInt8', 'UInt16', 'Float', 'Double']
 % type_to_max_value = {
 %   'UInt8'  : 'UInt8.max',
 %   'UInt16' : 'UInt16.max',
-%   'UInt32' : 'UInt32.max',
-%   'UInt64' : 'UInt64.max',
-%   'Int'    : '255',
 %   'Float'  : '1',
 %   'Double' : '1',
 % }
 % summables = {
 %   'UInt8' : 'Int',
 %   'UInt16': 'Int',
-%   'UInt32': 'UInt64',
 % }
 % int_convertibles = {'UInt8', 'UInt16'}
 %
@@ -64,22 +60,6 @@ extension RGBA where Channel == ${type} {
     }
 %   if type in int_convertibles:
     
-    public init(red: Int, green: Int, blue: Int, alpha: Int) {
-        self.init(red: ${type}(red), green: ${type}(green), blue: ${type}(blue), alpha: ${type}(alpha))
-    }
-    
-    public init(red: Int, green: Int, blue: Int) {
-        self.init(red: ${type}(red), green: ${type}(green), blue: ${type}(blue))
-    }
-    
-    public init(gray: Int) {
-        self.init(gray: ${type}(gray))
-    }
-    
-    public init(gray: Int, alpha: Int) {
-        self.init(gray: ${type}(gray), alpha: ${type}(alpha))
-    }
-
     public var redInt: Int {
         get {
             return Int(red)

@@ -1,5 +1,5 @@
 % weight_types = ['Int', 'Float', 'Double']
-% pixel_types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
+% pixel_types = ['UInt8', 'UInt16', 'Int', 'Float', 'Double']
 % pixel_types = pixel_types + [f'RGBA<{type}>' for type in pixel_types]
 %
 extension ImageProtocol where Pixel : _NumericPixel {

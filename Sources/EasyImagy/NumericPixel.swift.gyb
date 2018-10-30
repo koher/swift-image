@@ -1,9 +1,8 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'Int', 'Float', 'Double']
+% types = ['UInt8', 'UInt16', 'Int', 'Float', 'Double']
 % summable_types = ['Int', 'Int64', 'Float', 'Double']
 % type_to_summables = {
 %   'UInt8' : ['Int', 'Float', 'Double'],
 %   'UInt16': ['Int', 'Float', 'Double'],
-%   'UInt32': ['Int64', 'Float', 'Double'],
 %   'Int'   : ['Int', 'Float', 'Double'],
 %   'Float' : ['Float', 'Float', 'Double'],
 %   'Double': ['Double', 'Double', 'Double'],

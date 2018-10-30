@@ -1,9 +1,8 @@
-% uint_types = ['UInt8', 'UInt16', 'UInt32']
+% uint_types = ['UInt8', 'UInt16']
 % float_types = ['Float', 'Double']
 % type_to_summable = {
 %   'UInt8' : 'Int',
 %   'UInt16': 'Int',
-%   'UInt32': 'Int64',
 % }
 %
 #if canImport(CoreGraphics)

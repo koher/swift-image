@@ -1,8 +1,8 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
+% types = ['UInt8', 'UInt16', 'Float', 'Double', 'Bool']
 % outer_type_to_types = {
-%   'RGBA'             : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
-%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double'],
-%   ''                 : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
+%   'RGBA'             : ['UInt8', 'UInt16', 'Float', 'Double', 'Bool'],
+%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'Float', 'Double'],
+%   ''                 : ['UInt8', 'UInt16', 'Float', 'Double', 'Bool'],
 % }
 #if canImport(AppKit)
 import Foundation
