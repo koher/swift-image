@@ -39,11 +39,14 @@ extension Image where Pixel == RGBA<UInt8> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -96,11 +99,14 @@ extension Image where Pixel == RGBA<UInt16> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -153,11 +159,14 @@ extension Image where Pixel == RGBA<UInt32> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -210,11 +219,14 @@ extension Image where Pixel == RGBA<Float> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -267,11 +279,14 @@ extension Image where Pixel == RGBA<Double> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -324,11 +339,14 @@ extension Image where Pixel == RGBA<Bool> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -381,11 +399,14 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -438,11 +459,14 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -495,11 +519,14 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -552,11 +579,14 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -609,11 +639,14 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -666,11 +699,14 @@ extension Image where Pixel == UInt8 {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -723,11 +759,14 @@ extension Image where Pixel == UInt16 {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -780,11 +819,14 @@ extension Image where Pixel == UInt32 {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -837,11 +879,14 @@ extension Image where Pixel == Float {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -894,11 +939,14 @@ extension Image where Pixel == Double {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
@@ -951,11 +999,14 @@ extension Image where Pixel == Bool {
         let imageRep = NSBitmapImageRep(cgImage: cgImage)
         imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        // fix for memory deallocation problem (https://github.com/koher/EasyImagy/issues/38)
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
