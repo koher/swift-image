@@ -68,11 +68,13 @@ extension Image where Pixel == RGBA<UInt8> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -138,11 +140,13 @@ extension Image where Pixel == RGBA<UInt16> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -208,11 +212,13 @@ extension Image where Pixel == RGBA<UInt32> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -278,11 +284,13 @@ extension Image where Pixel == RGBA<Float> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -348,11 +356,13 @@ extension Image where Pixel == RGBA<Double> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -418,11 +428,13 @@ extension Image where Pixel == RGBA<Bool> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -488,11 +500,13 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -558,11 +572,13 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -628,11 +644,13 @@ extension Image where Pixel == PremultipliedRGBA<UInt32> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -698,11 +716,13 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -768,11 +788,13 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -838,11 +860,13 @@ extension Image where Pixel == UInt8 {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -908,11 +932,13 @@ extension Image where Pixel == UInt16 {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -978,11 +1004,13 @@ extension Image where Pixel == UInt32 {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -1048,11 +1076,13 @@ extension Image where Pixel == Float {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -1118,11 +1148,13 @@ extension Image where Pixel == Double {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
@@ -1188,11 +1220,13 @@ extension Image where Pixel == Bool {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
