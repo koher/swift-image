@@ -77,11 +77,13 @@ extension Image where Pixel == ${pixel_type} {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        switch format {
-        case .png:
-            return UIImagePNGRepresentation(uiImage)
-        case .jpeg(let compressionQuality):
-            return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+        return autoreleasepool {
+            switch format {
+            case .png:
+                return UIImagePNGRepresentation(uiImage)
+            case .jpeg(let compressionQuality):
+                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
+            }
         }
     }
 
