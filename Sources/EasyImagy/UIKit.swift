@@ -67,12 +67,16 @@ extension Image where Pixel == RGBA<UInt8> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -145,12 +149,16 @@ extension Image where Pixel == RGBA<UInt16> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -223,12 +231,16 @@ extension Image where Pixel == RGBA<Float> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -301,12 +313,16 @@ extension Image where Pixel == RGBA<Double> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -379,12 +395,16 @@ extension Image where Pixel == RGBA<Bool> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -457,12 +477,16 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -535,12 +559,16 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -613,12 +641,16 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -691,12 +723,16 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -769,12 +805,16 @@ extension Image where Pixel == UInt8 {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -847,12 +887,16 @@ extension Image where Pixel == UInt16 {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -925,12 +969,16 @@ extension Image where Pixel == Float {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -1003,12 +1051,16 @@ extension Image where Pixel == Double {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -1081,12 +1133,16 @@ extension Image where Pixel == Bool {
 
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.pngData()
+        return autoreleasepool {
+            return uiImage.pngData()
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
-        return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {

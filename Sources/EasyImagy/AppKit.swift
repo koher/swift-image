@@ -36,17 +36,21 @@ extension Image where Pixel == RGBA<UInt8> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -104,17 +108,21 @@ extension Image where Pixel == RGBA<UInt16> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -172,17 +180,21 @@ extension Image where Pixel == RGBA<Float> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -240,17 +252,21 @@ extension Image where Pixel == RGBA<Double> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -308,17 +324,21 @@ extension Image where Pixel == RGBA<Bool> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -376,17 +396,21 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -444,17 +468,21 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -512,17 +540,21 @@ extension Image where Pixel == PremultipliedRGBA<Float> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -580,17 +612,21 @@ extension Image where Pixel == PremultipliedRGBA<Double> {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -648,17 +684,21 @@ extension Image where Pixel == UInt8 {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -716,17 +756,21 @@ extension Image where Pixel == UInt16 {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -784,17 +828,21 @@ extension Image where Pixel == Float {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -852,17 +900,21 @@ extension Image where Pixel == Double {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
@@ -920,17 +972,21 @@ extension Image where Pixel == Bool {
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .png, properties: [:])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
     }
 
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
-        return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
     }
 
     public func data(using format: Image.Format) -> Data? {
