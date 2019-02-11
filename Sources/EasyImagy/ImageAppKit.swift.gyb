@@ -45,14 +45,16 @@ extension Image where Pixel == ${pixel_type} {
     public func data(using format: Image.Format) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
-        let imageRep = NSBitmapImageRep(cgImage: cgImage)
-        imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
 
-        switch format {
-        case .png:
-            return imageRep.representation(using: .png, properties: [:])
-        case .jpeg(let compressionQuality):
-            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            switch format {
+            case .png:
+                return imageRep.representation(using: .png, properties: [:])
+            case .jpeg(let compressionQuality):
+                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+            }
         }
     }
 
