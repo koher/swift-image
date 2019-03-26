@@ -150,8 +150,9 @@ extension Image { // RGBA
         let maxSummable = toSummable(maxValue)
         
         var data = Data(count: length)
-        data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Channel>) -> Void in
-            var pointer = bytes
+        data.withUnsafeMutableBytes { (rawPointer: UnsafeMutableRawBufferPointer) -> Void in
+            let bytes = rawPointer.bindMemory(to: Channel.self)
+            var pointer = bytes.baseAddress!
             for pixel in image.pixels {
                 let alphaInt = toSummable(pixel.alpha)
                 pointer.pointee = toOriginal(quotient(product(toSummable(pixel.red), alphaInt), maxSummable))
