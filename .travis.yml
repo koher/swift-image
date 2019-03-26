@@ -10,8 +10,24 @@ matrix:
         - xcodebuild test -scheme EasyImagy-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
         - xcodebuild build -scheme EasyImagy-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
     - os: osx
+      language: objective-c
+      osx_image: xcode10.2
+      script:
+        - set -o pipefail
+        - xcodebuild test -scheme EasyImagy-macOS -configuration Debug | xcpretty -c
+        - xcodebuild test -scheme EasyImagy-iOS -configuration Debug -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone XS" | xcpretty -c
+        - xcodebuild test -scheme EasyImagy-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme EasyImagy-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
+    - os: osx
       language: generic
       osx_image: xcode10
+      script:
+        - swift --version
+        - swift build
+        - swift test
+    - os: osx
+      language: generic
+      osx_image: xcode10.2
       script:
         - swift --version
         - swift build
@@ -20,6 +36,16 @@ matrix:
       language: generic
       sudo: required
       env: SWIFT_VERSION=4.2
+      install:
+        - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+      script:
+        - swift --version
+        - swift build
+        - swift test
+    - os: linux
+      language: generic
+      sudo: required
+      env: SWIFT_VERSION=5.0
       install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
       script:
