@@ -212,7 +212,6 @@
 		D6134A3F1F852A57005592A2 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		D6134A401F852A57005592A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6134A411F852A57005592A2 /* RGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBATests.swift; sourceTree = "<group>"; };
-		D6134A471F852A57005592A2 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 		D6134A601F852C80005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A681F852C80005592A2 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134AA21F85D1F9005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -372,7 +371,6 @@
 			isa = PBXGroup;
 			children = (
 				D6134A3A1F852A57005592A2 /* EasyImagyTests */,
-				D6134A471F852A57005592A2 /* LinuxMain.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";

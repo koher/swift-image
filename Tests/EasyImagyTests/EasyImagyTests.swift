@@ -217,14 +217,6 @@ class EasyImagySample: XCTestCase {
         /**/ }
     }
     #endif
-    
-    static var allTests = [
-        ("testInitialization", testInitialization),
-        ("testAccessToAPixel", testAccessToAPixel),
-        ("testRotation", testRotation),
-        ("testResizing", testResizing),
-        ("testCropping", testCropping),
-    ]
 }
 
 private func never() -> Bool {
