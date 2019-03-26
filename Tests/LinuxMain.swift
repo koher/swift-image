@@ -1,5 +1,5 @@
 import XCTest
-@testable import EasyImagyTests
+import EasyImagyTests
 
 XCTMain([
     testCase(AnyImageTests.allTests),
