@@ -1,7 +1,8 @@
 extension ImageProtocol {
     @inlinable
     public func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: try map(transform))
+        let pixels: [T] = try map(transform)
+        return Image<T>(width: width, height: height, pixels: pixels)
     }
 
     @inlinable
