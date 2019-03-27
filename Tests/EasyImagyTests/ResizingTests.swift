@@ -118,8 +118,4 @@ class ResizingTests : XCTestCase {
             ]))
         }
     }
-    
-    static var allTests = [
-        ("testResized", testResized),
-    ]
 }

@@ -332,20 +332,4 @@ class ImageTests: XCTestCase {
         }
     }
 #endif
-    
-    static var allTests = [
-        ("testInitWithImageSlice", testInitWithImageSlice),
-        ("testSequence", testSequence),
-        ("testSubscriptGet", testSubscriptGet),
-        ("testSubscriptSet", testSubscriptSet),
-        ("testSubscriptRange", testSubscriptRange),
-        ("testPixel", testPixel),
-        ("testWithUnsafeBufferPointer", testWithUnsafeBufferPointer),
-        ("testWithUnsafeMutableBufferPointer", testWithUnsafeMutableBufferPointer),
-        ("testWithUnsafeBytes", testWithUnsafeBytes),
-        ("testWithUnsafeMutableBytes", testWithUnsafeMutableBytes),
-        ("testCopyOnWritePerformanceOfCopy", testCopyOnWritePerformanceOfCopy),
-        ("testCopyOnWritePerformanceOfUpdate", testCopyOnWritePerformanceOfUpdate),
-        ("testCopyPerformance", testCopyPerformance),
-    ]
 }
