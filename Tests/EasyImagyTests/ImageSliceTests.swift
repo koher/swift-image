@@ -145,11 +145,4 @@ class ImageSliceTests: XCTestCase {
         XCTAssertNil(image.pixelAt(x: 0, y: -1))
         XCTAssertNil(image.pixelAt(x: 0, y: 3))
     }
-    
-    static var allTests = [
-        ("testInit", testInit),
-        ("testSequence", testSequence),
-        ("testSubscriptRange", testSubscriptRange),
-        ("testPixel", testPixel),
-    ]
 }

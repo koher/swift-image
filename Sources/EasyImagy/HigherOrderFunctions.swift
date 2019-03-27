@@ -1352,7 +1352,8 @@ extension ImageProtocol {
     @_specialize(exported: true, where Self == ImageSlice<Bool>, T == Double)
     @_specialize(exported: true, where Self == ImageSlice<Bool>, T == Bool)
     public func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T> {
-        return Image<T>(width: width, height: height, pixels: try map(transform))
+        let pixels: [T] = try map(transform)
+        return Image<T>(width: width, height: height, pixels: pixels)
     }
 
     // No specialization for `Image` because it has special implementation

@@ -97,10 +97,4 @@ class HigherOrderFunctionsTests : XCTestCase {
             image.update { $0 += 1 }
         }
     }
-    
-    static var allTests = [
-        ("testMap", testMap),
-        ("testUpdate", testUpdate),
-        ("testUpdatePerformance", testUpdatePerformance),
-    ]
 }

@@ -23,8 +23,4 @@ class PremultipliedRGBATests: XCTestCase {
             XCTAssertEqual(r, PremultipliedRGBA<UInt8>(red: 204, green: 221, blue: 238, alpha: 255))
         }
     }
-    
-    static var allTests = [
-        ("testInit", testInit),
-    ]
 }

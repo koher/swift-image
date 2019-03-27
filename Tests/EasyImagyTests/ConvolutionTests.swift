@@ -150,8 +150,4 @@ class ConvolutionTests: XCTestCase {
             ]))
         }
     }
-    
-    static var allTests = [
-        ("testConvoluted", testConvoluted),
-    ]
 }
