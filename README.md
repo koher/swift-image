@@ -2,12 +2,12 @@
 
 [![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=master)](https://travis-ci.org/koher/EasyImagy)
 
-_EasyImagy_ makes it easy to process images in Swift.
+_EasyImagy_ is a Swift library for image processing.
 
 ```swift
 var image = Image<RGBA<UInt8>>(named: "ImageName")!
 
-print(image[x, y])
+let pixel: RGBA<UInt8> = image[x, y]
 image[x, y] = RGBA(red: 255, green: 0, blue: 0, alpha: 127)
 image[x, y] = RGBA(0xFF00007F) // red: 255, green: 0, blue: 0, alpha: 127
 
@@ -16,7 +16,7 @@ for pixel in image {
     // ...
 }
 
-// Processes images (e.g. binarizations)
+// Image processing (e.g. binarizations)
 let binarized: Image<Bool> = image.map { $0.gray >= 127 }
 
 // From/to `UIImage`
@@ -26,9 +26,21 @@ imageView.image = image.uiImage
 
 ## Introduction
 
-Processing images by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides easier APIs to process images.
+Image processing by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides easy and Swifty APIs for image processing.
 
-Typically the `Image` type is used with the `RGBA` type. The `RGBA` is a simple structure declared as follows.
+With _EasyImagy_, images are handled as instances of the `Image` type. `Image` is a type similar to `Array`.
+
+```swift
+var image: Image<UInt8> = Image(width: 640, height: 480, pixels: [255, 248, /* ... */])
+
+let pixel: UInt8 = image[x, y]
+image[x, y] = 255
+
+let width: Int = image.width // 640
+let height: Int = image.height // 480
+```
+
+Typically `Image` is used with the `RGBA` type. `RGBA` is a simple structure declared as follows.
 
 ```swift
 struct RGBA<Channel> {
@@ -39,15 +51,17 @@ struct RGBA<Channel> {
 }
 ```
 
-You can easily access to pixels using subscripts like `image[x, y]` and also their channels using properties `red`, `green`, `blue` and `alpha`.
+Because both `Image` and `RGBA` are generic types, concrete image types have a nested type parameter like `Image<RGBA<UInt8>>` when `Image` and `RGBA` are combined.
 
-In addition, `Image` and `RGBA` provide some powerful APIs to process images. For example, it is possible to convert an image to grayscale combining `Image.map` with `RGBA.gray` in one line as shown below.
+`Image` and `RGBA` provide some powerful APIs to process images. For example, it is possible to convert an RGBA image to grayscale combining `Image.map` with `RGBA.gray` in one line as shown below.
 
 ```swift
+var image = Image<RGBA<UInt8>>(named: "ImageName")!
 let grayscale: Image<UInt8> = image.map { $0.gray }
+
 ```
 
-Another notable feature of _EasyImagy_ is that the `Image` is a `struct`, i.e. a value type, with copy-on-write. It means
+Another notable feature of _EasyImagy_ is that `Image` is a structure, i.e. a value type, with copy-on-write. It means
 
 - `Image` instances never be shared
 - defensive copying is unnecessary
@@ -281,42 +295,21 @@ imageView.image = image.uiImage
 
 ## Requirements
 
-- Swift 4 or later
-- Xcode 9 or later
+- Swift 4.2 or later
+- Xcode 10 or later
 
 ## Installation
 
 ### Swift Package Manager
 
-**Package.swift**
-
 ```swift
-// swift-tools-version:4.0
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
-import PackageDescription
-
-let package = Package(
-  ...
-  dependencies: [
-    .package(url: "https://github.com/koher/EasyImagy.git", .branch("dev-0.6.0")),
-  ],
-  targets: [
-    .target(
-      ...
-      dependencies: [
-        "EasyImagy",
-      ]),
-    ]
-)
+.package(url: "https://github.com/koher/EasyImagy.git", from: "0.6.0"),
 ```
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
-**Cartfile**
-
 ```
-github "koher/EasyImagy" "dev-0.6.0"
+github "koher/EasyImagy" ~> 0.6.0
 ```
 
 ### Manually

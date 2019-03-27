@@ -73,11 +73,15 @@ extension EasyImagySample {
     // to regenerate.
     static let __allTests__EasyImagySample = [
         ("testAccessToAPixel", testAccessToAPixel),
+        ("testWithCoreGraphics", testWithCoreGraphics),
         ("testCropping", testCropping),
         ("testInitialization", testInitialization),
+        ("testIntroduction", testIntroduction),
         ("testResizing", testResizing),
         ("testRotation", testRotation),
-//        ("testWithNSImage", testWithNSImage),
+        ("testSample", testSample),
+        ("testWithNSImage", testWithNSImage),
+        ("testWithUIImage", testWithNSImage),
     ]
 }
 
