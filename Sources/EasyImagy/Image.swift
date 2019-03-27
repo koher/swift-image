@@ -150,6 +150,7 @@ extension Image { // RGBA
         let maxSummable = toSummable(maxValue)
         
         var data = Data(count: length)
+        #if swift(>=5.0)
         data.withUnsafeMutableBytes { (rawPointer: UnsafeMutableRawBufferPointer) -> Void in
             let bytes = rawPointer.bindMemory(to: Channel.self)
             var pointer = bytes.baseAddress!
@@ -165,6 +166,22 @@ extension Image { // RGBA
                 pointer += 1
             }
         }
+        #else
+        data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Channel>) -> Void in
+            var pointer = bytes
+            for pixel in image.pixels {
+                let alphaInt = toSummable(pixel.alpha)
+                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.red), alphaInt), maxSummable))
+                pointer += 1
+                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.green), alphaInt), maxSummable))
+                pointer += 1
+                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.blue), alphaInt), maxSummable))
+                pointer += 1
+                pointer.pointee = pixel.alpha
+                pointer += 1
+            }
+        }
+        #endif
         let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
         
         return CGImage(
