@@ -3,7 +3,7 @@ public struct Image<Pixel> : ImageProtocol {
     
 	public let width: Int
 	public let height: Int
-	internal var pixels: [Pixel]
+	@usableFromInline internal var pixels: [Pixel]
 	
 	public init(width: Int, height: Int, pixels: [Pixel]) {
 		precondition(width >= 0, "`width` must be greater than or equal to 0: \(width)")
@@ -16,11 +16,11 @@ public struct Image<Pixel> : ImageProtocol {
         self.pixels = pixels
 	}
     
-    public var xRange: CountableRange<Int> {
+    public var xRange: Range<Int> {
         return 0..<width
     }
     
-    public var yRange: CountableRange<Int> {
+    public var yRange: Range<Int> {
         return 0..<height
     }
     
@@ -33,7 +33,7 @@ public struct Image<Pixel> : ImageProtocol {
         }
     }
 
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> ImageSlice<Pixel> {
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> ImageSlice<Pixel> {
         return ImageSlice(image: self, xRange: xRange, yRange: yRange)
     }
 }
@@ -150,6 +150,23 @@ extension Image { // RGBA
         let maxSummable = toSummable(maxValue)
         
         var data = Data(count: length)
+        #if swift(>=5.0)
+        data.withUnsafeMutableBytes { (rawPointer: UnsafeMutableRawBufferPointer) -> Void in
+            let bytes = rawPointer.bindMemory(to: Channel.self)
+            var pointer = bytes.baseAddress!
+            for pixel in image.pixels {
+                let alphaInt = toSummable(pixel.alpha)
+                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.red), alphaInt), maxSummable))
+                pointer += 1
+                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.green), alphaInt), maxSummable))
+                pointer += 1
+                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.blue), alphaInt), maxSummable))
+                pointer += 1
+                pointer.pointee = pixel.alpha
+                pointer += 1
+            }
+        }
+        #else
         data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Channel>) -> Void in
             var pointer = bytes
             for pixel in image.pixels {
@@ -164,6 +181,7 @@ extension Image { // RGBA
                 pointer += 1
             }
         }
+        #endif
         let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
         
         return CGImage(

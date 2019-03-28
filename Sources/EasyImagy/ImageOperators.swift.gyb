@@ -196,12 +196,7 @@ extension ImageProtocol where Element ${'==' if type in concrete_types else ':'}
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-%     end
+    @inlinable
     public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<Pixel> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         let pixels = zip(lhs, rhs).map { $0 ${operator} $1 }
@@ -215,12 +210,7 @@ extension ImageProtocol where Element ${'==' if type in concrete_types else ':'}
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-%     end
+    @inlinable
     public static func ${operator}<I : ImageProtocol>(lhs: inout Self, rhs: I) where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
         for (y1, y2) in zip(lhs.yRange, rhs.yRange) {
@@ -237,12 +227,7 @@ extension ImageProtocol where Element ${'==' if type in concrete_types else ':'}
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-%     end
+    @inlinable
 %     initial, and_or, different_size,  = ('true', '&&', 'false') if operator == '==' else ('false', '||', 'true')
     public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Bool where I.Pixel == Pixel {
         guard lhs.width == rhs.width && lhs.height == rhs.height else { return ${different_size} }
@@ -256,12 +241,7 @@ extension ImageProtocol where Element ${'==' if type in concrete_types else ':'}
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == Image<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>, I == ImageSlice<${concrete_type}>)
-%     end
+    @inlinable
 %     return_pixel_type = 'RGBA<Bool>' if type.startswith('RGBA<') else 'Bool'
     public static func ${operator}<I : ImageProtocol>(lhs: Self, rhs: I) -> Image<${return_pixel_type}> where I.Pixel == Pixel {
         precondition(lhs.width == rhs.width && lhs.height == rhs.height, "`${operator}` cannot be applied for images with different sizes: (\(lhs.width), \(lhs.height)), (\(rhs.width), \(rhs.height))")
@@ -276,10 +256,7 @@ extension ImageProtocol where Element ${'==' if type in concrete_types else ':'}
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Self == Image<${concrete_type}>)
-    @_specialize(exported: true, where Self == ImageSlice<${concrete_type}>)
-%     end
+    @inlinable
     prefix public static func ${operator}(a: Self) -> Image<Pixel> {
         return Image<Pixel>(width: a.width, height: a.height, pixels: a.map { ${operator}$0 })
     }

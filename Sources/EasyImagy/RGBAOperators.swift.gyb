@@ -83,9 +83,7 @@ extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Channel == ${concrete_type})
-%     end
+    @inlinable
     public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Channel> {
         return RGBA(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
     }
@@ -97,9 +95,7 @@ extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Channel == ${concrete_type})
-%     end
+    @inlinable
     public static func ${operator}(lhs: inout RGBA<Channel>, rhs: RGBA<Channel>) {
         lhs.red ${operator} rhs.red
         lhs.green ${operator} rhs.green
@@ -114,9 +110,7 @@ extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Channel == ${concrete_type})
-%     end
+    @inlinable
 %     and_or = '&&' if operator == '==' else '||'
     public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> Bool {
         return lhs.red ${operator} rhs.red ${and_or} lhs.green ${operator} rhs.green ${and_or} lhs.blue ${operator} rhs.blue ${and_or} lhs.alpha ${operator} rhs.alpha
@@ -129,9 +123,7 @@ extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Channel == ${concrete_type})
-%     end
+    @inlinable
     public static func ${operator}(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Bool> {
         return RGBA<Bool>(red: lhs.red ${operator} rhs.red, green: lhs.green ${operator} rhs.green, blue: lhs.blue ${operator} rhs.blue, alpha: lhs.alpha ${operator} rhs.alpha)
     }
@@ -143,9 +135,7 @@ extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'
 %     else:
 
 %     end
-%     for concrete_type in type_to_concrete_types[type]:
-    @_specialize(exported: true, where Channel == ${concrete_type})
-%     end
+    @inlinable
     prefix public static func ${operator}(a: RGBA<Channel>) -> RGBA<Channel> {
         return RGBA(red: ${operator}a.red, green: ${operator}a.green, blue: ${operator}a.blue, alpha: ${operator}a.alpha)
     }

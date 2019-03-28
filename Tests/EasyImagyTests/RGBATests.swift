@@ -22,32 +22,32 @@ class RGBATests: XCTestCase {
     
     func testGray() {
         do {
-            let p = RGBA<UInt64>(red: .max, green: .max, blue: .max)
+            let p = RGBA<UInt16>(red: .max, green: .max, blue: .max)
             XCTAssertEqual(p.gray, .max)
         }
         
         do {
-            let p = RGBA<UInt64>(red: .max, green: .max, blue: .max - 1)
+            let p = RGBA<UInt16>(red: .max, green: .max, blue: .max - 1)
             XCTAssertEqual(p.gray, .max - 1)
         }
         
         do {
-            let p = RGBA<UInt64>(red: .max, green: .max, blue: .max - 3)
+            let p = RGBA<UInt16>(red: .max, green: .max, blue: .max - 3)
             XCTAssertEqual(p.gray, .max - 1)
         }
         
         do {
-            let p = RGBA<UInt64>(red: .max, green: .max, blue: .max - 4)
+            let p = RGBA<UInt16>(red: .max, green: .max, blue: .max - 4)
             XCTAssertEqual(p.gray, .max - 2)
         }
         
         do {
-            let p = RGBA<UInt64>(red: .max, green: .max - 1, blue: .max - 2)
+            let p = RGBA<UInt16>(red: .max, green: .max - 1, blue: .max - 2)
             XCTAssertEqual(p.gray, .max - 1)
         }
         
         do {
-            let p = RGBA<UInt64>(red: .max, green: .max - 1, blue: .max - 3)
+            let p = RGBA<UInt16>(red: .max, green: .max - 1, blue: .max - 3)
             XCTAssertEqual(p.gray, .max - 2)
         }
     }

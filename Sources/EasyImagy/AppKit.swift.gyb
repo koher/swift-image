@@ -1,8 +1,8 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
+% types = ['UInt8', 'UInt16', 'Float', 'Double', 'Bool']
 % outer_type_to_types = {
-%   'RGBA'             : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
-%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double'],
-%   ''                 : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
+%   'RGBA'             : ['UInt8', 'UInt16', 'Float', 'Double', 'Bool'],
+%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'Float', 'Double'],
+%   ''                 : ['UInt8', 'UInt16', 'Float', 'Double', 'Bool'],
 % }
 #if canImport(AppKit)
 import Foundation
@@ -42,19 +42,32 @@ extension Image where Pixel == ${pixel_type} {
         return NSImage(cgImage: cgImage, size: .zero)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
         return autoreleasepool {
             let imageRep = NSBitmapImageRep(cgImage: cgImage)
             imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .png, properties: [:])
+        }
+    }
 
-            switch format {
-            case .png:
-                return imageRep.representation(using: .png, properties: [:])
-            case .jpeg(let compressionQuality):
-                return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
-            }
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+
+        return autoreleasepool {
+            let imageRep = NSBitmapImageRep(cgImage: cgImage)
+            imageRep.size = CGSize(width: CGFloat(width), height: CGFloat(height))
+            return imageRep.representation(using: .jpeg, properties: [.compressionFactor: NSNumber(value: compressionQuality)])
+        }
+    }
+
+    public func data(using format: Image.Format) -> Data? {
+        switch format {
+        case .png:
+            return pngData()
+        case .jpeg(let compressionQuality):
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 

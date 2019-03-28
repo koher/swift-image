@@ -1,27 +1,29 @@
 import XCTest
 #if canImport(UIKit)
-    import UIKit
+import UIKit
 #endif
 #if canImport(AppKit)
-    import AppKit
+import AppKit
 #endif
 import EasyImagy
 
 class EasyImagySample: XCTestCase {
-    #if canImport(UIKit)
     func testSample() {
+        /**/ #if canImport(UIKit) || canImport(AppKit)
         /**/ let x = 0
         /**/ let y = 0
+        /**/ #if canImport(UIKit)
         /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black).uiImage
-        
+        /**/ #endif
+
         /**/ if never() {
-            var image = Image<RGBA<UInt8>>(named: "ImageName")!
-            /**/ _ = image[0, 0]
-            /**/ }
+        var image = Image<RGBA<UInt8>>(named: "ImageName")!
+        /**/ _ = image[0, 0]
+        /**/ }
         /**/ var image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black)
         
-        print(image[x, y])
+        let pixel: RGBA<UInt8> = image[x, y]
         image[x, y] = RGBA(red: 255, green: 0, blue: 0, alpha: 127)
         image[x, y] = RGBA(0xFF00007F) // red: 255, green: 0, blue: 0, alpha: 127
         
@@ -31,26 +33,59 @@ class EasyImagySample: XCTestCase {
             /**/ _ = pixel.description
         }
         
-        // Processes images (e.g. binarizations)
+        // Image processing (e.g. binarizations)
         let binarized: Image<Bool> = image.map { $0.gray >= 127 }
         
         // From/to `UIImage`
+        /**/ #if canImport(UIKit)
         image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
         imageView.image = image.uiImage
-        
+        /**/ #endif
+
+        /**/ _ = pixel
         /**/ _ = binarized[0, 0]
+        /**/ #endif
     }
-    
+
     func testIntroduction() {
-        /**/ let image = Image<RGBA<UInt8>>(width: 10, height: 10, pixel: .black)
-        let grayscale = image.map { $0.gray }
-        /**/ _ = grayscale[0, 0]
+        do {
+            /**/ if never() {
+            var image: Image<UInt8> = Image(width: 640, height: 480, pixels: [255, 248, /* ... */])
+            
+            /**/ image[0, 0] = 0
+            /**/ }
+            /**/ var image: Image<UInt8> = Image(width: 1, height: 1, pixel: 0)
+            /**/ let x = 0
+            /**/ let y = 0
+            let pixel: UInt8 = image[x, y]
+            image[x, y] = 255
+            /**/ _ = pixel
+            
+            let width: Int = image.width // 640
+            let height: Int = image.height // 480
+            /**/ _ = width
+            /**/ _ = height
+        }
+
+        do {
+            /**/ #if canImport(UIKit) || canImport(AppKit)
+            /**/ if never() {
+            var image = Image<RGBA<UInt8>>(named: "ImageName")!
+            /**/ image[0, 0] = RGBA(0xffffffff)
+            /**/ }
+            /**/ #endif
+            /**/ let image = Image<RGBA<UInt8>>(width: 10, height: 10, pixel: .black)
+            let grayscale: Image<UInt8> = image.map { $0.gray }
+            /**/ _ = grayscale[0, 0]
+        }
         
-        /**/ let x = 0, y = 0
-        var another = image // Not copied here because of copy-on-write
-        another[x, y] = RGBA(0xff0000ff) // Copied here lazily
+        do {
+            /**/ let image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black)
+            /**/ let x = 0, y = 0
+            var another = image // Not copied here because of copy-on-write
+            another[x, y] = RGBA(0xff0000ff) // Copied here lazily
+        }
     }
-    #endif
     
     func testInitialization() {
         #if canImport(UIKit)
@@ -68,9 +103,9 @@ class EasyImagySample: XCTestCase {
         }
         do {
             /**/ if never() {
-                let image = Image<RGBA<UInt8>>(data: Data(/* ... */))!
-                /**/ _ = image.count
-                /**/ }
+            let image = Image<RGBA<UInt8>>(data: Data(/* ... */))!
+            /**/ _ = image.count
+            /**/ }
         }
         do {
             /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -173,8 +208,8 @@ class EasyImagySample: XCTestCase {
         
         /**/ _ = cropped.count
     }
-    #if canImport(UIKit)
     func testWithUIImage() {
+        #if canImport(UIKit)
         /**/ if never() {
             /**/ let imageView = UIImageView()
             
@@ -184,10 +219,10 @@ class EasyImagySample: XCTestCase {
             // To `UIImage`
             imageView.image = image.uiImage
         /**/ }
+        #endif
     }
-    #endif
-    #if canImport(AppKit)
     func testWithNSImage() {
+        #if canImport(AppKit)
         /**/ if never() {
             /**/ let imageView = NSImageView()
             
@@ -197,10 +232,10 @@ class EasyImagySample: XCTestCase {
             // To `NSImage`
             imageView.image = image.nsImage
         /**/ }
+        #endif
     }
-    #endif
-    #if canImport(UIKit)
     func testWithCoreGraphics() {
+        #if canImport(UIKit)
         /**/ if never() {
             /**/ let imageView = UIImageView()
             
@@ -215,8 +250,8 @@ class EasyImagySample: XCTestCase {
             }
             imageView.image = image.uiImage
         /**/ }
+        #endif
     }
-    #endif
 }
 
 private func never() -> Bool {

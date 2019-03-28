@@ -5,8 +5,8 @@ internal struct ExtrapolatedImage<Pixels : ImageProtocol> : ImageProtocol {
     private var image: Pixels
     private let extrapolationMethod: ExtrapolationMethod<Pixels.Pixel>
     
-    public let xRange: CountableRange<Int> = .min ..< .max
-    public let yRange: CountableRange<Int> = .min ..< .max
+    public let xRange: Range<Int> = .min ..< .max
+    public let yRange: Range<Int> = .min ..< .max
     
     private var pixels: [Coordinate: Pixel]
     
@@ -25,7 +25,7 @@ internal struct ExtrapolatedImage<Pixels : ImageProtocol> : ImageProtocol {
         }
     }
     
-    public subscript(xRange: CountableRange<Int>, yRange: CountableRange<Int>) -> AnyImage<Pixels.Pixel> {
+    public subscript(xRange: Range<Int>, yRange: Range<Int>) -> AnyImage<Pixels.Pixel> {
         return AnyImage<Pixels.Pixel>(self, xRange: xRange, yRange: yRange)
     }
 }

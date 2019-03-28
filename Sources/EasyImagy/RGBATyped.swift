@@ -35,22 +35,6 @@ extension RGBA where Channel == UInt8 {
         return UInt8((Int(red) + Int(green) + Int(blue)) / 3)
     }
     
-    public init(red: Int, green: Int, blue: Int, alpha: Int) {
-        self.init(red: UInt8(red), green: UInt8(green), blue: UInt8(blue), alpha: UInt8(alpha))
-    }
-    
-    public init(red: Int, green: Int, blue: Int) {
-        self.init(red: UInt8(red), green: UInt8(green), blue: UInt8(blue))
-    }
-    
-    public init(gray: Int) {
-        self.init(gray: UInt8(gray))
-    }
-    
-    public init(gray: Int, alpha: Int) {
-        self.init(gray: UInt8(gray), alpha: UInt8(alpha))
-    }
-
     public var redInt: Int {
         get {
             return Int(red)
@@ -129,22 +113,6 @@ extension RGBA where Channel == UInt16 {
         return UInt16((Int(red) + Int(green) + Int(blue)) / 3)
     }
     
-    public init(red: Int, green: Int, blue: Int, alpha: Int) {
-        self.init(red: UInt16(red), green: UInt16(green), blue: UInt16(blue), alpha: UInt16(alpha))
-    }
-    
-    public init(red: Int, green: Int, blue: Int) {
-        self.init(red: UInt16(red), green: UInt16(green), blue: UInt16(blue))
-    }
-    
-    public init(gray: Int) {
-        self.init(gray: UInt16(gray))
-    }
-    
-    public init(gray: Int, alpha: Int) {
-        self.init(gray: UInt16(gray), alpha: UInt16(alpha))
-    }
-
     public var redInt: Int {
         get {
             return Int(red)
@@ -183,82 +151,6 @@ extension RGBA where Channel == UInt16 {
 
     public var grayInt: Int {
         return (redInt + greenInt + blueInt) / 3
-    }
-}
-
-extension RGBA where Channel == UInt32 {
-    public init(red: UInt32, green: UInt32, blue: UInt32) {
-        self.init(red: red, green: green, blue: blue, alpha: UInt32.max)
-    }
-    
-    public init(gray: UInt32) {
-        self.init(gray: gray, alpha: UInt32.max)
-    }
-
-    public static var red: RGBA<UInt32> {
-        return RGBA<UInt32>(red: UInt32.max, green: 0, blue: 0)
-    }
-    
-    public static var green: RGBA<UInt32> {
-        return RGBA<UInt32>(red: 0, green: UInt32.max, blue: 0)
-    }
-    
-    public static var blue: RGBA<UInt32> {
-        return RGBA<UInt32>(red: 0, green: 0, blue: UInt32.max)
-    }
-    
-    public static var black: RGBA<UInt32> {
-        return RGBA<UInt32>(gray: 0)
-    }
-    
-    public static var white: RGBA<UInt32> {
-        return RGBA<UInt32>(gray: UInt32.max)
-    }
-    
-    public static var transparent: RGBA<UInt32> {
-        return RGBA<UInt32>(gray: 0, alpha: 0)
-    }
-
-    public var gray: UInt32 {
-        return UInt32((UInt64(red) + UInt64(green) + UInt64(blue)) / 3)
-    }
-}
-
-extension RGBA where Channel == UInt64 {
-    public init(red: UInt64, green: UInt64, blue: UInt64) {
-        self.init(red: red, green: green, blue: blue, alpha: UInt64.max)
-    }
-    
-    public init(gray: UInt64) {
-        self.init(gray: gray, alpha: UInt64.max)
-    }
-
-    public static var red: RGBA<UInt64> {
-        return RGBA<UInt64>(red: UInt64.max, green: 0, blue: 0)
-    }
-    
-    public static var green: RGBA<UInt64> {
-        return RGBA<UInt64>(red: 0, green: UInt64.max, blue: 0)
-    }
-    
-    public static var blue: RGBA<UInt64> {
-        return RGBA<UInt64>(red: 0, green: 0, blue: UInt64.max)
-    }
-    
-    public static var black: RGBA<UInt64> {
-        return RGBA<UInt64>(gray: 0)
-    }
-    
-    public static var white: RGBA<UInt64> {
-        return RGBA<UInt64>(gray: UInt64.max)
-    }
-    
-    public static var transparent: RGBA<UInt64> {
-        return RGBA<UInt64>(gray: 0, alpha: 0)
-    }
-
-    public var gray: UInt64 {
-        return (red / 3 + green / 3 + blue / 3) + (red % 3 + green % 3 + blue % 3) / 3
     }
 }
 

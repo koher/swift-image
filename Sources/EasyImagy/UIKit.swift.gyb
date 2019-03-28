@@ -1,8 +1,8 @@
-% types = ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool']
+% types = ['UInt8', 'UInt16', 'Float', 'Double', 'Bool']
 % outer_type_to_types = {
-%   'RGBA'             : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
-%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double'],
-%   ''                 : ['UInt8', 'UInt16', 'UInt32', 'Float', 'Double', 'Bool'],
+%   'RGBA'             : ['UInt8', 'UInt16', 'Float', 'Double', 'Bool'],
+%   'PremultipliedRGBA': ['UInt8', 'UInt16', 'Float', 'Double'],
+%   ''                 : ['UInt8', 'UInt16', 'Float', 'Double', 'Bool'],
 % }
 #if canImport(UIKit)
 import Foundation
@@ -74,16 +74,26 @@ extension Image where Pixel == ${pixel_type} {
         return UIImage(cgImage: cgImage)
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
-
         return autoreleasepool {
-            switch format {
-            case .png:
-                return UIImagePNGRepresentation(uiImage)
-            case .jpeg(let compressionQuality):
-                return UIImageJPEGRepresentation(uiImage, CGFloat(compressionQuality))
-            }
+            return uiImage.pngData()
+        }
+    }
+
+    public func jpegData(compressionQuality: Double) -> Data? {
+        guard width > 0 && height > 0 else { return nil }
+        return autoreleasepool {
+            return uiImage.jpegData(compressionQuality: CGFloat(compressionQuality))
+        }
+    }
+
+    public func data(using format: Image.Format) -> Data? {
+        switch format {
+        case .png:
+            return pngData()
+        case .jpeg(let compressionQuality):
+            return jpegData(compressionQuality: compressionQuality)
         }
     }
 

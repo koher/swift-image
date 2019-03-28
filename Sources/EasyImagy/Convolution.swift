@@ -1,52 +1,5 @@
-extension ImageProtocol where Pixel : _Numeric {
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == ImageSlice<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == Image<Int>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == ImageSlice<Int>)
+extension ImageProtocol where Pixel : _NumericPixel {
+    @inlinable
     public func convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
@@ -82,54 +35,7 @@ extension ImageProtocol where Pixel : _Numeric {
         }
     }
 
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == ImageSlice<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == Image<Float>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == ImageSlice<Float>)
+    @inlinable
     public func convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
@@ -165,54 +71,7 @@ extension ImageProtocol where Pixel : _Numeric {
         }
     }
 
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<UInt8>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt8>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<UInt16>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt16>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<UInt32>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<UInt32>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<Int>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Int>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<Float>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Float>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<Double>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<Double>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt8>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt8>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt16>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt16>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<UInt32>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<UInt32>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Int>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Int>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Float>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Float>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == Image<RGBA<Double>>, Kernel == ImageSlice<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == Image<Double>)
-    @_specialize(exported: true, where Self == ImageSlice<RGBA<Double>>, Kernel == ImageSlice<Double>)
+    @inlinable
     public func convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         extrapolatedBy extrapolationMethod: ExtrapolationMethod<Pixel> = .edge
@@ -248,7 +107,8 @@ extension ImageProtocol where Pixel : _Numeric {
         }
     }
 
-    private func _convoluted<Kernel: ImageProtocol>(
+    @usableFromInline
+    internal func _convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         pixelAt: (Int, Int) -> Pixel
     ) -> Image<Pixel> where Kernel.Pixel == Int {
@@ -269,24 +129,25 @@ extension ImageProtocol where Pixel : _Numeric {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel.IntType] = []
+                var weightedValues: [Pixel._NumericPixelSummableInt] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summableI
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableInt
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.productI(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productInt(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summableI: weightedValues.reduce(Pixel.summableIZero) { Pixel.IntType._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summableInt: weightedValues.reduce(Pixel._ez_summableIntZero) { Pixel._NumericPixelSummableInt._ez_sum($0, $1) }))
             }
         }
         
         return Image<Pixel>(width: width, height: height, pixels: pixels)
     }
 
-    private func _convoluted<Kernel: ImageProtocol>(
+    @usableFromInline
+    internal func _convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         pixelAt: (Int, Int) -> Pixel
     ) -> Image<Pixel> where Kernel.Pixel == Float {
@@ -307,24 +168,25 @@ extension ImageProtocol where Pixel : _Numeric {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel.FloatType] = []
+                var weightedValues: [Pixel._NumericPixelSummableFloat] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summableF
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableFloat
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.productF(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productFloat(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summableF: weightedValues.reduce(Pixel.summableFZero) { Pixel.FloatType._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summableFloat: weightedValues.reduce(Pixel._ez_summableFloatZero) { Pixel._NumericPixelSummableFloat._ez_sum($0, $1) }))
             }
         }
         
         return Image<Pixel>(width: width, height: height, pixels: pixels)
     }
 
-    private func _convoluted<Kernel: ImageProtocol>(
+    @usableFromInline
+    internal func _convoluted<Kernel: ImageProtocol>(
         with kernel: Kernel,
         pixelAt: (Int, Int) -> Pixel
     ) -> Image<Pixel> where Kernel.Pixel == Double {
@@ -345,17 +207,17 @@ extension ImageProtocol where Pixel : _Numeric {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel.DoubleType] = []
+                var weightedValues: [Pixel._NumericPixelSummableDouble] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy).summableD
+                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableDouble
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel.productD(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productDouble(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(summableD: weightedValues.reduce(Pixel.summableDZero) { Pixel.DoubleType._sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summableDouble: weightedValues.reduce(Pixel._ez_summableDoubleZero) { Pixel._NumericPixelSummableDouble._ez_sum($0, $1) }))
             }
         }
         

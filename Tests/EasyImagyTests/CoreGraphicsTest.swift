@@ -12,7 +12,7 @@ import EasyImagy
     private let white: CGColor = UIColor.white.cgColor
 #endif
 
-    class ImageCoreGraphicsTests: XCTestCase {
+    class CoreGraphicsTests: XCTestCase {
         func testCGImage() {
             do {
                 let image = Image<RGBA<UInt8>>(width: 2, height: 2, pixels: [
