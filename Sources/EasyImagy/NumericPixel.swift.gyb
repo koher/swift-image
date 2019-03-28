@@ -30,6 +30,10 @@ public protocol _NumericPixel {
     static func _ez_quotientDouble(_ lhs: _NumericPixelSummableDouble, _ rhs: Double) -> _NumericPixelSummableDouble
 }
 
+extension _NumericPixel where Self: AdditiveArithmetic {
+    public static var _ez_zero: Self { return .zero }
+}
+
 extension RGBA : _NumericPixel where Channel : _NumericPixel {
     public typealias _NumericPixelSummableInt = RGBA<Channel._NumericPixelSummableInt>
     public typealias _NumericPixelSummableFloat = RGBA<Channel._NumericPixelSummableFloat>
@@ -124,10 +128,6 @@ extension ${type} : _NumericPixel {
 %     end
     }
 %   end
-
-    public static var _ez_zero: ${type} {
-        return 0
-    }
 
 %   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
     

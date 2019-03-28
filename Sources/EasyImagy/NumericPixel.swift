@@ -18,6 +18,10 @@ public protocol _NumericPixel {
     static func _ez_quotientDouble(_ lhs: _NumericPixelSummableDouble, _ rhs: Double) -> _NumericPixelSummableDouble
 }
 
+extension _NumericPixel where Self: AdditiveArithmetic {
+    public static var _ez_zero: Self { return .zero }
+}
+
 extension RGBA : _NumericPixel where Channel : _NumericPixel {
     public typealias _NumericPixelSummableInt = RGBA<Channel._NumericPixelSummableInt>
     public typealias _NumericPixelSummableFloat = RGBA<Channel._NumericPixelSummableFloat>
@@ -110,10 +114,6 @@ extension UInt8 : _NumericPixel {
         return Double(self)
     }
 
-    public static var _ez_zero: UInt8 {
-        return 0
-    }
-
     
     public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
@@ -163,10 +163,6 @@ extension UInt16 : _NumericPixel {
     
     public var _ez_summableDouble: Double {
         return Double(self)
-    }
-
-    public static var _ez_zero: UInt16 {
-        return 0
     }
 
     
@@ -220,10 +216,6 @@ extension Int : _NumericPixel {
         return Double(self)
     }
 
-    public static var _ez_zero: Int {
-        return 0
-    }
-
     
     public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
@@ -275,10 +267,6 @@ extension Float : _NumericPixel {
         return Double(self)
     }
 
-    public static var _ez_zero: Float {
-        return 0
-    }
-
     
     public static func _ez_productInt(_ lhs: Float, _ rhs: Int) -> Float {
         return lhs * Float(rhs)
@@ -328,10 +316,6 @@ extension Double : _NumericPixel {
     
     public var _ez_summableDouble: Double {
         return self
-    }
-
-    public static var _ez_zero: Double {
-        return 0
     }
 
     
