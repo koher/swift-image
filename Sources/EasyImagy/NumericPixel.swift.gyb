@@ -10,54 +10,6 @@
 % summable_sybmols = ['Int', 'Float', 'Double']
 % summable_weights = ['Int', 'Float', 'Double']
 %
-extension RGBA: AdditiveArithmetic where Channel: AdditiveArithmetic {
-    @inlinable
-    public static var zero: RGBA<Channel> {
-        return RGBA<Channel>(
-            red  : .zero,
-            green: .zero,
-            blue : .zero,
-            alpha: .zero
-        )
-    }
-
-    @inlinable
-    public static func +(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
-        return RGBA<Channel>(
-            red  : lhs.red   + rhs.red,
-            green: lhs.green + rhs.green,
-            blue : lhs.blue  + rhs.blue,
-            alpha: lhs.alpha + rhs.alpha
-        )
-    }
-
-    @inlinable
-    public static func +=(_ lhs: inout RGBA<Channel>, _ rhs: RGBA<Channel>) {
-        lhs.red   += rhs.red
-        lhs.green += rhs.green
-        lhs.blue  += rhs.blue
-        lhs.alpha += rhs.alpha
-    }
-
-    @inlinable
-    public static func -(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
-        return RGBA<Channel>(
-            red  : lhs.red   - rhs.red,
-            green: lhs.green - rhs.green,
-            blue : lhs.blue  - rhs.blue,
-            alpha: lhs.alpha - rhs.alpha
-        )
-    }
-
-    @inlinable
-    public static func -=(_ lhs: inout RGBA<Channel>, _ rhs: RGBA<Channel>) {
-        lhs.red   -= rhs.red
-        lhs.green -= rhs.green
-        lhs.blue  -= rhs.blue
-        lhs.alpha -= rhs.alpha
-    }
-}
-
 public protocol _NumericPixel {
     associatedtype _NumericPixelSummableInt    : AdditiveArithmetic
     associatedtype _NumericPixelSummableFloat  : AdditiveArithmetic

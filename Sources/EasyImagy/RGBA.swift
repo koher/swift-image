@@ -50,3 +50,51 @@ extension RGBA : CustomDebugStringConvertible {
         return description
     }
 }
+
+extension RGBA: AdditiveArithmetic where Channel: AdditiveArithmetic {
+    @inlinable
+    public static var zero: RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : .zero,
+            green: .zero,
+            blue : .zero,
+            alpha: .zero
+        )
+    }
+    
+    @inlinable
+    public static func +(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : lhs.red   + rhs.red,
+            green: lhs.green + rhs.green,
+            blue : lhs.blue  + rhs.blue,
+            alpha: lhs.alpha + rhs.alpha
+        )
+    }
+    
+    @inlinable
+    public static func +=(_ lhs: inout RGBA<Channel>, _ rhs: RGBA<Channel>) {
+        lhs.red   += rhs.red
+        lhs.green += rhs.green
+        lhs.blue  += rhs.blue
+        lhs.alpha += rhs.alpha
+    }
+    
+    @inlinable
+    public static func -(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : lhs.red   - rhs.red,
+            green: lhs.green - rhs.green,
+            blue : lhs.blue  - rhs.blue,
+            alpha: lhs.alpha - rhs.alpha
+        )
+    }
+    
+    @inlinable
+    public static func -=(_ lhs: inout RGBA<Channel>, _ rhs: RGBA<Channel>) {
+        lhs.red   -= rhs.red
+        lhs.green -= rhs.green
+        lhs.blue  -= rhs.blue
+        lhs.alpha -= rhs.alpha
+    }
+}
