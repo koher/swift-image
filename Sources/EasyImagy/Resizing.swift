@@ -142,7 +142,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
             for x in 0..<width {
                 let bx = x * sx
                 
-                var pixel = Pixel._NumericPixelSummableInt.zero
+                var pixel = Pixel._ez_AdditiveInt.zero
                 for dy in 0..<sy {
                     for dx in 0..<sx {
                         pixel = pixel + self[bx + dx, by + dy]._ez_summableInt
