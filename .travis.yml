@@ -25,18 +25,6 @@ matrix:
     - os: linux
       language: generic
       sudo: required
-      env: SWIFT_VERSION=4.2
-      install:
-        - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
-      script:
-        - swift --version
-        - swift build
-        - swift test
-        - swift build -c release
-        - swift test -c release
-    - os: linux
-      language: generic
-      sudo: required
       env: SWIFT_VERSION=5.0
       install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
