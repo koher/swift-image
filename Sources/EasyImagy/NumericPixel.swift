@@ -1,5 +1,3 @@
-import Foundation
-
 extension RGBA: AdditiveArithmetic where Channel: AdditiveArithmetic {
     @inlinable
     public static var zero: RGBA<Channel> {
