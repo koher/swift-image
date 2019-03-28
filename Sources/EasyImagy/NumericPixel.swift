@@ -10,9 +10,6 @@ public protocol _NumericPixel {
     var _ez_summableFloat: _NumericPixelSummableFloat { get }
     var _ez_summableDouble: _NumericPixelSummableDouble { get }
     static var _ez_zero: Self { get }
-    static var _ez_summableIntZero: _NumericPixelSummableInt { get }
-    static var _ez_summableFloatZero: _NumericPixelSummableFloat { get }
-    static var _ez_summableDoubleZero: _NumericPixelSummableDouble { get }
     static func _ez_productInt(_ lhs: _NumericPixelSummableInt, _ rhs: Int) -> _NumericPixelSummableInt
     static func _ez_productFloat(_ lhs: _NumericPixelSummableFloat, _ rhs: Float) -> _NumericPixelSummableFloat
     static func _ez_productDouble(_ lhs: _NumericPixelSummableDouble, _ rhs: Double) -> _NumericPixelSummableDouble
@@ -55,21 +52,6 @@ extension RGBA : _NumericPixel where Channel : _NumericPixel {
     
     public static var _ez_zero: RGBA<Channel> {
         return RGBA<Channel>(red: Channel._ez_zero, green: Channel._ez_zero, blue: Channel._ez_zero, alpha: Channel._ez_zero)
-    }
-    
-    public static var _ez_summableIntZero: RGBA<Channel._NumericPixelSummableInt> {
-        let zero = Channel._ez_summableIntZero
-        return RGBA<Channel._NumericPixelSummableInt>(red: zero, green: zero, blue: zero, alpha: zero)
-    }
-    
-    public static var _ez_summableFloatZero: RGBA<Channel._NumericPixelSummableFloat> {
-        let zero = Channel._ez_summableFloatZero
-        return RGBA<Channel._NumericPixelSummableFloat>(red: zero, green: zero, blue: zero, alpha: zero)
-    }
-    
-    public static var _ez_summableDoubleZero: RGBA<Channel._NumericPixelSummableDouble> {
-        let zero = Channel._ez_summableDoubleZero
-        return RGBA<Channel._NumericPixelSummableDouble>(red: zero, green: zero, blue: zero, alpha: zero)
     }
     
     @inlinable
@@ -133,21 +115,6 @@ extension UInt8 : _NumericPixel {
     }
 
     
-    public static var _ez_summableIntZero: Int {
-        return 0
-        
-    }
-    
-    public static var _ez_summableFloatZero: Float {
-        return 0
-        
-    }
-    
-    public static var _ez_summableDoubleZero: Double {
-        return 0
-        
-    }
-    
     public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
@@ -202,21 +169,6 @@ extension UInt16 : _NumericPixel {
         return 0
     }
 
-    
-    public static var _ez_summableIntZero: Int {
-        return 0
-        
-    }
-    
-    public static var _ez_summableFloatZero: Float {
-        return 0
-        
-    }
-    
-    public static var _ez_summableDoubleZero: Double {
-        return 0
-        
-    }
     
     public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
@@ -273,21 +225,6 @@ extension Int : _NumericPixel {
     }
 
     
-    public static var _ez_summableIntZero: Int {
-        return 0
-        
-    }
-    
-    public static var _ez_summableFloatZero: Float {
-        return 0
-        
-    }
-    
-    public static var _ez_summableDoubleZero: Double {
-        return 0
-        
-    }
-    
     public static func _ez_productInt(_ lhs: Int, _ rhs: Int) -> Int {
         return lhs * rhs
     }
@@ -343,21 +280,6 @@ extension Float : _NumericPixel {
     }
 
     
-    public static var _ez_summableIntZero: Float {
-        return 0
-        
-    }
-    
-    public static var _ez_summableFloatZero: Float {
-        return 0
-        
-    }
-    
-    public static var _ez_summableDoubleZero: Double {
-        return 0
-        
-    }
-    
     public static func _ez_productInt(_ lhs: Float, _ rhs: Int) -> Float {
         return lhs * Float(rhs)
     }
@@ -412,21 +334,6 @@ extension Double : _NumericPixel {
         return 0
     }
 
-    
-    public static var _ez_summableIntZero: Double {
-        return 0
-        
-    }
-    
-    public static var _ez_summableFloatZero: Double {
-        return 0
-        
-    }
-    
-    public static var _ez_summableDoubleZero: Double {
-        return 0
-        
-    }
     
     public static func _ez_productInt(_ lhs: Double, _ rhs: Int) -> Double {
         return lhs * Double(rhs)

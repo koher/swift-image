@@ -139,7 +139,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
                         weightedValues.append(Pixel._ez_productInt(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableInt: weightedValues.reduce(Pixel._ez_summableIntZero, +)))
+                pixels.append(Pixel.init(_ez_summableInt: weightedValues.reduce(Pixel._NumericPixelSummableInt.zero, +)))
             }
         }
         
@@ -178,7 +178,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
                         weightedValues.append(Pixel._ez_productFloat(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableFloat: weightedValues.reduce(Pixel._ez_summableFloatZero, +)))
+                pixels.append(Pixel.init(_ez_summableFloat: weightedValues.reduce(Pixel._NumericPixelSummableFloat.zero, +)))
             }
         }
         
@@ -217,7 +217,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
                         weightedValues.append(Pixel._ez_productDouble(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableDouble: weightedValues.reduce(Pixel._ez_summableDoubleZero, +)))
+                pixels.append(Pixel.init(_ez_summableDouble: weightedValues.reduce(Pixel._NumericPixelSummableDouble.zero, +)))
             }
         }
         
