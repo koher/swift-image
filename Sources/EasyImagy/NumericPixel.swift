@@ -1,29 +1,57 @@
 import Foundation
 
-public protocol _Summable {
-    static func _ez_sum(_ lhs: Self, _ rhs: Self) -> Self
-}
-
-extension Int : _Summable { public static func _ez_sum(_ lhs: Int, _ rhs: Int) -> Int { return lhs + rhs } }
-extension Int64 : _Summable { public static func _ez_sum(_ lhs: Int64, _ rhs: Int64) -> Int64 { return lhs + rhs } }
-extension Float : _Summable { public static func _ez_sum(_ lhs: Float, _ rhs: Float) -> Float { return lhs + rhs } }
-extension Double : _Summable { public static func _ez_sum(_ lhs: Double, _ rhs: Double) -> Double { return lhs + rhs } }
-extension RGBA : _Summable where Channel : _Summable {
+extension RGBA: AdditiveArithmetic where Channel: AdditiveArithmetic {
     @inlinable
-    public static func _ez_sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+    public static var zero: RGBA<Channel> {
         return RGBA<Channel>(
-            red  : Channel._ez_sum(lhs.red  , rhs.red),
-            green: Channel._ez_sum(lhs.green, rhs.green),
-            blue : Channel._ez_sum(lhs.blue , rhs.blue),
-            alpha: Channel._ez_sum(lhs.alpha, rhs.alpha)
+            red  : .zero,
+            green: .zero,
+            blue : .zero,
+            alpha: .zero
         )
+    }
+
+    @inlinable
+    public static func +(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : lhs.red   + rhs.red,
+            green: lhs.green + rhs.green,
+            blue : lhs.blue  + rhs.blue,
+            alpha: lhs.alpha + rhs.alpha
+        )
+    }
+
+    @inlinable
+    public static func +=(_ lhs: inout RGBA<Channel>, _ rhs: RGBA<Channel>) {
+        lhs.red   += rhs.red
+        lhs.green += rhs.green
+        lhs.blue  += rhs.blue
+        lhs.alpha += rhs.alpha
+    }
+
+    @inlinable
+    public static func -(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
+        return RGBA<Channel>(
+            red  : lhs.red   - rhs.red,
+            green: lhs.green - rhs.green,
+            blue : lhs.blue  - rhs.blue,
+            alpha: lhs.alpha - rhs.alpha
+        )
+    }
+
+    @inlinable
+    public static func -=(_ lhs: inout RGBA<Channel>, _ rhs: RGBA<Channel>) {
+        lhs.red   -= rhs.red
+        lhs.green -= rhs.green
+        lhs.blue  -= rhs.blue
+        lhs.alpha -= rhs.alpha
     }
 }
 
 public protocol _NumericPixel {
-    associatedtype _NumericPixelSummableInt    : _Summable
-    associatedtype _NumericPixelSummableFloat  : _Summable
-    associatedtype _NumericPixelSummableDouble : _Summable
+    associatedtype _NumericPixelSummableInt    : AdditiveArithmetic
+    associatedtype _NumericPixelSummableFloat  : AdditiveArithmetic
+    associatedtype _NumericPixelSummableDouble : AdditiveArithmetic
 
     init(_ez_summableInt: _NumericPixelSummableInt)
     init(_ez_summableFloat: _NumericPixelSummableFloat)

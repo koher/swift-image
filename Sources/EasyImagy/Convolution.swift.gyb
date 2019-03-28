@@ -78,7 +78,7 @@ extension ImageProtocol where Pixel : _NumericPixel {
                         weightedValues.append(Pixel._ez_product${type}(summablePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summable${type}: weightedValues.reduce(Pixel._ez_summable${type}Zero) { Pixel._NumericPixelSummable${type}._ez_sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_summable${type}: weightedValues.reduce(Pixel._ez_summable${type}Zero, +)))
             }
         }
         
