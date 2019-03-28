@@ -1,26 +1,26 @@
 % types = ['UInt8', 'UInt16', 'Int', 'Float', 'Double']
-% summable_types = ['Int', 'Int64', 'Float', 'Double']
-% type_to_summables = {
+% additive_types = ['Int', 'Int64', 'Float', 'Double']
+% type_to_additives = {
 %   'UInt8' : ['Int', 'Float', 'Double'],
 %   'UInt16': ['Int', 'Float', 'Double'],
 %   'Int'   : ['Int', 'Float', 'Double'],
 %   'Float' : ['Float', 'Float', 'Double'],
 %   'Double': ['Double', 'Double', 'Double'],
 % }
-% summable_sybmols = ['Int', 'Float', 'Double']
-% summable_weights = ['Int', 'Float', 'Double']
+% additive_sybmols = ['Int', 'Float', 'Double']
+% additive_weights = ['Int', 'Float', 'Double']
 %
 public protocol _NumericPixel {
     associatedtype _ez_AdditiveInt    : AdditiveArithmetic
     associatedtype _ez_AdditiveFloat  : AdditiveArithmetic
     associatedtype _ez_AdditiveDouble : AdditiveArithmetic
 
-    init(_ez_summableInt: _ez_AdditiveInt)
-    init(_ez_summableFloat: _ez_AdditiveFloat)
-    init(_ez_summableDouble: _ez_AdditiveDouble)
-    var _ez_summableInt: _ez_AdditiveInt { get }
-    var _ez_summableFloat: _ez_AdditiveFloat { get }
-    var _ez_summableDouble: _ez_AdditiveDouble { get }
+    init(_ez_additiveInt: _ez_AdditiveInt)
+    init(_ez_additiveFloat: _ez_AdditiveFloat)
+    init(_ez_additiveDouble: _ez_AdditiveDouble)
+    var _ez_additiveInt: _ez_AdditiveInt { get }
+    var _ez_additiveFloat: _ez_AdditiveFloat { get }
+    var _ez_additiveDouble: _ez_AdditiveDouble { get }
     static var _ez_zero: Self { get }
     static func _ez_productInt(_ lhs: _ez_AdditiveInt, _ rhs: Int) -> _ez_AdditiveInt
     static func _ez_productFloat(_ lhs: _ez_AdditiveFloat, _ rhs: Float) -> _ez_AdditiveFloat
@@ -40,30 +40,30 @@ extension RGBA : _NumericPixel where Channel : _NumericPixel {
     public typealias _ez_AdditiveDouble = RGBA<Channel._ez_AdditiveDouble>
     
     @inlinable
-    public init(_ez_summableInt: RGBA<Channel._ez_AdditiveInt>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableInt: _ez_summableInt.red), green: Channel.init(_ez_summableInt: _ez_summableInt.green), blue: Channel.init(_ez_summableInt: _ez_summableInt.blue), alpha: Channel.init(_ez_summableInt: _ez_summableInt.alpha))
+    public init(_ez_additiveInt: RGBA<Channel._ez_AdditiveInt>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveInt: _ez_additiveInt.red), green: Channel.init(_ez_additiveInt: _ez_additiveInt.green), blue: Channel.init(_ez_additiveInt: _ez_additiveInt.blue), alpha: Channel.init(_ez_additiveInt: _ez_additiveInt.alpha))
     }
     
     @inlinable
-    public init(_ez_summableFloat: RGBA<Channel._ez_AdditiveFloat>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableFloat: _ez_summableFloat.red), green: Channel.init(_ez_summableFloat: _ez_summableFloat.green), blue: Channel.init(_ez_summableFloat: _ez_summableFloat.blue), alpha: Channel.init(_ez_summableFloat: _ez_summableFloat.alpha))
+    public init(_ez_additiveFloat: RGBA<Channel._ez_AdditiveFloat>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveFloat: _ez_additiveFloat.red), green: Channel.init(_ez_additiveFloat: _ez_additiveFloat.green), blue: Channel.init(_ez_additiveFloat: _ez_additiveFloat.blue), alpha: Channel.init(_ez_additiveFloat: _ez_additiveFloat.alpha))
     }
     
     @inlinable
-    public init(_ez_summableDouble: RGBA<Channel._ez_AdditiveDouble>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableDouble: _ez_summableDouble.red), green: Channel.init(_ez_summableDouble: _ez_summableDouble.green), blue: Channel.init(_ez_summableDouble: _ez_summableDouble.blue), alpha: Channel.init(_ez_summableDouble: _ez_summableDouble.alpha))
+    public init(_ez_additiveDouble: RGBA<Channel._ez_AdditiveDouble>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveDouble: _ez_additiveDouble.red), green: Channel.init(_ez_additiveDouble: _ez_additiveDouble.green), blue: Channel.init(_ez_additiveDouble: _ez_additiveDouble.blue), alpha: Channel.init(_ez_additiveDouble: _ez_additiveDouble.alpha))
     }
     
-    public var _ez_summableInt: RGBA<Channel._ez_AdditiveInt> {
-        return RGBA<Channel._ez_AdditiveInt>(red: red._ez_summableInt, green: green._ez_summableInt, blue: blue._ez_summableInt, alpha: alpha._ez_summableInt)
+    public var _ez_additiveInt: RGBA<Channel._ez_AdditiveInt> {
+        return RGBA<Channel._ez_AdditiveInt>(red: red._ez_additiveInt, green: green._ez_additiveInt, blue: blue._ez_additiveInt, alpha: alpha._ez_additiveInt)
     }
     
-    public var _ez_summableFloat: RGBA<Channel._ez_AdditiveFloat> {
-        return RGBA<Channel._ez_AdditiveFloat>(red: red._ez_summableFloat, green: green._ez_summableFloat, blue: blue._ez_summableFloat, alpha: alpha._ez_summableFloat)
+    public var _ez_additiveFloat: RGBA<Channel._ez_AdditiveFloat> {
+        return RGBA<Channel._ez_AdditiveFloat>(red: red._ez_additiveFloat, green: green._ez_additiveFloat, blue: blue._ez_additiveFloat, alpha: alpha._ez_additiveFloat)
     }
     
-    public var _ez_summableDouble: RGBA<Channel._ez_AdditiveDouble> {
-        return RGBA<Channel._ez_AdditiveDouble>(red: red._ez_summableDouble, green: green._ez_summableDouble, blue: blue._ez_summableDouble, alpha: alpha._ez_summableDouble)
+    public var _ez_additiveDouble: RGBA<Channel._ez_AdditiveDouble> {
+        return RGBA<Channel._ez_AdditiveDouble>(red: red._ez_additiveDouble, green: green._ez_additiveDouble, blue: blue._ez_additiveDouble, alpha: alpha._ez_additiveDouble)
     }
     
     public static var _ez_zero: RGBA<Channel> {
@@ -103,50 +103,50 @@ extension RGBA : _NumericPixel where Channel : _NumericPixel {
 % for type in types:
 
 extension ${type} : _NumericPixel {
-%   summables = type_to_summables[type]
+%   additives = type_to_additives[type]
 %
-%   for i, (summable_symbol, summable) in enumerate(zip(summable_sybmols, summables)):
+%   for i, (additive_symbol, additive) in enumerate(zip(additive_sybmols, additives)):
 %     if i > 0:
 
 %     end
-    public init(_ez_summable${summable_symbol}: ${summable}) {
-%     if summable == type:
-        self = _ez_summable${summable_symbol}
+    public init(_ez_additive${additive_symbol}: ${additive}) {
+%     if additive == type:
+        self = _ez_additive${additive_symbol}
 %     else:
-        self = ${type}(_ez_summable${summable_symbol})
+        self = ${type}(_ez_additive${additive_symbol})
 %     end
     }
 %   end
 %
-%   for summable_symbol, summable in zip(summable_sybmols, summables):
+%   for additive_symbol, additive in zip(additive_sybmols, additives):
     
-    public var _ez_summable${summable_symbol}: ${summable} {
-%     if summable == type:
+    public var _ez_additive${additive_symbol}: ${additive} {
+%     if additive == type:
         return self
 %     else:
-        return ${summable}(self)
+        return ${additive}(self)
 %     end
     }
 %   end
 
-%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+%   for additive_symbol, additive_weight, additive in zip(additive_sybmols, additive_weights, additives):
     
-    public static func _ez_product${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
-%     if summable_weight == summable:
+    public static func _ez_product${additive_symbol}(_ lhs: ${additive}, _ rhs: ${additive_weight}) -> ${additive} {
+%     if additive_weight == additive:
         return lhs * rhs
 %     else:
-        return lhs * ${summable}(rhs)
+        return lhs * ${additive}(rhs)
 %     end
     }
 %   end
 %
-%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+%   for additive_symbol, additive_weight, additive in zip(additive_sybmols, additive_weights, additives):
     
-    public static func _ez_quotient${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
-%     if summable_weight == summable:
+    public static func _ez_quotient${additive_symbol}(_ lhs: ${additive}, _ rhs: ${additive_weight}) -> ${additive} {
+%     if additive_weight == additive:
         return lhs / rhs
 %     else:
-        return lhs / ${summable}(rhs)
+        return lhs / ${additive}(rhs)
 %     end
     }
 %   end

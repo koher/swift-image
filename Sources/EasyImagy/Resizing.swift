@@ -145,10 +145,10 @@ extension ImageProtocol where Pixel : _NumericPixel {
                 var pixel = Pixel._ez_AdditiveInt.zero
                 for dy in 0..<sy {
                     for dx in 0..<sx {
-                        pixel = pixel + self[bx + dx, by + dy]._ez_summableInt
+                        pixel = pixel + self[bx + dx, by + dy]._ez_additiveInt
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableInt: Pixel._ez_quotientInt(pixel, n)))
+                pixels.append(Pixel.init(_ez_additiveInt: Pixel._ez_quotientInt(pixel, n)))
             }
         }
         

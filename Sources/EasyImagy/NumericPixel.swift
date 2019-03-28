@@ -3,12 +3,12 @@ public protocol _NumericPixel {
     associatedtype _ez_AdditiveFloat  : AdditiveArithmetic
     associatedtype _ez_AdditiveDouble : AdditiveArithmetic
 
-    init(_ez_summableInt: _ez_AdditiveInt)
-    init(_ez_summableFloat: _ez_AdditiveFloat)
-    init(_ez_summableDouble: _ez_AdditiveDouble)
-    var _ez_summableInt: _ez_AdditiveInt { get }
-    var _ez_summableFloat: _ez_AdditiveFloat { get }
-    var _ez_summableDouble: _ez_AdditiveDouble { get }
+    init(_ez_additiveInt: _ez_AdditiveInt)
+    init(_ez_additiveFloat: _ez_AdditiveFloat)
+    init(_ez_additiveDouble: _ez_AdditiveDouble)
+    var _ez_additiveInt: _ez_AdditiveInt { get }
+    var _ez_additiveFloat: _ez_AdditiveFloat { get }
+    var _ez_additiveDouble: _ez_AdditiveDouble { get }
     static var _ez_zero: Self { get }
     static func _ez_productInt(_ lhs: _ez_AdditiveInt, _ rhs: Int) -> _ez_AdditiveInt
     static func _ez_productFloat(_ lhs: _ez_AdditiveFloat, _ rhs: Float) -> _ez_AdditiveFloat
@@ -28,30 +28,30 @@ extension RGBA : _NumericPixel where Channel : _NumericPixel {
     public typealias _ez_AdditiveDouble = RGBA<Channel._ez_AdditiveDouble>
     
     @inlinable
-    public init(_ez_summableInt: RGBA<Channel._ez_AdditiveInt>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableInt: _ez_summableInt.red), green: Channel.init(_ez_summableInt: _ez_summableInt.green), blue: Channel.init(_ez_summableInt: _ez_summableInt.blue), alpha: Channel.init(_ez_summableInt: _ez_summableInt.alpha))
+    public init(_ez_additiveInt: RGBA<Channel._ez_AdditiveInt>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveInt: _ez_additiveInt.red), green: Channel.init(_ez_additiveInt: _ez_additiveInt.green), blue: Channel.init(_ez_additiveInt: _ez_additiveInt.blue), alpha: Channel.init(_ez_additiveInt: _ez_additiveInt.alpha))
     }
     
     @inlinable
-    public init(_ez_summableFloat: RGBA<Channel._ez_AdditiveFloat>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableFloat: _ez_summableFloat.red), green: Channel.init(_ez_summableFloat: _ez_summableFloat.green), blue: Channel.init(_ez_summableFloat: _ez_summableFloat.blue), alpha: Channel.init(_ez_summableFloat: _ez_summableFloat.alpha))
+    public init(_ez_additiveFloat: RGBA<Channel._ez_AdditiveFloat>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveFloat: _ez_additiveFloat.red), green: Channel.init(_ez_additiveFloat: _ez_additiveFloat.green), blue: Channel.init(_ez_additiveFloat: _ez_additiveFloat.blue), alpha: Channel.init(_ez_additiveFloat: _ez_additiveFloat.alpha))
     }
     
     @inlinable
-    public init(_ez_summableDouble: RGBA<Channel._ez_AdditiveDouble>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableDouble: _ez_summableDouble.red), green: Channel.init(_ez_summableDouble: _ez_summableDouble.green), blue: Channel.init(_ez_summableDouble: _ez_summableDouble.blue), alpha: Channel.init(_ez_summableDouble: _ez_summableDouble.alpha))
+    public init(_ez_additiveDouble: RGBA<Channel._ez_AdditiveDouble>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveDouble: _ez_additiveDouble.red), green: Channel.init(_ez_additiveDouble: _ez_additiveDouble.green), blue: Channel.init(_ez_additiveDouble: _ez_additiveDouble.blue), alpha: Channel.init(_ez_additiveDouble: _ez_additiveDouble.alpha))
     }
     
-    public var _ez_summableInt: RGBA<Channel._ez_AdditiveInt> {
-        return RGBA<Channel._ez_AdditiveInt>(red: red._ez_summableInt, green: green._ez_summableInt, blue: blue._ez_summableInt, alpha: alpha._ez_summableInt)
+    public var _ez_additiveInt: RGBA<Channel._ez_AdditiveInt> {
+        return RGBA<Channel._ez_AdditiveInt>(red: red._ez_additiveInt, green: green._ez_additiveInt, blue: blue._ez_additiveInt, alpha: alpha._ez_additiveInt)
     }
     
-    public var _ez_summableFloat: RGBA<Channel._ez_AdditiveFloat> {
-        return RGBA<Channel._ez_AdditiveFloat>(red: red._ez_summableFloat, green: green._ez_summableFloat, blue: blue._ez_summableFloat, alpha: alpha._ez_summableFloat)
+    public var _ez_additiveFloat: RGBA<Channel._ez_AdditiveFloat> {
+        return RGBA<Channel._ez_AdditiveFloat>(red: red._ez_additiveFloat, green: green._ez_additiveFloat, blue: blue._ez_additiveFloat, alpha: alpha._ez_additiveFloat)
     }
     
-    public var _ez_summableDouble: RGBA<Channel._ez_AdditiveDouble> {
-        return RGBA<Channel._ez_AdditiveDouble>(red: red._ez_summableDouble, green: green._ez_summableDouble, blue: blue._ez_summableDouble, alpha: alpha._ez_summableDouble)
+    public var _ez_additiveDouble: RGBA<Channel._ez_AdditiveDouble> {
+        return RGBA<Channel._ez_AdditiveDouble>(red: red._ez_additiveDouble, green: green._ez_additiveDouble, blue: blue._ez_additiveDouble, alpha: alpha._ez_additiveDouble)
     }
     
     public static var _ez_zero: RGBA<Channel> {
@@ -90,27 +90,27 @@ extension RGBA : _NumericPixel where Channel : _NumericPixel {
 }
 
 extension UInt8 : _NumericPixel {
-    public init(_ez_summableInt: Int) {
-        self = UInt8(_ez_summableInt)
+    public init(_ez_additiveInt: Int) {
+        self = UInt8(_ez_additiveInt)
     }
 
-    public init(_ez_summableFloat: Float) {
-        self = UInt8(_ez_summableFloat)
+    public init(_ez_additiveFloat: Float) {
+        self = UInt8(_ez_additiveFloat)
     }
 
-    public init(_ez_summableDouble: Double) {
-        self = UInt8(_ez_summableDouble)
+    public init(_ez_additiveDouble: Double) {
+        self = UInt8(_ez_additiveDouble)
     }
     
-    public var _ez_summableInt: Int {
+    public var _ez_additiveInt: Int {
         return Int(self)
     }
     
-    public var _ez_summableFloat: Float {
+    public var _ez_additiveFloat: Float {
         return Float(self)
     }
     
-    public var _ez_summableDouble: Double {
+    public var _ez_additiveDouble: Double {
         return Double(self)
     }
 
@@ -141,27 +141,27 @@ extension UInt8 : _NumericPixel {
 }
 
 extension UInt16 : _NumericPixel {
-    public init(_ez_summableInt: Int) {
-        self = UInt16(_ez_summableInt)
+    public init(_ez_additiveInt: Int) {
+        self = UInt16(_ez_additiveInt)
     }
 
-    public init(_ez_summableFloat: Float) {
-        self = UInt16(_ez_summableFloat)
+    public init(_ez_additiveFloat: Float) {
+        self = UInt16(_ez_additiveFloat)
     }
 
-    public init(_ez_summableDouble: Double) {
-        self = UInt16(_ez_summableDouble)
+    public init(_ez_additiveDouble: Double) {
+        self = UInt16(_ez_additiveDouble)
     }
     
-    public var _ez_summableInt: Int {
+    public var _ez_additiveInt: Int {
         return Int(self)
     }
     
-    public var _ez_summableFloat: Float {
+    public var _ez_additiveFloat: Float {
         return Float(self)
     }
     
-    public var _ez_summableDouble: Double {
+    public var _ez_additiveDouble: Double {
         return Double(self)
     }
 
@@ -192,27 +192,27 @@ extension UInt16 : _NumericPixel {
 }
 
 extension Int : _NumericPixel {
-    public init(_ez_summableInt: Int) {
-        self = _ez_summableInt
+    public init(_ez_additiveInt: Int) {
+        self = _ez_additiveInt
     }
 
-    public init(_ez_summableFloat: Float) {
-        self = Int(_ez_summableFloat)
+    public init(_ez_additiveFloat: Float) {
+        self = Int(_ez_additiveFloat)
     }
 
-    public init(_ez_summableDouble: Double) {
-        self = Int(_ez_summableDouble)
+    public init(_ez_additiveDouble: Double) {
+        self = Int(_ez_additiveDouble)
     }
     
-    public var _ez_summableInt: Int {
+    public var _ez_additiveInt: Int {
         return self
     }
     
-    public var _ez_summableFloat: Float {
+    public var _ez_additiveFloat: Float {
         return Float(self)
     }
     
-    public var _ez_summableDouble: Double {
+    public var _ez_additiveDouble: Double {
         return Double(self)
     }
 
@@ -243,27 +243,27 @@ extension Int : _NumericPixel {
 }
 
 extension Float : _NumericPixel {
-    public init(_ez_summableInt: Float) {
-        self = _ez_summableInt
+    public init(_ez_additiveInt: Float) {
+        self = _ez_additiveInt
     }
 
-    public init(_ez_summableFloat: Float) {
-        self = _ez_summableFloat
+    public init(_ez_additiveFloat: Float) {
+        self = _ez_additiveFloat
     }
 
-    public init(_ez_summableDouble: Double) {
-        self = Float(_ez_summableDouble)
+    public init(_ez_additiveDouble: Double) {
+        self = Float(_ez_additiveDouble)
     }
     
-    public var _ez_summableInt: Float {
+    public var _ez_additiveInt: Float {
         return self
     }
     
-    public var _ez_summableFloat: Float {
+    public var _ez_additiveFloat: Float {
         return self
     }
     
-    public var _ez_summableDouble: Double {
+    public var _ez_additiveDouble: Double {
         return Double(self)
     }
 
@@ -294,27 +294,27 @@ extension Float : _NumericPixel {
 }
 
 extension Double : _NumericPixel {
-    public init(_ez_summableInt: Double) {
-        self = _ez_summableInt
+    public init(_ez_additiveInt: Double) {
+        self = _ez_additiveInt
     }
 
-    public init(_ez_summableFloat: Double) {
-        self = _ez_summableFloat
+    public init(_ez_additiveFloat: Double) {
+        self = _ez_additiveFloat
     }
 
-    public init(_ez_summableDouble: Double) {
-        self = _ez_summableDouble
+    public init(_ez_additiveDouble: Double) {
+        self = _ez_additiveDouble
     }
     
-    public var _ez_summableInt: Double {
+    public var _ez_additiveInt: Double {
         return self
     }
     
-    public var _ez_summableFloat: Double {
+    public var _ez_additiveFloat: Double {
         return self
     }
     
-    public var _ez_summableDouble: Double {
+    public var _ez_additiveDouble: Double {
         return self
     }
 

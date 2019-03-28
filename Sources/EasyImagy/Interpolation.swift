@@ -73,10 +73,10 @@ extension ImageProtocol where Pixel : _NumericPixel {
         let w11 = wx * wy
         
         return Pixel.init(
-            _ez_summableDouble: Pixel._ez_productDouble(v00._ez_summableDouble, w00)
-                + Pixel._ez_productDouble(v01._ez_summableDouble, w01)
-                + Pixel._ez_productDouble(v10._ez_summableDouble, w10)
-                + Pixel._ez_productDouble(v11._ez_summableDouble, w11)
+            _ez_additiveDouble: Pixel._ez_productDouble(v00._ez_additiveDouble, w00)
+                + Pixel._ez_productDouble(v01._ez_additiveDouble, w01)
+                + Pixel._ez_productDouble(v10._ez_additiveDouble, w10)
+                + Pixel._ez_productDouble(v11._ez_additiveDouble, w11)
         )
     }
 }
