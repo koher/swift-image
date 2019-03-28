@@ -1,6 +1,6 @@
 # EasyImagy
 
-[![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=master)](https://travis-ci.org/koher/EasyImagy)
+[![Build Status]([![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=dev-0.7.0)](https://travis-ci.org/koher/EasyImagy))
 
 _EasyImagy_ is a Swift library for image processing.
 
@@ -295,21 +295,21 @@ imageView.image = image.uiImage
 
 ## Requirements
 
-- Swift 4.2 or later
-- Xcode 10 or later
+- Swift 5.0 or later
+- Xcode 10.2 or later
 
 ## Installation
 
 ### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/koher/EasyImagy.git", from: "0.6.0"),
+.package(url: "https://github.com/koher/EasyImagy.git", .branch("dev-0.7.0")),
 ```
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
 ```
-github "koher/EasyImagy" ~> 0.6.0
+github "koher/EasyImagy" "dev-0.7.0"
 ```
 
 ### Manually
