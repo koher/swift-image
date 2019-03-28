@@ -1,6 +1,6 @@
 # EasyImagy
 
-[![Build Status]([![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=dev-0.7.0)](https://travis-ci.org/koher/EasyImagy))
+[![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=dev-0.7.0)](https://travis-ci.org/koher/EasyImagy)
 
 _EasyImagy_ is a Swift library for image processing.
 
