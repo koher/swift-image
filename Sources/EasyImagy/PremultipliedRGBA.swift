@@ -32,7 +32,6 @@ extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & Fi
 
 extension PremultipliedRGBA where Channel : FloatingPoint {
     public init(_ rgba: RGBA<Channel>) {
-        
         self.init(
             red: rgba.red * rgba.alpha,
             green: rgba.green * rgba.alpha,

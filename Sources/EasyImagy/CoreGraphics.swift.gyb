@@ -26,23 +26,8 @@ extension Image where Pixel == RGBA<${type}> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [RGBA<${type}>] = Image<RGBA<${type}>>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: .transparent,
-            colorSpace: Image<RGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<RGBA<${type}>>.bitmapInfo,
-            minValue: .min,
-            maxValue: .max,
-            isEqual: ==,
-            toAdditive: ${additive}.init,
-            product: (*) as (${additive}, ${additive}) -> ${additive},
-            quotient: (/) as (${additive}, ${additive}) -> ${additive},
-            toOriginal: ${type}.init,
-            setUp: setUp
-        )
-        
-        self.init(width: width, height: height, pixels: pixels)
+        let image = Image<PremultipliedRGBA<${type}>>(width: width, height: height, setUp: setUp)
+        self = image.map { RGBA<${type}>($0) }
     }
     
     public init(cgImage: CGImage) {
@@ -82,23 +67,8 @@ extension Image where Pixel == RGBA<${type}> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [RGBA<UInt8>] = Image<RGBA<UInt8>>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: .transparent,
-            colorSpace: Image<RGBA<UInt8>>.colorSpace,
-            bitmapInfo: Image<RGBA<UInt8>>.bitmapInfo,
-            minValue: .min,
-            maxValue: .max,
-            isEqual: ==,
-            toAdditive: Int.init,
-            product: (*) as (Int, Int) -> Int,
-            quotient: (/) as (Int, Int) -> Int,
-            toOriginal: UInt8.init,
-            setUp: setUp
-        )
-        
-        self.init(width: width, height: height, pixels: pixels.map { $0.map { ${type}($0) / 255 } })
+        let image = Image<PremultipliedRGBA<${type}>>(width: width, height: height, setUp: setUp)
+        self = image.map { RGBA<${type}>($0) }
     }
     
     public init(cgImage: CGImage) {
@@ -127,23 +97,8 @@ extension Image where Pixel == RGBA<Bool> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [RGBA<UInt8>] = Image<RGBA<UInt8>>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: .transparent,
-            colorSpace: Image<RGBA<UInt8>>.colorSpace,
-            bitmapInfo: Image<RGBA<UInt8>>.bitmapInfo,
-            minValue: .min,
-            maxValue: .max,
-            isEqual: ==,
-            toAdditive: Int.init,
-            product: (*) as (Int, Int) -> Int,
-            quotient: (/) as (Int, Int) -> Int,
-            toOriginal: UInt8.init,
-            setUp: setUp
-        )
-        
-        self.init(width: width, height: height, pixels: pixels.map { $0.map { $0 >= 128 } })
+        let image = Image<RGBA<UInt8>>(width: width, height: height, setUp: setUp)
+        self = image.map { $0.map { $0 >= 128 } }
     }
     
     public init(cgImage: CGImage) {

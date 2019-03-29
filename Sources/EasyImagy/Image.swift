@@ -81,58 +81,6 @@ import Foundation
 import CoreGraphics
 
 extension Image { // RGBA
-    internal static func drawnPixels<Channel, Additive>(
-        width: Int,
-        height: Int,
-        defaultPixel: RGBA<Channel>,
-        colorSpace: CGColorSpace,
-        bitmapInfo: CGBitmapInfo,
-        minValue: Channel,
-        maxValue: Channel,
-        isEqual: (Channel, Channel) -> Bool,
-        toAdditive: (Channel) -> Additive,
-        product: (Additive, Additive) -> Additive,
-        quotient: (Additive, Additive) -> Additive,
-        toOriginal: (Additive) -> Channel,
-        setUp: (CGContext) -> ()
-    ) -> [RGBA<Channel>] {
-        assert(width >= 0)
-        assert(height >= 0)
-        
-        let bytesPerComponent = MemoryLayout<Channel>.size
-        
-        let count = width * height
-        var pixels = [RGBA<Channel>](repeating: defaultPixel, count: count)
-        
-        let context  = CGContext(
-            data: &pixels,
-            width: width,
-            height: height,
-            bitsPerComponent: bytesPerComponent * 8,
-            bytesPerRow: bytesPerComponent * 4 * width,
-            space: colorSpace,
-            bitmapInfo: bitmapInfo.rawValue
-        )!
-        context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
-        setUp(context)
-        
-        let maxAdditive = toAdditive(maxValue)
-        for i in 0..<count {
-            let pixel = pixels[i]
-            if !isEqual(pixel.alpha, minValue) && !isEqual(pixel.alpha, maxValue) {
-                let alpha = toAdditive(pixel.alpha)
-                pixels[i] = RGBA<Channel>(
-                    red: toOriginal(quotient(product(maxAdditive, toAdditive(pixel.red)), alpha)),
-                    green: toOriginal(quotient(product(maxAdditive, toAdditive(pixel.green)), alpha)),
-                    blue: toOriginal(quotient(product(maxAdditive, toAdditive(pixel.blue)), alpha)),
-                    alpha: pixel.alpha
-                )
-            }
-        }
-        
-        return pixels
-    }
-    
     internal static func generatedCGImage<Channel, Additive>(
         image: Image<RGBA<Channel>>,
         colorSpace: CGColorSpace,
