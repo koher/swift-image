@@ -173,17 +173,9 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [PremultipliedRGBA<${type}>] = Image<PremultipliedRGBA<${type}>>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: PremultipliedRGBA<${type}>(red: 0, green: 0, blue: 0, alpha: 0),
-            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
-            componentType: ${type}.self,
-            setUp: setUp
-        )
-        
+        let pixels = [PremultipliedRGBA<${type}>](repeating: PremultipliedRGBA<${type}>(red: 0, green: 0, blue: 0, alpha: 0), count: width * height)
         self.init(width: width, height: height, pixels: pixels)
+        withCGContext(coordinates: .original, setUp)
     }
     
     public init(cgImage: CGImage) {
@@ -256,17 +248,8 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [PremultipliedRGBA<UInt8>] = Image<PremultipliedRGBA<UInt8>>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0),
-            colorSpace: Image<PremultipliedRGBA<UInt8>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<UInt8>>.bitmapInfo,
-            componentType: UInt8.self,
-            setUp: setUp
-        )
-        
-        self.init(width: width, height: height, pixels: pixels.map { $0.map { ${type}($0) / 255 } })
+        let image = Image<PremultipliedRGBA<UInt8>>(width: width, height: height, setUp: setUp)
+        self = image.map { $0.map { ${type}($0) / 255 } }
     }
     
     public init(cgImage: CGImage) {
@@ -297,17 +280,9 @@ extension Image where Pixel == ${type} {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [${type}] = Image<${type}>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: 0,
-            colorSpace: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo,
-            componentType: ${type}.self,
-            setUp: setUp
-        )
-        
+        let pixels = [${type}](repeating: .zero, count: width * height)
         self.init(width: width, height: height, pixels: pixels)
+        withCGContext(coordinates: .original, setUp)
     }
     
     public init(cgImage: CGImage) {
@@ -380,17 +355,8 @@ extension Image where Pixel == ${type} {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [UInt8] = Image<UInt8>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: 0,
-            colorSpace: Image<UInt8>.colorSpace,
-            bitmapInfo: Image<UInt8>.bitmapInfo,
-            componentType: UInt8.self,
-            setUp: setUp
-        )
-        
-        self.init(width: width, height: height, pixels: pixels.map { ${type}($0) / 255 })
+        let image = Image<UInt8>(width: width, height: height, setUp: setUp)
+        self = image.map { ${type}($0) / 255 }
     }
     
     public init(cgImage: CGImage) {
@@ -419,17 +385,8 @@ extension Image where Pixel == Bool {
     }
     
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
-        let pixels: [UInt8] = Image<UInt8>.drawnPixels(
-            width: width,
-            height: height,
-            defaultPixel: 0,
-            colorSpace: Image<UInt8>.colorSpace,
-            bitmapInfo: Image<UInt8>.bitmapInfo,
-            componentType: UInt8.self,
-            setUp: setUp
-        )
-        
-        self.init(width: width, height: height, pixels: pixels.map { $0 >= 128 })
+        let image = Image<UInt8>(width: width, height: height, setUp: setUp)
+        self = image.map { $0 >= 128 }
     }
     
     public init(cgImage: CGImage) {
