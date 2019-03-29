@@ -81,7 +81,7 @@ import Foundation
 import CoreGraphics
 
 extension Image { // RGBA
-    internal static func drawnPixels<Channel, Summable>(
+    internal static func drawnPixels<Channel, Additive>(
         width: Int,
         height: Int,
         defaultPixel: RGBA<Channel>,
@@ -90,10 +90,10 @@ extension Image { // RGBA
         minValue: Channel,
         maxValue: Channel,
         isEqual: (Channel, Channel) -> Bool,
-        toSummable: (Channel) -> Summable,
-        product: (Summable, Summable) -> Summable,
-        quotient: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Channel,
+        toAdditive: (Channel) -> Additive,
+        product: (Additive, Additive) -> Additive,
+        quotient: (Additive, Additive) -> Additive,
+        toOriginal: (Additive) -> Channel,
         setUp: (CGContext) -> ()
     ) -> [RGBA<Channel>] {
         assert(width >= 0)
@@ -116,15 +116,15 @@ extension Image { // RGBA
         context.clear(CGRect(x: 0.0, y: 0.0, width: CGFloat(width), height: CGFloat(height)))
         setUp(context)
         
-        let maxSummable = toSummable(maxValue)
+        let maxAdditive = toAdditive(maxValue)
         for i in 0..<count {
             let pixel = pixels[i]
             if !isEqual(pixel.alpha, minValue) && !isEqual(pixel.alpha, maxValue) {
-                let alpha = toSummable(pixel.alpha)
+                let alpha = toAdditive(pixel.alpha)
                 pixels[i] = RGBA<Channel>(
-                    red: toOriginal(quotient(product(maxSummable, toSummable(pixel.red)), alpha)),
-                    green: toOriginal(quotient(product(maxSummable, toSummable(pixel.green)), alpha)),
-                    blue: toOriginal(quotient(product(maxSummable, toSummable(pixel.blue)), alpha)),
+                    red: toOriginal(quotient(product(maxAdditive, toAdditive(pixel.red)), alpha)),
+                    green: toOriginal(quotient(product(maxAdditive, toAdditive(pixel.green)), alpha)),
+                    blue: toOriginal(quotient(product(maxAdditive, toAdditive(pixel.blue)), alpha)),
                     alpha: pixel.alpha
                 )
             }
@@ -133,21 +133,21 @@ extension Image { // RGBA
         return pixels
     }
     
-    internal static func generatedCGImage<Channel, Summable>(
+    internal static func generatedCGImage<Channel, Additive>(
         image: Image<RGBA<Channel>>,
         colorSpace: CGColorSpace,
         bitmapInfo: CGBitmapInfo,
         maxValue: Channel,
-        toSummable: (Channel) -> Summable,
-        product: (Summable, Summable) -> Summable,
-        quotient: (Summable, Summable) -> Summable,
-        toOriginal: (Summable) -> Channel
+        toAdditive: (Channel) -> Additive,
+        product: (Additive, Additive) -> Additive,
+        quotient: (Additive, Additive) -> Additive,
+        toOriginal: (Additive) -> Channel
     ) -> CGImage {
         let bytesPerComponent = MemoryLayout<Channel>.size
         let bytesPerPixel = bytesPerComponent * 4
         let length = image.count * bytesPerPixel
         
-        let maxSummable = toSummable(maxValue)
+        let maxAdditive = toAdditive(maxValue)
         
         var data = Data(count: length)
         #if swift(>=5.0)
@@ -155,12 +155,12 @@ extension Image { // RGBA
             let bytes = rawPointer.bindMemory(to: Channel.self)
             var pointer = bytes.baseAddress!
             for pixel in image.pixels {
-                let alphaInt = toSummable(pixel.alpha)
-                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.red), alphaInt), maxSummable))
+                let alphaInt = toAdditive(pixel.alpha)
+                pointer.pointee = toOriginal(quotient(product(toAdditive(pixel.red), alphaInt), maxAdditive))
                 pointer += 1
-                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.green), alphaInt), maxSummable))
+                pointer.pointee = toOriginal(quotient(product(toAdditive(pixel.green), alphaInt), maxAdditive))
                 pointer += 1
-                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.blue), alphaInt), maxSummable))
+                pointer.pointee = toOriginal(quotient(product(toAdditive(pixel.blue), alphaInt), maxAdditive))
                 pointer += 1
                 pointer.pointee = pixel.alpha
                 pointer += 1
@@ -170,12 +170,12 @@ extension Image { // RGBA
         data.withUnsafeMutableBytes { (bytes: UnsafeMutablePointer<Channel>) -> Void in
             var pointer = bytes
             for pixel in image.pixels {
-                let alphaInt = toSummable(pixel.alpha)
-                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.red), alphaInt), maxSummable))
+                let alphaInt = toAdditive(pixel.alpha)
+                pointer.pointee = toOriginal(quotient(product(toAdditive(pixel.red), alphaInt), maxAdditive))
                 pointer += 1
-                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.green), alphaInt), maxSummable))
+                pointer.pointee = toOriginal(quotient(product(toAdditive(pixel.green), alphaInt), maxAdditive))
                 pointer += 1
-                pointer.pointee = toOriginal(quotient(product(toSummable(pixel.blue), alphaInt), maxSummable))
+                pointer.pointee = toOriginal(quotient(product(toAdditive(pixel.blue), alphaInt), maxAdditive))
                 pointer += 1
                 pointer.pointee = pixel.alpha
                 pointer += 1

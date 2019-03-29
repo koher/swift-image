@@ -129,17 +129,17 @@ extension ImageProtocol where Pixel : _NumericPixel {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel._NumericPixelSummableInt] = []
+                var weightedValues: [Pixel._ez_AdditiveInt] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableInt
+                        let additivePixel = pixelAt(x + dx, y + dy)._ez_additiveInt
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel._ez_productInt(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productInt(additivePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableInt: weightedValues.reduce(Pixel._ez_summableIntZero) { Pixel._NumericPixelSummableInt._ez_sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_additiveInt: weightedValues.reduce(Pixel._ez_AdditiveInt.zero, +)))
             }
         }
         
@@ -168,17 +168,17 @@ extension ImageProtocol where Pixel : _NumericPixel {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel._NumericPixelSummableFloat] = []
+                var weightedValues: [Pixel._ez_AdditiveFloat] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableFloat
+                        let additivePixel = pixelAt(x + dx, y + dy)._ez_additiveFloat
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel._ez_productFloat(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productFloat(additivePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableFloat: weightedValues.reduce(Pixel._ez_summableFloatZero) { Pixel._NumericPixelSummableFloat._ez_sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_additiveFloat: weightedValues.reduce(Pixel._ez_AdditiveFloat.zero, +)))
             }
         }
         
@@ -207,17 +207,17 @@ extension ImageProtocol where Pixel : _NumericPixel {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel._NumericPixelSummableDouble] = []
+                var weightedValues: [Pixel._ez_AdditiveDouble] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summableDouble
+                        let additivePixel = pixelAt(x + dx, y + dy)._ez_additiveDouble
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel._ez_productDouble(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_productDouble(additivePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summableDouble: weightedValues.reduce(Pixel._ez_summableDoubleZero) { Pixel._NumericPixelSummableDouble._ez_sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_additiveDouble: weightedValues.reduce(Pixel._ez_AdditiveDouble.zero, +)))
             }
         }
         

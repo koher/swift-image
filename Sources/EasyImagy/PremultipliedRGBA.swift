@@ -16,15 +16,15 @@ public struct PremultipliedRGBA<Channel> where Channel : Numeric, Channel : Comp
     }
 }
 
-extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._NumericPixelSummableInt : FixedWidthInteger {
+extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._ez_AdditiveInt : FixedWidthInteger {
     public init(_ rgba: RGBA<Channel>) {
-        let numericAlpha: Channel._NumericPixelSummableInt = rgba.alpha._ez_summableInt
-        let numericMaxAlpha: Channel._NumericPixelSummableInt = Channel.max._ez_summableInt
+        let numericAlpha: Channel._ez_AdditiveInt = rgba.alpha._ez_additiveInt
+        let numericMaxAlpha: Channel._ez_AdditiveInt = Channel.max._ez_additiveInt
         
         self.init(
-            red: .init(_ez_summableInt: rgba.red._ez_summableInt * numericAlpha / numericMaxAlpha),
-            green: .init(_ez_summableInt: rgba.green._ez_summableInt * numericAlpha / numericMaxAlpha),
-            blue: .init(_ez_summableInt: rgba.blue._ez_summableInt * numericAlpha / numericMaxAlpha),
+            red: .init(_ez_additiveInt: rgba.red._ez_additiveInt * numericAlpha / numericMaxAlpha),
+            green: .init(_ez_additiveInt: rgba.green._ez_additiveInt * numericAlpha / numericMaxAlpha),
+            blue: .init(_ez_additiveInt: rgba.blue._ez_additiveInt * numericAlpha / numericMaxAlpha),
             alpha: rgba.alpha
         )
     }

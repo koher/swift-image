@@ -1,6 +1,6 @@
 % uint_types = ['UInt8', 'UInt16']
 % float_types = ['Float', 'Double']
-% type_to_summable = {
+% type_to_additive = {
 %   'UInt8' : 'Int',
 %   'UInt16': 'Int',
 % }
@@ -14,7 +14,7 @@ public enum CGContextCoordinates {
     case natural
 }
 % for type in uint_types:
-%   summable = type_to_summable[type]
+%   additive = type_to_additive[type]
 
 extension Image where Pixel == RGBA<${type}> {
     private static var colorSpace: CGColorSpace {
@@ -35,9 +35,9 @@ extension Image where Pixel == RGBA<${type}> {
             minValue: .min,
             maxValue: .max,
             isEqual: ==,
-            toSummable: ${summable}.init,
-            product: (*) as (${summable}, ${summable}) -> ${summable},
-            quotient: (/) as (${summable}, ${summable}) -> ${summable},
+            toAdditive: ${additive}.init,
+            product: (*) as (${additive}, ${additive}) -> ${additive},
+            quotient: (/) as (${additive}, ${additive}) -> ${additive},
             toOriginal: ${type}.init,
             setUp: setUp
         )
@@ -61,9 +61,9 @@ extension Image where Pixel == RGBA<${type}> {
             colorSpace: Image<RGBA<${type}>>.colorSpace,
             bitmapInfo: Image<RGBA<${type}>>.bitmapInfo,
             maxValue: .max,
-            toSummable: ${summable}.init,
-            product: (*) as (${summable}, ${summable}) -> ${summable},
-            quotient: (/) as (${summable}, ${summable}) -> ${summable},
+            toAdditive: ${additive}.init,
+            product: (*) as (${additive}, ${additive}) -> ${additive},
+            quotient: (/) as (${additive}, ${additive}) -> ${additive},
             toOriginal: ${type}.init
         )
     }
@@ -91,7 +91,7 @@ extension Image where Pixel == RGBA<${type}> {
             minValue: .min,
             maxValue: .max,
             isEqual: ==,
-            toSummable: Int.init,
+            toAdditive: Int.init,
             product: (*) as (Int, Int) -> Int,
             quotient: (/) as (Int, Int) -> Int,
             toOriginal: UInt8.init,
@@ -136,7 +136,7 @@ extension Image where Pixel == RGBA<Bool> {
             minValue: .min,
             maxValue: .max,
             isEqual: ==,
-            toSummable: Int.init,
+            toAdditive: Int.init,
             product: (*) as (Int, Int) -> Int,
             quotient: (/) as (Int, Int) -> Int,
             toOriginal: UInt8.init,
