@@ -1,14 +1,10 @@
-public struct PremultipliedRGBA<Channel> where Channel : Numeric, Channel : Comparable {
+public struct PremultipliedRGBA<Channel> where Channel : Numeric{
     public var red: Channel
     public var green: Channel
     public var blue: Channel
     public var alpha: Channel
     
     public init(red: Channel, green: Channel, blue: Channel, alpha: Channel) {
-        precondition(red <= alpha, "`red` (\(red)) must be less than or equal to `alpha` (\(alpha)).")
-        precondition(green <= alpha, "`green` (\(green)) must be less than or equal to `alpha` (\(alpha)).")
-        precondition(blue <= alpha, "`blue` (\(blue)) must be less than or equal to `alpha` (\(alpha)).")
-        
         self.red = red
         self.green = green
         self.blue = blue
