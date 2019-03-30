@@ -67,6 +67,7 @@ extension Bool: _CGChannel {
 
 public protocol _CGPixel {
     associatedtype _EZ_DirectPixel: _CGDirectPixel
+    associatedtype _EZ_PixelDirectChannel: _CGDirectChannel
 
     static var _ez_cgColorSpace: CGColorSpace { get }
     static var _ez_cgBitmapInfo: CGBitmapInfo { get }
@@ -78,34 +79,70 @@ public protocol _CGDirectPixel: _CGPixel where _EZ_DirectPixel == Self {
 
 extension UInt8: _CGDirectPixel {
     public typealias _EZ_DirectPixel = UInt8
+    public typealias _EZ_PixelDirectChannel = UInt8
 }
 
 extension UInt16: _CGDirectPixel {
     public typealias _EZ_DirectPixel = UInt16
+    public typealias _EZ_PixelDirectChannel = UInt16
 }
 
 extension Float: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
+    public typealias _EZ_PixelDirectChannel = UInt8
 }
 
 extension Double: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
+    public typealias _EZ_PixelDirectChannel = UInt8
 }
 
 extension Bool: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
+    public typealias _EZ_PixelDirectChannel = UInt8
 }
 
 extension RGBA: _CGPixel where Channel: _CGChannel {
     public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
+    public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
 }
 
 extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
     public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
+    public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
 }
 
 extension PremultipliedRGBA: _CGDirectPixel where Channel: _CGDirectChannel {
 
+}
+
+extension Image where Pixel: _CGDirectPixel {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let context  = CGContext(
+            data: &pixels,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * width,
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+        }
+
+        try body(context)
+    }
 }
 
 extension Image where Pixel == RGBA<UInt8> {
@@ -266,33 +303,6 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
             componentType: UInt8.self
         )
     }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        let width = self.width
-        let height = self.height
-
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let context  = CGContext(
-            data: &pixels,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
-            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt8>>.size * width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
-        }
-
-        try body(context)
-    }
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt16> {
@@ -329,33 +339,6 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
             body: body,
             componentType: UInt16.self
         )
-    }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        let width = self.width
-        let height = self.height
-
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let context  = CGContext(
-            data: &pixels,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
-            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt16>>.size * width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
-        }
-
-        try body(context)
     }
 }
 
@@ -436,33 +419,6 @@ extension Image where Pixel == UInt8 {
             componentType: UInt8.self
         )
     }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        let width = self.width
-        let height = self.height
-
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let context  = CGContext(
-            data: &pixels,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
-            bytesPerRow: MemoryLayout<UInt8>.size * width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
-        }
-
-        try body(context)
-    }
 }
 
 extension Image where Pixel == UInt16 {
@@ -499,33 +455,6 @@ extension Image where Pixel == UInt16 {
             body: body,
             componentType: UInt16.self
         )
-    }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        let width = self.width
-        let height = self.height
-
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let context  = CGContext(
-            data: &pixels,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
-            bytesPerRow: MemoryLayout<UInt16>.size * width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
-        }
-
-        try body(context)
     }
 }
 
