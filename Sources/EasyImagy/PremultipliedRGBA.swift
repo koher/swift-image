@@ -44,7 +44,7 @@ extension PremultipliedRGBA { // Additional initializers
 }
 
 extension PremultipliedRGBA {
-    public func map<T>(_ transform: (Channel) -> T) -> PremultipliedRGBA<T> where T : Numeric, T : Comparable {
+    public func map<T>(_ transform: (Channel) -> T) -> PremultipliedRGBA<T> where T : Numeric {
         return PremultipliedRGBA<T>(
             red: transform(red),
             green: transform(green),
