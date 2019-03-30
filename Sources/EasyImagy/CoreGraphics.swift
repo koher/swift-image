@@ -6,6 +6,109 @@ public enum CGContextCoordinates {
     case natural
 }
 
+public protocol _CGGrayScale {}
+public protocol _CGRGBA {}
+
+extension _CGGrayScale {
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceGray()
+    }
+
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
+}
+
+extension _CGRGBA {
+
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceRGB()
+    }
+
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
+    }
+}
+
+extension UInt8: _CGGrayScale {}
+extension UInt16: _CGGrayScale {}
+extension Float: _CGGrayScale {}
+extension Double: _CGGrayScale {}
+extension Bool: _CGGrayScale {}
+extension RGBA: _CGRGBA {}
+extension PremultipliedRGBA: _CGRGBA {}
+
+public protocol _CGChannel {
+    associatedtype _EZ_DirectChannel: _CGDirectChannel, Numeric
+}
+
+public protocol _CGDirectChannel: _CGChannel where _EZ_DirectChannel == Self {
+
+}
+
+extension UInt8: _CGDirectChannel {
+    public typealias _EZ_DirectChannel = UInt8
+}
+
+extension UInt16: _CGDirectChannel {
+    public typealias _EZ_DirectChannel = UInt16
+}
+
+extension Float: _CGChannel {
+    public typealias _EZ_DirectChannel = UInt8
+}
+
+extension Double: _CGChannel {
+    public typealias _EZ_DirectChannel = UInt8
+}
+
+extension Bool: _CGChannel {
+    public typealias _EZ_DirectChannel = UInt8
+}
+
+public protocol _CGPixel {
+    associatedtype _EZ_DirectPixel: _CGDirectPixel
+
+    static var _ez_cgColorSpace: CGColorSpace { get }
+    static var _ez_cgBitmapInfo: CGBitmapInfo { get }
+}
+
+public protocol _CGDirectPixel: _CGPixel where _EZ_DirectPixel == Self {
+
+}
+
+extension UInt8: _CGDirectPixel {
+    public typealias _EZ_DirectPixel = UInt8
+}
+
+extension UInt16: _CGDirectPixel {
+    public typealias _EZ_DirectPixel = UInt16
+}
+
+extension Float: _CGPixel {
+    public typealias _EZ_DirectPixel = UInt8
+}
+
+extension Double: _CGPixel {
+    public typealias _EZ_DirectPixel = UInt8
+}
+
+extension Bool: _CGPixel {
+    public typealias _EZ_DirectPixel = UInt8
+}
+
+extension RGBA: _CGPixel where Channel: _CGChannel {
+    public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
+}
+
+extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
+    public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
+}
+
+extension PremultipliedRGBA: _CGDirectPixel where Channel: _CGDirectChannel {
+
+}
+
 extension Image where Pixel == RGBA<UInt8> {
     private static var colorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
