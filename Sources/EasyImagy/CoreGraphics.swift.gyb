@@ -27,7 +27,6 @@ extension _CGGrayScale {
 }
 
 extension _CGRGBA {
-
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
@@ -119,14 +118,6 @@ extension PremultipliedRGBA: _CGDirectPixel where Channel: _CGDirectChannel {
 %   additive = type_to_additive[type]
 
 extension Image where Pixel == RGBA<${type}> {
-    private static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceRGB()
-    }
-    
-    private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let image = Image<PremultipliedRGBA<${type}>>(width: width, height: height, setUp: setUp)
         self = image.map { RGBA<${type}>($0) }
@@ -145,8 +136,8 @@ extension Image where Pixel == RGBA<${type}> {
     public var cgImage: CGImage {
         return Image.generatedCGImage(
             image: self,
-            colorSpace: Image<RGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<RGBA<${type}>>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             maxValue: .max,
             toAdditive: ${additive}.init,
             product: (*) as (${additive}, ${additive}) -> ${additive},
@@ -160,14 +151,6 @@ extension Image where Pixel == RGBA<${type}> {
 % for type in float_types:
 
 extension Image where Pixel == RGBA<${type}> {
-    private static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceRGB()
-    }
-    
-    private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let image = Image<PremultipliedRGBA<${type}>>(width: width, height: height, setUp: setUp)
         self = image.map { RGBA<${type}>($0) }
@@ -190,14 +173,6 @@ extension Image where Pixel == RGBA<${type}> {
 % end
 
 extension Image where Pixel == RGBA<Bool> {
-    private static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceRGB()
-    }
-    
-    private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let image = Image<RGBA<UInt8>>(width: width, height: height, setUp: setUp)
         self = image.map { $0.map { $0 >= 128 } }
@@ -221,14 +196,6 @@ extension Image where Pixel == RGBA<Bool> {
 % for type in uint_types:
 
 extension Image where Pixel == PremultipliedRGBA<${type}> {
-    fileprivate static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceRGB()
-    }
-    
-    fileprivate static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let pixels = [PremultipliedRGBA<${type}>](repeating: PremultipliedRGBA<${type}>(red: 0, green: 0, blue: 0, alpha: 0), count: width * height)
         self.init(width: width, height: height, pixels: pixels)
@@ -248,8 +215,8 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
     public var cgImage: CGImage {
         return Image.generatedCGImage(
             image: self,
-            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             componentType: ${type}.self
         )
     }
@@ -257,8 +224,8 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try Image.withGeneratedCGImage(
             image: self,
-            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             body: body,
             componentType: ${type}.self
         )
@@ -277,8 +244,8 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
             height: height,
             bitsPerComponent: MemoryLayout<${type}>.size * 8,
             bytesPerRow: MemoryLayout<PremultipliedRGBA<${type}>>.size * width,
-            space: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo.rawValue
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
         )!
         switch coordinates {
         case .original:
@@ -296,14 +263,6 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
 % for type in float_types:
 
 extension Image where Pixel == PremultipliedRGBA<${type}> {
-    private static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceRGB()
-    }
-    
-    private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let image = Image<PremultipliedRGBA<UInt8>>(width: width, height: height, setUp: setUp)
         self = image.map { $0.map { ${type}($0) / 255 } }
@@ -328,14 +287,6 @@ extension Image where Pixel == PremultipliedRGBA<${type}> {
 % for type in uint_types:
 
 extension Image where Pixel == ${type} {
-    fileprivate static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceGray()
-    }
-    
-    fileprivate static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let pixels = [${type}](repeating: .zero, count: width * height)
         self.init(width: width, height: height, pixels: pixels)
@@ -355,8 +306,8 @@ extension Image where Pixel == ${type} {
     public var cgImage: CGImage {
         return Image.generatedCGImage(
             image: self,
-            colorSpace: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             componentType: ${type}.self
         )
     }
@@ -364,8 +315,8 @@ extension Image where Pixel == ${type} {
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try Image.withGeneratedCGImage(
             image: self,
-            colorSpace: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             body: body,
             componentType: ${type}.self
         )
@@ -384,8 +335,8 @@ extension Image where Pixel == ${type} {
             height: height,
             bitsPerComponent: MemoryLayout<${type}>.size * 8,
             bytesPerRow: MemoryLayout<${type}>.size * width,
-            space: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo.rawValue
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
         )!
         switch coordinates {
         case .original:
@@ -403,14 +354,6 @@ extension Image where Pixel == ${type} {
 % for type in float_types:
 
 extension Image where Pixel == ${type} {
-    private static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceGray()
-    }
-    
-    private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let image = Image<UInt8>(width: width, height: height, setUp: setUp)
         self = image.map { ${type}($0) / 255 }
@@ -433,14 +376,6 @@ extension Image where Pixel == ${type} {
 % end
 
 extension Image where Pixel == Bool {
-    private static var colorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceGray()
-    }
-    
-    private static var bitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
-    }
-    
     private init(width: Int, height: Int, setUp: (CGContext) -> ()) {
         let image = Image<UInt8>(width: width, height: height, setUp: setUp)
         self = image.map { $0 >= 128 }
@@ -467,8 +402,8 @@ extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
     public var cgImage: CGImage {
         return ImageSlice<PremultipliedRGBA<${type}>>.generatedCGImage(
             slice: self,
-            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             componentType: ${type}.self
         )
     }
@@ -476,8 +411,8 @@ extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<${type}>>.withGeneratedCGImage(
             slice: self,
-            colorSpace: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             body: body,
             componentType: ${type}.self
         )
@@ -494,8 +429,8 @@ extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
             height: height,
             bitsPerComponent: MemoryLayout<${type}>.size * 8,
             bytesPerRow: MemoryLayout<PremultipliedRGBA<${type}>>.size * self.image.width,
-            space: Image<PremultipliedRGBA<${type}>>.colorSpace,
-            bitmapInfo: Image<PremultipliedRGBA<${type}>>.bitmapInfo.rawValue
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
         )!
         switch coordinates {
         case .original:
@@ -516,8 +451,8 @@ extension ImageSlice where Pixel == ${type} {
     public var cgImage: CGImage {
         return ImageSlice<${type}>.generatedCGImage(
             slice: self,
-            colorSpace: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             componentType: ${type}.self
         )
     }
@@ -525,8 +460,8 @@ extension ImageSlice where Pixel == ${type} {
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<${type}>.withGeneratedCGImage(
             slice: self,
-            colorSpace: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo,
+            colorSpace: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
             body: body,
             componentType: ${type}.self
         )
@@ -543,8 +478,8 @@ extension ImageSlice where Pixel == ${type} {
             height: height,
             bitsPerComponent: MemoryLayout<${type}>.size * 8,
             bytesPerRow: MemoryLayout<${type}>.size * self.image.width,
-            space: Image<${type}>.colorSpace,
-            bitmapInfo: Image<${type}>.bitmapInfo.rawValue
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
         )!
         switch coordinates {
         case .original:
