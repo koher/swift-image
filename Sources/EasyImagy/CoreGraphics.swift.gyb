@@ -254,6 +254,12 @@ extension Image where Pixel: _CGDirectPixel {
         try body(context)
     }
 }
+
+extension ImageSlice where Pixel: _CGPixel {
+    public init(cgImage: CGImage) {
+        self.init(Image<Pixel>(cgImage: cgImage))
+    }
+}
 % for type in uint_types:
 %   additive = type_to_additive[type]
 

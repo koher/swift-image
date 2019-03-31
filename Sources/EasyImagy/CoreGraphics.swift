@@ -248,6 +248,12 @@ extension Image where Pixel: _CGDirectPixel {
     }
 }
 
+extension ImageSlice where Pixel: _CGPixel {
+    public init(cgImage: CGImage) {
+        self.init(Image<Pixel>(cgImage: cgImage))
+    }
+}
+
 extension Image where Pixel == RGBA<UInt8> {
     public var cgImage: CGImage {
         return Image.generatedCGImage(
