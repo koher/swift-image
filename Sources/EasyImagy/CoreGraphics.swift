@@ -345,9 +345,48 @@ extension ImageSlice where Pixel: _CGPixel {
     public init(cgImage: CGImage) {
         self.init(Image<Pixel>(cgImage: cgImage))
     }
+
+    public var cgImage: CGImage {
+        return map { $0._ez_directPixel }.cgImage
+    }
 }
 
 extension ImageSlice where Pixel: _CGDirectPixel {
+    public var cgImage: CGImage {
+        let imageCount = image.count
+        let pixelCount = image.width * self.height
+        let length = pixelCount * MemoryLayout<Pixel>.size
+        let offset = yRange.lowerBound * image.width + xRange.lowerBound
+
+        var data: Data
+        if offset + pixelCount <= imageCount {
+            let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: image.pixels) + (yRange.lowerBound * image.width + xRange.lowerBound)
+            data = Data(bytes: bytes, count: length)
+        } else {
+            let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: image.pixels) + (yRange.lowerBound * image.width + xRange.lowerBound)
+            let pointer: UnsafeMutablePointer<UInt8> = UnsafeMutableRawPointer(bytes).bindMemory(to: UInt8.self, capacity: length)
+            data = Data(capacity: pixelCount * MemoryLayout<Pixel>.size)
+            data.append(pointer, count: (imageCount - offset) * MemoryLayout<Pixel>.size)
+            data.append(pointer, count: (offset + pixelCount - imageCount) * MemoryLayout<Pixel>.size)
+        }
+
+        let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
+
+        return CGImage(
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * image.width,
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+    }
+
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
@@ -426,15 +465,6 @@ extension Image where Pixel == UInt16 {
 }
 
 extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
-    public var cgImage: CGImage {
-        return ImageSlice<PremultipliedRGBA<UInt8>>.generatedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt8.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<UInt8>>.withGeneratedCGImage(
             slice: self,
@@ -472,15 +502,6 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
 }
 
 extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
-    public var cgImage: CGImage {
-        return ImageSlice<PremultipliedRGBA<UInt16>>.generatedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt16.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<PremultipliedRGBA<UInt16>>.withGeneratedCGImage(
             slice: self,
@@ -518,15 +539,6 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
 }
 
 extension ImageSlice where Pixel == UInt8 {
-    public var cgImage: CGImage {
-        return ImageSlice<UInt8>.generatedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt8.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<UInt8>.withGeneratedCGImage(
             slice: self,
@@ -539,15 +551,6 @@ extension ImageSlice where Pixel == UInt8 {
 }
 
 extension ImageSlice where Pixel == UInt16 {
-    public var cgImage: CGImage {
-        return ImageSlice<UInt16>.generatedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt16.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try ImageSlice<UInt16>.withGeneratedCGImage(
             slice: self,
