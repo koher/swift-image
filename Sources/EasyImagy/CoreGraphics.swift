@@ -254,6 +254,36 @@ extension ImageSlice where Pixel: _CGPixel {
     }
 }
 
+extension ImageSlice where Pixel: _CGDirectPixel {
+    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
+        let width = self.width
+        let height = self.height
+
+        precondition(width >= 0)
+        precondition(height >= 0)
+
+        let data: UnsafeMutablePointer<Pixel> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+        let context  = CGContext(
+            data: data,
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * self.image.width,
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
+        )!
+        switch coordinates {
+        case .original:
+            break
+        case .natural:
+            context.scaleBy(x: 1, y: -1)
+            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+        }
+
+        try body(context)
+    }
+}
+
 extension Image where Pixel == RGBA<UInt8> {
     public var cgImage: CGImage {
         return Image.generatedCGImage(
@@ -527,31 +557,6 @@ extension ImageSlice where Pixel == UInt8 {
             componentType: UInt8.self
         )
     }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let data: UnsafeMutablePointer<UInt8> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
-        let context  = CGContext(
-            data: data,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
-            bytesPerRow: MemoryLayout<UInt8>.size * self.image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
-        }
-
-        try body(context)
-    }
 }
 
 extension ImageSlice where Pixel == UInt16 {
@@ -572,31 +577,6 @@ extension ImageSlice where Pixel == UInt16 {
             body: body,
             componentType: UInt16.self
         )
-    }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let data: UnsafeMutablePointer<UInt16> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
-        let context  = CGContext(
-            data: data,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
-            bytesPerRow: MemoryLayout<UInt16>.size * self.image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
-        }
-
-        try body(context)
     }
 }
 #endif
