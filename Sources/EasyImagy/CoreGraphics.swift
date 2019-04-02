@@ -1,5 +1,6 @@
 #if canImport(CoreGraphics)
 import CoreGraphics
+import Foundation
 
 public enum CGContextCoordinates {
     case original
@@ -41,8 +42,10 @@ public protocol _CGChannel {
     associatedtype _EZ_DirectChannel: _CGDirectChannel, Numeric
 
     init(_ez_directChannel: _EZ_DirectChannel)
+    var _ez_directChannel: _EZ_DirectChannel { get }
 
     static func _ez_rgba(from: PremultipliedRGBA<_EZ_DirectChannel>) -> RGBA<Self>
+    static func _ez_premultipliedRGBA(from: RGBA<Self>) -> PremultipliedRGBA<_EZ_DirectChannel>
 }
 
 public protocol _CGDirectChannel: _CGChannel where _EZ_DirectChannel == Self {
@@ -53,6 +56,10 @@ extension _CGDirectChannel {
     public init(_ez_directChannel directChannel: _EZ_DirectChannel) {
         self = directChannel
     }
+
+    public var _ez_directChannel: _EZ_DirectChannel {
+        return self
+    }
 }
 
 extension UInt8: _CGDirectChannel {
@@ -60,6 +67,10 @@ extension UInt8: _CGDirectChannel {
 
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<UInt8> {
         return RGBA<UInt8>(premultipliedRGBA)
+    }
+
+    public static func _ez_premultipliedRGBA(from rgba: RGBA<UInt8>) -> PremultipliedRGBA<UInt8> {
+        return PremultipliedRGBA<UInt8>(rgba)
     }
 
     public static var _ez_cgChannelDefault: UInt8 { return 0 }
@@ -72,6 +83,10 @@ extension UInt16: _CGDirectChannel {
         return RGBA<UInt16>(premultipliedRGBA)
     }
 
+    public static func _ez_premultipliedRGBA(from rgba: RGBA<UInt16>) -> PremultipliedRGBA<UInt16> {
+        return PremultipliedRGBA<UInt16>(rgba)
+    }
+
     public static var _ez_cgChannelDefault: UInt16 { return 0 }
 }
 
@@ -82,8 +97,16 @@ extension Float: _CGChannel {
         self = Float(directChannel) / 255
     }
 
+    public var _ez_directChannel: UInt8 {
+        return UInt8(clamp(self * 255, lower: 0, upper: 255))
+    }
+
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<Float> {
         return RGBA<Float>(premultipliedRGBA.map(Float.init(_ez_directChannel:)))
+    }
+
+    public static func _ez_premultipliedRGBA(from rgba: RGBA<Float>) -> PremultipliedRGBA<UInt8> {
+        return PremultipliedRGBA<UInt8>(rgba.map { $0._ez_directChannel })
     }
 }
 
@@ -94,8 +117,16 @@ extension Double: _CGChannel {
         self = Double(directChannel) / 255
     }
 
+    public var _ez_directChannel: UInt8 {
+        return UInt8(clamp(self * 255, lower: 0, upper: 255))
+    }
+
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<Double> {
         return RGBA<Double>(premultipliedRGBA.map(Double.init(_ez_directChannel:)))
+    }
+
+    public static func _ez_premultipliedRGBA(from rgba: RGBA<Double>) -> PremultipliedRGBA<UInt8> {
+        return PremultipliedRGBA<UInt8>(rgba.map { $0._ez_directChannel })
     }
 }
 
@@ -106,8 +137,16 @@ extension Bool: _CGChannel {
         self = directChannel >= 128
     }
 
+    public var _ez_directChannel: _EZ_DirectChannel {
+        return self ? 255 : 0
+    }
+
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<Bool> {
         return RGBA<UInt8>(premultipliedRGBA).map(Bool.init(_ez_directChannel:))
+    }
+
+    public static func _ez_premultipliedRGBA(from rgba: RGBA<Bool>) -> PremultipliedRGBA<UInt8> {
+        return PremultipliedRGBA<UInt8>(rgba.map { $0._ez_directChannel })
     }
 }
 
@@ -116,6 +155,8 @@ public protocol _CGPixel {
     associatedtype _EZ_PixelDirectChannel: _CGDirectChannel
 
     init(_ez_directPixel: _EZ_DirectPixel)
+
+    var _ez_directPixel: _EZ_DirectPixel { get }
 
     static var _ez_cgColorSpace: CGColorSpace { get }
     static var _ez_cgBitmapInfo: CGBitmapInfo { get }
@@ -126,6 +167,10 @@ public protocol _CGDirectPixel: _CGPixel where _EZ_DirectPixel == Self {
 }
 
 extension _CGDirectPixel {
+    public var _ez_directPixel: _EZ_DirectPixel {
+        return self
+    }
+
     public init(_ez_directPixel directPixel: _EZ_DirectPixel) {
         self = directPixel
     }
@@ -151,6 +196,10 @@ extension Float: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
 
+    public var _ez_directPixel: UInt8 {
+        return UInt8(clamp(self * 255, lower: 0, upper: 255))
+    }
+
     public init(_ez_directPixel directPixel: UInt8) {
         self = Float(directPixel) / 255
     }
@@ -160,6 +209,10 @@ extension Double: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
 
+    public var _ez_directPixel: UInt8 {
+        return UInt8(clamp(self * 255, lower: 0, upper: 255))
+    }
+
     public init(_ez_directPixel directPixel: UInt8) {
         self = Double(directPixel) / 255
     }
@@ -168,6 +221,10 @@ extension Double: _CGPixel {
 extension Bool: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
+
+    public var _ez_directPixel: UInt8 {
+        return self ? 255 : 0
+    }
 
     public init(_ez_directPixel directPixel: UInt8) {
         self = directPixel >= 128
@@ -181,6 +238,10 @@ extension RGBA: _CGPixel where Channel: _CGChannel {
     public init(_ez_directPixel directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel>) {
         self = Channel._ez_rgba(from: directPixel)
     }
+
+    public var _ez_directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel> {
+        return Channel._ez_premultipliedRGBA(from: self)
+    }
 }
 
 extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
@@ -189,6 +250,10 @@ extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
 
     public init(_ez_directPixel directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel>) {
         self = directPixel.map(Channel.init(_ez_directChannel:))
+    }
+
+    public var _ez_directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel> {
+        return map { $0._ez_directChannel }
     }
 }
 
@@ -217,9 +282,37 @@ extension Image where Pixel: _CGPixel {
 
         self = image.map(Pixel.init(_ez_directPixel:))
     }
+
+    public var cgImage: CGImage {
+        return map { $0._ez_directPixel }.cgImage
+    }
 }
 
 extension Image where Pixel: _CGDirectPixel {
+    public var cgImage: CGImage {
+        let length = count * MemoryLayout<Pixel>.size
+
+        let provider: CGDataProvider = CGDataProvider(data: Data(
+            bytes: UnsafeMutableRawPointer(mutating: pixels),
+            count: length
+        ) as CFData)!
+
+        return CGImage(
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * width,
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+
+    }
+
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
@@ -284,64 +377,7 @@ extension ImageSlice where Pixel: _CGDirectPixel {
     }
 }
 
-extension Image where Pixel == RGBA<UInt8> {
-    public var cgImage: CGImage {
-        return Image.generatedCGImage(
-            image: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            maxValue: .max,
-            toAdditive: Int.init,
-            product: (*) as (Int, Int) -> Int,
-            quotient: (/) as (Int, Int) -> Int,
-            toOriginal: UInt8.init
-        )
-    }
-}
-
-extension Image where Pixel == RGBA<UInt16> {
-    public var cgImage: CGImage {
-        return Image.generatedCGImage(
-            image: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            maxValue: .max,
-            toAdditive: Int.init,
-            product: (*) as (Int, Int) -> Int,
-            quotient: (/) as (Int, Int) -> Int,
-            toOriginal: UInt16.init
-        )
-    }
-}
-
-extension Image where Pixel == RGBA<Float> {
-    public var cgImage: CGImage {
-        return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-    }
-}
-
-extension Image where Pixel == RGBA<Double> {
-    public var cgImage: CGImage {
-        return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-    }
-}
-
-extension Image where Pixel == RGBA<Bool> {
-    public var cgImage: CGImage {
-        return map { $0.map { $0 ? (255 as UInt8) : (0 as UInt8) } }.cgImage
-    }
-}
-
 extension Image where Pixel == PremultipliedRGBA<UInt8> {
-    public var cgImage: CGImage {
-        return Image.generatedCGImage(
-            image: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt8.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try Image.withGeneratedCGImage(
             image: self,
@@ -354,15 +390,6 @@ extension Image where Pixel == PremultipliedRGBA<UInt8> {
 }
 
 extension Image where Pixel == PremultipliedRGBA<UInt16> {
-    public var cgImage: CGImage {
-        return Image.generatedCGImage(
-            image: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt16.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try Image.withGeneratedCGImage(
             image: self,
@@ -374,28 +401,7 @@ extension Image where Pixel == PremultipliedRGBA<UInt16> {
     }
 }
 
-extension Image where Pixel == PremultipliedRGBA<Float> {
-    public var cgImage: CGImage {
-        return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-    }
-}
-
-extension Image where Pixel == PremultipliedRGBA<Double> {
-    public var cgImage: CGImage {
-        return map { $0.map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) } }.cgImage
-    }
-}
-
 extension Image where Pixel == UInt8 {
-    public var cgImage: CGImage {
-        return Image.generatedCGImage(
-            image: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt8.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try Image.withGeneratedCGImage(
             image: self,
@@ -408,15 +414,6 @@ extension Image where Pixel == UInt8 {
 }
 
 extension Image where Pixel == UInt16 {
-    public var cgImage: CGImage {
-        return Image.generatedCGImage(
-            image: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            componentType: UInt16.self
-        )
-    }
-
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         return try Image.withGeneratedCGImage(
             image: self,
@@ -425,24 +422,6 @@ extension Image where Pixel == UInt16 {
             body: body,
             componentType: UInt16.self
         )
-    }
-}
-
-extension Image where Pixel == Float {
-    public var cgImage: CGImage {
-        return map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) }.cgImage
-    }
-}
-
-extension Image where Pixel == Double {
-    public var cgImage: CGImage {
-        return map { UInt8(clamp($0, lower: 0.0, upper: 1.0) * 255) }.cgImage
-    }
-}
-
-extension Image where Pixel == Bool {
-    public var cgImage: CGImage {
-        return map { $0 ? 255 as UInt8 : 0 as UInt8 }.cgImage
     }
 }
 
