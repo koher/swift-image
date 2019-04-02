@@ -474,31 +474,6 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
             componentType: UInt8.self
         )
     }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let data: UnsafeMutablePointer<PremultipliedRGBA<UInt8>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
-        let context  = CGContext(
-            data: data,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt8>.size * 8,
-            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt8>>.size * self.image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
-        }
-
-        try body(context)
-    }
 }
 
 extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
@@ -510,31 +485,6 @@ extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
             body: body,
             componentType: UInt16.self
         )
-    }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let data: UnsafeMutablePointer<PremultipliedRGBA<UInt16>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
-        let context  = CGContext(
-            data: data,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<UInt16>.size * 8,
-            bytesPerRow: MemoryLayout<PremultipliedRGBA<UInt16>>.size * self.image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
-        }
-
-        try body(context)
     }
 }
 

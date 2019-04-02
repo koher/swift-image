@@ -464,31 +464,6 @@ extension ImageSlice where Pixel == PremultipliedRGBA<${type}> {
             componentType: ${type}.self
         )
     }
-
-    public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
-        precondition(width >= 0)
-        precondition(height >= 0)
-
-        let data: UnsafeMutablePointer<PremultipliedRGBA<${type}>> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
-        let context  = CGContext(
-            data: data,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<${type}>.size * 8,
-            bytesPerRow: MemoryLayout<PremultipliedRGBA<${type}>>.size * self.image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
-        }
-
-        try body(context)
-    }
 }
 % end
 %
