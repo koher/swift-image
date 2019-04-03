@@ -1117,8 +1117,56 @@ import EasyImagy
                 XCTAssertEqual(image[2, 3], 0)
                 XCTAssertEqual(image[3, 3], 0)
             }
+        }
+        
+        func testInitWithCGImagePerformance() {
+            let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            let cgImage = original.cgImage
             
+            var restored: Image<RGBA<UInt8>>! = nil
+            measure {
+                restored = Image<RGBA<UInt8>>(cgImage: cgImage)
+            }
+            XCTAssertEqual(restored, original)
+        }
+        
+        func testCGImagePerformance() {
+            let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            
+            var cgImage: CGImage!
+            measure {
+                cgImage = original.cgImage
+            }
+            let restored = Image<RGBA<UInt8>>(cgImage: cgImage)
+            XCTAssertEqual(restored, original)
+        }
+        
+        func testWithCGImagePerformance() {
+            let image = Image<PremultipliedRGBA<UInt8>>(width: 640, height: 480, pixel: PremultipliedRGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            
+            var size: (width: Int, height: Int)! = nil
+            measure {
+                size = image.withCGImage { cgImage in
+                    return (width: cgImage.width, height: cgImage.height)
+                }
+            }
+            XCTAssertEqual(size.width, image.width)
+            XCTAssertEqual(size.height, image.height)
         }
     }
-
 #endif

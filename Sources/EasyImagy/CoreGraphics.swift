@@ -306,6 +306,7 @@ public protocol _CGImageDirectlyConvertible: _CGImageConvertible {
 }
 
 extension Image: _CGImageConvertible where Pixel: _CGPixel {
+    @inlinable
     public init(cgImage: CGImage) {
         let width = cgImage.width
         let height = cgImage.height
@@ -320,12 +321,14 @@ extension Image: _CGImageConvertible where Pixel: _CGPixel {
         self = image.map(Pixel.init(_ez_directPixel:))
     }
 
+    @inlinable
     public var cgImage: CGImage {
         return map { $0._ez_directPixel }.cgImage
     }
 }
 
 extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
+    @inlinable
     public var cgImage: CGImage {
         let length = count * MemoryLayout<Pixel>.size
 
@@ -350,6 +353,7 @@ extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
 
     }
 
+    @inlinable
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         let length = count * MemoryLayout<Pixel>.size
 
@@ -377,6 +381,7 @@ extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
         return try body(cgImage)
     }
 
+    @inlinable
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
@@ -406,16 +411,19 @@ extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
 }
 
 extension ImageSlice: _CGImageConvertible where Pixel: _CGPixel {
+    @inlinable
     public init(cgImage: CGImage) {
         self.init(Image<Pixel>(cgImage: cgImage))
     }
 
+    @inlinable
     public var cgImage: CGImage {
         return map { $0._ez_directPixel }.cgImage
     }
 }
 
 extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
+    @inlinable
     public var cgImage: CGImage {
         let imageCount = image.count
         let pixelCount = image.width * self.height
@@ -451,6 +459,7 @@ extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
         )!
     }
 
+    @inlinable
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         let length = image.width * self.height * MemoryLayout<Pixel>.size
 
@@ -480,6 +489,7 @@ extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
 
     }
 
+    @inlinable
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height

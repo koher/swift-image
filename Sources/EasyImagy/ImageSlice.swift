@@ -2,6 +2,7 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     public typealias SubImage = ImageSlice<Pixel>
     public typealias Element = Pixel // FIXME: Remove this line in the future. Swift 4.1 needs it to build `ImageSlice`.
 
+    @usableFromInline
     internal var image: Image<Pixel>
     public let xRange: Range<Int>
     public let yRange: Range<Int>
