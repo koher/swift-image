@@ -6,6 +6,7 @@ public enum ImageFormat {
         public let image: I
         public let format: ImageFormat
         
+        @usableFromInline
         internal init(image: I, format: ImageFormat) {
             self.image = image
             self.format = format

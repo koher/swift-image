@@ -234,5 +234,37 @@
                 XCTAssertEqual(restored, original)
             }
         }
+        
+        func testInitWithNSImagePerformance() {
+            let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            let nsImage = original.nsImage
+            
+            var restored: Image<RGBA<UInt8>>! = nil
+            measure {
+                restored = Image<RGBA<UInt8>>(nsImage: nsImage)
+            }
+            XCTAssertEqual(restored, original)
+        }
+        
+        func testNSImagePerformance() {
+            let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            
+            var nsImage: NSImage!
+            measure {
+                nsImage = original.nsImage
+            }
+            let restored = Image<RGBA<UInt8>>(nsImage: nsImage)
+            XCTAssertEqual(restored, original)
+        }
     }
 #endif

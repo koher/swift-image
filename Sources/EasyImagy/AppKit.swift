@@ -2,6 +2,7 @@
 import Foundation
 import AppKit
 extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
+    @inlinable
     public init(nsImage: NSImage) {
         if let cgImage: CGImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {
             self.init(cgImage: cgImage)
@@ -10,28 +11,34 @@ extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
             self.init(width: 0, height: 0, pixels: [])
         }
     }
-    
-    private init?(nsImageOrNil: NSImage?) {
+
+    @usableFromInline
+    internal init?(nsImageOrNil: NSImage?) {
         guard let nsImage: NSImage = nsImageOrNil else { return nil }
         self.init(nsImage: nsImage)
     }
     
+    @inlinable
     public init?(named name: NSImage.Name) {
         self.init(nsImageOrNil: NSImage(named: name))
     }
     
+    @inlinable
     public init?(contentsOfFile path: String) {
         self.init(nsImageOrNil: NSImage(contentsOfFile: path))
     }
     
+    @inlinable
     public init?(data: Data) {
         self.init(nsImageOrNil: NSImage(data: data))
     }
     
+    @inlinable
     public var nsImage: NSImage {
         return NSImage(cgImage: cgImage, size: .zero)
     }
 
+    @inlinable
     public func pngData() -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
@@ -42,6 +49,7 @@ extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
         }
     }
 
+    @inlinable
     public func jpegData(compressionQuality: Double) -> Data? {
         guard width > 0 && height > 0 else { return nil }
 
@@ -52,6 +60,7 @@ extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
         }
     }
 
+    @inlinable
     public func data(using format: ImageFormat) -> Data? {
         switch format {
         case .png:
@@ -61,6 +70,7 @@ extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
         }
     }
 
+    @inlinable
     public func write(to url: URL, atomically: Bool, format: ImageFormat) throws {
         guard let data = data(using: format) else {
             throw ImageFormat.FormattingError<Self>(image: self, format: format)
@@ -68,6 +78,7 @@ extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
+    @inlinable
     public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: ImageFormat) throws {
         try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
