@@ -93,21 +93,21 @@
             }
             
             #if os(iOS) || os(tvOS)
-                do { // With `UIImage` from `CIImage`
-                    let ciImage = CIImage(color: CIColor.red).cropped(to: CGRect(x: 0, y: 0, width: 1, height: 1))
-                    let uiImage = UIImage(ciImage: ciImage)
-                    let image = Image<RGBA<UInt8>>(uiImage: uiImage)
-                    
-                    XCTAssertEqual(image.width, 1)
-                    XCTAssertEqual(image.height, 1)
-                    
-                    XCTAssertEqual(255, image[0, 0].red)
-                    XCTAssertEqual(  0, image[0, 0].green)
-                    XCTAssertEqual(  0, image[0, 0].blue)
-                    XCTAssertEqual(255, image[0, 0].alpha)
-                }
+            do { // With `UIImage` from `CIImage`
+                let ciImage = CIImage(color: CIColor.red).cropped(to: CGRect(x: 0, y: 0, width: 1, height: 1))
+                let uiImage = UIImage(ciImage: ciImage)
+                let image = Image<RGBA<UInt8>>(uiImage: uiImage)
                 
+                XCTAssertEqual(image.width, 1)
+                XCTAssertEqual(image.height, 1)
+                
+                XCTAssertEqual(255, image[0, 0].red)
+                XCTAssertEqual(  0, image[0, 0].green)
+                XCTAssertEqual(  0, image[0, 0].blue)
+                XCTAssertEqual(255, image[0, 0].alpha)
+            }
             #endif
+
             do { // With `UIImage` whose `cgImage` and `ciImage` are `nil`
                 let uiImage = UIImage()
                 let image = Image<RGBA<UInt8>>(uiImage: uiImage)
