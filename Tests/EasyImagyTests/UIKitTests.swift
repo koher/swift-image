@@ -200,5 +200,37 @@
                 XCTAssertEqual(restored, original)
             }
         }
+        
+        func testInitWithUIImagePerformance() {
+            let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            let uiImage = original.uiImage
+            
+            var restored: Image<RGBA<UInt8>>! = nil
+            measure {
+                restored = Image<RGBA<UInt8>>(uiImage: uiImage)
+            }
+            XCTAssertEqual(restored, original)
+        }
+        
+        func testUIImagePerformance() {
+            let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
+                red: .random(in: 0...255),
+                green: .random(in: 0...255),
+                blue: .random(in: 0...255),
+                alpha: 255
+            ))
+            
+            var uiImage: UIImage!
+            measure {
+                uiImage = original.uiImage
+            }
+            let restored = Image<RGBA<UInt8>>(uiImage: uiImage)
+            XCTAssertEqual(restored, original)
+        }
     }
 #endif
