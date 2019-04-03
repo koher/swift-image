@@ -295,7 +295,17 @@ extension PremultipliedRGBA: _CGDirectPixel where Channel: _CGDirectChannel {
     }
 }
 
-extension Image where Pixel: _CGPixel {
+public protocol _CGImageConvertible {
+    init(cgImage: CGImage)
+    var cgImage: CGImage { get }
+}
+
+public protocol _CGImageDirectlyConvertible: _CGImageConvertible {
+    func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R
+    mutating func withCGContext(coordinates: CGContextCoordinates, _ body: (CGContext) throws -> Void) rethrows
+}
+
+extension Image: _CGImageConvertible where Pixel: _CGPixel {
     public init(cgImage: CGImage) {
         let width = cgImage.width
         let height = cgImage.height
@@ -315,7 +325,7 @@ extension Image where Pixel: _CGPixel {
     }
 }
 
-extension Image where Pixel: _CGDirectPixel {
+extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
     public var cgImage: CGImage {
         let length = count * MemoryLayout<Pixel>.size
 
@@ -395,7 +405,7 @@ extension Image where Pixel: _CGDirectPixel {
     }
 }
 
-extension ImageSlice where Pixel: _CGPixel {
+extension ImageSlice: _CGImageConvertible where Pixel: _CGPixel {
     public init(cgImage: CGImage) {
         self.init(Image<Pixel>(cgImage: cgImage))
     }
@@ -405,7 +415,7 @@ extension ImageSlice where Pixel: _CGPixel {
     }
 }
 
-extension ImageSlice where Pixel: _CGDirectPixel {
+extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
     public var cgImage: CGImage {
         let imageCount = image.count
         let pixelCount = image.width * self.height

@@ -18,7 +18,7 @@ extension UIImage {
 }
 #endif
 
-extension Image where Pixel: _CGPixel {
+extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
     public init(uiImage: UIImage) {
         if let cgImage = uiImage.cgImage {
             self.init(cgImage: cgImage)
@@ -79,7 +79,7 @@ extension Image where Pixel: _CGPixel {
         }
     }
 
-    public func data(using format: Image.Format) -> Data? {
+    public func data(using format: ImageFormat) -> Data? {
         switch format {
         case .png:
             return pngData()
@@ -88,14 +88,14 @@ extension Image where Pixel: _CGPixel {
         }
     }
 
-    public func write(to url: URL, atomically: Bool, format: Image.Format) throws {
+    public func write(to url: URL, atomically: Bool, format: ImageFormat) throws {
         guard let data = data(using: format) else {
-            throw Image.Format.FormattingError<Image<Pixel>>(image: self, format: format)
+            throw ImageFormat.FormattingError<Self>(image: self, format: format)
         }
         try data.write(to: url, options: atomically ? .atomic : .init(rawValue: 0))
     }
 
-    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: Image.Format) throws {
+    public func write<S : StringProtocol>(toFile path: S, atomically: Bool, format: ImageFormat) throws {
         try write(to: URL(fileURLWithPath: String(path)), atomically: atomically, format: format)
     }
 }
