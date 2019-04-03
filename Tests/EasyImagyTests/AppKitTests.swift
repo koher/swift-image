@@ -117,7 +117,7 @@
             }
         }
         
-        func testNsImage() {
+        func testNSImage() {
             do {
                 let image = Image<RGBA<UInt8>>(width: 2, height: 2, pixels: [
                     RGBA<UInt8>(red: 0, green: 1, blue: 2, alpha: 255),
@@ -154,7 +154,7 @@
             }
         }
         
-        func testNsImageTiffRepresentation() {
+        func testNSImageTiffRepresentation() {
             do {
                 let image = Image<RGBA<UInt8>>(width: 2, height: 2, pixels: [
                     RGBA<UInt8>(red: 0, green: 1, blue: 2, alpha: 255),
