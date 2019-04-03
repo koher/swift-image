@@ -1,4 +1,4 @@
-#if canImport(AppKit)
+#if canImport(AppKit) && canImport(CoreGraphics)
     import XCTest
     import EasyImagy
     import CoreGraphics
