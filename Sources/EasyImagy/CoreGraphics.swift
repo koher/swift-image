@@ -414,6 +414,35 @@ extension ImageSlice where Pixel: _CGDirectPixel {
         )!
     }
 
+    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
+        let length = image.width * self.height * MemoryLayout<Pixel>.size
+
+        var slice = self
+        let bytes: UnsafeMutablePointer<Pixel> = &slice.image.pixels + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+        let provider: CGDataProvider = CGDataProvider(data: Data(
+            bytesNoCopy: bytes,
+            count: length,
+            deallocator: .none
+        ) as CFData)!
+
+        let cgImage = CGImage(
+            width: width,
+            height: height,
+            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+            bytesPerRow: MemoryLayout<Pixel>.size * image.width,
+            space: Pixel._ez_cgColorSpace,
+            bitmapInfo: Pixel._ez_cgBitmapInfo,
+            provider: provider,
+            decode: nil,
+            shouldInterpolate: false,
+            intent: CGColorRenderingIntent.defaultIntent
+        )!
+
+        return try body(cgImage)
+
+    }
+
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
@@ -440,54 +469,6 @@ extension ImageSlice where Pixel: _CGDirectPixel {
         }
 
         try body(context)
-    }
-}
-
-extension ImageSlice where Pixel == PremultipliedRGBA<UInt8> {
-    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
-        return try ImageSlice<PremultipliedRGBA<UInt8>>.withGeneratedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            body: body,
-            componentType: UInt8.self
-        )
-    }
-}
-
-extension ImageSlice where Pixel == PremultipliedRGBA<UInt16> {
-    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
-        return try ImageSlice<PremultipliedRGBA<UInt16>>.withGeneratedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            body: body,
-            componentType: UInt16.self
-        )
-    }
-}
-
-extension ImageSlice where Pixel == UInt8 {
-    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
-        return try ImageSlice<UInt8>.withGeneratedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            body: body,
-            componentType: UInt8.self
-        )
-    }
-}
-
-extension ImageSlice where Pixel == UInt16 {
-    public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
-        return try ImageSlice<UInt16>.withGeneratedCGImage(
-            slice: self,
-            colorSpace: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            body: body,
-            componentType: UInt16.self
-        )
     }
 }
 #endif
