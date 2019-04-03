@@ -7,37 +7,6 @@ public enum CGContextCoordinates {
     case natural
 }
 
-public protocol _CGGrayScale {}
-public protocol _CGRGBA {}
-
-extension _CGGrayScale {
-    public static var _ez_cgColorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceGray()
-    }
-
-    public static var _ez_cgBitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
-    }
-}
-
-extension _CGRGBA {
-    public static var _ez_cgColorSpace: CGColorSpace {
-        return CGColorSpaceCreateDeviceRGB()
-    }
-
-    public static var _ez_cgBitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue)
-    }
-}
-
-extension UInt8: _CGGrayScale {}
-extension UInt16: _CGGrayScale {}
-extension Float: _CGGrayScale {}
-extension Double: _CGGrayScale {}
-extension Bool: _CGGrayScale {}
-extension RGBA: _CGRGBA {}
-extension PremultipliedRGBA: _CGRGBA {}
-
 public protocol _CGChannel {
     associatedtype _EZ_DirectChannel: _CGDirectChannel, Numeric
 
@@ -179,6 +148,15 @@ extension _CGDirectPixel {
 extension UInt8: _CGDirectPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceGray()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
+    
     public static var _ez_cgPixelDefault: UInt8 {
         return 0
     }
@@ -187,6 +165,15 @@ extension UInt8: _CGDirectPixel {
 extension UInt16: _CGDirectPixel {
     public typealias _EZ_DirectPixel = UInt16
     public typealias _EZ_PixelDirectChannel = UInt16
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceGray()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
+
     public static var _ez_cgPixelDefault: UInt16 {
         return 0
     }
@@ -198,6 +185,14 @@ extension Float: _CGPixel {
 
     public var _ez_directPixel: UInt8 {
         return UInt8(clamp(self * 255, lower: 0, upper: 255))
+    }
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceGray()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
     }
 
     public init(_ez_directPixel directPixel: UInt8) {
@@ -212,6 +207,14 @@ extension Double: _CGPixel {
     public var _ez_directPixel: UInt8 {
         return UInt8(clamp(self * 255, lower: 0, upper: 255))
     }
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceGray()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
 
     public init(_ez_directPixel directPixel: UInt8) {
         self = Double(directPixel) / 255
@@ -224,6 +227,14 @@ extension Bool: _CGPixel {
 
     public var _ez_directPixel: UInt8 {
         return self ? 255 : 0
+    }
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceGray()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
     }
 
     public init(_ez_directPixel directPixel: UInt8) {
@@ -242,6 +253,14 @@ extension RGBA: _CGPixel where Channel: _CGChannel {
     public var _ez_directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel> {
         return Channel._ez_premultipliedRGBA(from: self)
     }
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceRGB()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+    }
 }
 
 extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
@@ -254,6 +273,14 @@ extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
 
     public var _ez_directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel> {
         return map { $0._ez_directChannel }
+    }
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceRGB()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
     }
 }
 
