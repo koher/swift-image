@@ -7,14 +7,21 @@ import CoreImage
 
 #if os(watchOS)
 // Hack to simplify code
-private enum CIImage {
+@usableFromInline
+internal enum CIImage {
+    @usableFromInline
     var extent: CGRect { fatalError() }
 }
-private class CIContext {
+@usableFromInline
+internal class CIContext {
+    @usableFromInline
+    init() {}
+    @usableFromInline
     func createCGImage(_ image: CIImage, from: CGRect) -> CGImage? { return nil }
 }
 extension UIImage {
-    fileprivate var ciImage: CIImage? { return nil }
+    @usableFromInline
+    internal var ciImage: CIImage? { return nil }
 }
 #endif
 
