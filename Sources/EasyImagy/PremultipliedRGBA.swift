@@ -1,14 +1,10 @@
-public struct PremultipliedRGBA<Channel> where Channel : Numeric, Channel : Comparable {
+public struct PremultipliedRGBA<Channel> where Channel : Numeric{
     public var red: Channel
     public var green: Channel
     public var blue: Channel
     public var alpha: Channel
     
     public init(red: Channel, green: Channel, blue: Channel, alpha: Channel) {
-        precondition(red <= alpha, "`red` (\(red)) must be less than or equal to `alpha` (\(alpha)).")
-        precondition(green <= alpha, "`green` (\(green)) must be less than or equal to `alpha` (\(alpha)).")
-        precondition(blue <= alpha, "`blue` (\(blue)) must be less than or equal to `alpha` (\(alpha)).")
-        
         self.red = red
         self.green = green
         self.blue = blue
@@ -32,7 +28,6 @@ extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & Fi
 
 extension PremultipliedRGBA where Channel : FloatingPoint {
     public init(_ rgba: RGBA<Channel>) {
-        
         self.init(
             red: rgba.red * rgba.alpha,
             green: rgba.green * rgba.alpha,
@@ -49,7 +44,7 @@ extension PremultipliedRGBA { // Additional initializers
 }
 
 extension PremultipliedRGBA {
-    public func map<T>(_ transform: (Channel) -> T) -> PremultipliedRGBA<T> where T : Numeric, T : Comparable {
+    public func map<T>(_ transform: (Channel) -> T) -> PremultipliedRGBA<T> where T : Numeric {
         return PremultipliedRGBA<T>(
             red: transform(red),
             green: transform(green),
