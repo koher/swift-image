@@ -159,6 +159,13 @@
 		D6B8BF841FE57E22009C7C30 /* ResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */; };
 		D6B8BF851FE57E22009C7C30 /* ResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */; };
 		D6B8BF861FE57E22009C7C30 /* ResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */; };
+		D6C05E3F225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E40225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E41225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E42225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E4422561545007AB9CD /* ColorLiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */; };
+		D6C05E4522561545007AB9CD /* ColorLiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */; };
+		D6C05E4622561545007AB9CD /* ColorLiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */; };
 		D6C1C01E1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
 		D6C1C01F1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
 		D6C1C0201FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
@@ -247,6 +254,8 @@
 		D6B4EE241FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrapolatedImage.swift; sourceTree = "<group>"; };
 		D6B4EE291FE4A1C200B6B7B0 /* Resizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resizing.swift; sourceTree = "<group>"; };
 		D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizingTests.swift; sourceTree = "<group>"; };
+		D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiteral.swift; sourceTree = "<group>"; };
+		D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiteralTests.swift; sourceTree = "<group>"; };
 		D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrderFunctionsTests.swift; sourceTree = "<group>"; };
 		D6D33DBA1FD97A8B00256FD0 /* ImageProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProtocolTests.swift; sourceTree = "<group>"; };
 		D6FAC8691FD1938400509BCB /* ImageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProtocol.swift; sourceTree = "<group>"; };
@@ -344,6 +353,7 @@
 			children = (
 				D6B4EE1B1FE25C0600B6B7B0 /* AnyImage.swift */,
 				D6134A2C1F852A49005592A2 /* AppKit.swift */,
+				D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */,
 				D63109111FCFD7DE009974D0 /* Convolution.swift */,
 				D6134A2D1F852A49005592A2 /* CoreGraphics.swift */,
 				D6134A2A1F852A49005592A2 /* EasyImagy.h */,
@@ -386,6 +396,7 @@
 				D6134A3C1F852A57005592A2 /* AppKitTests.swift */,
 				D632C8AA21354DE20030D7D1 /* AppUIKitTests.swift */,
 				D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */,
+				D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */,
 				D63109161FCFF252009974D0 /* ConvolutionTests.swift */,
 				D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */,
 				D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */,
@@ -695,6 +706,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6134A5A1F852A85005592A2 /* Util.swift in Sources */,
+				D6C05E3F225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A511F852A85005592A2 /* AppKit.swift in Sources */,
 				D6B4EE251FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D66840591F9F426200D1DE7F /* NumericPixel.swift in Sources */,
@@ -729,6 +741,7 @@
 				D6134A491F852A64005592A2 /* AppKitTests.swift in Sources */,
 				D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC31FCBA6B800E7DF02 /* UIKitTests.swift in Sources */,
+				D6C05E4422561545007AB9CD /* ColorLiteralTests.swift in Sources */,
 				D631091D1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */,
 				D631092D1FD009B6009974D0 /* ImageOperatorsTests.swift in Sources */,
 				D62C6EEA1FCE8F5D00E7DF02 /* ExtrapolationTests.swift in Sources */,
@@ -753,6 +766,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62C6EBB1FC9DAD900E7DF02 /* RGBATyped.swift in Sources */,
+				D6C05E40225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A851F85CF5E005592A2 /* Util.swift in Sources */,
 				D6B4EE261FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D6134A7C1F85CF5E005592A2 /* AppKit.swift in Sources */,
@@ -787,6 +801,7 @@
 				D6134A871F85CF6F005592A2 /* AppKitTests.swift in Sources */,
 				D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC41FCBA6B900E7DF02 /* UIKitTests.swift in Sources */,
+				D6C05E4522561545007AB9CD /* ColorLiteralTests.swift in Sources */,
 				D631091C1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */,
 				D631092E1FD009B6009974D0 /* ImageOperatorsTests.swift in Sources */,
 				D62C6EE91FCE8F5C00E7DF02 /* ExtrapolationTests.swift in Sources */,
@@ -811,6 +826,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62C6EBC1FC9DADA00E7DF02 /* RGBATyped.swift in Sources */,
+				D6C05E41225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AC41F85D2AF005592A2 /* Util.swift in Sources */,
 				D6B4EE271FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D6134ABB1F85D2AF005592A2 /* AppKit.swift in Sources */,
@@ -845,6 +861,7 @@
 				D6134AC61F85D2BF005592A2 /* AppKitTests.swift in Sources */,
 				D6134AC51F85D2BF005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC51FCBA6BA00E7DF02 /* UIKitTests.swift in Sources */,
+				D6C05E4622561545007AB9CD /* ColorLiteralTests.swift in Sources */,
 				D631091B1FCFF27C009974D0 /* ConvolutionTests.swift in Sources */,
 				D631092F1FD009B6009974D0 /* ImageOperatorsTests.swift in Sources */,
 				D62C6EE81FCE8F5B00E7DF02 /* ExtrapolationTests.swift in Sources */,
@@ -869,6 +886,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D62C6EBD1FC9DADB00E7DF02 /* RGBATyped.swift in Sources */,
+				D6C05E42225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AE51F85DA5C005592A2 /* Util.swift in Sources */,
 				D6B4EE281FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D6134ADC1F85DA5C005592A2 /* AppKit.swift in Sources */,
