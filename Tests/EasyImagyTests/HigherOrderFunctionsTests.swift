@@ -89,6 +89,23 @@ class HigherOrderFunctionsTests : XCTestCase {
                 8, 10, 12,
             ]))
         }
+        
+        do { // Shared `Image` instances
+            var image1 = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            let image2 = image1
+            image1.update { $0 *= 2 }
+            XCTAssertEqual(image1, Image<UInt8>(width: 3, height: 2, pixels: [
+                2,  4,  6,
+                8, 10, 12,
+            ]))
+            XCTAssertEqual(image2, Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ]))
+        }
     }
     
     func testMapPerformance() {
