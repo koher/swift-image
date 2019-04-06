@@ -68,7 +68,7 @@ class HigherOrderFunctionsTests : XCTestCase {
                 1, 2, 3,
                 4, 5, 6,
             ])
-            image.update { $0 *= 2 }
+            image._update { $0 *= 2 }
             XCTAssertEqual(image, Image<UInt8>(width: 3, height: 2, pixels: [
                 2,  4,  6,
                 8, 10, 12,
@@ -83,7 +83,7 @@ class HigherOrderFunctionsTests : XCTestCase {
                 0, 0, 0, 0, 0,
             ])
             var slice: ImageSlice<UInt8> = image[1...3, 1...2]
-            slice.update { $0 *= 2 }
+            slice._update { $0 *= 2 }
             XCTAssertEqual(slice, ImageSlice<UInt8>(width: 3, height: 2, pixels: [
                 2,  4,  6,
                 8, 10, 12,
@@ -96,7 +96,7 @@ class HigherOrderFunctionsTests : XCTestCase {
                 4, 5, 6,
             ])
             let image2 = image1
-            image1.update { $0 *= 2 }
+            image1._update { $0 *= 2 }
             XCTAssertEqual(image1, Image<UInt8>(width: 3, height: 2, pixels: [
                 2,  4,  6,
                 8, 10, 12,
@@ -125,13 +125,13 @@ class HigherOrderFunctionsTests : XCTestCase {
                 }
             ])
             XCTAssertEqual(flags, 0b0)
-            image.update {
+            image._update {
                 $0 = Foo {
                     flags |= 0b10
                 }
             }
             XCTAssertEqual(flags, 0b1)
-            image.update {
+            image._update {
                 $0 = Foo {
                     flags |= 0b100
                 }
@@ -157,7 +157,7 @@ class HigherOrderFunctionsTests : XCTestCase {
     func testUpdatePerformance() {
         var image = Image<Int>(width: 1024, height: 1024, pixels: 1...(1024 * 1024))
         measure {
-            image.update { $0 += 1 }
+            image._update { $0 += 1 }
         }
     }
 }
