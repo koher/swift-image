@@ -106,6 +106,42 @@ class HigherOrderFunctionsTests : XCTestCase {
                 4, 5, 6,
             ]))
         }
+        
+        do { // Shared reference type instances
+            class Foo {
+                private let deinitBody: () -> Void
+                init(deinitBody: @escaping () -> Void) {
+                    self.deinitBody = deinitBody
+                }
+                deinit {
+                    deinitBody()
+                }
+            }
+            
+            var flags = 0b0
+            var image = Image<Foo>(width: 1, height: 1, pixels: [
+                Foo {
+                   flags |= 0b1
+                }
+            ])
+            XCTAssertEqual(flags, 0b0)
+            image.update {
+                $0 = Foo {
+                    flags |= 0b10
+                }
+            }
+            XCTAssertEqual(flags, 0b1)
+            image.update {
+                $0 = Foo {
+                    flags |= 0b100
+                }
+            }
+            XCTAssertEqual(flags, 0b11)
+            image[0, 0] = Foo {
+                flags |= 0b1000
+            }
+            XCTAssertEqual(flags, 0b111)
+        }
     }
     
     func testMapPerformance() {
