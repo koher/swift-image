@@ -242,6 +242,37 @@ extension Bool: _CGPixel {
     }
 }
 
+extension RGB: _CGPixel where Channel: _CGChannel {
+    public typealias _EZ_DirectPixel = RGB<Channel._EZ_DirectChannel>
+    public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
+
+    public init(_ez_directPixel directPixel: RGB<Channel._EZ_DirectChannel>) {
+        self = directPixel.map(Channel.init(_ez_directChannel:))
+    }
+    
+    public var _ez_directPixel: RGB<Channel._EZ_DirectChannel> {
+        return map { $0._ez_directChannel }
+    }
+    
+    public static var _ez_cgColorSpace: CGColorSpace {
+        return CGColorSpaceCreateDeviceRGB()
+    }
+    
+    public static var _ez_cgBitmapInfo: CGBitmapInfo {
+        return CGBitmapInfo()
+    }
+}
+
+extension RGB: _CGDirectPixel where Channel: _CGDirectChannel {
+    public static var _ez_cgPixelDefault: RGB<Channel> {
+        return RGB<Channel>(
+            red: Channel._ez_cgChannelDefault,
+            green: Channel._ez_cgChannelDefault,
+            blue: Channel._ez_cgChannelDefault
+        )
+    }
+}
+
 extension RGBA: _CGPixel where Channel: _CGChannel {
     public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
     public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
