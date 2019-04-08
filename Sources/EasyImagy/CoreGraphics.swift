@@ -259,7 +259,7 @@ extension RGB: _CGPixel where Channel: _CGChannel {
     }
     
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
-        return CGBitmapInfo()
+        return CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue)
     }
 }
 

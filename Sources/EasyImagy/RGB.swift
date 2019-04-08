@@ -2,12 +2,19 @@ public struct RGB<Channel> {
     public var red: Channel
     public var green: Channel
     public var blue: Channel
+    #if canImport(CoreGraphics)
+    @usableFromInline
+    internal let padding: Channel
+    #endif
     
     @inlinable
     public init(red: Channel, green: Channel, blue: Channel) {
         self.red = red
         self.green = green
         self.blue = blue
+        #if canImport(CoreGraphics)
+        self.padding = blue
+        #endif
     }
 }
 
