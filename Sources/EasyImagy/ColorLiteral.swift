@@ -26,6 +26,16 @@ extension Double: _ColorLiteralChannel {
     }
 }
 
+extension RGB: _ExpressibleByColorLiteral where Channel: _ColorLiteralChannel {
+    public init(_colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float) {
+        self.init(
+            red: .init(_ez_colorLiteralFloatChannel: red * alpha),
+            green: .init(_ez_colorLiteralFloatChannel: green * alpha),
+            blue: .init(_ez_colorLiteralFloatChannel: blue * alpha)
+        )
+    }
+}
+
 extension RGBA: _ExpressibleByColorLiteral where Channel: _ColorLiteralChannel {
     public init(_colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float) {
         self.init(
