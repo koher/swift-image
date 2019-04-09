@@ -68,7 +68,7 @@ class HigherOrderFunctionsTests : XCTestCase {
                 1, 2, 3,
                 4, 5, 6,
             ])
-            image.update { $0 *= 2 }
+            image._update { $0 *= 2 }
             XCTAssertEqual(image, Image<UInt8>(width: 3, height: 2, pixels: [
                 2,  4,  6,
                 8, 10, 12,
@@ -83,11 +83,64 @@ class HigherOrderFunctionsTests : XCTestCase {
                 0, 0, 0, 0, 0,
             ])
             var slice: ImageSlice<UInt8> = image[1...3, 1...2]
-            slice.update { $0 *= 2 }
+            slice._update { $0 *= 2 }
             XCTAssertEqual(slice, ImageSlice<UInt8>(width: 3, height: 2, pixels: [
                 2,  4,  6,
                 8, 10, 12,
             ]))
+        }
+        
+        do { // Shared `Image` instances
+            var image1 = Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ])
+            let image2 = image1
+            image1._update { $0 *= 2 }
+            XCTAssertEqual(image1, Image<UInt8>(width: 3, height: 2, pixels: [
+                2,  4,  6,
+                8, 10, 12,
+            ]))
+            XCTAssertEqual(image2, Image<UInt8>(width: 3, height: 2, pixels: [
+                1, 2, 3,
+                4, 5, 6,
+            ]))
+        }
+        
+        do { // Shared reference type instances
+            class Foo {
+                private let deinitBody: () -> Void
+                init(deinitBody: @escaping () -> Void) {
+                    self.deinitBody = deinitBody
+                }
+                deinit {
+                    deinitBody()
+                }
+            }
+            
+            var flags = 0b0
+            var image = Image<Foo>(width: 1, height: 1, pixels: [
+                Foo {
+                   flags |= 0b1
+                }
+            ])
+            XCTAssertEqual(flags, 0b0)
+            image._update {
+                $0 = Foo {
+                    flags |= 0b10
+                }
+            }
+            XCTAssertEqual(flags, 0b1)
+            image._update {
+                $0 = Foo {
+                    flags |= 0b100
+                }
+            }
+            XCTAssertEqual(flags, 0b11)
+            image[0, 0] = Foo {
+                flags |= 0b1000
+            }
+            XCTAssertEqual(flags, 0b111)
         }
     }
     
@@ -104,7 +157,7 @@ class HigherOrderFunctionsTests : XCTestCase {
     func testUpdatePerformance() {
         var image = Image<Int>(width: 1024, height: 1024, pixels: 1...(1024 * 1024))
         measure {
-            image.update { $0 += 1 }
+            image._update { $0 += 1 }
         }
     }
 }

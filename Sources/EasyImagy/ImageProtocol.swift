@@ -21,7 +21,7 @@ public protocol ImageProtocol : Sequence {
     subscript(xRange: UnboundedRange, yRange: UnboundedRange) -> SubImage { get }
     
     func map<T>(_ transform: (Pixel) throws -> T) rethrows -> Image<T>
-    mutating func update(_ body: (inout Pixel) throws -> ()) rethrows
+    mutating func _update(_ body: (inout Pixel) throws -> ()) rethrows
 }
 
 extension ImageProtocol {

@@ -3,17 +3,14 @@ import EasyImagy
 
 #if canImport(CoreGraphics)
 import CoreGraphics
-
-#if canImport(AppKit)
-private let red: CGColor = NSColor.red.cgColor
-private let white: CGColor = NSColor.white.cgColor
-#else
-private let red: CGColor = UIColor.red.cgColor
-private let white: CGColor = UIColor.white.cgColor
 #endif
+
+private let red: CGColor = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [1, 0, 0, 1])!
+private let white: CGColor = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!, components: [1, 1, 1, 1])!
 
 class CoreGraphicsTests: XCTestCase {
     func testCGImageAndInitWithCGImage() {
+        #if canImport(CoreGraphics)
         do {
             let image = Image<RGB<UInt8>>(width: 2, height: 2, pixels: [
                 RGB<UInt8>(red: 0, green: 1, blue: 2),
@@ -664,9 +661,11 @@ class CoreGraphicsTests: XCTestCase {
             XCTAssertEqual(restored[0, 0], PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127))
             XCTAssertEqual(restored[0, 1], PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4))
         }
+        #endif
     }
     
     func testWithCGImage() {
+        #if canImport(CoreGraphics)
         // UInt8
         do {
             let original = Image<UInt8>(width: 3, height: 2, pixels: [
@@ -840,9 +839,11 @@ class CoreGraphicsTests: XCTestCase {
             
             XCTAssertEqual(restored, original)
         }
+        #endif
     }
     
     func testWithCGContext() {
+        #if canImport(CoreGraphics)
         // Draws lines with CoreGraphics as follows:
         //
         // Before
@@ -1358,9 +1359,11 @@ class CoreGraphicsTests: XCTestCase {
             XCTAssertEqual(image[2, 3], 0)
             XCTAssertEqual(image[3, 3], 0)
         }
+        #endif
     }
     
     func testInitWithCGImagePerformance() {
+        #if canImport(CoreGraphics)
         let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
             red: .random(in: 0...255),
             green: .random(in: 0...255),
@@ -1374,9 +1377,11 @@ class CoreGraphicsTests: XCTestCase {
             restored = Image<RGBA<UInt8>>(cgImage: cgImage)
         }
         XCTAssertEqual(restored, original)
+        #endif
     }
     
     func testCGImagePerformance() {
+        #if canImport(CoreGraphics)
         let original = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: RGBA<UInt8>(
             red: .random(in: 0...255),
             green: .random(in: 0...255),
@@ -1390,9 +1395,11 @@ class CoreGraphicsTests: XCTestCase {
         }
         let restored = Image<RGBA<UInt8>>(cgImage: cgImage)
         XCTAssertEqual(restored, original)
+        #endif
     }
     
     func testWithCGImagePerformance() {
+        #if canImport(CoreGraphics)
         let image = Image<PremultipliedRGBA<UInt8>>(width: 640, height: 480, pixel: PremultipliedRGBA<UInt8>(
             red: .random(in: 0...255),
             green: .random(in: 0...255),
@@ -1408,6 +1415,6 @@ class CoreGraphicsTests: XCTestCase {
         }
         XCTAssertEqual(size.width, image.width)
         XCTAssertEqual(size.height, image.height)
+        #endif
     }
 }
-#endif
