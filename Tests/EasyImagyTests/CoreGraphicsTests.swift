@@ -3,10 +3,10 @@ import EasyImagy
 
 #if canImport(CoreGraphics)
 import CoreGraphics
-#endif
 
 private let red: CGColor = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.sRGB)!, components: [1, 0, 0, 1])!
 private let white: CGColor = CGColor(colorSpace: CGColorSpace(name: CGColorSpace.genericGrayGamma2_2)!, components: [1, 1, 1, 1])!
+#endif
 
 class CoreGraphicsTests: XCTestCase {
     func testCGImageAndInitWithCGImage() {
