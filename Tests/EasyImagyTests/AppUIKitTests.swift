@@ -1,9 +1,9 @@
-#if canImport(AppKit) || canImport(UIKit)
 import XCTest
 import EasyImagy
 
 class AppUIKitTests: XCTestCase {
     func testPNGData() {
+        #if (canImport(AppKit) || canImport(UIKit)) && canImport(CoreGraphics)
         do {
             let image = Image<RGBA<UInt8>>(width: 3, height: 2, pixels: [
                 RGBA<UInt8>(red: 0, green: 1, blue: 2),
@@ -27,9 +27,11 @@ class AppUIKitTests: XCTestCase {
             let restored = Image<UInt8>(data: data)
             XCTAssertEqual(restored, image)
         }
+        #endif
     }
     
     func testJPEGData() {
+        #if (canImport(AppKit) || canImport(UIKit)) && canImport(CoreGraphics)
         do {
             let image = Image<RGBA<Double>>(width: 3, height: 2, pixels: [
                 RGBA<Double>(red: 0.00, green: 0.01, blue: 0.02),
@@ -53,6 +55,6 @@ class AppUIKitTests: XCTestCase {
             let restored = Image<Double>(data: data)!
             XCTAssertEqual(restored, image, accuracy: 0.01)
         }
+        #endif
     }
 }
-#endif

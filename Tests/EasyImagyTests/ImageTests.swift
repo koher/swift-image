@@ -8,8 +8,8 @@ import AppKit
 #endif
 
 class ImageTests: XCTestCase {
-#if canImport(UIKit) || canImport(AppKit)
     func testInitNamed() {
+        #if (canImport(AppKit) || canImport(UIKit)) && canImport(CoreGraphics)
         do {
             let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
             
@@ -33,8 +33,8 @@ class ImageTests: XCTestCase {
             XCTAssertEqual(  0, image[1, 1].blue)
             XCTAssertEqual(255, image[1, 1].alpha)
         }
+        #endif
     }
-#endif
     
     func testInitWithImageSlice() {
         let original = Image<UInt8>(width: 5, height: 4, pixels: [
@@ -282,8 +282,8 @@ class ImageTests: XCTestCase {
 		}
 	}
     
-#if canImport(UIKit) || canImport(AppKit)
     func testData() {
+        #if (canImport(AppKit) || canImport(UIKit)) && canImport(CoreGraphics)
         do {
             let image = Image<UInt8>(width: 3, height: 2, pixels: [
                 1, 2, 3,
@@ -330,6 +330,6 @@ class ImageTests: XCTestCase {
             let image = Image<UInt8>(width: 42, height: 0, pixels: [])
             XCTAssertNil(image.data(using: .png))
         }
+        #endif
     }
-#endif
 }
