@@ -134,6 +134,9 @@
 		D66AFEF620D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
 		D66AFEF720D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
 		D66AFEF820D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
+		D68F9AA4225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
+		D68F9AA5225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
+		D68F9AA6225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
 		D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE0F1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE101FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
@@ -251,6 +254,7 @@
 		D66840581F9F426200D1DE7F /* NumericPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericPixel.swift; sourceTree = "<group>"; };
 		D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBATests.swift; sourceTree = "<group>"; };
 		D66AFEF420D90296003FE64C /* ImageIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIterator.swift; sourceTree = "<group>"; };
+		D68F9AA3225C182100DA338D /* RGBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBTests.swift; sourceTree = "<group>"; };
 		D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
 		D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
@@ -416,6 +420,7 @@
 				D62C6ED91FCE5F7600E7DF02 /* InterpolationTests.swift */,
 				D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */,
 				D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */,
+				D68F9AA3225C182100DA338D /* RGBTests.swift */,
 				D6134A411F852A57005592A2 /* RGBATests.swift */,
 				D63109281FD0056B009974D0 /* RGBAOperatorsTests.swift */,
 				D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */,
@@ -745,6 +750,7 @@
 			files = (
 				D632C8AB21354DE20030D7D1 /* AppUIKitTests.swift in Sources */,
 				D6134A4C1F852A64005592A2 /* ImageTests.swift in Sources */,
+				D68F9AA4225C182200DA338D /* RGBTests.swift in Sources */,
 				D6134A491F852A64005592A2 /* AppKitTests.swift in Sources */,
 				D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC31FCBA6B800E7DF02 /* UIKitTests.swift in Sources */,
@@ -806,6 +812,7 @@
 			files = (
 				D632C8AC21354DE20030D7D1 /* AppUIKitTests.swift in Sources */,
 				D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */,
+				D68F9AA5225C182200DA338D /* RGBTests.swift in Sources */,
 				D6134A871F85CF6F005592A2 /* AppKitTests.swift in Sources */,
 				D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC41FCBA6B900E7DF02 /* UIKitTests.swift in Sources */,
@@ -867,6 +874,7 @@
 			files = (
 				D632C8AD21354DE20030D7D1 /* AppUIKitTests.swift in Sources */,
 				D6134AC91F85D2BF005592A2 /* ImageTests.swift in Sources */,
+				D68F9AA6225C182200DA338D /* RGBTests.swift in Sources */,
 				D6134AC61F85D2BF005592A2 /* AppKitTests.swift in Sources */,
 				D6134AC51F85D2BF005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC51FCBA6BA00E7DF02 /* UIKitTests.swift in Sources */,

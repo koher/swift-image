@@ -38,8 +38,8 @@ extension RGB {
 
 extension RGB where Channel == UInt8 {
     @inlinable
-    public init(_ rgbaInt: UInt32) {
-        self.init(red: UInt8((rgbaInt >> 16) & 0xFF), green: UInt8((rgbaInt >> 8) & 0xFF), blue: UInt8(rgbaInt & 0xFF))
+    public init(_ hex: UInt32) {
+        self.init(red: UInt8((hex >> 16) & 0xFF), green: UInt8((hex >> 8) & 0xFF), blue: UInt8(hex & 0xFF))
     }
 }
 

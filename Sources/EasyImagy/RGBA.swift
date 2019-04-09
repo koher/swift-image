@@ -65,8 +65,8 @@ extension RGBA {
 }
 
 extension RGBA where Channel == UInt8 {
-    public init(_ rgbaInt: UInt32) {
-        self.init(red: UInt8((rgbaInt >> 24) & 0xFF), green: UInt8((rgbaInt >> 16) & 0xFF), blue: UInt8((rgbaInt >> 8) & 0xFF), alpha: UInt8(rgbaInt & 0xFF))
+    public init(_ hex: UInt32) {
+        self.init(red: UInt8((hex >> 24) & 0xFF), green: UInt8((hex >> 16) & 0xFF), blue: UInt8((hex >> 8) & 0xFF), alpha: UInt8(hex & 0xFF))
     }
 }
 
