@@ -108,4 +108,52 @@ class RGBTests: XCTestCase {
             XCTAssertFalse(a == b)
         }
     }
+    
+    func testZero() {
+        do {
+            let a: RGB<UInt8> = .zero
+            XCTAssertEqual(a, RGB<UInt8>(red: 0, green: 0, blue: 0))
+        }
+        
+        do {
+            let a: RGB<Double> = .zero
+            XCTAssertEqual(a, RGB<Double>(red: 0, green: 0, blue: 0))
+        }
+    }
+    
+    func testAdd() {
+        do {
+            let a = RGB<UInt8>(red: 1, green: 2, blue: 3)
+            let b = RGB<UInt8>(red: 4, green: 5, blue: 6)
+            let r = a + b
+            XCTAssertEqual(r, RGB<UInt8>(red: 5, green: 7, blue: 9))
+        }
+    }
+    
+    func testAddAssign() {
+        do {
+            var a = RGB<UInt8>(red: 1, green: 2, blue: 3)
+            let b = RGB<UInt8>(red: 4, green: 5, blue: 6)
+            a += b
+            XCTAssertEqual(a, RGB<UInt8>(red: 5, green: 7, blue: 9))
+        }
+    }
+    
+    func testSubtract() {
+        do {
+            let a = RGB<UInt8>(red: 255, green: 254, blue: 253)
+            let b = RGB<UInt8>(red: 4, green: 5, blue: 6)
+            let r = a - b
+            XCTAssertEqual(r, RGB<UInt8>(red: 251, green: 249, blue: 247))
+        }
+    }
+    
+    func testSubtractAssign() {
+        do {
+            var a = RGB<UInt8>(red: 255, green: 254, blue: 253)
+            let b = RGB<UInt8>(red: 4, green: 5, blue: 6)
+            a -= b
+            XCTAssertEqual(a, RGB<UInt8>(red: 251, green: 249, blue: 247))
+        }
+    }
 }
