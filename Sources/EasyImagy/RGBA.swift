@@ -18,6 +18,12 @@ extension RGBA { // Additional initializers
     }
 }
 
+extension RGBA where Channel : UnsignedInteger & FixedWidthInteger {
+    public init(_ rgb: RGB<Channel>) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: .max)
+    }
+}
+
 extension RGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._ez_AdditiveInt : FixedWidthInteger {
     public init(_ premultipliedRGBA: PremultipliedRGBA<Channel>) {
         guard premultipliedRGBA.alpha > 0 else {
@@ -38,6 +44,10 @@ extension RGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteg
 }
 
 extension RGBA where Channel : FloatingPoint {
+    public init(_ rgb: RGB<Channel>) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 1)
+    }
+    
     public init(_ premultipliedRgba: PremultipliedRGBA<Channel>) {
         guard premultipliedRgba.alpha != 0 else {
             self.init(red: 0, green: 0, blue: 0, alpha: 0)

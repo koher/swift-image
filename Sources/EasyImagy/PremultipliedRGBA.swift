@@ -12,6 +12,12 @@ public struct PremultipliedRGBA<Channel> where Channel : Numeric{
     }
 }
 
+extension PremultipliedRGBA where Channel : UnsignedInteger & FixedWidthInteger {
+    public init(_ rgb: RGB<Channel>) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: .max)
+    }
+}
+
 extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._ez_AdditiveInt : FixedWidthInteger {
     public init(_ rgba: RGBA<Channel>) {
         let numericAlpha: Channel._ez_AdditiveInt = rgba.alpha._ez_additiveInt
@@ -27,6 +33,10 @@ extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & Fi
 }
 
 extension PremultipliedRGBA where Channel : FloatingPoint {
+    public init(_ rgb: RGB<Channel>) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 1)
+    }
+    
     public init(_ rgba: RGBA<Channel>) {
         self.init(
             red: rgba.red * rgba.alpha,

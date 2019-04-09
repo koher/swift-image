@@ -2,7 +2,21 @@ import XCTest
 import EasyImagy
 
 class RGBATests: XCTestCase {
-    func testInit() {
+    func testInitWithRGB() {
+        do {
+            let a = RGB<UInt8>(red: 1, green: 2, blue: 254)
+            let r = RGBA<UInt8>(a)
+            XCTAssertEqual(r, RGBA<UInt8>(red: 1, green: 2, blue: 254, alpha: 255))
+        }
+        
+        do {
+            let a = RGB<Double>(red: 0.2, green: 0.4, blue: 0.6)
+            let r = RGBA<Double>(a)
+            XCTAssertEqual(r, RGBA<Double>(red: 0.2, green: 0.4, blue: 0.6, alpha: 1.0))
+        }
+    }
+    
+    func testInitWithHex() {
         do {
             let r = RGBA(0xFFEEDDCC)
             XCTAssertEqual(r.red, 255)
