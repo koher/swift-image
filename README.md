@@ -1,6 +1,6 @@
 # EasyImagy
 
-[![Build Status](https://travis-ci.org/koher/EasyImagy.svg?branch=master)](https://travis-ci.org/koher/EasyImagy)
+[![Build Status](https://travis-ci.org/koher/swift-image.svg?branch=master)](https://travis-ci.org/koher/swift-image)
 
 **(_EasyImagy_ will be renamed to _SwiftImage_ when 0.7.0 is released.)**
 
