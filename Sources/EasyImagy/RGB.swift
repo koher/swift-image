@@ -32,6 +32,38 @@ extension RGB where Channel == UInt8 {
     }
 }
 
+extension RGB where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._ez_AdditiveInt : FixedWidthInteger {
+    @inlinable
+    public init(_ rgba: RGBA<Channel>) {
+        let numericAlpha: Channel._ez_AdditiveInt = rgba.alpha._ez_additiveInt
+        let numericMaxAlpha: Channel._ez_AdditiveInt = Channel.max._ez_additiveInt
+        
+        self.init(
+            red: .init(_ez_additiveInt: rgba.red._ez_additiveInt * numericAlpha / numericMaxAlpha),
+            green: .init(_ez_additiveInt: rgba.green._ez_additiveInt * numericAlpha / numericMaxAlpha),
+            blue: .init(_ez_additiveInt: rgba.blue._ez_additiveInt * numericAlpha / numericMaxAlpha)
+        )
+    }
+}
+
+extension RGB where Channel : FloatingPoint {
+    @inlinable
+    public init(_ rgba: RGBA<Channel>) {
+        self.init(
+            red: rgba.red * rgba.alpha,
+            green: rgba.green * rgba.alpha,
+            blue: rgba.blue * rgba.alpha
+        )
+    }
+}
+
+extension RGB where Channel: Numeric {
+    @inlinable
+    public init(_ premultipliedRGBA: PremultipliedRGBA<Channel>) {
+        self.init(red: premultipliedRGBA.red, green: premultipliedRGBA.green, blue: premultipliedRGBA.blue)
+    }
+}
+
 extension RGB where Channel: _TypicalChannel {
     @inlinable
     public init(_ rgb: RGB<Int>) {
