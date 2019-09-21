@@ -207,8 +207,14 @@ extension RGBA where Channel: UnsignedInteger & FixedWidthInteger {
     }
     
     @inlinable
-    public static var transparent: RGBA<Channel> {
+    public static var clear: RGBA<Channel> {
         return RGBA<Channel>(red: .zero, green: .zero, blue: .zero, alpha: .zero)
+    }
+    
+    @inlinable
+    @available(*, deprecated, message: "User `clear` instead.")
+    public static var transparent: RGBA<Channel> {
+        return .clear
     }
 }
 
@@ -269,8 +275,14 @@ extension RGBA where Channel: FloatingPoint {
     }
     
     @inlinable
-    public static var transparent: RGBA<Channel> {
+    public static var clear: RGBA<Channel> {
         return RGBA<Channel>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+    
+    @inlinable
+    @available(*, deprecated, message: "User `clear` instead.")
+    public static var transparent: RGBA<Channel> {
+        return .clear
     }
 }
 

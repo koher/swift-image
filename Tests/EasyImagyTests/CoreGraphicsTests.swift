@@ -604,12 +604,12 @@ class CoreGraphicsTests: XCTestCase {
         }
         
         do {
-            let transparent = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
+            let clear = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
             let slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 3, height: 4, pixels: [
-                transparent, transparent, transparent,
-                transparent, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127), transparent,
-                transparent, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4), transparent,
-                transparent, transparent, transparent,
+                clear, clear, clear,
+                clear, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127), clear,
+                clear, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4), clear,
+                clear, clear, clear,
             ])[1...1, 1...2]
             
             let cgImage = slice.cgImage
@@ -645,11 +645,11 @@ class CoreGraphicsTests: XCTestCase {
         }
         
         do { // slices which contains the last row of the original images
-            let transparent = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
+            let clear = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
             let slice: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 2, height: 3, pixels: [
-                transparent, transparent,
-                transparent, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127),
-                transparent, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4),
+                clear, clear,
+                clear, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127),
+                clear, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4),
             ])[1...1, 1...2]
             
             let cgImage = slice.cgImage
@@ -738,12 +738,12 @@ class CoreGraphicsTests: XCTestCase {
         }
         
         do {
-            let transparent = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
+            let clear = PremultipliedRGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0)
             let original: ImageSlice<PremultipliedRGBA<UInt8>> = Image<PremultipliedRGBA<UInt8>>(width: 3, height: 4, pixels: [
-                transparent, transparent, transparent,
-                transparent, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127), transparent,
-                transparent, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4), transparent,
-                transparent, transparent, transparent,
+                clear, clear, clear,
+                clear, PremultipliedRGBA<UInt8>(red: 24, green: 49, blue: 99, alpha: 127), clear,
+                clear, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 3, alpha: 4), clear,
+                clear, clear, clear,
             ])[1...1, 1...2]
             
             let restored = original.withCGImage { cgImage in
@@ -825,12 +825,12 @@ class CoreGraphicsTests: XCTestCase {
         }
         
         do {
-            let transparent = PremultipliedRGBA<UInt16>(red: 0, green: 0, blue: 0, alpha: 0)
+            let clear = PremultipliedRGBA<UInt16>(red: 0, green: 0, blue: 0, alpha: 0)
             let original: ImageSlice<PremultipliedRGBA<UInt16>> = Image<PremultipliedRGBA<UInt16>>(width: 3, height: 4, pixels: [
-                transparent, transparent, transparent,
-                transparent, PremultipliedRGBA<UInt16>(red: 24, green: 49, blue: 99, alpha: 32767), transparent,
-                transparent, PremultipliedRGBA<UInt16>(red: 1, green: 2, blue: 3, alpha: 4), transparent,
-                transparent, transparent, transparent,
+                clear, clear, clear,
+                clear, PremultipliedRGBA<UInt16>(red: 24, green: 49, blue: 99, alpha: 32767), clear,
+                clear, PremultipliedRGBA<UInt16>(red: 1, green: 2, blue: 3, alpha: 4), clear,
+                clear, clear, clear,
             ])[1...1, 1...2]
             
             let restored = original.withCGImage { cgImage in
