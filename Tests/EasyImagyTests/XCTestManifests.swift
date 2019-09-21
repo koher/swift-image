@@ -227,10 +227,25 @@ extension RGBATests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__RGBATests = [
+        ("testBlack", testBlack),
+        ("testBlue", testBlue),
+        ("testCyan", testCyan),
         ("testDescription", testDescription),
         ("testGray", testGray),
+        ("testGreen", testGreen),
+        ("testInit", testInit),
+        ("testInitForCasting", testInitForCasting),
+        ("testInitWithGray", testInitWithGray),
         ("testInitWithHex", testInitWithHex),
+        ("testInitWithPremultipliedRGBA", testInitWithPremultipliedRGBA),
         ("testInitWithRGB", testInitWithRGB),
+        ("testMagenta", testMagenta),
+        ("testOrange", testOrange),
+        ("testPurple", testPurple),
+        ("testRed", testRed),
+        ("testStaticGray", testStaticGray),
+        ("testWhite", testWhite),
+        ("testYellow", testYellow),
     ]
 }
 
@@ -261,11 +276,11 @@ extension RGBTests {
         ("testGreaterThanOrEqualTo", testGreaterThanOrEqualTo),
         ("testGreen", testGreen),
         ("testInit", testInit),
-        ("testInitCast", testInitCast),
-        ("testInitFromPremultipliedRGBA", testInitFromPremultipliedRGBA),
-        ("testInitFromRGBA", testInitFromRGBA),
+        ("testInitForCasting", testInitForCasting),
         ("testInitWithGray", testInitWithGray),
         ("testInitWithHex", testInitWithHex),
+        ("testInitWithPremultipliedRGBA", testInitWithPremultipliedRGBA),
+        ("testInitWithRGBA", testInitWithRGBA),
         ("testLeftShift", testLeftShift),
         ("testLeftShiftAssignment", testLeftShiftAssignment),
         ("testLessThan", testLessThan),

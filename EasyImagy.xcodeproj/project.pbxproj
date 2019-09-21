@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
 		D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A0E1F85226C005592A2 /* EasyImagy.framework */; };
 		D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134A491F852A64005592A2 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* AppKitTests.swift */; };
@@ -64,9 +63,6 @@
 		D62285BA221171A3006A6D9C /* AutoreleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */; };
 		D62285BB221171A3006A6D9C /* AutoreleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */; };
 		D62285BC221171A3006A6D9C /* AutoreleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */; };
-		D62C6EBB1FC9DAD900E7DF02 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
-		D62C6EBC1FC9DADA00E7DF02 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
-		D62C6EBD1FC9DADB00E7DF02 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
 		D62C6EC31FCBA6B800E7DF02 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */; };
 		D62C6EC41FCBA6B900E7DF02 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */; };
 		D62C6EC51FCBA6BA00E7DF02 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */; };
@@ -214,7 +210,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBATyped.swift; sourceTree = "<group>"; };
 		D6134A0E1F85226C005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EasyImagyTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A2A1F852A49005592A2 /* EasyImagy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
@@ -388,7 +383,6 @@
 				D64CA244224DC1CF002D5B44 /* RGB.swift */,
 				D6134A371F852A49005592A2 /* RGBA.swift */,
 				D63109231FCFFD85009974D0 /* RGBAOperators.swift */,
-				D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */,
 				D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */,
 				D69BF73F2336B90F0086E809 /* TypicalChannel.swift */,
 				D6134A301F852A49005592A2 /* UIKit.swift */,
@@ -731,7 +725,6 @@
 				D62C6EDF1FCE6BD800E7DF02 /* Extrapolation.swift in Sources */,
 				D6FAC86A1FD1938400509BCB /* ImageProtocol.swift in Sources */,
 				D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */,
-				D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */,
 				D6134A591F852A85005592A2 /* RGBA.swift in Sources */,
 				D62C6ED51FCE55EB00E7DF02 /* Interpolation.swift in Sources */,
 				D6B4EE2A1FE4A1C300B6B7B0 /* Resizing.swift in Sources */,
@@ -786,7 +779,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69BF7422336C06E0086E809 /* TypicalChannel.swift in Sources */,
-				D62C6EBB1FC9DAD900E7DF02 /* RGBATyped.swift in Sources */,
 				D6C05E40225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A851F85CF5E005592A2 /* Util.swift in Sources */,
 				D6B4EE261FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
@@ -849,7 +841,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69BF7432336C06F0086E809 /* TypicalChannel.swift in Sources */,
-				D62C6EBC1FC9DADA00E7DF02 /* RGBATyped.swift in Sources */,
 				D6C05E41225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AC41F85D2AF005592A2 /* Util.swift in Sources */,
 				D6B4EE271FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
@@ -912,7 +903,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69BF7442336C0700086E809 /* TypicalChannel.swift in Sources */,
-				D62C6EBD1FC9DADB00E7DF02 /* RGBATyped.swift in Sources */,
 				D6C05E42225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AE51F85DA5C005592A2 /* Util.swift in Sources */,
 				D6B4EE281FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,

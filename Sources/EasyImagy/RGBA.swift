@@ -19,6 +19,10 @@ extension RGBA { // Additional initializers
 }
 
 extension RGBA where Channel : UnsignedInteger & FixedWidthInteger {
+    public init(red: Channel, green: Channel, blue: Channel) {
+        self.init(red: red, green: green, blue: blue, alpha: .max)
+    }
+
     public init(_ rgb: RGB<Channel>) {
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: .max)
     }
@@ -44,6 +48,10 @@ extension RGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteg
 }
 
 extension RGBA where Channel : FloatingPoint {
+    public init(red: Channel, green: Channel, blue: Channel) {
+        self.init(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
     public init(_ rgb: RGB<Channel>) {
         self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 1)
     }
@@ -77,6 +85,206 @@ extension RGBA {
 extension RGBA where Channel == UInt8 {
     public init(_ hex: UInt32) {
         self.init(red: UInt8((hex >> 24) & 0xFF), green: UInt8((hex >> 16) & 0xFF), blue: UInt8((hex >> 8) & 0xFF), alpha: UInt8(hex & 0xFF))
+    }
+}
+
+extension RGBA where Channel: _TypicalChannel {
+    @inlinable
+    public init(_ rgb: RGBA<Int>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<Int8>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<Int16>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<Int32>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<Int64>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<UInt>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<UInt8>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<UInt16>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<UInt32>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<UInt64>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<Float>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+
+    @inlinable
+    public init(_ rgb: RGBA<Double>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue), alpha: Channel(rgb.alpha))
+    }
+}
+
+extension RGBA where Channel: UnsignedInteger & FixedWidthInteger {
+    @inlinable
+    public static var red: RGBA<Channel> {
+        return RGBA<Channel>(red: .max, green: .zero, blue: .zero, alpha: .max)
+    }
+    
+    @inlinable
+    public static var green: RGBA<Channel> {
+        return RGBA<Channel>(red: .zero, green: .max, blue: .zero, alpha: .max)
+    }
+    
+    @inlinable
+    public static var blue: RGBA<Channel> {
+        return RGBA<Channel>(red: .zero, green: .zero, blue: .max, alpha: .max)
+    }
+    
+    @inlinable
+    public static var cyan: RGBA<Channel> {
+        return RGBA<Channel>(red: .zero, green: .max, blue: .max, alpha: .max)
+    }
+    
+    @inlinable
+    public static var magenta: RGBA<Channel> {
+        return RGBA<Channel>(red: .max, green: .zero, blue: .max, alpha: .max)
+    }
+    
+    @inlinable
+    public static var yellow: RGBA<Channel> {
+        return RGBA<Channel>(red: .max, green: .max, blue: .zero, alpha: .max)
+    }
+    
+    @inlinable
+    public static var black: RGBA<Channel> {
+        return RGBA<Channel>(red: .zero, green: .zero, blue: .zero, alpha: .max)
+    }
+    
+    @inlinable
+    public static var white: RGBA<Channel> {
+        return RGBA<Channel>(red: .max, green: .max, blue: .max, alpha: .max)
+    }
+    
+    @inlinable
+    public static var gray: RGBA<Channel> {
+        return RGBA<Channel>(red: .max / 2, green: .max / 2, blue: .max / 2, alpha: .max)
+    }
+    
+    @inlinable
+    public static var orange: RGBA<Channel> {
+        return RGBA<Channel>(red: .max, green: .max / 2, blue: .zero, alpha: .max)
+    }
+    
+    @inlinable
+    public static var purple: RGBA<Channel> {
+        return RGBA<Channel>(red: .max / 2, green: .zero, blue: .max / 2, alpha: .max)
+    }
+    
+    @inlinable
+    public static var transparent: RGBA<Channel> {
+        return RGBA<Channel>(red: .zero, green: .zero, blue: .zero, alpha: .zero)
+    }
+}
+
+extension RGBA where Channel: FloatingPoint {
+    @inlinable
+    public static var red: RGBA<Channel> {
+        return RGBA<Channel>(red: 1, green: 0, blue: 0, alpha: 1)
+    }
+    
+    @inlinable
+    public static var green: RGBA<Channel> {
+        return RGBA<Channel>(red: 0, green: 1, blue: 0, alpha: 1)
+    }
+    
+    @inlinable
+    public static var blue: RGBA<Channel> {
+        return RGBA<Channel>(red: 0, green: 0, blue: 1, alpha: 1)
+    }
+    
+    @inlinable
+    public static var cyan: RGBA<Channel> {
+        return RGBA<Channel>(red: 0, green: 1, blue: 1, alpha: 1)
+    }
+    
+    @inlinable
+    public static var magenta: RGBA<Channel> {
+        return RGBA<Channel>(red: 1, green: 0, blue: 1, alpha: 1)
+    }
+    
+    @inlinable
+    public static var yellow: RGBA<Channel> {
+        return RGBA<Channel>(red: 1, green: 1, blue: 0, alpha: 1)
+    }
+    
+    @inlinable
+    public static var black: RGBA<Channel> {
+        return RGBA<Channel>(red: 0, green: 0, blue: 0, alpha: 1)
+    }
+    
+    @inlinable
+    public static var white: RGBA<Channel> {
+        return RGBA<Channel>(red: 1, green: 1, blue: 1, alpha: 1)
+    }
+    
+    @inlinable
+    public static var gray: RGBA<Channel> {
+        return RGBA<Channel>(red: 1 / 2, green: 1 / 2, blue: 1 / 2, alpha: 1)
+    }
+    
+    @inlinable
+    public static var orange: RGBA<Channel> {
+        return RGBA<Channel>(red: 1, green: 1 / 2, blue: 0, alpha: 1)
+    }
+    
+    @inlinable
+    public static var purple: RGBA<Channel> {
+        return RGBA<Channel>(red: 1 / 2, green: 0, blue: 1 / 2, alpha: 1)
+    }
+    
+    @inlinable
+    public static var transparent: RGBA<Channel> {
+        return RGBA<Channel>(red: 0, green: 0, blue: 0, alpha: 0)
+    }
+}
+
+extension RGBA where Channel: _NumericPixel & BinaryInteger {
+    @inlinable
+    public var gray: Channel {
+        return Channel(_ez_additiveInt: Channel._ez_quotientInt((red._ez_additiveInt + green._ez_additiveInt + blue._ez_additiveInt), 3))
+    }
+}
+
+extension RGBA where Channel: FloatingPoint {
+    @inlinable
+    public var gray: Channel {
+        return (red + green + blue) / 3
     }
 }
 
