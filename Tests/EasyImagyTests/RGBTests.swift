@@ -932,6 +932,172 @@ class RGBTests: XCTestCase {
         }
     }
     
+    func testRed() {
+        do {
+            let a: RGB<UInt8> = .red
+            XCTAssertEqual(a.red, 255)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 0)
+        }
+        do {
+            let a: RGB<Double> = .red
+            XCTAssertEqual(a.red, 1)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 0)
+        }
+    }
+    
+    func testGreen() {
+        do {
+            let a: RGB<UInt8> = .green
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 255)
+            XCTAssertEqual(a.blue, 0)
+        }
+        do {
+            let a: RGB<Double> = .green
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 1)
+            XCTAssertEqual(a.blue, 0)
+        }
+    }
+    
+    func testBlue() {
+        do {
+            let a: RGB<UInt8> = .blue
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 255)
+        }
+        do {
+            let a: RGB<Double> = .blue
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 1)
+        }
+    }
+    
+    func testCyan() {
+        do {
+            let a: RGB<UInt8> = .cyan
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 255)
+            XCTAssertEqual(a.blue, 255)
+        }
+        do {
+            let a: RGB<Double> = .cyan
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 1)
+            XCTAssertEqual(a.blue, 1)
+        }
+    }
+
+    func testMagenta() {
+        do {
+            let a: RGB<UInt8> = .magenta
+            XCTAssertEqual(a.red, 255)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 255)
+        }
+        do {
+            let a: RGB<Double> = .magenta
+            XCTAssertEqual(a.red, 1)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 1)
+        }
+    }
+    
+    func testYellow() {
+        do {
+            let a: RGB<UInt8> = .yellow
+            XCTAssertEqual(a.red, 255)
+            XCTAssertEqual(a.green, 255)
+            XCTAssertEqual(a.blue, 0)
+        }
+        do {
+            let a: RGB<Double> = .yellow
+            XCTAssertEqual(a.red, 1)
+            XCTAssertEqual(a.green, 1)
+            XCTAssertEqual(a.blue, 0)
+        }
+    }
+
+    
+    func testBlack() {
+        do {
+            let a: RGB<UInt8> = .black
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 0)
+        }
+        do {
+            let a: RGB<Double> = .black
+            XCTAssertEqual(a.red, 0)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 0)
+        }
+    }
+    
+    func testWhite() {
+        do {
+            let a: RGB<UInt8> = .white
+            XCTAssertEqual(a.red, 255)
+            XCTAssertEqual(a.green, 255)
+            XCTAssertEqual(a.blue, 255)
+        }
+        do {
+            let a: RGB<Double> = .white
+            XCTAssertEqual(a.red, 1)
+            XCTAssertEqual(a.green, 1)
+            XCTAssertEqual(a.blue, 1)
+        }
+    }
+    
+    func testGray() {
+        do {
+            let a: RGB<UInt8> = .gray
+            XCTAssertEqual(a.red, 127)
+            XCTAssertEqual(a.green, 127)
+            XCTAssertEqual(a.blue, 127)
+        }
+        do {
+            let a: RGB<Double> = .gray
+            XCTAssertEqual(a.red, 0.5)
+            XCTAssertEqual(a.green, 0.5)
+            XCTAssertEqual(a.blue, 0.5)
+        }
+    }
+    
+    func testOrange() {
+        do {
+            let a: RGB<UInt8> = .orange
+            XCTAssertEqual(a.red, 255)
+            XCTAssertEqual(a.green, 127)
+            XCTAssertEqual(a.blue, 0)
+        }
+        do {
+            let a: RGB<Double> = .orange
+            XCTAssertEqual(a.red, 1)
+            XCTAssertEqual(a.green, 0.5)
+            XCTAssertEqual(a.blue, 0)
+        }
+    }
+    
+    func testPurple() {
+        do {
+            let a: RGB<UInt8> = .purple
+            XCTAssertEqual(a.red, 127)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 127)
+        }
+        do {
+            let a: RGB<Double> = .purple
+            XCTAssertEqual(a.red, 0.5)
+            XCTAssertEqual(a.green, 0)
+            XCTAssertEqual(a.blue, 0.5)
+        }
+    }
+
     func testMap() {
         do {
             let a = RGB<UInt8>(red: 51, green: 102, blue: 153)

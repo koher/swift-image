@@ -93,6 +93,98 @@ extension RGB where Channel: _TypicalChannel {
     }
 }
 
+extension RGB where Channel: FixedWidthInteger {
+    public static var red: RGB<Channel> {
+        return RGB<Channel>(red: .max, green: .zero, blue: .zero)
+    }
+    
+    public static var green: RGB<Channel> {
+        return RGB<Channel>(red: .zero, green: .max, blue: .zero)
+    }
+    
+    public static var blue: RGB<Channel> {
+        return RGB<Channel>(red: .zero, green: .zero, blue: .max)
+    }
+    
+    public static var cyan: RGB<Channel> {
+        return RGB<Channel>(red: .zero, green: .max, blue: .max)
+    }
+    
+    public static var magenta: RGB<Channel> {
+        return RGB<Channel>(red: .max, green: .zero, blue: .max)
+    }
+    
+    public static var yellow: RGB<Channel> {
+        return RGB<Channel>(red: .max, green: .max, blue: .zero)
+    }
+    
+    public static var black: RGB<Channel> {
+        return RGB<Channel>(red: .zero, green: .zero, blue: .zero)
+    }
+    
+    public static var white: RGB<Channel> {
+        return RGB<Channel>(red: .max, green: .max, blue: .max)
+    }
+    
+    public static var gray: RGB<Channel> {
+        return RGB<Channel>(red: .max / 2, green: .max / 2, blue: .max / 2)
+    }
+    
+    public static var orange: RGB<Channel> {
+        return RGB<Channel>(red: .max, green: .max / 2, blue: .zero)
+    }
+    
+    public static var purple: RGB<Channel> {
+        return RGB<Channel>(red: .max / 2, green: .zero, blue: .max / 2)
+    }
+}
+
+extension RGB where Channel: FloatingPoint {
+    public static var red: RGB<Channel> {
+        return RGB<Channel>(red: 1, green: 0, blue: 0)
+    }
+    
+    public static var green: RGB<Channel> {
+        return RGB<Channel>(red: 0, green: 1, blue: 0)
+    }
+    
+    public static var blue: RGB<Channel> {
+        return RGB<Channel>(red: 0, green: 0, blue: 1)
+    }
+    
+    public static var cyan: RGB<Channel> {
+        return RGB<Channel>(red: 0, green: 1, blue: 1)
+    }
+    
+    public static var magenta: RGB<Channel> {
+        return RGB<Channel>(red: 1, green: 0, blue: 1)
+    }
+    
+    public static var yellow: RGB<Channel> {
+        return RGB<Channel>(red: 1, green: 1, blue: 0)
+    }
+    
+    public static var black: RGB<Channel> {
+        return RGB<Channel>(red: 0, green: 0, blue: 0)
+    }
+    
+    public static var white: RGB<Channel> {
+        return RGB<Channel>(red: 1, green: 1, blue: 1)
+    }
+    
+    public static var gray: RGB<Channel> {
+        return RGB<Channel>(red: 1 / 2, green: 1 / 2, blue: 1 / 2)
+    }
+    
+    public static var orange: RGB<Channel> {
+        return RGB<Channel>(red: 1, green: 1 / 2, blue: 0)
+    }
+    
+    public static var purple: RGB<Channel> {
+        return RGB<Channel>(red: 1 / 2, green: 0, blue: 1 / 2)
+    }
+}
+
 extension RGB : Equatable where Channel : Equatable {
     @inlinable
     public static func ==(lhs: RGB<Channel>, rhs: RGB<Channel>) -> Bool {
