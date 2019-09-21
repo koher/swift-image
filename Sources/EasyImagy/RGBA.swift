@@ -375,3 +375,105 @@ extension RGBA: AdditiveArithmetic where Channel: AdditiveArithmetic {
         lhs.alpha -= rhs.alpha
     }
 }
+
+extension RGBA where Channel == UInt8 {
+    public var redInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.redInt` with `Int(rgba.red)`.")
+        get {
+            return Int(red)
+        }
+        @available(*, deprecated, message: "Replace `rgba.redInt = value` with `rgba.red = UInt8(rgba.red)`.")
+        set {
+            red = UInt8(newValue)
+        }
+    }
+    
+    public var greenInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.greenInt` with `Int(rgba.green)`.")
+        get {
+            return Int(green)
+        }
+        @available(*, deprecated, message: "Replace `rgba.greenInt = value` with `rgba.red = UInt8(rgba.green)`.")
+        set {
+            green = UInt8(newValue)
+        }
+    }
+    
+    public var blueInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.blueInt` with `Int(rgba.blue)`.")
+        get {
+            return Int(blue)
+        }
+        @available(*, deprecated, message: "Replace `rgba.blueInt = value` with `rgba.red = UInt8(rgba.blue)`.")
+        set {
+            blue = UInt8(newValue)
+        }
+    }
+    
+    public var alphaInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.alphaInt` with `Int(rgba.alpha)`.")
+        get {
+            return Int(alpha)
+        }
+        @available(*, deprecated, message: "Replace `rgba.alphaInt = value` with `rgba.red = UInt8(rgba.alpha)`.")
+        set {
+            alpha = UInt8(newValue)
+        }
+    }
+
+    @available(*, deprecated, message: "Replace `rgba.grayInt` with `Int(rgba.gray)`.")
+    public var grayInt: Int {
+        return (redInt + greenInt + blueInt) / 3
+    }
+}
+
+extension RGBA where Channel == UInt16 {
+    public var redInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.redInt` with `Int(rgba.red)`.")
+        get {
+            return Int(red)
+        }
+        @available(*, deprecated, message: "Replace `rgba.redInt = value` with `rgba.red = UInt16(rgba.red)`.")
+        set {
+            red = UInt16(newValue)
+        }
+    }
+    
+    public var greenInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.greenInt` with `Int(rgba.green)`.")
+        get {
+            return Int(green)
+        }
+        @available(*, deprecated, message: "Replace `rgba.greenInt = value` with `rgba.red = UInt16(rgba.green)`.")
+        set {
+            green = UInt16(newValue)
+        }
+    }
+    
+    public var blueInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.blueInt` with `Int(rgba.blue)`.")
+        get {
+            return Int(blue)
+        }
+        @available(*, deprecated, message: "Replace `rgba.blueInt = value` with `rgba.red = UInt16(rgba.blue)`.")
+        set {
+            blue = UInt16(newValue)
+        }
+    }
+    
+    public var alphaInt: Int {
+        @available(*, deprecated, message: "Replace `rgba.alphaInt` with `Int(rgba.alpha)`.")
+        get {
+            return Int(alpha)
+        }
+        @available(*, deprecated, message: "Replace `rgba.alphaInt = value` with `rgba.red = UInt16(rgba.alpha)`.")
+        set {
+            alpha = UInt16(newValue)
+        }
+    }
+
+    @available(*, deprecated, message: "Replace `rgba.grayInt` with `Int(rgba.gray)`.")
+    public var grayInt: Int {
+        return (redInt + greenInt + blueInt) / 3
+    }
+}
