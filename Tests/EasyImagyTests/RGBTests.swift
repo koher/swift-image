@@ -29,6 +29,909 @@ class RGBTests: XCTestCase {
         }
     }
     
+    func testInitCast() {
+        do {
+            let a: RGB<Int> = RGB<Int>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<Int8> = RGB<Int8>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<Int16> = RGB<Int16>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<Int32> = RGB<Int32>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<Int64> = RGB<Int64>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<UInt> = RGB<UInt>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<UInt8> = RGB<UInt8>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<UInt16> = RGB<UInt16>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<UInt32> = RGB<UInt32>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<UInt64> = RGB<UInt64>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<Float> = RGB<Float>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+        do {
+            let a: RGB<Double> = RGB<Double>(red: 1, green: 2, blue: 3)
+            do {
+                let r: RGB<Int> = RGB<Int>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int8> = RGB<Int8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int16> = RGB<Int16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int32> = RGB<Int32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Int64> = RGB<Int64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt> = RGB<UInt>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt8> = RGB<UInt8>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt16> = RGB<UInt16>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt32> = RGB<UInt32>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<UInt64> = RGB<UInt64>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Float> = RGB<Float>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+            do {
+                let r: RGB<Double> = RGB<Double>(a)
+                XCTAssertEqual(r.red, 1)
+                XCTAssertEqual(r.green, 2)
+                XCTAssertEqual(r.blue, 3)
+            }
+        }
+    }
+    
     func testMap() {
         do {
             let a = RGB<UInt8>(red: 51, green: 102, blue: 153)

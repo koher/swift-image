@@ -43,6 +43,56 @@ extension RGB where Channel == UInt8 {
     }
 }
 
+extension RGB where Channel: _TypicalChannel {
+    public init(_ rgb: RGB<Int>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<Int8>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<Int16>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<Int32>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<Int64>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<UInt>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<UInt8>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<UInt16>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<UInt32>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<UInt64>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<Float>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+
+    public init(_ rgb: RGB<Double>) {
+        self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
+    }
+}
+
 extension RGB : Equatable where Channel : Equatable {
     @inlinable
     public static func ==(lhs: RGB<Channel>, rhs: RGB<Channel>) -> Bool {

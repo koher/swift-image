@@ -137,6 +137,7 @@
 		D68F9AA4225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
 		D68F9AA5225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
 		D68F9AA6225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
+		D69BF7402336B90F0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
 		D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE0F1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE101FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
@@ -255,6 +256,7 @@
 		D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBATests.swift; sourceTree = "<group>"; };
 		D66AFEF420D90296003FE64C /* ImageIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIterator.swift; sourceTree = "<group>"; };
 		D68F9AA3225C182100DA338D /* RGBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBTests.swift; sourceTree = "<group>"; };
+		D69BF73F2336B90F0086E809 /* TypicalChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypicalChannel.swift; sourceTree = "<group>"; };
 		D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
 		D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				D63109231FCFFD85009974D0 /* RGBAOperators.swift */,
 				D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */,
 				D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */,
+				D69BF73F2336B90F0086E809 /* TypicalChannel.swift */,
 				D6134A301F852A49005592A2 /* UIKit.swift */,
 				D6134A381F852A49005592A2 /* Util.swift */,
 			);
@@ -716,6 +719,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69BF7402336B90F0086E809 /* TypicalChannel.swift in Sources */,
 				D6134A5A1F852A85005592A2 /* Util.swift in Sources */,
 				D6C05E3F225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A511F852A85005592A2 /* AppKit.swift in Sources */,
