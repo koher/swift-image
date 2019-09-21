@@ -33,142 +33,176 @@ extension RGB where Channel == UInt8 {
 }
 
 extension RGB where Channel: _TypicalChannel {
+    @inlinable
     public init(_ rgb: RGB<Int>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<Int8>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<Int16>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<Int32>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<Int64>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<UInt>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<UInt8>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<UInt16>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<UInt32>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<UInt64>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<Float>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 
+    @inlinable
     public init(_ rgb: RGB<Double>) {
         self.init(red: Channel(rgb.red), green: Channel(rgb.green), blue: Channel(rgb.blue))
     }
 }
 
 extension RGB where Channel: FixedWidthInteger {
+    @inlinable
     public static var red: RGB<Channel> {
         return RGB<Channel>(red: .max, green: .zero, blue: .zero)
     }
     
+    @inlinable
     public static var green: RGB<Channel> {
         return RGB<Channel>(red: .zero, green: .max, blue: .zero)
     }
     
+    @inlinable
     public static var blue: RGB<Channel> {
         return RGB<Channel>(red: .zero, green: .zero, blue: .max)
     }
     
+    @inlinable
     public static var cyan: RGB<Channel> {
         return RGB<Channel>(red: .zero, green: .max, blue: .max)
     }
     
+    @inlinable
     public static var magenta: RGB<Channel> {
         return RGB<Channel>(red: .max, green: .zero, blue: .max)
     }
     
+    @inlinable
     public static var yellow: RGB<Channel> {
         return RGB<Channel>(red: .max, green: .max, blue: .zero)
     }
     
+    @inlinable
     public static var black: RGB<Channel> {
         return RGB<Channel>(red: .zero, green: .zero, blue: .zero)
     }
     
+    @inlinable
     public static var white: RGB<Channel> {
         return RGB<Channel>(red: .max, green: .max, blue: .max)
     }
     
+    @inlinable
     public static var gray: RGB<Channel> {
         return RGB<Channel>(red: .max / 2, green: .max / 2, blue: .max / 2)
     }
     
+    @inlinable
     public static var orange: RGB<Channel> {
         return RGB<Channel>(red: .max, green: .max / 2, blue: .zero)
     }
     
+    @inlinable
     public static var purple: RGB<Channel> {
         return RGB<Channel>(red: .max / 2, green: .zero, blue: .max / 2)
     }
 }
 
 extension RGB where Channel: FloatingPoint {
+    @inlinable
     public static var red: RGB<Channel> {
         return RGB<Channel>(red: 1, green: 0, blue: 0)
     }
     
+    @inlinable
     public static var green: RGB<Channel> {
         return RGB<Channel>(red: 0, green: 1, blue: 0)
     }
     
+    @inlinable
     public static var blue: RGB<Channel> {
         return RGB<Channel>(red: 0, green: 0, blue: 1)
     }
     
+    @inlinable
     public static var cyan: RGB<Channel> {
         return RGB<Channel>(red: 0, green: 1, blue: 1)
     }
     
+    @inlinable
     public static var magenta: RGB<Channel> {
         return RGB<Channel>(red: 1, green: 0, blue: 1)
     }
     
+    @inlinable
     public static var yellow: RGB<Channel> {
         return RGB<Channel>(red: 1, green: 1, blue: 0)
     }
     
+    @inlinable
     public static var black: RGB<Channel> {
         return RGB<Channel>(red: 0, green: 0, blue: 0)
     }
     
+    @inlinable
     public static var white: RGB<Channel> {
         return RGB<Channel>(red: 1, green: 1, blue: 1)
     }
     
+    @inlinable
     public static var gray: RGB<Channel> {
         return RGB<Channel>(red: 1 / 2, green: 1 / 2, blue: 1 / 2)
     }
     
+    @inlinable
     public static var orange: RGB<Channel> {
         return RGB<Channel>(red: 1, green: 1 / 2, blue: 0)
     }
     
+    @inlinable
     public static var purple: RGB<Channel> {
         return RGB<Channel>(red: 1 / 2, green: 0, blue: 1 / 2)
     }
