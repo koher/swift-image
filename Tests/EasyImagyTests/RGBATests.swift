@@ -813,6 +813,17 @@ class RGBATests: XCTestCase {
         }
     }
     
+    func testClear() {
+        do {
+            let a: RGBA<UInt8> = .clear
+            XCTAssertEqual(a, RGBA<UInt8>(red: 0, green: 0, blue: 0, alpha: 0))
+        }
+        do {
+            let a: RGBA<Double> = .clear
+            XCTAssertEqual(a, RGBA<Double>(red: 0, green: 0, blue: 0, alpha: 0))
+        }
+    }
+
 	func testDescription() {
 		XCTAssertEqual("#FF0000FF", RGBA<UInt8>(red: 255, green: 0, blue: 0, alpha: 255).description)
 		XCTAssertEqual("#00FFFF00", RGBA<UInt8>(red: 0, green: 255, blue: 255, alpha: 0).description)
