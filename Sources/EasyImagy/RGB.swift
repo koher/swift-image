@@ -94,7 +94,7 @@ extension RGB where Channel: _TypicalChannel {
     }
 }
 
-extension RGB where Channel: FixedWidthInteger {
+extension RGB where Channel: UnsignedInteger & FixedWidthInteger {
     @inlinable
     public static var red: RGB<Channel> {
         return RGB<Channel>(red: .max, green: .zero, blue: .zero)
