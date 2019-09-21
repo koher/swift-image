@@ -138,6 +138,9 @@
 		D68F9AA5225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
 		D68F9AA6225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
 		D69BF7402336B90F0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
+		D69BF7422336C06E0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
+		D69BF7432336C06F0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
+		D69BF7442336C0700086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
 		D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE0F1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE101FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
@@ -782,6 +785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69BF7422336C06E0086E809 /* TypicalChannel.swift in Sources */,
 				D62C6EBB1FC9DAD900E7DF02 /* RGBATyped.swift in Sources */,
 				D6C05E40225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A851F85CF5E005592A2 /* Util.swift in Sources */,
@@ -844,6 +848,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69BF7432336C06F0086E809 /* TypicalChannel.swift in Sources */,
 				D62C6EBC1FC9DADA00E7DF02 /* RGBATyped.swift in Sources */,
 				D6C05E41225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AC41F85D2AF005592A2 /* Util.swift in Sources */,
@@ -906,6 +911,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69BF7442336C0700086E809 /* TypicalChannel.swift in Sources */,
 				D62C6EBD1FC9DADB00E7DF02 /* RGBATyped.swift in Sources */,
 				D6C05E42225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AE51F85DA5C005592A2 /* Util.swift in Sources */,
