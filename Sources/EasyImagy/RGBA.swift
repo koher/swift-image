@@ -71,17 +71,6 @@ extension RGBA where Channel : FloatingPoint {
     }
 }
 
-extension RGBA {
-    public func map<T>(_ transform: (Channel) -> T) -> RGBA<T> {
-        return RGBA<T>(
-            red: transform(red),
-            green: transform(green),
-            blue: transform(blue),
-            alpha: transform(alpha)
-        )
-    }
-}
-
 extension RGBA where Channel == UInt8 {
     public init(_ hex: UInt32) {
         self.init(red: UInt8((hex >> 24) & 0xFF), green: UInt8((hex >> 16) & 0xFF), blue: UInt8((hex >> 8) & 0xFF), alpha: UInt8(hex & 0xFF))
@@ -297,6 +286,17 @@ extension RGBA where Channel: FloatingPoint {
     @inlinable
     public var gray: Channel {
         return (red + green + blue) / 3
+    }
+}
+
+extension RGBA {
+    public func map<T>(_ transform: (Channel) -> T) -> RGBA<T> {
+        return RGBA<T>(
+            red: transform(red),
+            green: transform(green),
+            blue: transform(blue),
+            alpha: transform(alpha)
+        )
     }
 }
 
