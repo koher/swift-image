@@ -229,6 +229,7 @@ extension RGBATests {
     static let __allTests__RGBATests = [
         ("testBlack", testBlack),
         ("testBlue", testBlue),
+        ("testClear", testClear),
         ("testCyan", testCyan),
         ("testDescription", testDescription),
         ("testGray", testGray),
@@ -239,11 +240,11 @@ extension RGBATests {
         ("testInitWithHex", testInitWithHex),
         ("testInitWithPremultipliedRGBA", testInitWithPremultipliedRGBA),
         ("testInitWithRGB", testInitWithRGB),
+        ("testInstanceGray", testInstanceGray),
         ("testMagenta", testMagenta),
         ("testOrange", testOrange),
         ("testPurple", testPurple),
         ("testRed", testRed),
-        ("testStaticGray", testStaticGray),
         ("testWhite", testWhite),
         ("testYellow", testYellow),
     ]
@@ -281,6 +282,7 @@ extension RGBTests {
         ("testInitWithHex", testInitWithHex),
         ("testInitWithPremultipliedRGBA", testInitWithPremultipliedRGBA),
         ("testInitWithRGBA", testInitWithRGBA),
+        ("testInstanceGray", testInstanceGray),
         ("testLeftShift", testLeftShift),
         ("testLeftShiftAssignment", testLeftShiftAssignment),
         ("testLessThan", testLessThan),
