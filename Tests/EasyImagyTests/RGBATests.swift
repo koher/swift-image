@@ -780,7 +780,7 @@ class RGBATests: XCTestCase {
         }
     }
     
-    func testStaticGray() {
+    func testGray() {
         do {
             let a: RGBA<UInt8> = .gray
             XCTAssertEqual(a, RGBA<UInt8>(red: 127, green: 127, blue: 127, alpha: 255))
@@ -832,7 +832,7 @@ class RGBATests: XCTestCase {
 		XCTAssertEqual("#0E0F1011", RGBA<UInt8>(red: 14, green: 15, blue: 16, alpha: 17).description)
 	}
     
-    func testGray() {
+    func testInstanceGray() {
         do {
             let p = RGBA<UInt16>(red: .max, green: .max, blue: .max)
             XCTAssertEqual(p.gray, .max)

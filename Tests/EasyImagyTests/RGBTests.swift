@@ -808,7 +808,39 @@ class RGBTests: XCTestCase {
             XCTAssertEqual(a, RGB<Double>(red: 0.5, green: 0, blue: 0.5))
         }
     }
-
+    
+    func testInstanceGray() {
+        do {
+            let p = RGB<UInt16>(red: .max, green: .max, blue: .max)
+            XCTAssertEqual(p.gray, .max)
+        }
+        
+        do {
+            let p = RGB<UInt16>(red: .max, green: .max, blue: .max - 1)
+            XCTAssertEqual(p.gray, .max - 1)
+        }
+        
+        do {
+            let p = RGB<UInt16>(red: .max, green: .max, blue: .max - 3)
+            XCTAssertEqual(p.gray, .max - 1)
+        }
+        
+        do {
+            let p = RGB<UInt16>(red: .max, green: .max, blue: .max - 4)
+            XCTAssertEqual(p.gray, .max - 2)
+        }
+        
+        do {
+            let p = RGB<UInt16>(red: .max, green: .max - 1, blue: .max - 2)
+            XCTAssertEqual(p.gray, .max - 1)
+        }
+        
+        do {
+            let p = RGB<UInt16>(red: .max, green: .max - 1, blue: .max - 3)
+            XCTAssertEqual(p.gray, .max - 2)
+        }
+    }
+    
     func testMap() {
         do {
             let a = RGB<UInt8>(red: 51, green: 102, blue: 153)

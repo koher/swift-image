@@ -240,6 +240,20 @@ extension RGB where Channel: FloatingPoint {
     }
 }
 
+extension RGB where Channel: _NumericPixel & BinaryInteger {
+    @inlinable
+    public var gray: Channel {
+        return Channel(_ez_additiveInt: Channel._ez_quotientInt((red._ez_additiveInt + green._ez_additiveInt + blue._ez_additiveInt), 3))
+    }
+}
+
+extension RGB where Channel: FloatingPoint {
+    @inlinable
+    public var gray: Channel {
+        return (red + green + blue) / 3
+    }
+}
+
 extension RGB {
     @inlinable
     public func map<T>(_ transform: (Channel) -> T) -> RGB<T> {
