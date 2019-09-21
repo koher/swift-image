@@ -25,17 +25,6 @@ extension RGB { // Additional initializers
     }
 }
 
-extension RGB {
-    @inlinable
-    public func map<T>(_ transform: (Channel) -> T) -> RGB<T> {
-        return RGB<T>(
-            red: transform(red),
-            green: transform(green),
-            blue: transform(blue)
-        )
-    }
-}
-
 extension RGB where Channel == UInt8 {
     @inlinable
     public init(_ hex: UInt32) {
@@ -182,6 +171,17 @@ extension RGB where Channel: FloatingPoint {
     
     public static var purple: RGB<Channel> {
         return RGB<Channel>(red: 1 / 2, green: 0, blue: 1 / 2)
+    }
+}
+
+extension RGB {
+    @inlinable
+    public func map<T>(_ transform: (Channel) -> T) -> RGB<T> {
+        return RGB<T>(
+            red: transform(red),
+            green: transform(green),
+            blue: transform(blue)
+        )
     }
 }
 
