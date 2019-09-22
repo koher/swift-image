@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:EasyImagy.xcodeproj">
+      location = "self:/Users/yuta/Documents/Personal/Libraries/EasyImagy/SwiftImage.xcodeproj">
    </FileRef>
 </Workspace>

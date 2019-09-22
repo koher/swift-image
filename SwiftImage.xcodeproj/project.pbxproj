@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A0E1F85226C005592A2 /* EasyImagy.framework */; };
+		D6134A181F85226D005592A2 /* SwiftImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A0E1F85226C005592A2 /* SwiftImage.framework */; };
 		D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134A491F852A64005592A2 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* AppKitTests.swift */; };
 		D6134A4A1F852A64005592A2 /* CoreGraphicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */; };
@@ -21,7 +21,7 @@
 		D6134A551F852A85005592A2 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A301F852A49005592A2 /* UIKit.swift */; };
 		D6134A591F852A85005592A2 /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A371F852A49005592A2 /* RGBA.swift */; };
 		D6134A5A1F852A85005592A2 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A381F852A49005592A2 /* Util.swift */; };
-		D6134A691F852C80005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A601F852C80005592A2 /* EasyImagy.framework */; };
+		D6134A691F852C80005592A2 /* SwiftImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A601F852C80005592A2 /* SwiftImage.framework */; };
 		D6134A7B1F85CF5E005592A2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2B1F852A49005592A2 /* Image.swift */; };
 		D6134A7C1F85CF5E005592A2 /* AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2C1F852A49005592A2 /* AppKit.swift */; };
 		D6134A7D1F85CF5E005592A2 /* CoreGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2D1F852A49005592A2 /* CoreGraphics.swift */; };
@@ -36,7 +36,7 @@
 		D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
 		D6134A8F1F85CFA4005592A2 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D6134A2A1F852A49005592A2 /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6134AAB1F85D1FA005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134AA21F85D1F9005592A2 /* EasyImagy.framework */; };
+		D6134AAB1F85D1FA005592A2 /* SwiftImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134AA21F85D1F9005592A2 /* SwiftImage.framework */; };
 		D6134AB91F85D2AF005592A2 /* EasyImagy.h in Headers */ = {isa = PBXBuildFile; fileRef = D6134A2A1F852A49005592A2 /* EasyImagy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D6134ABA1F85D2AF005592A2 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2B1F852A49005592A2 /* Image.swift */; };
 		D6134ABB1F85D2AF005592A2 /* AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A2C1F852A49005592A2 /* AppKit.swift */; };
@@ -210,8 +210,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D6134A0E1F85226C005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EasyImagyTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134A0E1F85226C005592A2 /* SwiftImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134A171F85226D005592A2 /* SwiftImageTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftImageTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A2A1F852A49005592A2 /* EasyImagy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
 		D6134A2B1F852A49005592A2 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		D6134A2C1F852A49005592A2 /* AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKit.swift; sourceTree = "<group>"; };
@@ -228,11 +228,11 @@
 		D6134A3F1F852A57005592A2 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		D6134A401F852A57005592A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6134A411F852A57005592A2 /* RGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBATests.swift; sourceTree = "<group>"; };
-		D6134A601F852C80005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6134A681F852C80005592A2 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6134AA21F85D1F9005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6134AAA1F85D1FA005592A2 /* EasyImagyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyImagyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6134AD21F85D800005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134A601F852C80005592A2 /* SwiftImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134A681F852C80005592A2 /* SwiftImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134AA21F85D1F9005592A2 /* SwiftImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134AAA1F85D1FA005592A2 /* SwiftImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6134AD21F85D800005592A2 /* SwiftImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoreleaseTests.swift; sourceTree = "<group>"; };
 		D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTests.swift; sourceTree = "<group>"; };
 		D62C6EC61FCC18E600E7DF02 /* HigherOrderFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrderFunctions.swift; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */,
+				D6134A181F85226D005592A2 /* SwiftImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6134A691F852C80005592A2 /* EasyImagy.framework in Frameworks */,
+				D6134A691F852C80005592A2 /* SwiftImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +312,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6134AAB1F85D1FA005592A2 /* EasyImagy.framework in Frameworks */,
+				D6134AAB1F85D1FA005592A2 /* SwiftImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,13 +338,13 @@
 		D6134A0F1F85226C005592A2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D6134A0E1F85226C005592A2 /* EasyImagy.framework */,
-				D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */,
-				D6134A601F852C80005592A2 /* EasyImagy.framework */,
-				D6134A681F852C80005592A2 /* EasyImagyTests.xctest */,
-				D6134AA21F85D1F9005592A2 /* EasyImagy.framework */,
-				D6134AAA1F85D1FA005592A2 /* EasyImagyTests.xctest */,
-				D6134AD21F85D800005592A2 /* EasyImagy.framework */,
+				D6134A0E1F85226C005592A2 /* SwiftImage.framework */,
+				D6134A171F85226D005592A2 /* SwiftImageTests-iOS.xctest */,
+				D6134A601F852C80005592A2 /* SwiftImage.framework */,
+				D6134A681F852C80005592A2 /* SwiftImageTests.xctest */,
+				D6134AA21F85D1F9005592A2 /* SwiftImage.framework */,
+				D6134AAA1F85D1FA005592A2 /* SwiftImageTests.xctest */,
+				D6134AD21F85D800005592A2 /* SwiftImage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -468,9 +468,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D6134A0D1F85226C005592A2 /* EasyImagy-iOS */ = {
+		D6134A0D1F85226C005592A2 /* SwiftImage-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134A221F85226D005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-iOS" */;
+			buildConfigurationList = D6134A221F85226D005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-iOS" */;
 			buildPhases = (
 				D6134A091F85226C005592A2 /* Sources */,
 				D6134A0A1F85226C005592A2 /* Frameworks */,
@@ -481,14 +481,14 @@
 			);
 			dependencies = (
 			);
-			name = "EasyImagy-iOS";
+			name = "SwiftImage-iOS";
 			productName = EasyImagy;
-			productReference = D6134A0E1F85226C005592A2 /* EasyImagy.framework */;
+			productReference = D6134A0E1F85226C005592A2 /* SwiftImage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D6134A161F85226D005592A2 /* EasyImagyTests-iOS */ = {
+		D6134A161F85226D005592A2 /* SwiftImageTests-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134A251F85226D005592A2 /* Build configuration list for PBXNativeTarget "EasyImagyTests-iOS" */;
+			buildConfigurationList = D6134A251F85226D005592A2 /* Build configuration list for PBXNativeTarget "SwiftImageTests-iOS" */;
 			buildPhases = (
 				D6134A131F85226D005592A2 /* Sources */,
 				D6134A141F85226D005592A2 /* Frameworks */,
@@ -499,14 +499,14 @@
 			dependencies = (
 				D6134A1A1F85226D005592A2 /* PBXTargetDependency */,
 			);
-			name = "EasyImagyTests-iOS";
+			name = "SwiftImageTests-iOS";
 			productName = EasyImagyTests;
-			productReference = D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */;
+			productReference = D6134A171F85226D005592A2 /* SwiftImageTests-iOS.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D6134A5F1F852C80005592A2 /* EasyImagy-macOS */ = {
+		D6134A5F1F852C80005592A2 /* SwiftImage-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134A711F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-macOS" */;
+			buildConfigurationList = D6134A711F852C80005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-macOS" */;
 			buildPhases = (
 				D6134A5B1F852C80005592A2 /* Sources */,
 				D6134A5C1F852C80005592A2 /* Frameworks */,
@@ -517,14 +517,14 @@
 			);
 			dependencies = (
 			);
-			name = "EasyImagy-macOS";
+			name = "SwiftImage-macOS";
 			productName = "EasyImagy-macOS";
-			productReference = D6134A601F852C80005592A2 /* EasyImagy.framework */;
+			productReference = D6134A601F852C80005592A2 /* SwiftImage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D6134A671F852C80005592A2 /* EasyImagyTests-macOS */ = {
+		D6134A671F852C80005592A2 /* SwiftImageTests-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134A741F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagyTests-macOS" */;
+			buildConfigurationList = D6134A741F852C80005592A2 /* Build configuration list for PBXNativeTarget "SwiftImageTests-macOS" */;
 			buildPhases = (
 				D6134A641F852C80005592A2 /* Sources */,
 				D6134A651F852C80005592A2 /* Frameworks */,
@@ -535,14 +535,14 @@
 			dependencies = (
 				D6134A6B1F852C80005592A2 /* PBXTargetDependency */,
 			);
-			name = "EasyImagyTests-macOS";
+			name = "SwiftImageTests-macOS";
 			productName = "EasyImagy-macOSTests";
-			productReference = D6134A681F852C80005592A2 /* EasyImagyTests.xctest */;
+			productReference = D6134A681F852C80005592A2 /* SwiftImageTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D6134AA11F85D1F9005592A2 /* EasyImagy-tvOS */ = {
+		D6134AA11F85D1F9005592A2 /* SwiftImage-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134AB71F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-tvOS" */;
+			buildConfigurationList = D6134AB71F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-tvOS" */;
 			buildPhases = (
 				D6134A9D1F85D1F9005592A2 /* Sources */,
 				D6134A9E1F85D1F9005592A2 /* Frameworks */,
@@ -553,14 +553,14 @@
 			);
 			dependencies = (
 			);
-			name = "EasyImagy-tvOS";
+			name = "SwiftImage-tvOS";
 			productName = "EasyImagy-tvOS";
-			productReference = D6134AA21F85D1F9005592A2 /* EasyImagy.framework */;
+			productReference = D6134AA21F85D1F9005592A2 /* SwiftImage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D6134AA91F85D1FA005592A2 /* EasyImagyTests-tvOS */ = {
+		D6134AA91F85D1FA005592A2 /* SwiftImageTests-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134AB81F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "EasyImagyTests-tvOS" */;
+			buildConfigurationList = D6134AB81F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "SwiftImageTests-tvOS" */;
 			buildPhases = (
 				D6134AA61F85D1FA005592A2 /* Sources */,
 				D6134AA71F85D1FA005592A2 /* Frameworks */,
@@ -571,14 +571,14 @@
 			dependencies = (
 				D6134AAD1F85D1FA005592A2 /* PBXTargetDependency */,
 			);
-			name = "EasyImagyTests-tvOS";
+			name = "SwiftImageTests-tvOS";
 			productName = "EasyImagy-tvOSTests";
-			productReference = D6134AAA1F85D1FA005592A2 /* EasyImagyTests.xctest */;
+			productReference = D6134AAA1F85D1FA005592A2 /* SwiftImageTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D6134AD11F85D800005592A2 /* EasyImagy-watchOS */ = {
+		D6134AD11F85D800005592A2 /* SwiftImage-watchOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6134AD71F85D800005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-watchOS" */;
+			buildConfigurationList = D6134AD71F85D800005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-watchOS" */;
 			buildPhases = (
 				D6134ACD1F85D800005592A2 /* Sources */,
 				D6134ACE1F85D800005592A2 /* Frameworks */,
@@ -589,9 +589,9 @@
 			);
 			dependencies = (
 			);
-			name = "EasyImagy-watchOS";
+			name = "SwiftImage-watchOS";
 			productName = "EasyImagy-watchOS";
-			productReference = D6134AD21F85D800005592A2 /* EasyImagy.framework */;
+			productReference = D6134AD21F85D800005592A2 /* SwiftImage.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -636,7 +636,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D6134A081F85226C005592A2 /* Build configuration list for PBXProject "EasyImagy" */;
+			buildConfigurationList = D6134A081F85226C005592A2 /* Build configuration list for PBXProject "SwiftImage" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -648,13 +648,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D6134A0D1F85226C005592A2 /* EasyImagy-iOS */,
-				D6134A161F85226D005592A2 /* EasyImagyTests-iOS */,
-				D6134A5F1F852C80005592A2 /* EasyImagy-macOS */,
-				D6134A671F852C80005592A2 /* EasyImagyTests-macOS */,
-				D6134AA11F85D1F9005592A2 /* EasyImagy-tvOS */,
-				D6134AA91F85D1FA005592A2 /* EasyImagyTests-tvOS */,
-				D6134AD11F85D800005592A2 /* EasyImagy-watchOS */,
+				D6134A0D1F85226C005592A2 /* SwiftImage-iOS */,
+				D6134A161F85226D005592A2 /* SwiftImageTests-iOS */,
+				D6134A5F1F852C80005592A2 /* SwiftImage-macOS */,
+				D6134A671F852C80005592A2 /* SwiftImageTests-macOS */,
+				D6134AA11F85D1F9005592A2 /* SwiftImage-tvOS */,
+				D6134AA91F85D1FA005592A2 /* SwiftImageTests-tvOS */,
+				D6134AD11F85D800005592A2 /* SwiftImage-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -935,17 +935,17 @@
 /* Begin PBXTargetDependency section */
 		D6134A1A1F85226D005592A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D6134A0D1F85226C005592A2 /* EasyImagy-iOS */;
+			target = D6134A0D1F85226C005592A2 /* SwiftImage-iOS */;
 			targetProxy = D6134A191F85226D005592A2 /* PBXContainerItemProxy */;
 		};
 		D6134A6B1F852C80005592A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D6134A5F1F852C80005592A2 /* EasyImagy-macOS */;
+			target = D6134A5F1F852C80005592A2 /* SwiftImage-macOS */;
 			targetProxy = D6134A6A1F852C80005592A2 /* PBXContainerItemProxy */;
 		};
 		D6134AAD1F85D1FA005592A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D6134AA11F85D1F9005592A2 /* EasyImagy-tvOS */;
+			target = D6134AA11F85D1F9005592A2 /* SwiftImage-tvOS */;
 			targetProxy = D6134AAC1F85D1FA005592A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1080,7 +1080,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1100,7 +1100,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1148,7 +1148,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1170,7 +1170,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -1187,7 +1187,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
-				PRODUCT_NAME = EasyImagyTests;
+				PRODUCT_NAME = SwiftImageTests;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -1203,7 +1203,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
-				PRODUCT_NAME = EasyImagyTests;
+				PRODUCT_NAME = SwiftImageTests;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1221,7 +1221,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1242,7 +1242,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1258,7 +1258,7 @@
 				INFOPLIST_FILE = Tests/EasyImagyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
-				PRODUCT_NAME = EasyImagyTests;
+				PRODUCT_NAME = SwiftImageTests;
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
@@ -1273,7 +1273,7 @@
 				INFOPLIST_FILE = Tests/EasyImagyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagyTests;
-				PRODUCT_NAME = EasyImagyTests;
+				PRODUCT_NAME = SwiftImageTests;
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.0;
@@ -1294,7 +1294,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1316,7 +1316,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.koherent.EasyImagy;
-				PRODUCT_NAME = EasyImagy;
+				PRODUCT_NAME = SwiftImage;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -1327,7 +1327,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D6134A081F85226C005592A2 /* Build configuration list for PBXProject "EasyImagy" */ = {
+		D6134A081F85226C005592A2 /* Build configuration list for PBXProject "SwiftImage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134A201F85226D005592A2 /* Debug */,
@@ -1336,7 +1336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134A221F85226D005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-iOS" */ = {
+		D6134A221F85226D005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134A231F85226D005592A2 /* Debug */,
@@ -1345,7 +1345,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134A251F85226D005592A2 /* Build configuration list for PBXNativeTarget "EasyImagyTests-iOS" */ = {
+		D6134A251F85226D005592A2 /* Build configuration list for PBXNativeTarget "SwiftImageTests-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134A261F85226D005592A2 /* Debug */,
@@ -1354,7 +1354,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134A711F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-macOS" */ = {
+		D6134A711F852C80005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134A721F852C80005592A2 /* Debug */,
@@ -1363,7 +1363,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134A741F852C80005592A2 /* Build configuration list for PBXNativeTarget "EasyImagyTests-macOS" */ = {
+		D6134A741F852C80005592A2 /* Build configuration list for PBXNativeTarget "SwiftImageTests-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134A751F852C80005592A2 /* Debug */,
@@ -1372,7 +1372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134AB71F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-tvOS" */ = {
+		D6134AB71F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134AB31F85D1FA005592A2 /* Debug */,
@@ -1381,7 +1381,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134AB81F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "EasyImagyTests-tvOS" */ = {
+		D6134AB81F85D1FA005592A2 /* Build configuration list for PBXNativeTarget "SwiftImageTests-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134AB51F85D1FA005592A2 /* Debug */,
@@ -1390,7 +1390,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6134AD71F85D800005592A2 /* Build configuration list for PBXNativeTarget "EasyImagy-watchOS" */ = {
+		D6134AD71F85D800005592A2 /* Build configuration list for PBXNativeTarget "SwiftImage-watchOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6134AD81F85D800005592A2 /* Debug */,
