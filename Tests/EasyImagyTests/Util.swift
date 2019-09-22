@@ -54,6 +54,27 @@ internal func XCTAssertEqual<I : ImageProtocol, F : FloatingPoint>(
 }
 
 internal func XCTAssertEqual<F : FloatingPoint>(
+    _ expression1: @autoclosure () throws -> RGB<F>,
+    _ expression2: @autoclosure () throws -> RGB<F>,
+    accuracy: F,
+    _ message: @autoclosure () -> String = "",
+    file: StaticString = #file,
+    line: UInt = #line
+    ) {
+    do {
+        let e1 = try expression1()
+        let e2 = try expression2()
+        let m = message()
+        
+        XCTAssertEqual(e1.red, e2.red, accuracy: accuracy, m, file: file, line: line)
+        XCTAssertEqual(e1.green, e2.green, accuracy: accuracy, m, file: file, line: line)
+        XCTAssertEqual(e1.blue, e2.blue, accuracy: accuracy, m, file: file, line: line)
+    } catch let error {
+        XCTAssertThrowsError(error, message(), file: file, line: line)
+    }
+}
+
+internal func XCTAssertEqual<F : FloatingPoint>(
     _ expression1: @autoclosure () throws -> RGBA<F>,
     _ expression2: @autoclosure () throws -> RGBA<F>,
     accuracy: F,

@@ -23,4 +23,18 @@ class PremultipliedRGBATests: XCTestCase {
             XCTAssertEqual(r, PremultipliedRGBA<UInt8>(red: 204, green: 221, blue: 238, alpha: 255))
         }
     }
+    
+    func testInitWithRGB() {
+        do {
+            let a = RGB<UInt8>(red: 1, green: 2, blue: 254)
+            let r = PremultipliedRGBA<UInt8>(a)
+            XCTAssertEqual(r, PremultipliedRGBA<UInt8>(red: 1, green: 2, blue: 254, alpha: 255))
+        }
+        
+        do {
+            let a = RGB<Double>(red: 0.2, green: 0.4, blue: 0.6)
+            let r = PremultipliedRGBA<Double>(a)
+            XCTAssertEqual(r, PremultipliedRGBA<Double>(red: 0.2, green: 0.4, blue: 0.6, alpha: 1.0))
+        }
+    }
 }

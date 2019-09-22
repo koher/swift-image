@@ -258,7 +258,7 @@ class ImageTests: XCTestCase {
     }
 
     func testCopyOnWritePerformanceOfCopy() { // Fast
-        let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.transparent)
+        let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.clear)
 		measure {
 			let copy = image
 			XCTAssertEqual(8192 * 8192, copy.count)
@@ -266,7 +266,7 @@ class ImageTests: XCTestCase {
 	}
 	
     func testCopyOnWritePerformanceOfUpdate() { // Fast
-        var image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.transparent)
+        var image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.clear)
         measure {
             image[0, 0] = .white
             XCTAssertEqual(8192 * 8192, image.count)
@@ -274,7 +274,7 @@ class ImageTests: XCTestCase {
     }
     
 	func testCopyPerformance() { // Slow
-		let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.transparent)
+		let image = Image<RGBA<UInt8>>(width: 8192, height: 8192, pixel: RGBA.clear)
 		measure {
 			var copy = image
 			copy[0, 0] = .white

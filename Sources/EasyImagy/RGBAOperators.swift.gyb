@@ -4,7 +4,6 @@
 %   'BinaryInteger',
 %   'FixedWidthInteger',
 %   'FloatingPoint',
-%   'Equatable',
 %   'Comparable',
 %   'Bool',
 % ]
@@ -17,7 +16,6 @@
 %   'BinaryInteger': ['/', '%', '&', '|', '^', '<<', '>>'],
 %   'FixedWidthInteger': ['&+', '&-', '&*', '&<<', '&>>'],
 %   'FloatingPoint': ['/'],
-%   'Equatable': [],
 %   'Comparable': [],
 %   'Bool': ['&&', '||'],
 % }
@@ -27,7 +25,6 @@
 %   'BinaryInteger': ['/=', '%=', '&=', '|=', '^=', '<<=', '>>='],
 %   'FixedWidthInteger': ['&<<=', '&>>='],
 %   'FloatingPoint': ['/='],
-%   'Equatable': [],
 %   'Comparable': [],
 %   'Bool': [],
 % }
@@ -37,7 +34,6 @@
 %   'BinaryInteger': [],
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
-%   'Equatable': ['==', '!='],
 %   'Comparable': [],
 %   'Bool': [],
 % }
@@ -47,7 +43,6 @@
 %   'BinaryInteger': [],
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
-%   'Equatable': [],
 %   'Comparable': ['<', '<=', '>', '>='],
 %   'Bool': [],
 % }
@@ -57,7 +52,6 @@
 %   'BinaryInteger': [],
 %   'FixedWidthInteger': [],
 %   'FloatingPoint': [],
-%   'Equatable': [],
 %   'Comparable': [],
 %   'Bool': ['!'],
 % }
@@ -67,7 +61,6 @@
 %   'BinaryInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
 %   'FixedWidthInteger': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64'],
 %   'FloatingPoint': ['Float', 'Double'],
-%   'Equatable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double', 'Bool'],
 %   'Comparable': ['Int', 'Int8', 'Int16', 'Int32', 'Int64', 'UInt', 'UInt8', 'UInt16', 'UInt32', 'UInt64', 'Float', 'Double'],
 %   'Bool': [],
 % }
@@ -75,7 +68,7 @@
 %   if i > 0:
 
 %   end
-extension RGBA ${': Equatable ' if type == 'Equatable' else ''}where Channel ${'==' if type in concrete_types else ':'} ${type} {
+extension RGBA where Channel ${'==' if type in concrete_types else ':'} ${type} {
 %   first = True
 %   for operator in type_to_operators[type]:
 %     if first:
