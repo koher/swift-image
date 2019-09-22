@@ -1,5 +1,5 @@
 import XCTest
-import EasyImagy
+import SwiftImage
 
 private let image = Image<UInt8>(width: 3, height: 2, pixels: [
     1, 2, 3,

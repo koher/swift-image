@@ -5,9 +5,9 @@ import UIKit
 #if canImport(AppKit)
 import AppKit
 #endif
-import EasyImagy
+import SwiftImage
 
-class EasyImagySample: XCTestCase {
+class SwiftImageSample: XCTestCase {
     func testSample() {
         /**/ #if canImport(UIKit) || canImport(AppKit)
         /**/ let x = 0

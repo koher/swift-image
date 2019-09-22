@@ -1,5 +1,5 @@
 import XCTest
-import EasyImagy
+import SwiftImage
 
 private let accuracy = 1.0e-10
 

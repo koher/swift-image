@@ -1,8 +1,8 @@
 import XCTest
 
-import EasyImagyTests
+import SwiftImageTests
 
 var tests = [XCTestCaseEntry]()
-tests += EasyImagyTests.__allTests()
+tests += SwiftImageTests.__allTests()
 
 XCTMain(tests)

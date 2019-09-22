@@ -1,5 +1,5 @@
 import XCTest
-import EasyImagy
+import SwiftImage
 
 class InterpolationTests: XCTestCase {
     func testSubscriptInterpolation() {

@@ -1,6 +1,6 @@
 #if canImport(UIKit) && canImport(CoreGraphics)
     import XCTest
-    import EasyImagy
+    import SwiftImage
     import CoreGraphics
     import UIKit
 

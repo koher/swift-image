@@ -1,5 +1,5 @@
 import XCTest
-import EasyImagy
+import SwiftImage
 
 internal func XCTAssertEqual<I : ImageProtocol, F : FloatingPoint>(
     _ expression1: @autoclosure () throws -> I,
