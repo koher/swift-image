@@ -202,18 +202,6 @@ extension RGBA where Channel : FloatingPoint {
     }
 }
 
-extension RGBA : Equatable where Channel : Equatable {
-    @inlinable
-    public static func ==(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> Bool {
-        return lhs.red == rhs.red && lhs.green == rhs.green && lhs.blue == rhs.blue && lhs.alpha == rhs.alpha
-    }
-
-    @inlinable
-    public static func !=(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> Bool {
-        return lhs.red != rhs.red || lhs.green != rhs.green || lhs.blue != rhs.blue || lhs.alpha != rhs.alpha
-    }
-}
-
 extension RGBA where Channel : Comparable {
     @inlinable
     public static func <(lhs: RGBA<Channel>, rhs: RGBA<Channel>) -> RGBA<Bool> {

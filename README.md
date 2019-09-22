@@ -297,21 +297,21 @@ imageView.image = image.uiImage
 
 ## Requirements
 
-- Swift 4.2 or later
-- Xcode 10 or later
+- Swift 5.0 or later
+- Xcode 10.2 or later
 
 ## Installation
 
 ### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/koher/swift-image.git", from: "0.6.0"),
+.package(url: "https://github.com/koher/swift-image.git", from: "0.7.0"),
 ```
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
 ```
-github "koher/swift-image" ~> 0.6.0
+github "koher/swift-image" ~> 0.7.0
 ```
 
 ### Manually

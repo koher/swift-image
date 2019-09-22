@@ -1,199 +1,152 @@
 % types = ['UInt8', 'UInt16', 'Int', 'Float', 'Double']
-% summable_types = ['Int', 'Int64', 'Float', 'Double']
-% type_to_summables = {
+% additive_types = ['Int', 'Int64', 'Float', 'Double']
+% type_to_additives = {
 %   'UInt8' : ['Int', 'Float', 'Double'],
 %   'UInt16': ['Int', 'Float', 'Double'],
 %   'Int'   : ['Int', 'Float', 'Double'],
 %   'Float' : ['Float', 'Float', 'Double'],
 %   'Double': ['Double', 'Double', 'Double'],
 % }
-% summable_sybmols = ['Int', 'Float', 'Double']
-% summable_weights = ['Int', 'Float', 'Double']
+% additive_sybmols = ['Int', 'Float', 'Double']
+% additive_weights = ['Int', 'Float', 'Double']
 %
-import Foundation
-
-public protocol _Summable {
-    static func _ez_sum(_ lhs: Self, _ rhs: Self) -> Self
-}
-
-% for type in summable_types:
-extension ${type} : _Summable { public static func _ez_sum(_ lhs: ${type}, _ rhs: ${type}) -> ${type} { return lhs + rhs } }
-% end
-extension RGBA : _Summable where Channel : _Summable {
-    @inlinable
-    public static func _ez_sum(_ lhs: RGBA<Channel>, _ rhs: RGBA<Channel>) -> RGBA<Channel> {
-        return RGBA<Channel>(
-            red  : Channel._ez_sum(lhs.red  , rhs.red),
-            green: Channel._ez_sum(lhs.green, rhs.green),
-            blue : Channel._ez_sum(lhs.blue , rhs.blue),
-            alpha: Channel._ez_sum(lhs.alpha, rhs.alpha)
-        )
-    }
-}
-
 public protocol _NumericPixel {
-    associatedtype _NumericPixelSummableInt    : _Summable
-    associatedtype _NumericPixelSummableFloat  : _Summable
-    associatedtype _NumericPixelSummableDouble : _Summable
+    associatedtype _ez_AdditiveInt    : AdditiveArithmetic
+    associatedtype _ez_AdditiveFloat  : AdditiveArithmetic
+    associatedtype _ez_AdditiveDouble : AdditiveArithmetic
 
-    init(_ez_summableInt: _NumericPixelSummableInt)
-    init(_ez_summableFloat: _NumericPixelSummableFloat)
-    init(_ez_summableDouble: _NumericPixelSummableDouble)
-    var _ez_summableInt: _NumericPixelSummableInt { get }
-    var _ez_summableFloat: _NumericPixelSummableFloat { get }
-    var _ez_summableDouble: _NumericPixelSummableDouble { get }
+    init(_ez_additiveInt: _ez_AdditiveInt)
+    init(_ez_additiveFloat: _ez_AdditiveFloat)
+    init(_ez_additiveDouble: _ez_AdditiveDouble)
+    var _ez_additiveInt: _ez_AdditiveInt { get }
+    var _ez_additiveFloat: _ez_AdditiveFloat { get }
+    var _ez_additiveDouble: _ez_AdditiveDouble { get }
     static var _ez_zero: Self { get }
-    static var _ez_summableIntZero: _NumericPixelSummableInt { get }
-    static var _ez_summableFloatZero: _NumericPixelSummableFloat { get }
-    static var _ez_summableDoubleZero: _NumericPixelSummableDouble { get }
-    static func _ez_productInt(_ lhs: _NumericPixelSummableInt, _ rhs: Int) -> _NumericPixelSummableInt
-    static func _ez_productFloat(_ lhs: _NumericPixelSummableFloat, _ rhs: Float) -> _NumericPixelSummableFloat
-    static func _ez_productDouble(_ lhs: _NumericPixelSummableDouble, _ rhs: Double) -> _NumericPixelSummableDouble
-    static func _ez_quotientInt(_ lhs: _NumericPixelSummableInt, _ rhs: Int) -> _NumericPixelSummableInt
-    static func _ez_quotientFloat(_ lhs: _NumericPixelSummableFloat, _ rhs: Float) -> _NumericPixelSummableFloat
-    static func _ez_quotientDouble(_ lhs: _NumericPixelSummableDouble, _ rhs: Double) -> _NumericPixelSummableDouble
+    static func _ez_productInt(_ lhs: _ez_AdditiveInt, _ rhs: Int) -> _ez_AdditiveInt
+    static func _ez_productFloat(_ lhs: _ez_AdditiveFloat, _ rhs: Float) -> _ez_AdditiveFloat
+    static func _ez_productDouble(_ lhs: _ez_AdditiveDouble, _ rhs: Double) -> _ez_AdditiveDouble
+    static func _ez_quotientInt(_ lhs: _ez_AdditiveInt, _ rhs: Int) -> _ez_AdditiveInt
+    static func _ez_quotientFloat(_ lhs: _ez_AdditiveFloat, _ rhs: Float) -> _ez_AdditiveFloat
+    static func _ez_quotientDouble(_ lhs: _ez_AdditiveDouble, _ rhs: Double) -> _ez_AdditiveDouble
+}
+
+extension _NumericPixel where Self: AdditiveArithmetic {
+    public static var _ez_zero: Self { return .zero }
 }
 
 extension RGBA : _NumericPixel where Channel : _NumericPixel {
-    public typealias _NumericPixelSummableInt = RGBA<Channel._NumericPixelSummableInt>
-    public typealias _NumericPixelSummableFloat = RGBA<Channel._NumericPixelSummableFloat>
-    public typealias _NumericPixelSummableDouble = RGBA<Channel._NumericPixelSummableDouble>
+    public typealias _ez_AdditiveInt = RGBA<Channel._ez_AdditiveInt>
+    public typealias _ez_AdditiveFloat = RGBA<Channel._ez_AdditiveFloat>
+    public typealias _ez_AdditiveDouble = RGBA<Channel._ez_AdditiveDouble>
     
     @inlinable
-    public init(_ez_summableInt: RGBA<Channel._NumericPixelSummableInt>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableInt: _ez_summableInt.red), green: Channel.init(_ez_summableInt: _ez_summableInt.green), blue: Channel.init(_ez_summableInt: _ez_summableInt.blue), alpha: Channel.init(_ez_summableInt: _ez_summableInt.alpha))
-    }
-    
-    @inlinable
-    public init(_ez_summableFloat: RGBA<Channel._NumericPixelSummableFloat>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableFloat: _ez_summableFloat.red), green: Channel.init(_ez_summableFloat: _ez_summableFloat.green), blue: Channel.init(_ez_summableFloat: _ez_summableFloat.blue), alpha: Channel.init(_ez_summableFloat: _ez_summableFloat.alpha))
+    public init(_ez_additiveInt: RGBA<Channel._ez_AdditiveInt>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveInt: _ez_additiveInt.red), green: Channel.init(_ez_additiveInt: _ez_additiveInt.green), blue: Channel.init(_ez_additiveInt: _ez_additiveInt.blue), alpha: Channel.init(_ez_additiveInt: _ez_additiveInt.alpha))
     }
     
     @inlinable
-    public init(_ez_summableDouble: RGBA<Channel._NumericPixelSummableDouble>) {
-        self = RGBA<Channel>(red: Channel.init(_ez_summableDouble: _ez_summableDouble.red), green: Channel.init(_ez_summableDouble: _ez_summableDouble.green), blue: Channel.init(_ez_summableDouble: _ez_summableDouble.blue), alpha: Channel.init(_ez_summableDouble: _ez_summableDouble.alpha))
+    public init(_ez_additiveFloat: RGBA<Channel._ez_AdditiveFloat>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveFloat: _ez_additiveFloat.red), green: Channel.init(_ez_additiveFloat: _ez_additiveFloat.green), blue: Channel.init(_ez_additiveFloat: _ez_additiveFloat.blue), alpha: Channel.init(_ez_additiveFloat: _ez_additiveFloat.alpha))
     }
     
-    public var _ez_summableInt: RGBA<Channel._NumericPixelSummableInt> {
-        return RGBA<Channel._NumericPixelSummableInt>(red: red._ez_summableInt, green: green._ez_summableInt, blue: blue._ez_summableInt, alpha: alpha._ez_summableInt)
+    @inlinable
+    public init(_ez_additiveDouble: RGBA<Channel._ez_AdditiveDouble>) {
+        self = RGBA<Channel>(red: Channel.init(_ez_additiveDouble: _ez_additiveDouble.red), green: Channel.init(_ez_additiveDouble: _ez_additiveDouble.green), blue: Channel.init(_ez_additiveDouble: _ez_additiveDouble.blue), alpha: Channel.init(_ez_additiveDouble: _ez_additiveDouble.alpha))
     }
     
-    public var _ez_summableFloat: RGBA<Channel._NumericPixelSummableFloat> {
-        return RGBA<Channel._NumericPixelSummableFloat>(red: red._ez_summableFloat, green: green._ez_summableFloat, blue: blue._ez_summableFloat, alpha: alpha._ez_summableFloat)
+    public var _ez_additiveInt: RGBA<Channel._ez_AdditiveInt> {
+        return RGBA<Channel._ez_AdditiveInt>(red: red._ez_additiveInt, green: green._ez_additiveInt, blue: blue._ez_additiveInt, alpha: alpha._ez_additiveInt)
     }
     
-    public var _ez_summableDouble: RGBA<Channel._NumericPixelSummableDouble> {
-        return RGBA<Channel._NumericPixelSummableDouble>(red: red._ez_summableDouble, green: green._ez_summableDouble, blue: blue._ez_summableDouble, alpha: alpha._ez_summableDouble)
+    public var _ez_additiveFloat: RGBA<Channel._ez_AdditiveFloat> {
+        return RGBA<Channel._ez_AdditiveFloat>(red: red._ez_additiveFloat, green: green._ez_additiveFloat, blue: blue._ez_additiveFloat, alpha: alpha._ez_additiveFloat)
+    }
+    
+    public var _ez_additiveDouble: RGBA<Channel._ez_AdditiveDouble> {
+        return RGBA<Channel._ez_AdditiveDouble>(red: red._ez_additiveDouble, green: green._ez_additiveDouble, blue: blue._ez_additiveDouble, alpha: alpha._ez_additiveDouble)
     }
     
     public static var _ez_zero: RGBA<Channel> {
         return RGBA<Channel>(red: Channel._ez_zero, green: Channel._ez_zero, blue: Channel._ez_zero, alpha: Channel._ez_zero)
     }
     
-    public static var _ez_summableIntZero: RGBA<Channel._NumericPixelSummableInt> {
-        let zero = Channel._ez_summableIntZero
-        return RGBA<Channel._NumericPixelSummableInt>(red: zero, green: zero, blue: zero, alpha: zero)
-    }
-    
-    public static var _ez_summableFloatZero: RGBA<Channel._NumericPixelSummableFloat> {
-        let zero = Channel._ez_summableFloatZero
-        return RGBA<Channel._NumericPixelSummableFloat>(red: zero, green: zero, blue: zero, alpha: zero)
-    }
-    
-    public static var _ez_summableDoubleZero: RGBA<Channel._NumericPixelSummableDouble> {
-        let zero = Channel._ez_summableDoubleZero
-        return RGBA<Channel._NumericPixelSummableDouble>(red: zero, green: zero, blue: zero, alpha: zero)
+    @inlinable
+    public static func _ez_productInt(_ lhs: RGBA<Channel._ez_AdditiveInt>, _ rhs: Int) -> RGBA<Channel._ez_AdditiveInt> {
+        return RGBA<Channel._ez_AdditiveInt>(red: Channel._ez_productInt(lhs.red, rhs), green: Channel._ez_productInt(lhs.green, rhs), blue: Channel._ez_productInt(lhs.blue, rhs), alpha: Channel._ez_productInt(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func _ez_productInt(_ lhs: RGBA<Channel._NumericPixelSummableInt>, _ rhs: Int) -> RGBA<Channel._NumericPixelSummableInt> {
-        return RGBA<Channel._NumericPixelSummableInt>(red: Channel._ez_productInt(lhs.red, rhs), green: Channel._ez_productInt(lhs.green, rhs), blue: Channel._ez_productInt(lhs.blue, rhs), alpha: Channel._ez_productInt(lhs.alpha, rhs))
+    public static func _ez_productFloat(_ lhs: RGBA<Channel._ez_AdditiveFloat>, _ rhs: Float) -> RGBA<Channel._ez_AdditiveFloat> {
+        return RGBA<Channel._ez_AdditiveFloat>(red: Channel._ez_productFloat(lhs.red, rhs), green: Channel._ez_productFloat(lhs.green, rhs), blue: Channel._ez_productFloat(lhs.blue, rhs), alpha: Channel._ez_productFloat(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func _ez_productFloat(_ lhs: RGBA<Channel._NumericPixelSummableFloat>, _ rhs: Float) -> RGBA<Channel._NumericPixelSummableFloat> {
-        return RGBA<Channel._NumericPixelSummableFloat>(red: Channel._ez_productFloat(lhs.red, rhs), green: Channel._ez_productFloat(lhs.green, rhs), blue: Channel._ez_productFloat(lhs.blue, rhs), alpha: Channel._ez_productFloat(lhs.alpha, rhs))
+    public static func _ez_productDouble(_ lhs: RGBA<Channel._ez_AdditiveDouble>, _ rhs: Double) -> RGBA<Channel._ez_AdditiveDouble> {
+        return RGBA<Channel._ez_AdditiveDouble>(red: Channel._ez_productDouble(lhs.red, rhs), green: Channel._ez_productDouble(lhs.green, rhs), blue: Channel._ez_productDouble(lhs.blue, rhs), alpha: Channel._ez_productDouble(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func _ez_productDouble(_ lhs: RGBA<Channel._NumericPixelSummableDouble>, _ rhs: Double) -> RGBA<Channel._NumericPixelSummableDouble> {
-        return RGBA<Channel._NumericPixelSummableDouble>(red: Channel._ez_productDouble(lhs.red, rhs), green: Channel._ez_productDouble(lhs.green, rhs), blue: Channel._ez_productDouble(lhs.blue, rhs), alpha: Channel._ez_productDouble(lhs.alpha, rhs))
+    public static func _ez_quotientInt(_ lhs: RGBA<Channel._ez_AdditiveInt>, _ rhs: Int) -> RGBA<Channel._ez_AdditiveInt> {
+        return RGBA<Channel._ez_AdditiveInt>(red: Channel._ez_quotientInt(lhs.red, rhs), green: Channel._ez_quotientInt(lhs.green, rhs), blue: Channel._ez_quotientInt(lhs.blue, rhs), alpha: Channel._ez_quotientInt(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func _ez_quotientInt(_ lhs: RGBA<Channel._NumericPixelSummableInt>, _ rhs: Int) -> RGBA<Channel._NumericPixelSummableInt> {
-        return RGBA<Channel._NumericPixelSummableInt>(red: Channel._ez_quotientInt(lhs.red, rhs), green: Channel._ez_quotientInt(lhs.green, rhs), blue: Channel._ez_quotientInt(lhs.blue, rhs), alpha: Channel._ez_quotientInt(lhs.alpha, rhs))
+    public static func _ez_quotientFloat(_ lhs: RGBA<Channel._ez_AdditiveFloat>, _ rhs: Float) -> RGBA<Channel._ez_AdditiveFloat> {
+        return RGBA<Channel._ez_AdditiveFloat>(red: Channel._ez_quotientFloat(lhs.red, rhs), green: Channel._ez_quotientFloat(lhs.green, rhs), blue: Channel._ez_quotientFloat(lhs.blue, rhs), alpha: Channel._ez_quotientFloat(lhs.alpha, rhs))
     }
     
     @inlinable
-    public static func _ez_quotientFloat(_ lhs: RGBA<Channel._NumericPixelSummableFloat>, _ rhs: Float) -> RGBA<Channel._NumericPixelSummableFloat> {
-        return RGBA<Channel._NumericPixelSummableFloat>(red: Channel._ez_quotientFloat(lhs.red, rhs), green: Channel._ez_quotientFloat(lhs.green, rhs), blue: Channel._ez_quotientFloat(lhs.blue, rhs), alpha: Channel._ez_quotientFloat(lhs.alpha, rhs))
-    }
-    
-    @inlinable
-    public static func _ez_quotientDouble(_ lhs: RGBA<Channel._NumericPixelSummableDouble>, _ rhs: Double) -> RGBA<Channel._NumericPixelSummableDouble> {
-        return RGBA<Channel._NumericPixelSummableDouble>(red: Channel._ez_quotientDouble(lhs.red, rhs), green: Channel._ez_quotientDouble(lhs.green, rhs), blue: Channel._ez_quotientDouble(lhs.blue, rhs), alpha: Channel._ez_quotientDouble(lhs.alpha, rhs))
+    public static func _ez_quotientDouble(_ lhs: RGBA<Channel._ez_AdditiveDouble>, _ rhs: Double) -> RGBA<Channel._ez_AdditiveDouble> {
+        return RGBA<Channel._ez_AdditiveDouble>(red: Channel._ez_quotientDouble(lhs.red, rhs), green: Channel._ez_quotientDouble(lhs.green, rhs), blue: Channel._ez_quotientDouble(lhs.blue, rhs), alpha: Channel._ez_quotientDouble(lhs.alpha, rhs))
     }
 }
 % for type in types:
 
 extension ${type} : _NumericPixel {
-%   summables = type_to_summables[type]
+%   additives = type_to_additives[type]
 %
-%   for i, (summable_symbol, summable) in enumerate(zip(summable_sybmols, summables)):
+%   for i, (additive_symbol, additive) in enumerate(zip(additive_sybmols, additives)):
 %     if i > 0:
 
 %     end
-    public init(_ez_summable${summable_symbol}: ${summable}) {
-%     if summable == type:
-        self = _ez_summable${summable_symbol}
+    public init(_ez_additive${additive_symbol}: ${additive}) {
+%     if additive == type:
+        self = _ez_additive${additive_symbol}
 %     else:
-        self = ${type}(_ez_summable${summable_symbol})
+        self = ${type}(_ez_additive${additive_symbol})
 %     end
     }
 %   end
 %
-%   for summable_symbol, summable in zip(summable_sybmols, summables):
+%   for additive_symbol, additive in zip(additive_sybmols, additives):
     
-    public var _ez_summable${summable_symbol}: ${summable} {
-%     if summable == type:
+    public var _ez_additive${additive_symbol}: ${additive} {
+%     if additive == type:
         return self
 %     else:
-        return ${summable}(self)
+        return ${additive}(self)
 %     end
     }
 %   end
 
-    public static var _ez_zero: ${type} {
-        return 0
-    }
-
-%   for summable_symbol, summable in zip(summable_sybmols, summables):
+%   for additive_symbol, additive_weight, additive in zip(additive_sybmols, additive_weights, additives):
     
-    public static var _ez_summable${summable_symbol}Zero: ${summable} {
-        return 0
-        
-    }
-%   end
-%
-%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
-    
-    public static func _ez_product${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
-%     if summable_weight == summable:
+    public static func _ez_product${additive_symbol}(_ lhs: ${additive}, _ rhs: ${additive_weight}) -> ${additive} {
+%     if additive_weight == additive:
         return lhs * rhs
 %     else:
-        return lhs * ${summable}(rhs)
+        return lhs * ${additive}(rhs)
 %     end
     }
 %   end
 %
-%   for summable_symbol, summable_weight, summable in zip(summable_sybmols, summable_weights, summables):
+%   for additive_symbol, additive_weight, additive in zip(additive_sybmols, additive_weights, additives):
     
-    public static func _ez_quotient${summable_symbol}(_ lhs: ${summable}, _ rhs: ${summable_weight}) -> ${summable} {
-%     if summable_weight == summable:
+    public static func _ez_quotient${additive_symbol}(_ lhs: ${additive}, _ rhs: ${additive_weight}) -> ${additive} {
+%     if additive_weight == additive:
         return lhs / rhs
 %     else:
-        return lhs / ${summable}(rhs)
+        return lhs / ${additive}(rhs)
 %     end
     }
 %   end

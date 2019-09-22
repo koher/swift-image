@@ -1,14 +1,10 @@
-public struct PremultipliedRGBA<Channel> where Channel : Numeric, Channel : Comparable {
+public struct PremultipliedRGBA<Channel> where Channel : Numeric{
     public var red: Channel
     public var green: Channel
     public var blue: Channel
     public var alpha: Channel
     
     public init(red: Channel, green: Channel, blue: Channel, alpha: Channel) {
-        precondition(red <= alpha, "`red` (\(red)) must be less than or equal to `alpha` (\(alpha)).")
-        precondition(green <= alpha, "`green` (\(green)) must be less than or equal to `alpha` (\(alpha)).")
-        precondition(blue <= alpha, "`blue` (\(blue)) must be less than or equal to `alpha` (\(alpha)).")
-        
         self.red = red
         self.green = green
         self.blue = blue
@@ -16,23 +12,32 @@ public struct PremultipliedRGBA<Channel> where Channel : Numeric, Channel : Comp
     }
 }
 
-extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._NumericPixelSummableInt : FixedWidthInteger {
+extension PremultipliedRGBA where Channel : UnsignedInteger & FixedWidthInteger {
+    public init(_ rgb: RGB<Channel>) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: .max)
+    }
+}
+
+extension PremultipliedRGBA where Channel : _NumericPixel & UnsignedInteger & FixedWidthInteger, Channel._ez_AdditiveInt : FixedWidthInteger {
     public init(_ rgba: RGBA<Channel>) {
-        let numericAlpha: Channel._NumericPixelSummableInt = rgba.alpha._ez_summableInt
-        let numericMaxAlpha: Channel._NumericPixelSummableInt = Channel.max._ez_summableInt
+        let numericAlpha: Channel._ez_AdditiveInt = rgba.alpha._ez_additiveInt
+        let numericMaxAlpha: Channel._ez_AdditiveInt = Channel.max._ez_additiveInt
         
         self.init(
-            red: .init(_ez_summableInt: rgba.red._ez_summableInt * numericAlpha / numericMaxAlpha),
-            green: .init(_ez_summableInt: rgba.green._ez_summableInt * numericAlpha / numericMaxAlpha),
-            blue: .init(_ez_summableInt: rgba.blue._ez_summableInt * numericAlpha / numericMaxAlpha),
+            red: .init(_ez_additiveInt: rgba.red._ez_additiveInt * numericAlpha / numericMaxAlpha),
+            green: .init(_ez_additiveInt: rgba.green._ez_additiveInt * numericAlpha / numericMaxAlpha),
+            blue: .init(_ez_additiveInt: rgba.blue._ez_additiveInt * numericAlpha / numericMaxAlpha),
             alpha: rgba.alpha
         )
     }
 }
 
 extension PremultipliedRGBA where Channel : FloatingPoint {
+    public init(_ rgb: RGB<Channel>) {
+        self.init(red: rgb.red, green: rgb.green, blue: rgb.blue, alpha: 1)
+    }
+    
     public init(_ rgba: RGBA<Channel>) {
-        
         self.init(
             red: rgba.red * rgba.alpha,
             green: rgba.green * rgba.alpha,
@@ -49,7 +54,7 @@ extension PremultipliedRGBA { // Additional initializers
 }
 
 extension PremultipliedRGBA {
-    public func map<T>(_ transform: (Channel) -> T) -> PremultipliedRGBA<T> where T : Numeric, T : Comparable {
+    public func map<T>(_ transform: (Channel) -> T) -> PremultipliedRGBA<T> where T : Numeric {
         return PremultipliedRGBA<T>(
             red: transform(red),
             green: transform(green),

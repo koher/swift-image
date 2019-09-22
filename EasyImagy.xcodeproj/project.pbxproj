@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
 		D6134A181F85226D005592A2 /* EasyImagy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6134A0E1F85226C005592A2 /* EasyImagy.framework */; };
 		D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134A491F852A64005592A2 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* AppKitTests.swift */; };
-		D6134A4A1F852A64005592A2 /* CoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTest.swift */; };
+		D6134A4A1F852A64005592A2 /* CoreGraphicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */; };
 		D6134A4B1F852A64005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
 		D6134A4C1F852A64005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134A4D1F852A64005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
@@ -32,7 +31,7 @@
 		D6134A851F85CF5E005592A2 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A381F852A49005592A2 /* Util.swift */; };
 		D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134A871F85CF6F005592A2 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* AppKitTests.swift */; };
-		D6134A881F85CF6F005592A2 /* CoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTest.swift */; };
+		D6134A881F85CF6F005592A2 /* CoreGraphicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */; };
 		D6134A891F85CF6F005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
 		D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134A8B1F85CF6F005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
@@ -48,7 +47,7 @@
 		D6134AC41F85D2AF005592A2 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A381F852A49005592A2 /* Util.swift */; };
 		D6134AC51F85D2BF005592A2 /* EasyImagyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */; };
 		D6134AC61F85D2BF005592A2 /* AppKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3C1F852A57005592A2 /* AppKitTests.swift */; };
-		D6134AC71F85D2BF005592A2 /* CoreGraphicsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTest.swift */; };
+		D6134AC71F85D2BF005592A2 /* CoreGraphicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */; };
 		D6134AC81F85D2BF005592A2 /* ImageSliceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */; };
 		D6134AC91F85D2BF005592A2 /* ImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A3F1F852A57005592A2 /* ImageTests.swift */; };
 		D6134ACA1F85D2BF005592A2 /* RGBATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6134A411F852A57005592A2 /* RGBATests.swift */; };
@@ -64,9 +63,6 @@
 		D62285BA221171A3006A6D9C /* AutoreleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */; };
 		D62285BB221171A3006A6D9C /* AutoreleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */; };
 		D62285BC221171A3006A6D9C /* AutoreleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */; };
-		D62C6EBB1FC9DAD900E7DF02 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
-		D62C6EBC1FC9DADA00E7DF02 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
-		D62C6EBD1FC9DADB00E7DF02 /* RGBATyped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */; };
 		D62C6EC31FCBA6B800E7DF02 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */; };
 		D62C6EC41FCBA6B900E7DF02 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */; };
 		D62C6EC51FCBA6BA00E7DF02 /* UIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62C6EC11FCBA67500E7DF02 /* UIKitTests.swift */; };
@@ -115,6 +111,10 @@
 		D632C8AB21354DE20030D7D1 /* AppUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D632C8AA21354DE20030D7D1 /* AppUIKitTests.swift */; };
 		D632C8AC21354DE20030D7D1 /* AppUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D632C8AA21354DE20030D7D1 /* AppUIKitTests.swift */; };
 		D632C8AD21354DE20030D7D1 /* AppUIKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D632C8AA21354DE20030D7D1 /* AppUIKitTests.swift */; };
+		D64CA245224DC1CF002D5B44 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64CA244224DC1CF002D5B44 /* RGB.swift */; };
+		D64CA246224DC1D4002D5B44 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64CA244224DC1CF002D5B44 /* RGB.swift */; };
+		D64CA247224DC1D4002D5B44 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64CA244224DC1CF002D5B44 /* RGB.swift */; };
+		D64CA248224DC1D5002D5B44 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64CA244224DC1CF002D5B44 /* RGB.swift */; };
 		D65D3FAA20D3B940004B0F7D /* PremultipliedRGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */; };
 		D65D3FAB20D3B940004B0F7D /* PremultipliedRGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */; };
 		D65D3FAC20D3B940004B0F7D /* PremultipliedRGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */; };
@@ -130,6 +130,13 @@
 		D66AFEF620D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
 		D66AFEF720D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
 		D66AFEF820D90296003FE64C /* ImageIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66AFEF420D90296003FE64C /* ImageIterator.swift */; };
+		D68F9AA4225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
+		D68F9AA5225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
+		D68F9AA6225C182200DA338D /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68F9AA3225C182100DA338D /* RGBTests.swift */; };
+		D69BF7402336B90F0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
+		D69BF7422336C06E0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
+		D69BF7432336C06F0086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
+		D69BF7442336C0700086E809 /* TypicalChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69BF73F2336B90F0086E809 /* TypicalChannel.swift */; };
 		D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE0F1FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
 		D6B4EE101FE0211700B6B7B0 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */; };
@@ -159,6 +166,13 @@
 		D6B8BF841FE57E22009C7C30 /* ResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */; };
 		D6B8BF851FE57E22009C7C30 /* ResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */; };
 		D6B8BF861FE57E22009C7C30 /* ResizingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */; };
+		D6C05E3F225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E40225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E41225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E42225612E9007AB9CD /* ColorLiteral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */; };
+		D6C05E4422561545007AB9CD /* ColorLiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */; };
+		D6C05E4522561545007AB9CD /* ColorLiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */; };
+		D6C05E4622561545007AB9CD /* ColorLiteralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */; };
 		D6C1C01E1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
 		D6C1C01F1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
 		D6C1C0201FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */; };
@@ -196,7 +210,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBATyped.swift; sourceTree = "<group>"; };
 		D6134A0E1F85226C005592A2 /* EasyImagy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EasyImagy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A171F85226D005592A2 /* EasyImagyTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "EasyImagyTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6134A2A1F852A49005592A2 /* EasyImagy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EasyImagy.h; sourceTree = "<group>"; };
@@ -210,7 +223,7 @@
 		D6134A381F852A49005592A2 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyImagyTests.swift; sourceTree = "<group>"; };
 		D6134A3C1F852A57005592A2 /* AppKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitTests.swift; sourceTree = "<group>"; };
-		D6134A3D1F852A57005592A2 /* CoreGraphicsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsTest.swift; sourceTree = "<group>"; };
+		D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsTests.swift; sourceTree = "<group>"; };
 		D6134A3E1F852A57005592A2 /* ImageSliceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliceTests.swift; sourceTree = "<group>"; };
 		D6134A3F1F852A57005592A2 /* ImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTests.swift; sourceTree = "<group>"; };
 		D6134A401F852A57005592A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -235,10 +248,13 @@
 		D63109281FD0056B009974D0 /* RGBAOperatorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBAOperatorsTests.swift; sourceTree = "<group>"; };
 		D631092C1FD009B6009974D0 /* ImageOperatorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOperatorsTests.swift; sourceTree = "<group>"; };
 		D632C8AA21354DE20030D7D1 /* AppUIKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUIKitTests.swift; sourceTree = "<group>"; };
+		D64CA244224DC1CF002D5B44 /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBA.swift; sourceTree = "<group>"; };
 		D66840581F9F426200D1DE7F /* NumericPixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericPixel.swift; sourceTree = "<group>"; };
 		D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremultipliedRGBATests.swift; sourceTree = "<group>"; };
 		D66AFEF420D90296003FE64C /* ImageIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIterator.swift; sourceTree = "<group>"; };
+		D68F9AA3225C182100DA338D /* RGBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBTests.swift; sourceTree = "<group>"; };
+		D69BF73F2336B90F0086E809 /* TypicalChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypicalChannel.swift; sourceTree = "<group>"; };
 		D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
 		D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
 		D6B4EE161FE2038000B6B7B0 /* ImageFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFormat.swift; sourceTree = "<group>"; };
@@ -247,6 +263,8 @@
 		D6B4EE241FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrapolatedImage.swift; sourceTree = "<group>"; };
 		D6B4EE291FE4A1C200B6B7B0 /* Resizing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resizing.swift; sourceTree = "<group>"; };
 		D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizingTests.swift; sourceTree = "<group>"; };
+		D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiteral.swift; sourceTree = "<group>"; };
+		D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiteralTests.swift; sourceTree = "<group>"; };
 		D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HigherOrderFunctionsTests.swift; sourceTree = "<group>"; };
 		D6D33DBA1FD97A8B00256FD0 /* ImageProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProtocolTests.swift; sourceTree = "<group>"; };
 		D6FAC8691FD1938400509BCB /* ImageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProtocol.swift; sourceTree = "<group>"; };
@@ -344,6 +362,7 @@
 			children = (
 				D6B4EE1B1FE25C0600B6B7B0 /* AnyImage.swift */,
 				D6134A2C1F852A49005592A2 /* AppKit.swift */,
+				D6C05E3E225612E9007AB9CD /* ColorLiteral.swift */,
 				D63109111FCFD7DE009974D0 /* Convolution.swift */,
 				D6134A2D1F852A49005592A2 /* CoreGraphics.swift */,
 				D6134A2A1F852A49005592A2 /* EasyImagy.h */,
@@ -361,10 +380,11 @@
 				D66840581F9F426200D1DE7F /* NumericPixel.swift */,
 				D65D3FA920D3B940004B0F7D /* PremultipliedRGBA.swift */,
 				D6B4EE291FE4A1C200B6B7B0 /* Resizing.swift */,
+				D64CA244224DC1CF002D5B44 /* RGB.swift */,
 				D6134A371F852A49005592A2 /* RGBA.swift */,
 				D63109231FCFFD85009974D0 /* RGBAOperators.swift */,
-				D60D48A61FA16BB90047F2D3 /* RGBATyped.swift */,
 				D6B4EE0D1FE0211700B6B7B0 /* Rotation.swift */,
+				D69BF73F2336B90F0086E809 /* TypicalChannel.swift */,
 				D6134A301F852A49005592A2 /* UIKit.swift */,
 				D6134A381F852A49005592A2 /* Util.swift */,
 			);
@@ -386,8 +406,9 @@
 				D6134A3C1F852A57005592A2 /* AppKitTests.swift */,
 				D632C8AA21354DE20030D7D1 /* AppUIKitTests.swift */,
 				D62285B9221171A3006A6D9C /* AutoreleaseTests.swift */,
+				D6C05E4322561545007AB9CD /* ColorLiteralTests.swift */,
 				D63109161FCFF252009974D0 /* ConvolutionTests.swift */,
-				D6134A3D1F852A57005592A2 /* CoreGraphicsTest.swift */,
+				D6134A3D1F852A57005592A2 /* CoreGraphicsTests.swift */,
 				D6134A3B1F852A57005592A2 /* EasyImagyTests.swift */,
 				D62C6EE31FCE8F1800E7DF02 /* ExtrapolationTests.swift */,
 				D6C1C01D1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift */,
@@ -399,6 +420,7 @@
 				D62C6ED91FCE5F7600E7DF02 /* InterpolationTests.swift */,
 				D66AFEE420D78D47003FE64C /* PremultipliedRGBATests.swift */,
 				D6B8BF831FE57E22009C7C30 /* ResizingTests.swift */,
+				D68F9AA3225C182100DA338D /* RGBTests.swift */,
 				D6134A411F852A57005592A2 /* RGBATests.swift */,
 				D63109281FD0056B009974D0 /* RGBAOperatorsTests.swift */,
 				D6B4EE121FE0DC4100B6B7B0 /* RotationTests.swift */,
@@ -592,10 +614,12 @@
 					};
 					D6134A5F1F852C80005592A2 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					D6134A671F852C80005592A2 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 					D6134AA11F85D1F9005592A2 = {
@@ -692,14 +716,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D69BF7402336B90F0086E809 /* TypicalChannel.swift in Sources */,
 				D6134A5A1F852A85005592A2 /* Util.swift in Sources */,
+				D6C05E3F225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A511F852A85005592A2 /* AppKit.swift in Sources */,
 				D6B4EE251FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D66840591F9F426200D1DE7F /* NumericPixel.swift in Sources */,
 				D62C6EDF1FCE6BD800E7DF02 /* Extrapolation.swift in Sources */,
 				D6FAC86A1FD1938400509BCB /* ImageProtocol.swift in Sources */,
 				D6B4EE0E1FE0211700B6B7B0 /* Rotation.swift in Sources */,
-				D60D48A71FA16BB90047F2D3 /* RGBATyped.swift in Sources */,
 				D6134A591F852A85005592A2 /* RGBA.swift in Sources */,
 				D62C6ED51FCE55EB00E7DF02 /* Interpolation.swift in Sources */,
 				D6B4EE2A1FE4A1C300B6B7B0 /* Resizing.swift in Sources */,
@@ -707,6 +732,7 @@
 				D6134A501F852A85005592A2 /* Image.swift in Sources */,
 				D62C6EC71FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134A551F852A85005592A2 /* UIKit.swift in Sources */,
+				D64CA245224DC1CF002D5B44 /* RGB.swift in Sources */,
 				D6134A531F852A85005592A2 /* ImageSlice.swift in Sources */,
 				D63109121FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D63109241FCFFD85009974D0 /* RGBAOperators.swift in Sources */,
@@ -724,9 +750,11 @@
 			files = (
 				D632C8AB21354DE20030D7D1 /* AppUIKitTests.swift in Sources */,
 				D6134A4C1F852A64005592A2 /* ImageTests.swift in Sources */,
+				D68F9AA4225C182200DA338D /* RGBTests.swift in Sources */,
 				D6134A491F852A64005592A2 /* AppKitTests.swift in Sources */,
 				D6134A481F852A64005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC31FCBA6B800E7DF02 /* UIKitTests.swift in Sources */,
+				D6C05E4422561545007AB9CD /* ColorLiteralTests.swift in Sources */,
 				D631091D1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */,
 				D631092D1FD009B6009974D0 /* ImageOperatorsTests.swift in Sources */,
 				D62C6EEA1FCE8F5D00E7DF02 /* ExtrapolationTests.swift in Sources */,
@@ -735,7 +763,7 @@
 				D6C1C01E1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */,
 				D6134A4B1F852A64005592A2 /* ImageSliceTests.swift in Sources */,
 				D6B4EE211FE2699700B6B7B0 /* AnyImageTests.swift in Sources */,
-				D6134A4A1F852A64005592A2 /* CoreGraphicsTest.swift in Sources */,
+				D6134A4A1F852A64005592A2 /* CoreGraphicsTests.swift in Sources */,
 				D63109291FD0056B009974D0 /* RGBAOperatorsTests.swift in Sources */,
 				D62285BA221171A3006A6D9C /* AutoreleaseTests.swift in Sources */,
 				D62C6ED11FCD666600E7DF02 /* Util.swift in Sources */,
@@ -750,7 +778,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D62C6EBB1FC9DAD900E7DF02 /* RGBATyped.swift in Sources */,
+				D69BF7422336C06E0086E809 /* TypicalChannel.swift in Sources */,
+				D6C05E40225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134A851F85CF5E005592A2 /* Util.swift in Sources */,
 				D6B4EE261FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D6134A7C1F85CF5E005592A2 /* AppKit.swift in Sources */,
@@ -765,6 +794,7 @@
 				D6134A801F85CF5E005592A2 /* UIKit.swift in Sources */,
 				D62C6EC81FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134A7E1F85CF5E005592A2 /* ImageSlice.swift in Sources */,
+				D64CA246224DC1D4002D5B44 /* RGB.swift in Sources */,
 				D6134A7D1F85CF5E005592A2 /* CoreGraphics.swift in Sources */,
 				D63109131FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D63109251FCFFD85009974D0 /* RGBAOperators.swift in Sources */,
@@ -782,9 +812,11 @@
 			files = (
 				D632C8AC21354DE20030D7D1 /* AppUIKitTests.swift in Sources */,
 				D6134A8A1F85CF6F005592A2 /* ImageTests.swift in Sources */,
+				D68F9AA5225C182200DA338D /* RGBTests.swift in Sources */,
 				D6134A871F85CF6F005592A2 /* AppKitTests.swift in Sources */,
 				D6134A861F85CF6F005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC41FCBA6B900E7DF02 /* UIKitTests.swift in Sources */,
+				D6C05E4522561545007AB9CD /* ColorLiteralTests.swift in Sources */,
 				D631091C1FCFF27D009974D0 /* ConvolutionTests.swift in Sources */,
 				D631092E1FD009B6009974D0 /* ImageOperatorsTests.swift in Sources */,
 				D62C6EE91FCE8F5C00E7DF02 /* ExtrapolationTests.swift in Sources */,
@@ -793,7 +825,7 @@
 				D6C1C01F1FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */,
 				D6134A891F85CF6F005592A2 /* ImageSliceTests.swift in Sources */,
 				D6B4EE221FE2699700B6B7B0 /* AnyImageTests.swift in Sources */,
-				D6134A881F85CF6F005592A2 /* CoreGraphicsTest.swift in Sources */,
+				D6134A881F85CF6F005592A2 /* CoreGraphicsTests.swift in Sources */,
 				D631092A1FD0056B009974D0 /* RGBAOperatorsTests.swift in Sources */,
 				D62285BB221171A3006A6D9C /* AutoreleaseTests.swift in Sources */,
 				D62C6ED21FCD666600E7DF02 /* Util.swift in Sources */,
@@ -808,7 +840,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D62C6EBC1FC9DADA00E7DF02 /* RGBATyped.swift in Sources */,
+				D69BF7432336C06F0086E809 /* TypicalChannel.swift in Sources */,
+				D6C05E41225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AC41F85D2AF005592A2 /* Util.swift in Sources */,
 				D6B4EE271FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D6134ABB1F85D2AF005592A2 /* AppKit.swift in Sources */,
@@ -823,6 +856,7 @@
 				D6134ABF1F85D2AF005592A2 /* UIKit.swift in Sources */,
 				D62C6EC91FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134ABD1F85D2AF005592A2 /* ImageSlice.swift in Sources */,
+				D64CA247224DC1D4002D5B44 /* RGB.swift in Sources */,
 				D6134ABC1F85D2AF005592A2 /* CoreGraphics.swift in Sources */,
 				D63109141FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D63109261FCFFD85009974D0 /* RGBAOperators.swift in Sources */,
@@ -840,9 +874,11 @@
 			files = (
 				D632C8AD21354DE20030D7D1 /* AppUIKitTests.swift in Sources */,
 				D6134AC91F85D2BF005592A2 /* ImageTests.swift in Sources */,
+				D68F9AA6225C182200DA338D /* RGBTests.swift in Sources */,
 				D6134AC61F85D2BF005592A2 /* AppKitTests.swift in Sources */,
 				D6134AC51F85D2BF005592A2 /* EasyImagyTests.swift in Sources */,
 				D62C6EC51FCBA6BA00E7DF02 /* UIKitTests.swift in Sources */,
+				D6C05E4622561545007AB9CD /* ColorLiteralTests.swift in Sources */,
 				D631091B1FCFF27C009974D0 /* ConvolutionTests.swift in Sources */,
 				D631092F1FD009B6009974D0 /* ImageOperatorsTests.swift in Sources */,
 				D62C6EE81FCE8F5B00E7DF02 /* ExtrapolationTests.swift in Sources */,
@@ -851,7 +887,7 @@
 				D6C1C0201FDFCB2500CAA6C4 /* HigherOrderFunctionsTests.swift in Sources */,
 				D6134AC81F85D2BF005592A2 /* ImageSliceTests.swift in Sources */,
 				D6B4EE231FE2699700B6B7B0 /* AnyImageTests.swift in Sources */,
-				D6134AC71F85D2BF005592A2 /* CoreGraphicsTest.swift in Sources */,
+				D6134AC71F85D2BF005592A2 /* CoreGraphicsTests.swift in Sources */,
 				D631092B1FD0056B009974D0 /* RGBAOperatorsTests.swift in Sources */,
 				D62285BC221171A3006A6D9C /* AutoreleaseTests.swift in Sources */,
 				D62C6ED31FCD666600E7DF02 /* Util.swift in Sources */,
@@ -866,7 +902,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D62C6EBD1FC9DADB00E7DF02 /* RGBATyped.swift in Sources */,
+				D69BF7442336C0700086E809 /* TypicalChannel.swift in Sources */,
+				D6C05E42225612E9007AB9CD /* ColorLiteral.swift in Sources */,
 				D6134AE51F85DA5C005592A2 /* Util.swift in Sources */,
 				D6B4EE281FE2BF1F00B6B7B0 /* ExtrapolatedImage.swift in Sources */,
 				D6134ADC1F85DA5C005592A2 /* AppKit.swift in Sources */,
@@ -881,6 +918,7 @@
 				D6134AE01F85DA5C005592A2 /* UIKit.swift in Sources */,
 				D62C6ECA1FCC18E600E7DF02 /* HigherOrderFunctions.swift in Sources */,
 				D6134ADE1F85DA5C005592A2 /* ImageSlice.swift in Sources */,
+				D64CA248224DC1D5002D5B44 /* RGB.swift in Sources */,
 				D6134ADD1F85DA5C005592A2 /* CoreGraphics.swift in Sources */,
 				D63109151FCFD7DE009974D0 /* Convolution.swift in Sources */,
 				D63109271FCFFD85009974D0 /* RGBAOperators.swift in Sources */,
@@ -968,7 +1006,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1021,7 +1059,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

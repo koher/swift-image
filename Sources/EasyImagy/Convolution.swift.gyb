@@ -68,17 +68,17 @@ extension ImageProtocol where Pixel : _NumericPixel {
         
         for y in yRange {
             for x in xRange {
-                var weightedValues: [Pixel._NumericPixelSummable${type}] = []
+                var weightedValues: [Pixel._ez_Additive${type}] = []
                 for ky in kyRange {
                     for kx in kxRange {
                         let dx = (kx - kxRange.lowerBound) - hw
                         let dy = (ky - kyRange.lowerBound) - hh
-                        let summablePixel = pixelAt(x + dx, y + dy)._ez_summable${type}
+                        let additivePixel = pixelAt(x + dx, y + dy)._ez_additive${type}
                         let weight = kernel[kx, ky]
-                        weightedValues.append(Pixel._ez_product${type}(summablePixel, weight))
+                        weightedValues.append(Pixel._ez_product${type}(additivePixel, weight))
                     }
                 }
-                pixels.append(Pixel.init(_ez_summable${type}: weightedValues.reduce(Pixel._ez_summable${type}Zero) { Pixel._NumericPixelSummable${type}._ez_sum($0, $1) }))
+                pixels.append(Pixel.init(_ez_additive${type}: weightedValues.reduce(Pixel._ez_Additive${type}.zero, +)))
             }
         }
         
