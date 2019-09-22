@@ -15,7 +15,7 @@ matrix:
         - xcodebuild build -scheme SwiftImage-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
     - os: osx
       language: objective-c
-      osx_image: xcode11.0
+      osx_image: xcode11
       script:
         - set -o pipefail
         - xcodebuild test -scheme SwiftImage-macOS -configuration Debug | xcpretty -c
@@ -37,7 +37,7 @@ matrix:
         - swift test -c release
     - os: osx
       language: generic
-      osx_image: xcode11.0
+      osx_image: xcode11
       script:
         - swift --version
         - swift build
