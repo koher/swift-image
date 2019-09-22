@@ -5,27 +5,27 @@ matrix:
       osx_image: xcode10.2
       script:
         - set -o pipefail
-        - xcodebuild test -scheme EasyImagy-macOS -configuration Debug | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-iOS -configuration Debug -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone XS" | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
-        - xcodebuild build -scheme EasyImagy-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-macOS -configuration Release | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-iOS -configuration Release -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone XS" | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-tvOS -configuration Release -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
-        - xcodebuild build -scheme EasyImagy-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-macOS -configuration Debug | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-iOS -configuration Debug -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone XS" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme SwiftImage-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-macOS -configuration Release | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-iOS -configuration Release -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone XS" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-tvOS -configuration Release -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme SwiftImage-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 4 - 44mm" | xcpretty -c
     - os: osx
       language: objective-c
       osx_image: xcode11
       script:
         - set -o pipefail
-        - xcodebuild test -scheme EasyImagy-macOS -configuration Debug | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-iOS -configuration Debug -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11 Pro" | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
-        - xcodebuild build -scheme EasyImagy-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-macOS -configuration Release | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-iOS -configuration Release -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11 Pro" | xcpretty -c
-        - xcodebuild test -scheme EasyImagy-tvOS -configuration Release -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
-        - xcodebuild build -scheme EasyImagy-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-macOS -configuration Debug | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-iOS -configuration Debug -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11 Pro" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme SwiftImage-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-macOS -configuration Release | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-iOS -configuration Release -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11 Pro" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-tvOS -configuration Release -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme SwiftImage-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
     - os: osx
       language: generic
       osx_image: xcode10.2

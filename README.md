@@ -1,10 +1,8 @@
-# EasyImagy (-> SwiftImage)
+# SwiftImage
 
 [![Build Status](https://travis-ci.org/koher/swift-image.svg?branch=master)](https://travis-ci.org/koher/swift-image)
 
-**(_EasyImagy_ will be renamed to _SwiftImage_ when 0.7.0 is released.)**
-
-_EasyImagy_ is a Swift library for image processing.
+_SwiftImage_ is a Swift library for image processing.
 
 ```swift
 var image = Image<RGBA<UInt8>>(named: "ImageName")!
@@ -28,9 +26,9 @@ imageView.image = image.uiImage
 
 ## Introduction
 
-Image processing by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _EasyImagy_ provides easy and Swifty APIs for image processing.
+Image processing by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _SwiftImage_ provides easy and Swifty APIs for image processing.
 
-With _EasyImagy_, images are handled as instances of the `Image` type. `Image` is a type similar to `Array`.
+With _SwiftImage_, images are handled as instances of the `Image` type. `Image` is a type similar to `Array`.
 
 ```swift
 var image: Image<UInt8> = Image(width: 640, height: 480, pixels: [255, 248, /* ... */])
@@ -63,7 +61,7 @@ let grayscale: Image<UInt8> = image.map { $0.gray }
 
 ```
 
-Another notable feature of _EasyImagy_ is that `Image` is a structure, i.e. a value type, with copy-on-write. It means
+Another notable feature of _SwiftImage_ is that `Image` is a structure, i.e. a value type, with copy-on-write. It means
 
 - `Image` instances never be shared
 - defensive copying is unnecessary
@@ -80,7 +78,7 @@ another[x, y] = RGBA(0xff0000ff) // Copied here lazily
 ### Import
 
 ```swift
-import EasyImagy
+import SwiftImage
 ```
 
 ### Initialization
@@ -316,9 +314,9 @@ github "koher/swift-image" ~> 0.7.0
 
 ### Manually
 
-1. Put [EasyImagy.xcodeproj](EasyImagy.xcodeproj) into your project/workspace in Xcode.
+1. Put [SwiftImage.xcodeproj](SwiftImage.xcodeproj) into your project/workspace in Xcode.
 2. Click your project icon and select the application target and the "General" tab.
-3. Add `EasyImagy.framework` to "Embedded Binaries".
+3. Add `SwiftImage.framework` to "Embedded Binaries".
 
 ## License
 
