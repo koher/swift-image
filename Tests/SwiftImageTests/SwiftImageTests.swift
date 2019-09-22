@@ -5,6 +5,9 @@ import UIKit
 #if canImport(AppKit)
 import AppKit
 #endif
+#if canImport(CoreGraphics)
+import CoreGraphics
+#endif
 import SwiftImage
 
 class SwiftImageSample: XCTestCase {
@@ -68,22 +71,20 @@ class SwiftImageSample: XCTestCase {
         }
 
         do {
-            /**/ #if canImport(UIKit) || canImport(AppKit)
-            /**/ if never() {
-            var image = Image<RGBA<UInt8>>(named: "ImageName")!
-            /**/ image[0, 0] = RGBA(0xffffffff)
-            /**/ }
-            /**/ #endif
-            /**/ let image = Image<RGBA<UInt8>>(width: 10, height: 10, pixel: .black)
+            let image: Image<RGBA<UInt8>> = // ...
+                /**/ Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA(red: 42, green: 42, blue: 42))
             let grayscale: Image<UInt8> = image.map { $0.gray }
-            /**/ _ = grayscale[0, 0]
+            /**/ XCTAssertEqual(grayscale[0, 0], 42)
         }
         
         do {
-            /**/ let image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black)
+            /**/ let image = Image<UInt8>(width: 1, height: 1, pixel: 0)
             /**/ let x = 0, y = 0
-            var another = image // Not copied here because of copy-on-write
-            another[x, y] = RGBA(0xff0000ff) // Copied here lazily
+            var another: Image<UInt8> = image // Not copied here because of copy-on-write
+            another[x, y] = 255               // Copied here lazily
+            /**/ XCTAssertFalse(
+            another[x, y] == image[x, y]      // false: Instances are never shared
+            /**/ )
         }
     }
     
@@ -114,21 +115,36 @@ class SwiftImageSample: XCTestCase {
             /**/ _ = image.count
         }
         #endif
+        #if canImport(AppKit)
+        do {
+            /**/ let imageView: NSImageView = NSImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+            /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).nsImage
+            let image = Image<RGBA<UInt8>>(nsImage: imageView.image!) // from a NSImage
+            /**/ _ = image.count
+        }
+        #endif
+        #if canImport(CoreGraphics)
+        do {
+            let cgImage: CGImage = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).cgImage
+            let image = Image<RGBA<UInt8>>(cgImage: cgImage) // from a CGImage
+            /**/ XCTAssertEqual(image.count, 1)
+        }
+        #endif
+        do {
+            /**/ let pixels = [RGBA<UInt8>](repeating: .black, count: 640 * 480)
+            let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from a pixel array
+            /**/ _ = image.count
+        }
         do {
             let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black RGBA image
             /**/ _ = image.count
         }
         do {
-            let image = Image<UInt8>(width: 640, height: 480, pixel: .min) // a black grayscale image
+            let image = Image<UInt8>(width: 640, height: 480, pixel: 0) // a black grayscale image
             /**/ _ = image.count
         }
         do {
             let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binary image
-            /**/ _ = image.count
-        }
-        do {
-            /**/ let pixels = [RGBA<UInt8>](repeating: .black, count: 640 * 480)
-            let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from pixels
             /**/ _ = image.count
         }
     }

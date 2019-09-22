@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/koher/swift-image.svg?branch=master)](https://travis-ci.org/koher/swift-image)
 
-_SwiftImage_ is a Swift library for image processing.
+SwiftImage is an image library written in Swift, which provides Swifty APIs and image types with [value semantics](https://developer.apple.com/videos/play/wwdc2015/414/).
 
 ```swift
 var image = Image<RGBA<UInt8>>(named: "ImageName")!
@@ -26,9 +26,7 @@ imageView.image = image.uiImage
 
 ## Introduction
 
-Image processing by _CoreGraphics_ is complicated: various formats, old C APIs and painful memory management. _SwiftImage_ provides easy and Swifty APIs for image processing.
-
-With _SwiftImage_, images are handled as instances of the `Image` type. `Image` is a type similar to `Array`.
+SwiftImage makes it easy to access pixels of images. The `Image` type in SwiftImage can be used intuitively like 2D `Array`.
 
 ```swift
 var image: Image<UInt8> = Image(width: 640, height: 480, pixels: [255, 248, /* ... */])
@@ -40,7 +38,9 @@ let width: Int = image.width // 640
 let height: Int = image.height // 480
 ```
 
-Typically `Image` is used with the `RGBA` type. `RGBA` is a simple structure declared as follows.
+We can also access pixels of images using CoreGraphics. However, CoreGraphics requires us to struggle with complicated formats, old C APIs and painful memory management. SwiftImage provides clear and Swifty APIs for images.
+
+Typically `Image` is used with the `RGBA` type. `RGBA` is a simple `struct` declared as follows.
 
 ```swift
 struct RGBA<Channel> {
@@ -51,26 +51,28 @@ struct RGBA<Channel> {
 }
 ```
 
-Because both `Image` and `RGBA` are generic types, concrete image types have a nested type parameter like `Image<RGBA<UInt8>>` when `Image` and `RGBA` are combined.
+Because `RGBA` is a generic type, it can represent various formats of pixels. For example, `RGBA<UInt8>` represents a pixel of 8-bit RGBA image (each channel has a value in `0...255`). Similarly, `RGBA<UInt16>` represents a pixel of 16-bit RGBA image (`0...65535`). `RGBA<Float>` can represent a pixel whose channels are `Float`s, which is often used for machine learning. A pixel of binary images, which have only black or white pixels and are used for fax, can be represented using `RGBA<Bool>`.
 
-`Image` and `RGBA` provide some powerful APIs to process images. For example, it is possible to convert an RGBA image to grayscale combining `Image.map` with `RGBA.gray` in one line as shown below.
+When `RGBA` is used with `Image`, type parameters are nested like `Image<RGBA<UInt8>>` because both `Image` and `RGBA` are generic types. On the other hand, grayscale images can be represented without nested parameters: `Image<UInt8>` for 8-bit grayscale images and `Image<UInt16>` for 16-bit grayscale images.
+
+`Image` and `RGBA` provide powerful APIs to handle images. For example, it is possible to convert a RGBA image to grayscale combining `Image.map` with `RGBA.gray` in one line.
 
 ```swift
-var image = Image<RGBA<UInt8>>(named: "ImageName")!
+let image: Image<RGBA<UInt8>> = // ...
 let grayscale: Image<UInt8> = image.map { $0.gray }
-
 ```
 
-Another notable feature of _SwiftImage_ is that `Image` is a structure, i.e. a value type, with copy-on-write. It means
+Another notable feature of SwiftImage is that `Image` is a `struct` with [value semantics](https://developer.apple.com/videos/play/wwdc2015/414/), which is achieved using copy-on-write. Therefore,
 
 - `Image` instances never be shared
 - defensive copying is unnecessary
-- no wastful copying of `Image` instances
-- copying is executed lazily when it is required
+- there are no wasteful copying of `Image` instances
+- copying is executed lazily only when it is inevitable
 
 ```swift
-var another = image // Not copied here because of copy-on-write
-another[x, y] = RGBA(0xff0000ff) // Copied here lazily
+var another: Image<UInt8> = image // Not copied here because of copy-on-write
+another[x, y] = 255               // Copied here lazily
+another[x, y] == image[x, y]      // false: Instances are never shared
 ```
 
 ## Usage
@@ -85,37 +87,14 @@ import SwiftImage
 
 ```swift
 let image = Image<RGBA<UInt8>>(named: "ImageName")!
-```
-
-```swift
 let image = Image<RGBA<UInt8>>(contentsOfFile: "path/to/file")!
-```
-
-```swift
 let image = Image<RGBA<UInt8>>(data: Data(/* ... */))!
-```
-
-```swift
 let image = Image<RGBA<UInt8>>(uiImage: imageView.image!) // from a UIImage
-```
-
-```swift
 let image = Image<RGBA<UInt8>>(nsImage: imageView.image!) // from a NSImage
-```
-
-```swift
-let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from pixels
-```
-
-```swift
+let image = Image<RGBA<UInt8>>(cgImage: cgImage) // from a CGImage
+let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixels: pixels) // from a pixel array
 let image = Image<RGBA<UInt8>>(width: 640, height: 480, pixel: .black) // a black RGBA image
-```
-
-```swift
-let image = Image<UInt8>(width: 640, height: 480, pixel: .min) // a black grayscale image
-```
-
-```swift
+let image = Image<UInt8>(width: 640, height: 480, pixel: 0) // a black grayscale image
 let image = Image<Bool>(width: 640, height: 480, pixel: false) // a black binary image
 ```
 
