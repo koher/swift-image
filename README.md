@@ -1,6 +1,6 @@
 # EasyImagy (-> SwiftImage)
 
-[![Build Status](https://travis-ci.org/koher/swift-image.svg?branch=dev-0.7.0)](https://travis-ci.org/koher/swift-image)
+[![Build Status](https://travis-ci.org/koher/swift-image.svg?branch=master)](https://travis-ci.org/koher/swift-image)
 
 **(_EasyImagy_ will be renamed to _SwiftImage_ when 0.7.0 is released.)**
 
@@ -305,13 +305,13 @@ imageView.image = image.uiImage
 ### Swift Package Manager
 
 ```swift
-.package(url: "https://github.com/koher/swift-image.git", .branch("dev-0.7.0")),
+.package(url: "https://github.com/koher/swift-image.git", from: "0.7.0"),
 ```
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 
 ```
-github "koher/swift-image" "dev-0.7.0"
+github "koher/swift-image" ~> 0.7.0
 ```
 
 ### Manually
