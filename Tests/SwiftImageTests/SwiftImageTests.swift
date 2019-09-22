@@ -19,7 +19,7 @@ class SwiftImageSample: XCTestCase {
 
         /**/ if never() {
         var image = Image<RGBA<UInt8>>(named: "ImageName")!
-        /**/ _ = image[0, 0]
+        /**/ image[0, 0] = image[0, 0]
         /**/ }
         /**/ var image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: .black)
         
