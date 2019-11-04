@@ -1,3 +1,4 @@
+@inlinable
 internal func clamp<T: Comparable>(_ x: T, lower: T, upper: T) -> T {
     return min(max(x, lower), upper)
 }
