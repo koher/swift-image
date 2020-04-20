@@ -22,10 +22,12 @@ public protocol _CGDirectChannel: _CGChannel where _EZ_DirectChannel == Self {
 }
 
 extension _CGDirectChannel {
+    @inlinable
     public init(_ez_directChannel directChannel: _EZ_DirectChannel) {
         self = directChannel
     }
 
+    @inlinable
     public var _ez_directChannel: _EZ_DirectChannel {
         return self
     }
@@ -34,46 +36,56 @@ extension _CGDirectChannel {
 extension UInt8: _CGDirectChannel {
     public typealias _EZ_DirectChannel = UInt8
 
+    @inlinable
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<UInt8> {
         return RGBA<UInt8>(premultipliedRGBA)
     }
 
+    @inlinable
     public static func _ez_premultipliedRGBA(from rgba: RGBA<UInt8>) -> PremultipliedRGBA<UInt8> {
         return PremultipliedRGBA<UInt8>(rgba)
     }
 
+    @inlinable
     public static var _ez_cgChannelDefault: UInt8 { return 0 }
 }
 
 extension UInt16: _CGDirectChannel {
     public typealias _EZ_DirectChannel = UInt16
 
+    @inlinable
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt16>) -> RGBA<UInt16> {
         return RGBA<UInt16>(premultipliedRGBA)
     }
 
+    @inlinable
     public static func _ez_premultipliedRGBA(from rgba: RGBA<UInt16>) -> PremultipliedRGBA<UInt16> {
         return PremultipliedRGBA<UInt16>(rgba)
     }
 
+    @inlinable
     public static var _ez_cgChannelDefault: UInt16 { return 0 }
 }
 
 extension Float: _CGChannel {
     public typealias _EZ_DirectChannel = UInt8
 
+    @inlinable
     public init(_ez_directChannel directChannel: UInt8) {
         self = Float(directChannel) / 255
     }
 
+    @inlinable
     public var _ez_directChannel: UInt8 {
         return UInt8(clamp(self * 255, lower: 0, upper: 255))
     }
 
+    @inlinable
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<Float> {
         return RGBA<Float>(premultipliedRGBA.map(Float.init(_ez_directChannel:)))
     }
 
+    @inlinable
     public static func _ez_premultipliedRGBA(from rgba: RGBA<Float>) -> PremultipliedRGBA<UInt8> {
         return PremultipliedRGBA<UInt8>(rgba.map { $0._ez_directChannel })
     }
@@ -82,18 +94,22 @@ extension Float: _CGChannel {
 extension Double: _CGChannel {
     public typealias _EZ_DirectChannel = UInt8
 
+    @inlinable
     public init(_ez_directChannel directChannel: UInt8) {
         self = Double(directChannel) / 255
     }
 
+    @inlinable
     public var _ez_directChannel: UInt8 {
         return UInt8(clamp(self * 255, lower: 0, upper: 255))
     }
 
+    @inlinable
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<Double> {
         return RGBA<Double>(premultipliedRGBA.map(Double.init(_ez_directChannel:)))
     }
 
+    @inlinable
     public static func _ez_premultipliedRGBA(from rgba: RGBA<Double>) -> PremultipliedRGBA<UInt8> {
         return PremultipliedRGBA<UInt8>(rgba.map { $0._ez_directChannel })
     }
@@ -102,18 +118,22 @@ extension Double: _CGChannel {
 extension Bool: _CGChannel {
     public typealias _EZ_DirectChannel = UInt8
 
+    @inlinable
     public init(_ez_directChannel directChannel: UInt8) {
         self = directChannel >= 128
     }
 
+    @inlinable
     public var _ez_directChannel: _EZ_DirectChannel {
         return self ? 255 : 0
     }
 
+    @inlinable
     public static func _ez_rgba(from premultipliedRGBA: PremultipliedRGBA<UInt8>) -> RGBA<Bool> {
         return RGBA<UInt8>(premultipliedRGBA).map(Bool.init(_ez_directChannel:))
     }
 
+    @inlinable
     public static func _ez_premultipliedRGBA(from rgba: RGBA<Bool>) -> PremultipliedRGBA<UInt8> {
         return PremultipliedRGBA<UInt8>(rgba.map { $0._ez_directChannel })
     }
@@ -136,10 +156,12 @@ public protocol _CGDirectPixel: _CGPixel where _EZ_DirectPixel == Self {
 }
 
 extension _CGDirectPixel {
+    @inlinable
     public var _ez_directPixel: _EZ_DirectPixel {
         return self
     }
 
+    @inlinable
     public init(_ez_directPixel directPixel: _EZ_DirectPixel) {
         self = directPixel
     }
@@ -149,14 +171,17 @@ extension UInt8: _CGDirectPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
     
+    @inlinable
     public static var _ez_cgPixelDefault: UInt8 {
         return 0
     }
@@ -166,14 +191,17 @@ extension UInt16: _CGDirectPixel {
     public typealias _EZ_DirectPixel = UInt16
     public typealias _EZ_PixelDirectChannel = UInt16
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
 
+    @inlinable
     public static var _ez_cgPixelDefault: UInt16 {
         return 0
     }
@@ -183,18 +211,22 @@ extension Float: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
 
+    @inlinable
     public var _ez_directPixel: UInt8 {
         return UInt8(clamp(self * 255, lower: 0, upper: 255))
     }
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
 
+    @inlinable
     public init(_ez_directPixel directPixel: UInt8) {
         self = Float(directPixel) / 255
     }
@@ -204,18 +236,22 @@ extension Double: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
 
+    @inlinable
     public var _ez_directPixel: UInt8 {
         return UInt8(clamp(self * 255, lower: 0, upper: 255))
     }
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
 
+    @inlinable
     public init(_ez_directPixel directPixel: UInt8) {
         self = Double(directPixel) / 255
     }
@@ -225,18 +261,22 @@ extension Bool: _CGPixel {
     public typealias _EZ_DirectPixel = UInt8
     public typealias _EZ_PixelDirectChannel = UInt8
 
+    @inlinable
     public var _ez_directPixel: UInt8 {
         return self ? 255 : 0
     }
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceGray()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo()
     }
 
+    @inlinable
     public init(_ez_directPixel directPixel: UInt8) {
         self = directPixel >= 128
     }
@@ -246,24 +286,29 @@ extension RGB: _CGPixel where Channel: _CGChannel {
     public typealias _EZ_DirectPixel = RGB<Channel._EZ_DirectChannel>
     public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
 
+    @inlinable
     public init(_ez_directPixel directPixel: RGB<Channel._EZ_DirectChannel>) {
         self = directPixel.map(Channel.init(_ez_directChannel:))
     }
     
+    @inlinable
     public var _ez_directPixel: RGB<Channel._EZ_DirectChannel> {
         return map { $0._ez_directChannel }
     }
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue)
     }
 }
 
 extension RGB: _CGDirectPixel where Channel: _CGDirectChannel {
+    @inlinable
     public static var _ez_cgPixelDefault: RGB<Channel> {
         return RGB<Channel>(
             red: Channel._ez_cgChannelDefault,
@@ -277,18 +322,22 @@ extension RGBA: _CGPixel where Channel: _CGChannel {
     public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
     public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
 
+    @inlinable
     public init(_ez_directPixel directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel>) {
         self = Channel._ez_rgba(from: directPixel)
     }
 
+    @inlinable
     public var _ez_directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel> {
         return Channel._ez_premultipliedRGBA(from: self)
     }
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
     }
@@ -298,24 +347,29 @@ extension PremultipliedRGBA: _CGPixel where Channel: _CGChannel {
     public typealias _EZ_DirectPixel = PremultipliedRGBA<Channel._EZ_DirectChannel>
     public typealias _EZ_PixelDirectChannel = Channel._EZ_DirectChannel
 
+    @inlinable
     public init(_ez_directPixel directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel>) {
         self = directPixel.map(Channel.init(_ez_directChannel:))
     }
 
+    @inlinable
     public var _ez_directPixel: PremultipliedRGBA<Channel._EZ_DirectChannel> {
         return map { $0._ez_directChannel }
     }
     
+    @inlinable
     public static var _ez_cgColorSpace: CGColorSpace {
         return CGColorSpaceCreateDeviceRGB()
     }
     
+    @inlinable
     public static var _ez_cgBitmapInfo: CGBitmapInfo {
         return CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
     }
 }
 
 extension PremultipliedRGBA: _CGDirectPixel where Channel: _CGDirectChannel {
+    @inlinable
     public static var _ez_cgPixelDefault: PremultipliedRGBA<Channel> {
         return PremultipliedRGBA<Channel>(
             red: Channel._ez_cgChannelDefault,

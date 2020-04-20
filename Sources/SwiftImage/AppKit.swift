@@ -12,7 +12,7 @@ extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
         }
     }
 
-    @usableFromInline
+    @inlinable
     internal init?(nsImageOrNil: NSImage?) {
         guard let nsImage: NSImage = nsImageOrNil else { return nil }
         self.init(nsImage: nsImage)
