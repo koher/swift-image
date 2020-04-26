@@ -417,10 +417,10 @@ extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
     public var cgImage: CGImage {
         let length = count * MemoryLayout<Pixel>.size
 
-        let provider: CGDataProvider = CGDataProvider(data: Data(
-            bytes: UnsafeMutableRawPointer(mutating: pixels),
-            count: length
-        ) as CFData)!
+        let data: Data = pixels.withUnsafeBytes { pixelsPointer in
+            Data(bytes: pixelsPointer.baseAddress!, count: length)
+        }
+        let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
 
         return CGImage(
             width: width,
@@ -443,27 +443,29 @@ extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
         let length = count * MemoryLayout<Pixel>.size
 
         var image = self
-        let provider: CGDataProvider = CGDataProvider(data: Data(
-            bytesNoCopy: &image.pixels,
-            count: length,
-            deallocator: .none
-        ) as CFData)!
+        return try image.pixels.withUnsafeMutableBufferPointer { pixelsPointer in
+            let provider: CGDataProvider = CGDataProvider(data: Data(
+                bytesNoCopy: pixelsPointer.baseAddress!,
+                count: length,
+                deallocator: .none
+            ) as CFData)!
 
-        let cgImage = CGImage(
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
-            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
-            bytesPerRow: MemoryLayout<Pixel>.size * width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            provider: provider,
-            decode: nil,
-            shouldInterpolate: false,
-            intent: CGColorRenderingIntent.defaultIntent
-        )!
+            let cgImage = CGImage(
+                width: width,
+                height: height,
+                bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+                bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+                bytesPerRow: MemoryLayout<Pixel>.size * width,
+                space: Pixel._ez_cgColorSpace,
+                bitmapInfo: Pixel._ez_cgBitmapInfo,
+                provider: provider,
+                decode: nil,
+                shouldInterpolate: false,
+                intent: CGColorRenderingIntent.defaultIntent
+            )!
 
-        return try body(cgImage)
+            return try body(cgImage)
+        }
     }
 
     @inlinable
@@ -474,24 +476,26 @@ extension Image: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
         precondition(width >= 0)
         precondition(height >= 0)
 
-        let context  = CGContext(
-            data: &pixels,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
-            bytesPerRow: MemoryLayout<Pixel>.size * width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
-        }
+        try self.pixels.withUnsafeMutableBytes { pixelsPointer in
+            let context  = CGContext(
+                data: pixelsPointer.baseAddress!,
+                width: width,
+                height: height,
+                bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+                bytesPerRow: MemoryLayout<Pixel>.size * width,
+                space: Pixel._ez_cgColorSpace,
+                bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
+            )!
+            switch coordinates {
+            case .original:
+                break
+            case .natural:
+                context.scaleBy(x: 1, y: -1)
+                context.translateBy(x: 0.5, y: 0.5 - CGFloat(height))
+            }
 
-        try body(context)
+            try body(context)
+        }
     }
 }
 
@@ -517,14 +521,19 @@ extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
 
         var data: Data
         if offset + pixelCount <= imageCount {
-            let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: image.pixels) + (yRange.lowerBound * image.width + xRange.lowerBound)
-            data = Data(bytes: bytes, count: length)
+            data = image.pixels.withUnsafeBufferPointer { pixelsPointer in
+                let bytes: UnsafePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * image.width + xRange.lowerBound)
+                return Data(bytes: bytes, count: length)
+            }
         } else {
-            let bytes: UnsafeMutablePointer<Pixel> = UnsafeMutablePointer(mutating: image.pixels) + (yRange.lowerBound * image.width + xRange.lowerBound)
-            let pointer: UnsafeMutablePointer<UInt8> = UnsafeMutableRawPointer(bytes).bindMemory(to: UInt8.self, capacity: length)
-            data = Data(capacity: pixelCount * MemoryLayout<Pixel>.size)
-            data.append(pointer, count: (imageCount - offset) * MemoryLayout<Pixel>.size)
-            data.append(pointer, count: (offset + pixelCount - imageCount) * MemoryLayout<Pixel>.size)
+            data = image.pixels.withUnsafeBufferPointer { pixelsPointer in
+                let bytes: UnsafePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * image.width + xRange.lowerBound)
+                let pointer: UnsafePointer<UInt8> = UnsafeRawPointer(bytes).bindMemory(to: UInt8.self, capacity: length)
+                var data = Data(capacity: pixelCount * MemoryLayout<Pixel>.size)
+                data.append(pointer, count: (imageCount - offset) * MemoryLayout<Pixel>.size)
+                data.append(pointer, count: (offset + pixelCount - imageCount) * MemoryLayout<Pixel>.size)
+                return data
+            }
         }
 
         let provider: CGDataProvider = CGDataProvider(data: data as CFData)!
@@ -547,60 +556,71 @@ extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
     @inlinable
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         let length = image.width * self.height * MemoryLayout<Pixel>.size
+        let width = self.width
+        let xRange = self.xRange
+        let yRange = self.yRange
+        let imageWidth = self.image.width
 
         var slice = self
-        let bytes: UnsafeMutablePointer<Pixel> = &slice.image.pixels + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
-        let provider: CGDataProvider = CGDataProvider(data: Data(
-            bytesNoCopy: bytes,
-            count: length,
-            deallocator: .none
-        ) as CFData)!
+        return try slice.image.pixels.withUnsafeMutableBufferPointer { pixelsPointer in
+            let bytes: UnsafeMutablePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * imageWidth + xRange.lowerBound)
+            let provider: CGDataProvider = CGDataProvider(data: Data(
+                bytesNoCopy: bytes,
+                count: length,
+                deallocator: .none
+            ) as CFData)!
 
-        let cgImage = CGImage(
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
-            bitsPerPixel: MemoryLayout<Pixel>.size * 8,
-            bytesPerRow: MemoryLayout<Pixel>.size * image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo,
-            provider: provider,
-            decode: nil,
-            shouldInterpolate: false,
-            intent: CGColorRenderingIntent.defaultIntent
-        )!
+            let cgImage = CGImage(
+                width: width,
+                height: height,
+                bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+                bitsPerPixel: MemoryLayout<Pixel>.size * 8,
+                bytesPerRow: MemoryLayout<Pixel>.size * image.width,
+                space: Pixel._ez_cgColorSpace,
+                bitmapInfo: Pixel._ez_cgBitmapInfo,
+                provider: provider,
+                decode: nil,
+                shouldInterpolate: false,
+                intent: CGColorRenderingIntent.defaultIntent
+            )!
 
-        return try body(cgImage)
-
+            return try body(cgImage)
+        }
     }
 
     @inlinable
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
+        let xRange = self.xRange
+        let yRange = self.yRange
+        let imageWidth = self.image.width
 
         precondition(width >= 0)
         precondition(height >= 0)
 
-        let data: UnsafeMutablePointer<Pixel> = &self.image.pixels + (yRange.lowerBound * self.image.width + xRange.lowerBound)
-        let context  = CGContext(
-            data: data,
-            width: width,
-            height: height,
-            bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
-            bytesPerRow: MemoryLayout<Pixel>.size * self.image.width,
-            space: Pixel._ez_cgColorSpace,
-            bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
-        )!
-        switch coordinates {
-        case .original:
-            break
-        case .natural:
-            context.scaleBy(x: 1, y: -1)
-            context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
-        }
+        try self.image.pixels.withUnsafeMutableBufferPointer { pixelsPointer in
+            let data: UnsafeMutablePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * imageWidth + xRange.lowerBound)
+            
+            let context  = CGContext(
+                data: data,
+                width: width,
+                height: height,
+                bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
+                bytesPerRow: MemoryLayout<Pixel>.size * imageWidth,
+                space: Pixel._ez_cgColorSpace,
+                bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
+            )!
+            switch coordinates {
+            case .original:
+                break
+            case .natural:
+                context.scaleBy(x: 1, y: -1)
+                context.translateBy(x: 0.5 - CGFloat(xRange.lowerBound), y: 0.5 - CGFloat(yRange.lowerBound + height))
+            }
 
-        try body(context)
+            try body(context)
+        }
     }
 }
 #endif

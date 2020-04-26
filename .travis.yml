@@ -27,6 +27,19 @@ matrix:
         - xcodebuild test -scheme SwiftImage-tvOS -configuration Release -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
         - xcodebuild build -scheme SwiftImage-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
     - os: osx
+      language: objective-c
+      osx_image: xcode11.4
+      script:
+        - set -o pipefail
+        - xcodebuild test -scheme SwiftImage-macOS -configuration Debug | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-iOS -configuration Debug -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11 Pro" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-tvOS -configuration Debug -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme SwiftImage-watchOS -configuration Debug -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-macOS -configuration Release | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-iOS -configuration Release -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 11 Pro" | xcpretty -c
+        - xcodebuild test -scheme SwiftImage-tvOS -configuration Release -sdk appletvsimulator -destination "platform=tvOS Simulator,name=Apple TV 4K" | xcpretty -c
+        - xcodebuild build -scheme SwiftImage-watchOS -configuration Release -sdk watchsimulator -destination "platform=watchOS Simulator,name=Apple Watch Series 5 - 44mm" | xcpretty -c
+    - os: osx
       language: generic
       osx_image: xcode10.2
       script:
@@ -38,6 +51,15 @@ matrix:
     - os: osx
       language: generic
       osx_image: xcode11
+      script:
+        - swift --version
+        - swift build
+        - swift test
+        - swift build -c release
+        - swift test -c release
+    - os: osx
+      language: generic
+      osx_image: xcode11.4
       script:
         - swift --version
         - swift build
@@ -60,6 +82,18 @@ matrix:
       language: generic
       sudo: required
       env: SWIFT_VERSION=5.1
+      install:
+        - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
+      script:
+        - swift --version
+        - swift build
+        - swift test
+        - swift build -c release
+        - swift test -c release
+    - os: linux
+      language: generic
+      sudo: required
+      env: SWIFT_VERSION=5.2
       install:
         - eval "$(curl -sL https://swiftenv.fuller.li/install.sh)"
       script:

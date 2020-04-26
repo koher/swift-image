@@ -141,6 +141,8 @@ class HigherOrderFunctionsTests : XCTestCase {
                 flags |= 0b1000
             }
             XCTAssertEqual(flags, 0b111)
+            
+            XCTAssertEqual(image.count, 1) // to prevent `image` being released
         }
     }
     
