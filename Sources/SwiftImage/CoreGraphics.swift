@@ -556,10 +556,14 @@ extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
     @inlinable
     public func withCGImage<R>(_ body: (CGImage) throws -> R) rethrows -> R {
         let length = image.width * self.height * MemoryLayout<Pixel>.size
+        let width = self.width
+        let xRange = self.xRange
+        let yRange = self.yRange
+        let imageWidth = self.image.width
 
         var slice = self
         return try slice.image.pixels.withUnsafeMutableBufferPointer { pixelsPointer in
-            let bytes: UnsafeMutablePointer<Pixel> = pixelsPointer.baseAddress! + (slice.yRange.lowerBound * slice.image.width + slice.xRange.lowerBound)
+            let bytes: UnsafeMutablePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * imageWidth + xRange.lowerBound)
             let provider: CGDataProvider = CGDataProvider(data: Data(
                 bytesNoCopy: bytes,
                 count: length,
@@ -588,19 +592,22 @@ extension ImageSlice: _CGImageDirectlyConvertible where Pixel: _CGDirectPixel {
     public mutating func withCGContext(coordinates: CGContextCoordinates = .natural, _ body: (CGContext) throws -> Void) rethrows {
         let width = self.width
         let height = self.height
+        let xRange = self.xRange
+        let yRange = self.yRange
+        let imageWidth = self.image.width
 
         precondition(width >= 0)
         precondition(height >= 0)
 
         try self.image.pixels.withUnsafeMutableBufferPointer { pixelsPointer in
-            let data: UnsafeMutablePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * self.image.width + xRange.lowerBound)
+            let data: UnsafeMutablePointer<Pixel> = pixelsPointer.baseAddress! + (yRange.lowerBound * imageWidth + xRange.lowerBound)
             
             let context  = CGContext(
                 data: data,
                 width: width,
                 height: height,
                 bitsPerComponent: MemoryLayout<Pixel._EZ_PixelDirectChannel>.size * 8,
-                bytesPerRow: MemoryLayout<Pixel>.size * self.image.width,
+                bytesPerRow: MemoryLayout<Pixel>.size * imageWidth,
                 space: Pixel._ez_cgColorSpace,
                 bitmapInfo: Pixel._ez_cgBitmapInfo.rawValue
             )!
