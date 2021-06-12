@@ -75,3 +75,9 @@ extension Image {
         return y * width + x
     }
 }
+
+extension Image { // all pixels
+    public var allPixels: [Pixel] {
+        return pixels
+    }
+}

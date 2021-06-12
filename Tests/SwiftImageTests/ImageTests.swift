@@ -332,4 +332,15 @@ class ImageTests: XCTestCase {
         }
         #endif
     }
+    
+    func testGetAllPixels() {
+        let image = Image<RGB<UInt8>>(width: 8, height: 8, pixel: RGB(red: 1, green: 2, blue: 3))
+        let pixels = image.allPixels
+        XCTAssertEqual(pixels.count, 64)
+        for pixel in pixels {
+            XCTAssertEqual(pixel.red, 1)
+            XCTAssertEqual(pixel.green, 2)
+            XCTAssertEqual(pixel.blue, 3)
+        }
+    }
 }
