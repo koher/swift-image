@@ -276,26 +276,6 @@ imageView.image = image.uiImage
 - Swift 5.0 or later
 - Xcode 10.2 or later
 
-## Installation
-
-### Swift Package Manager
-
-```swift
-.package(url: "https://github.com/koher/swift-image.git", from: "0.7.0"),
-```
-
-### [Carthage](https://github.com/Carthage/Carthage)
-
-```
-github "koher/swift-image" ~> 0.7.0
-```
-
-### Manually
-
-1. Put [SwiftImage.xcodeproj](SwiftImage.xcodeproj) into your project/workspace in Xcode.
-2. Click your project icon and select the application target and the "General" tab.
-3. Add `SwiftImage.framework` to "Embedded Binaries".
-
 ## License
 
 [The MIT License](LICENSE)
