@@ -17,7 +17,7 @@ public protocol _CGChannel {
     static func _ez_premultipliedRGBA(from: RGBA<Self>) -> PremultipliedRGBA<_EZ_DirectChannel>
 }
 
-public protocol _CGDirectChannel: _CGChannel where _EZ_DirectChannel == Self {
+public protocol _CGDirectChannel: _CGChannel, Numeric where _EZ_DirectChannel == Self {
     static var _ez_cgChannelDefault: Self { get }
 }
 
