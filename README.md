@@ -1,6 +1,5 @@
+![SwiftImage CI](https://github.com/koher/swift-image/actions/workflows/tests.yml/badge.svg)
 # SwiftImage
-
-[![Build Status](https://travis-ci.org/koher/swift-image.svg?branch=master)](https://travis-ci.org/koher/swift-image)
 
 SwiftImage is an image library written in Swift, which provides Swifty APIs and image types with [value semantics](https://developer.apple.com/videos/play/wwdc2015/414/).
 
