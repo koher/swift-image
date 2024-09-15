@@ -25,7 +25,7 @@ extension UIImage {
 }
 #endif
 
-extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
+extension ImageProtocol where Self: _CGImageConvertible, Self: Sendable, Pixel: _CGPixel {
     @inlinable
     public init(uiImage: UIImage) {
         if let cgImage = uiImage.cgImage {

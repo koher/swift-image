@@ -1,7 +1,7 @@
 #if canImport(AppKit) && canImport(CoreGraphics)
 import Foundation
 import AppKit
-extension ImageProtocol where Self: _CGImageConvertible, Pixel: _CGPixel {
+extension ImageProtocol where Self: _CGImageConvertible, Self: Sendable, Pixel: _CGPixel {
     @inlinable
     public init(nsImage: NSImage) {
         if let cgImage: CGImage = nsImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {

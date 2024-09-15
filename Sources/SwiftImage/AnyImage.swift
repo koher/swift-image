@@ -60,8 +60,8 @@ extension AnyImage : Equatable where Pixel : Equatable {
 }
 
 extension AnyImage {
-    private class AnyImageBox<Pixel> {
-        public subscript(x: Int, y: Int) -> Pixel {
+    private class AnyImageBox<_Pixel> {
+        public subscript(x: Int, y: Int) -> _Pixel {
             get {
                 fatalError("Abstract")
             }
@@ -71,7 +71,7 @@ extension AnyImage {
             }
         }
         
-        public func copied() -> AnyImageBox<Pixel> {
+        public func copied() -> AnyImageBox<_Pixel> {
             fatalError("Abstract")
         }
     }

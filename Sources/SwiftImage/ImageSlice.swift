@@ -40,6 +40,8 @@ public struct ImageSlice<Pixel> : ImageProtocol {
     }
 }
 
+extension ImageSlice : Sendable where Pixel : Sendable {}
+
 extension ImageSlice {
     public init(_ image: Image<Pixel>) {
         self.init(image: image, xRange: image.xRange, yRange: image.yRange)

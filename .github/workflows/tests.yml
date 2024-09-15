@@ -1,0 +1,39 @@
+name: "Tests"
+
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  mac-os:
+    name: macOS
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Xcode 15
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15'
+      - name: Build for macOS
+        run: swift build -c release -v
+      - name: Test for macOS
+        run: swift test -c release -v
+      - name: Set up iOS Simulator
+        run: |
+          xcrun simctl boot "iPhone 15 Pro"
+      - name: Build for iOS
+        run: xcodebuild -scheme SwiftImage -destination 'platform=iOS Simulator,name=iPhone 15 Pro' build
+      - name: Test on iOS Simulator
+        run: xcodebuild -scheme SwiftImage -destination 'platform=iOS Simulator,name=iPhone 15 Pro' test
+
+  linux:
+    name: Linux
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build for Linux
+        run: swift build -c release -v
+      - name: Test for Linux
+        run: swift test -c release -v
