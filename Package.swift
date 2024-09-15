@@ -21,9 +21,20 @@ let package = Package(
         .target(
             name: "SwiftImage",
             dependencies: [],
+            exclude: [
+                "Convolution.swift.gyb",
+                "RGBAOperators.swift.gyb",
+                "NumericPixel.swift.gyb",
+                "ImageOperators.swift.gyb"
+            ],
             swiftSettings: [.enableExperimentalFeature("StrictConcurrency")]),
         .testTarget(
             name: "SwiftImageTests",
-            dependencies: ["SwiftImage"]),
+            dependencies: ["SwiftImage"],
+            resources: [
+                .process("Test2x1.png"),
+                .process("Test2x2.png"),
+                .process("Test4x4.png"),
+            ]),
     ]
 )
