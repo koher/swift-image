@@ -87,7 +87,8 @@ class SwiftImageSample: XCTestCase {
             /**/ )
         }
     }
-    
+
+    @MainActor
     func testInitialization() {
         #if canImport(UIKit)
         do {
@@ -224,6 +225,7 @@ class SwiftImageSample: XCTestCase {
         
         /**/ _ = cropped.count
     }
+    @MainActor
     func testWithUIImage() {
         #if canImport(UIKit)
         /**/ if never() {
@@ -237,6 +239,7 @@ class SwiftImageSample: XCTestCase {
         /**/ }
         #endif
     }
+    @MainActor
     func testWithNSImage() {
         #if canImport(AppKit)
         /**/ if never() {
