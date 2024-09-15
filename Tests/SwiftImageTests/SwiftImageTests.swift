@@ -88,8 +88,7 @@ class SwiftImageSample: XCTestCase {
         }
     }
 
-    @MainActor
-    func testInitialization() {
+    func testInitialization() async {
         #if canImport(UIKit)
         do {
             /**/ if never() {
@@ -109,7 +108,7 @@ class SwiftImageSample: XCTestCase {
             /**/ _ = image.count
             /**/ }
         }
-        do {
+        await MainActor.run {
             /**/ let imageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
             /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).uiImage
             let image = Image<RGBA<UInt8>>(uiImage: imageView.image!) // from a UIImage
@@ -117,7 +116,7 @@ class SwiftImageSample: XCTestCase {
         }
         #endif
         #if canImport(AppKit)
-        do {
+        await MainActor.run {
             /**/ let imageView: NSImageView = NSImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
             /**/ imageView.image = Image<RGBA<UInt8>>(width: 1, height: 1, pixel: RGBA.black).nsImage
             let image = Image<RGBA<UInt8>>(nsImage: imageView.image!) // from a NSImage
@@ -225,32 +224,34 @@ class SwiftImageSample: XCTestCase {
         
         /**/ _ = cropped.count
     }
-    @MainActor
-    func testWithUIImage() {
+    func testWithUIImage() async {
         #if canImport(UIKit)
-        /**/ if never() {
-            /**/ let imageView = UIImageView()
-            
-            // From `UIImage`
-            let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
-            
-            // To `UIImage`
-            imageView.image = image.uiImage
-        /**/ }
+        await MainActor.run {
+            /**/ if never() {
+                /**/ let imageView = UIImageView()
+
+                // From `UIImage`
+                let image = Image<RGBA<UInt8>>(uiImage: imageView.image!)
+
+                // To `UIImage`
+                imageView.image = image.uiImage
+            /**/ }
+        }
         #endif
     }
-    @MainActor
-    func testWithNSImage() {
+    func testWithNSImage() async {
         #if canImport(AppKit)
-        /**/ if never() {
-            /**/ let imageView = NSImageView()
-            
-            // From `NSImage`
-            let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
-            
-            // To `NSImage`
-            imageView.image = image.nsImage
-        /**/ }
+        await MainActor.run {
+            /**/ if never() {
+                /**/ let imageView = NSImageView()
+
+                // From `NSImage`
+                let image = Image<RGBA<UInt8>>(nsImage: imageView.image!)
+
+                // To `NSImage`
+                imageView.image = image.nsImage
+            /**/ }
+        }
         #endif
     }
     func testWithCoreGraphics() {
