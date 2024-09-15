@@ -312,6 +312,8 @@ extension RGBA : Equatable where Channel : Equatable {
     }
 }
 
+extension RGBA : Sendable where Channel : Sendable {}
+
 extension RGBA : CustomStringConvertible {
     public var description: String {
         if let zelf = self as? RGBA<UInt8> {

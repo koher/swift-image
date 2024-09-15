@@ -93,3 +93,5 @@ extension PremultipliedRGBA : Equatable where Channel : Equatable {
         return lhs.red != rhs.red || lhs.green != rhs.green || lhs.blue != rhs.blue || lhs.alpha != rhs.alpha
     }
 }
+
+extension PremultipliedRGBA : Sendable where Channel : Sendable {}
