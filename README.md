@@ -273,7 +273,7 @@ imageView.image = image.uiImage
 
 ## Requirements
 
-- Swift 5.9 or later
+- Swift 6.4 or later
 
 ## License
 

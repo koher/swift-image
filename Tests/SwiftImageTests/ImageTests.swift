@@ -11,7 +11,7 @@ class ImageTests: XCTestCase {
     func testInitNamed() {
         #if (canImport(AppKit) || canImport(UIKit)) && canImport(CoreGraphics)
         do {
-            let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")))!
+            let image = Image<RGBA<UInt8>>(data: try! Data(contentsOf: Bundle.module.url(forResource: "Test2x2", withExtension: "png")!))!
             
             XCTAssertEqual(255, image[0, 0].red)
             XCTAssertEqual(  0, image[0, 0].green)

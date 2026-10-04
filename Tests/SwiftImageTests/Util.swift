@@ -6,7 +6,7 @@ internal func XCTAssertEqual<I : ImageProtocol, F : FloatingPoint>(
     _ expression2: @autoclosure () throws -> I,
     accuracy: F,
     _ message: @autoclosure () -> String = "",
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
 ) where I.Pixel == F {
     do {
@@ -32,7 +32,7 @@ internal func XCTAssertEqual<I : ImageProtocol, F : FloatingPoint>(
     _ expression2: @autoclosure () throws -> I,
     accuracy: F,
     _ message: @autoclosure () -> String = "",
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
 ) where I.Pixel == RGBA<F> {
     do {
@@ -58,7 +58,7 @@ internal func XCTAssertEqual<F : FloatingPoint>(
     _ expression2: @autoclosure () throws -> RGB<F>,
     accuracy: F,
     _ message: @autoclosure () -> String = "",
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
     ) {
     do {
@@ -79,7 +79,7 @@ internal func XCTAssertEqual<F : FloatingPoint>(
     _ expression2: @autoclosure () throws -> RGBA<F>,
     accuracy: F,
     _ message: @autoclosure () -> String = "",
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
 ) {
     do {
@@ -101,7 +101,7 @@ internal func XCTAssertEqual<F : FloatingPoint>(
     _ expression2: @autoclosure () throws -> PremultipliedRGBA<F>,
     accuracy: F,
     _ message: @autoclosure () -> String = "",
-    file: StaticString = #file,
+    file: StaticString = #filePath,
     line: UInt = #line
 ) {
     do {

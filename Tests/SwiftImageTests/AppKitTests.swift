@@ -9,7 +9,7 @@ class AppKitTests: XCTestCase {
     func testInitWithNSImage() {
         #if canImport(AppKit) && canImport(CoreGraphics)
         do {
-            let nsImage = NSImage(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png"))!
+            let nsImage = NSImage(contentsOf: Bundle.module.url(forResource: "Test2x2", withExtension: "png")!)!
             let image = Image<RGBA<UInt8>>(nsImage: nsImage)
             
             XCTAssertEqual(image.width, 2)
@@ -37,7 +37,7 @@ class AppKitTests: XCTestCase {
         }
         
         do { // `ImageSlice`
-            let nsImage = NSImage(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png"))!
+            let nsImage = NSImage(contentsOf: Bundle.module.url(forResource: "Test2x2", withExtension: "png")!)!
             let slice = ImageSlice<RGBA<UInt8>>(nsImage: nsImage)
             
             XCTAssertEqual(slice.width, 2)
@@ -65,7 +65,7 @@ class AppKitTests: XCTestCase {
         }
 
         do { // `PremultipliedRGBA`
-            let nsImage = NSImage(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png"))!
+            let nsImage = NSImage(contentsOf: Bundle.module.url(forResource: "Test2x2", withExtension: "png")!)!
             let image = Image<PremultipliedRGBA<UInt8>>(nsImage: nsImage)
             
             XCTAssertEqual(image.width, 2)
@@ -93,7 +93,7 @@ class AppKitTests: XCTestCase {
         }
         
         do { // With `NSImage` from `CGImage`
-            let dataProvider = CGDataProvider.init(data: try! Data(contentsOf: URL(fileURLWithPath: (#file as NSString).deletingLastPathComponent).appendingPathComponent("Test2x2.png")) as CFData)!
+            let dataProvider = CGDataProvider.init(data: try! Data(contentsOf: Bundle.module.url(forResource: "Test2x2", withExtension: "png")!) as CFData)!
             let cgImage = CGImage(pngDataProviderSource: dataProvider, decode: nil, shouldInterpolate: false, intent: .defaultIntent)!
             let nsImage = NSImage(cgImage: cgImage, size: .zero)
             let image = Image<RGBA<UInt8>>(nsImage: nsImage)
